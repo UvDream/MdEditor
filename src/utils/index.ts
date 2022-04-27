@@ -7,3 +7,4 @@
  * @Email: UvDream@163.com
  */
 export * from "./common";
+export * from "./markdown-it"

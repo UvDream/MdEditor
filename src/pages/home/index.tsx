@@ -11,7 +11,7 @@ import {Layout, Grid, Drawer} from "@arco-design/web-react";
 import {IconOrderedList, IconEye, IconEyeInvisible} from "@arco-design/web-react/icon";
 
 import "./index.less"
-import {DeviceType, DeviceTypeEnum} from "@/utils";
+import {DeviceType, DeviceTypeEnum, markdownParser} from "@/utils";
 import ArticleEditor from "@/pages/home/components/article-editor";
 import ArticlePreview from "@/pages/home/components/article-preview";
 import ArticleList from "@/pages/home/components/article-list";
@@ -23,6 +23,8 @@ const Content = Layout.Content;
 const Row = Grid.Row;
 const Col = Grid.Col;
 export default function HomePage() {
+    const [articleMd,setArticleMd] = useState("");
+    const [articleHtml,setArticleHtml]=useState('')
     //----------------------PC端处理----------------------
     //#region
     //#endregion
@@ -37,7 +39,16 @@ export default function HomePage() {
         setDrawerVisible(!drawerVisible);
     }
     //#endregion
-
+    /**
+     * 编辑器change事件
+     * @param val
+     */
+    const editorChange = (val: string) => {
+        console.log("编辑器内容", val)
+        console.log(markdownParser.render(val))
+        setArticleMd(val)
+        setArticleHtml(markdownParser.render(val))
+    }
 
     //布局组件
     function multinomialLayout() {
@@ -83,8 +94,8 @@ export default function HomePage() {
                             </Col>
                         </Row>
                     </Header>
-                    <Content>
-                        {previewState ? <ArticlePreview/> : <ArticleEditor/>}
+                    <Content className={"mobile-content"}>
+                        {previewState ? <ArticlePreview content={articleHtml}/> : <ArticleEditor value={articleMd} onChange={editorChange}/>}
                     </Content>
                 </Layout>
             )

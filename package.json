@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
@@ -13,7 +13,9 @@
     "react-dom": "^18.0.0",
     "react-router-dom": "6",
     "markdown-it": "^13.0.0",
-    "@uiw/react-codemirror":"^4.7.0"
+    "@uiw/react-codemirror":"^4.7.0",
+    "@codemirror/lang-markdown":"^0.20.0",
+    "@codemirror/language-data": "^0.20.0"
   },
   "devDependencies": {
     "@arco-plugins/vite-react": "^1.1.0",

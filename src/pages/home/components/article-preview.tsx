@@ -1,7 +1,8 @@
-export default function ArticlePreview() {
+export default function ArticlePreview(props: any) {
     return (
-        <div>
-            <h1>Article Preview</h1>
+        <div dangerouslySetInnerHTML={{
+            __html: props.content,
+        }}>
         </div>
     )
 }
