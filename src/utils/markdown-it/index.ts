@@ -1,4 +1,5 @@
 import MarkdownIt from "markdown-it";
+import MarkdownItSpan from "./markdown-it-span"
 //markdown 解析器
 export const markdownParser = new MarkdownIt({
     html: true,
@@ -7,3 +8,5 @@ export const markdownParser = new MarkdownIt({
     typographer: true,
     quotes: '“”‘’'
 })
+
+markdownParser.use(MarkdownItSpan)
