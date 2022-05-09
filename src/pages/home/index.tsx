@@ -15,6 +15,8 @@ import {DeviceType, DeviceTypeEnum, markdownParser} from "@/utils";
 import ArticleEditor from "@/pages/home/components/article-editor";
 import ArticlePreview from "@/pages/home/components/article-preview";
 import ArticleList from "@/pages/home/components/article-list";
+import {articleContent} from "@/pages/home/mock";
+import "highlight.js/styles/vs2015.css";
 
 const Sider = Layout.Sider;
 const Header = Layout.Header;
@@ -23,8 +25,8 @@ const Content = Layout.Content;
 const Row = Grid.Row;
 const Col = Grid.Col;
 export default function HomePage() {
-    const [articleMd,setArticleMd] = useState("");
-    const [articleHtml,setArticleHtml]=useState('')
+    const [articleMd,setArticleMd] = useState(articleContent);
+    const [articleHtml,setArticleHtml]=useState(markdownParser.render(articleContent));
     //----------------------PC端处理----------------------
     //#region
     //#endregion
@@ -85,11 +87,11 @@ export default function HomePage() {
                                 标题
                             </Col>
                             <Col span={4} className={["flex-center", "mobile-row"]}>
-                                {previewState ? <IconEye onClick={() => {
-                                        setPreviewState(false)
+                                {!previewState ? <IconEye onClick={() => {
+                                        setPreviewState(true)
                                     }} style={{fontSize: "18px"}}/> :
                                     <IconEyeInvisible onClick={() => {
-                                        setPreviewState(true)
+                                        setPreviewState(false)
                                     }} style={{fontSize: "18px"}}/>}
                             </Col>
                         </Row>
