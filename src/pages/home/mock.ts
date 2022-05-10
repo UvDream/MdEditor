@@ -89,7 +89,11 @@ func main() {
 \tfmt.Println("Hello, 世界")
 }
 \`\`\`
+### 演示javascript
 
+\`\`\`javascript
+a===b
+\`\`\`
 ##### 演示 Java 高亮
 
 \`\`\`java
