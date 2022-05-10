@@ -7,7 +7,7 @@ export default function ArticleEditor(props:any) {
     return (
         <div className={"editor"}>
             <CodeMirror
-                // theme={'dark'}
+                // themes={'dark'}
                 value={props.value}
                 minHeight={"500px"}
                 placeholder={"请输入文章内容"}

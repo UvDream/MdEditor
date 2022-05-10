@@ -6,17 +6,18 @@
  * @Description:
  * @Email: UvDream@163.com
  */
-import {useState} from "react";
+import {useState,useEffect} from "react";
 import {Layout, Grid, Drawer} from "@arco-design/web-react";
 import {IconOrderedList, IconEye, IconEyeInvisible} from "@arco-design/web-react/icon";
 
 import "./index.less"
-import {DeviceType, DeviceTypeEnum, markdownParser} from "@/utils";
+import {DeviceType, DeviceTypeEnum, markdownParser, setEditorStyle} from "@/utils";
 import ArticleEditor from "@/pages/home/components/article-editor";
 import ArticlePreview from "@/pages/home/components/article-preview";
 import ArticleList from "@/pages/home/components/article-list";
 import {articleContent} from "@/pages/home/mock";
 import "highlight.js/styles/vs2015.css";
+import {defaultStyle} from "@/pages/home/themes/default-style";
 
 const Sider = Layout.Sider;
 const Header = Layout.Header;
@@ -25,8 +26,8 @@ const Content = Layout.Content;
 const Row = Grid.Row;
 const Col = Grid.Col;
 export default function HomePage() {
-    const [articleMd,setArticleMd] = useState(articleContent);
-    const [articleHtml,setArticleHtml]=useState(markdownParser.render(articleContent));
+    const [articleMd, setArticleMd] = useState(articleContent);
+    const [articleHtml, setArticleHtml] = useState(markdownParser.render(articleContent));
     //----------------------PC端处理----------------------
     //#region
     //#endregion
@@ -51,6 +52,10 @@ export default function HomePage() {
         setArticleMd(val)
         setArticleHtml(markdownParser.render(val))
     }
+    useEffect(() => {
+        console.log("页面加载完成")
+        setEditorStyle("");
+    })
 
     //布局组件
     function multinomialLayout() {
@@ -97,7 +102,8 @@ export default function HomePage() {
                         </Row>
                     </Header>
                     <Content className={"mobile-content"}>
-                        {previewState ? <ArticlePreview content={articleHtml}/> : <ArticleEditor value={articleMd} onChange={editorChange}/>}
+                        {previewState ? <ArticlePreview content={articleHtml}/> :
+                            <ArticleEditor value={articleMd} onChange={editorChange}/>}
                     </Content>
                 </Layout>
             )
