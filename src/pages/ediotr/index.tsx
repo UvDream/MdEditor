@@ -7,6 +7,7 @@ import "./index.less";
 import {IconEye, IconEyeInvisible} from "@arco-design/web-react/icon";
 import {BackTop, Grid} from "@arco-design/web-react";
 import {defaultStyle} from "@/utils"
+
 const Row = Grid.Row;
 const Col = Grid.Col;
 export default function EditorPage() {
@@ -25,9 +26,11 @@ export default function EditorPage() {
     if (DeviceType() === DeviceTypeEnum.PC) {
         return (
             <div className={"pc-editor"}>
-                <Row style={{height:'100%'}} gutter={[2,0]}>
+                <Row style={{height: '100%'}} gutter={[2, 0]}>
                     <Col span={8} className={'code-editor'}>
-                        <Editor value={articleMd} onChange={(val:string)=>{editorChange(val)}} language={'markdown'}/>
+                        <Editor value={articleMd} onChange={(val: string) => {
+                            editorChange(val)
+                        }} language={'markdown'}/>
                     </Col>
                     <Col span={8} className={"preview"}>
                         <Preview content={articleHtml}/>
