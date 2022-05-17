@@ -19,7 +19,7 @@ export default function EditorPage() {
      * @param val
      */
     const editorChange = (val: string) => {
-        setArticleMd(val)
+        // setArticleMd(val)
         setArticleHtml(markdownParser.render(val))
     }
     if (DeviceType() === DeviceTypeEnum.PC) {
@@ -27,7 +27,7 @@ export default function EditorPage() {
             <div className={"pc-editor"}>
                 <Row style={{height:'100%'}} gutter={[2,0]}>
                     <Col span={8} className={'code-editor'}>
-                        <Editor value={articleMd} onChange={editorChange} language={'markdown'}/>
+                        <Editor value={articleMd} onChange={(val:string)=>{editorChange(val)}} language={'markdown'}/>
                     </Col>
                     <Col span={8} className={"preview"}>
                         <Preview content={articleHtml}/>
