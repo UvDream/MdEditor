@@ -9,3 +9,4 @@
 export * from "./common";
 export * from "./markdown-it";
 export * from "./dom";
+export * from "./themes/default-style"

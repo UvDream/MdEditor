@@ -1,9 +1,37 @@
 .pc-editor {
   height: 100%;
-  .code-editor{
+  //代码编辑器
+  .code-editor {
     height: 100%;
-    outline:1px solid red;
-    overflow:auto;
+    overflow: auto;
+    .editor{
+      height: 100%;
+    }
+  }
+
+  //
+  .preview {
+    height: 100%;
+    overflow: auto;
+  }
+
+  .style-editor {
+    height: 100%;
+    overflow: auto;
+    .editor{
+      height: 100%;
+    }
+  }
+
+  .cm-content {
+    width: calc(100% - 30px);
+
+    .cm-line {
+      width: 100%;
+      white-space: normal;
+      word-break: break-all;
+      word-wrap: break-word;
+    }
   }
 }
 

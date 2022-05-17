@@ -13,9 +13,7 @@
     "react-dom": "^18.0.0",
     "react-router-dom": "6",
     "markdown-it": "^13.0.0",
-    "@uiw/react-codemirror":"^4.7.0",
-    "@codemirror/lang-markdown":"^0.20.0",
-    "@codemirror/language-data": "^0.20.0",
+    "@uiw/react-monacoeditor": "^3.5.3",
     "juice": "^8.0.0",
     "highlight.js": "^11.5.1"
   },
