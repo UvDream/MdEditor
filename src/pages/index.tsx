@@ -10,12 +10,17 @@ import {Routes, Route} from "react-router-dom";
 import HomePage from "./home";
 import LoginPage from "./login";
 import {DeviceType} from "@/utils";
+import EditorPage from "@/pages/ediotr";
+
 export default function IndexPage() {
     console.log(DeviceType());
     return (
-            <Routes>
-                <Route path="/" element={<HomePage/>}/>
-                <Route path="/login" element={<LoginPage/>}/>
-            </Routes>
+        <Routes>
+            <Route path="/" element={<HomePage/>}>
+                <Route path="/editor" element={<EditorPage />}>
+                </Route>
+            </Route>
+            <Route path="/login" element={<LoginPage/>}/>
+        </Routes>
     );
 }

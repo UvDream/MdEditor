@@ -1,7 +1,20 @@
+import {TopMenusData} from './common';
 export default function TopMenus() {
+
+
     return (
-        <div>
-            顶部菜单
-        </div>
+        <>
+            {
+                TopMenusData.map((item, index) => {
+                    return (
+                        <div className={"menus-item"} key={index}>
+                            <div>
+                                {item.name}
+                            </div>
+                        </div>
+                    )
+                })
+            }
+        </>
     )
 }

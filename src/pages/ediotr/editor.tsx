@@ -1,10 +1,10 @@
 import CodeMirror from "@uiw/react-codemirror";
-import { markdown, markdownLanguage } from '@codemirror/lang-markdown';
-import { languages } from '@codemirror/language-data';
-import "./article-editor.less"
+import {markdown, markdownLanguage} from "@codemirror/lang-markdown";
+import {languages} from "@codemirror/language-data";
 
-export default function ArticleEditor(props:any) {
-    return (
+
+export default function Editor(props:any){
+    return(
         <div className={"editor"}>
             <CodeMirror
                 // themes={'dark'}
