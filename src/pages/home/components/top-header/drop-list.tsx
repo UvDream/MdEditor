@@ -5,9 +5,24 @@ type DropListProps = {
     onClick?: (item: string) => void;
 };
 export default function DropList(props: DropListProps) {
-    return (
-        <div>
-            {props.data.name}
-        </div>
-    )
+    if (props.data.children) {
+     return(
+         <div>
+             {props.data.children.map((item: TopMenusType) => {
+                 return (
+                    <div>
+                        {item.name}
+                    </div>
+                 );
+             })}
+         </div>
+     )
+    }else{
+        return(
+            <div>
+
+            </div>
+        )
+    }
+
 }
