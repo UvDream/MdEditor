@@ -52,15 +52,17 @@ export default function Preview(props: any) {
                     IconList.map((item: any) => {
                         if (item.id === 1 || item.id === 2 || item.type === DeviceType) {
                             return (
-                                <IconFont
-                                    key={item.id}
-                                    type={item.type}
-                                    style={{
-                                        fontSize: '22px',
-                                        marginRight: '10px'
-                                    }}
-                                    onClick={() => IconClick(item.id)}
-                                />
+
+                                    <IconFont
+                                        className={"tool-icon"}
+                                        key={item.id}
+                                        type={item.type}
+                                        style={{
+                                            fontSize: '22px',
+                                        }}
+                                        onClick={() => IconClick(item.id)}
+                                    />
+
                             )
                         }
 
