@@ -6,17 +6,16 @@
  * @Description:
  * @Email: UvDream@163.com
  */
-import {useState, useEffect} from "react";
-import {Layout, Grid, Drawer} from "@arco-design/web-react";
-import {IconOrderedList, IconEye, IconEyeInvisible} from "@arco-design/web-react/icon";
-import { Outlet} from "react-router-dom";
+import {useEffect, useState} from "react";
+import {Drawer, Grid, Layout} from "@arco-design/web-react";
+import {IconOrderedList} from "@arco-design/web-react/icon";
+import {Outlet} from "react-router-dom";
 
 import "./index.less"
-import {DeviceType, DeviceTypeEnum, markdownParser, setEditorStyle} from "@/utils";
+import {DeviceType, DeviceTypeEnum, setEditorStyle} from "@/utils";
 import ArticleList from "@/pages/home/components/article-list";
-import {articleContent} from "@/pages/home/mock";
 import "highlight.js/styles/vs2015.css";
-import TopHeader from "./components/top-header";
+import TopHeader from "./components/top-header/top-header";
 
 
 const Sider = Layout.Sider;
@@ -24,7 +23,7 @@ const Header = Layout.Header;
 const Content = Layout.Content;
 const Row = Grid.Row;
 const Col = Grid.Col;
-export default function HomePage(props:any) {
+export default function HomePage(props: any) {
     //----------------------PC端处理----------------------
     //#region
     //#endregion
@@ -49,19 +48,19 @@ export default function HomePage(props:any) {
         if (DeviceType() === DeviceTypeEnum.PC) {
             //pc端布局
             return (
-                    <Layout className={"pc-layout"}>
-                        <Header>
-                            <TopHeader/>
-                        </Header>
-                        <Layout>
-                            <Sider>
-                                111
-                            </Sider>
-                            <Content className={"content"}>
-                                <Outlet />
-                            </Content>
-                        </Layout>
+                <Layout className={"pc-layout"}>
+                    <Header>
+                        <TopHeader/>
+                    </Header>
+                    <Layout>
+                        <Sider>
+                            111
+                        </Sider>
+                        <Content className={"content"}>
+                            <Outlet/>
+                        </Content>
                     </Layout>
+                </Layout>
             )
         } else if (DeviceType() === DeviceTypeEnum.MOBILE) {
             //手机端布局
@@ -88,7 +87,7 @@ export default function HomePage(props:any) {
                     <Content className={"mobile-content"}>
                         {/*{previewState ? <ArticlePreview content={articleHtml}/> :*/}
                         {/*    <ArticleEditor value={articleMd} onChange={editorChange}/>}*/}
-                        <Outlet />
+                        <Outlet/>
                     </Content>
                 </Layout>
             )
