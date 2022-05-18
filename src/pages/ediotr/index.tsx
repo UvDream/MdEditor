@@ -32,7 +32,7 @@ export default function EditorPage() {
                             editorChange(val)
                         }} language={'markdown'}/>
                     </Col>
-                    <Col span={8} className={"preview scroll-bar"}>
+                    <Col span={8} className={"preview "}>
                         <Preview content={articleHtml}/>
                     </Col>
                     <Col span={8} className={"style-editor "}>

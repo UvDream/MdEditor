@@ -14,12 +14,11 @@
   //预览
   .preview {
     height: 100%;
-    overflow-y: scroll;
-    padding-bottom: 200px;
-
 
     .md-preview {
+      height: 100%;
       position: relative;
+      overflow: hidden;
 
       .tool {
         position: absolute;
@@ -33,6 +32,11 @@
         &-icon {
           margin: 5px auto;
         }
+      }
+
+      .md-editor {
+        height: 100%;
+        overflow-y: auto;
       }
 
       //  pc预览

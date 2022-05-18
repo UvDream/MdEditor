@@ -1,5 +1,6 @@
 import {Icon} from "@arco-design/web-react"
 import {useState} from "react"
+import "./index.less"
 
 const IconFont = Icon.addFromIconFontCn({src: '//at.alicdn.com/t/font_3408739_o2okt6dixt.js'})
 export default function Preview(props: any) {
@@ -40,9 +41,9 @@ export default function Preview(props: any) {
     }
     const EditorClass = () => {
         if (DeviceType === 'icon-phone') {
-            return 'md-editor md-editor-phone'
+            return 'md-editor md-editor-phone scroll-bar'
         } else {
-            return 'md-editor md-editor-pc'
+            return 'md-editor md-editor-pc scroll-bar'
         }
     }
     return (
@@ -53,15 +54,15 @@ export default function Preview(props: any) {
                         if (item.id === 1 || item.id === 2 || item.type === DeviceType) {
                             return (
 
-                                    <IconFont
-                                        className={"tool-icon"}
-                                        key={item.id}
-                                        type={item.type}
-                                        style={{
-                                            fontSize: '22px',
-                                        }}
-                                        onClick={() => IconClick(item.id)}
-                                    />
+                                <IconFont
+                                    className={"tool-icon"}
+                                    key={item.id}
+                                    type={item.type}
+                                    style={{
+                                        fontSize: '22px',
+                                    }}
+                                    onClick={() => IconClick(item.id)}
+                                />
 
                             )
                         }
@@ -70,9 +71,11 @@ export default function Preview(props: any) {
 
                 }
             </div>
-            <div className={EditorClass()} dangerouslySetInnerHTML={{
-                __html: props.content,
-            }}>
+            <div className={EditorClass()}>
+                <div style={{paddingBottom: "100px"}} dangerouslySetInnerHTML={{
+                    __html: props.content,
+                }}>
+                </div>
             </div>
         </div>
     )
