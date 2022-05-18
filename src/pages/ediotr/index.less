@@ -15,15 +15,29 @@
     height: 100%;
     overflow: auto;
     padding-bottom: 200px;
-    .md-preview{
-      outline:1px solid green;
-      position:relative;
-      .tool{
-        position:absolute;
+
+    .md-preview {
+      position: relative;
+
+      .tool {
+        position: absolute;
         right: 0;
         top: 0;
         width: 30px;
         height: 100%;
+      }
+
+      //  pc预览
+      .md-editor-pc {
+        padding: 10px 10px;
+      }
+
+      //phone 预览
+      .md-editor-phone {
+        width: 400px;
+        margin: 0 auto;
+        box-shadow: 0 0 60px rgb(0 0 0 / 10%);
+        padding: 10px 10px;
       }
     }
   }

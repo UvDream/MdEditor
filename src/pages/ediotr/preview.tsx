@@ -38,6 +38,13 @@ export default function Preview(props: any) {
                 break;
         }
     }
+    const EditorClass = () => {
+        if (DeviceType === 'icon-phone') {
+            return 'md-editor md-editor-phone'
+        } else {
+            return 'md-editor md-editor-pc'
+        }
+    }
     return (
         <div className={"md-preview"}>
             <div className={"tool"}>
@@ -61,7 +68,7 @@ export default function Preview(props: any) {
 
                 }
             </div>
-            <div className={"md-editor"} dangerouslySetInnerHTML={{
+            <div className={EditorClass()} dangerouslySetInnerHTML={{
                 __html: props.content,
             }}>
             </div>
