@@ -9,7 +9,7 @@ export default function TopMenus() {
                 TopMenusData.map((item:TopMenusType, index) => {
                     return (
                         <div className={"menus-item"} key={index}>
-                            <Dropdown droplist={<DropList data={item}/>} trigger='click' position='bottom'>
+                            <Dropdown droplist={<DropList data={item}/>} trigger='click' position='bl'>
                                 <div>
                                     {item.name}
                                 </div>

@@ -7,24 +7,40 @@
  * @Email: UvDream@163.com
  */
 export enum DeviceTypeEnum {
-  PC,
-  MOBILE,
-  Pad,
+    PC,
+    MOBILE,
+    Pad,
 }
+
 /**
  * 判断设备
  * @returns {DeviceTypeEnum}
  */
 export const DeviceType = () => {
-  let ua = navigator.userAgent.toLowerCase();
-  let isAndroid = ua.indexOf("android") > -1;
-  let isIphone = ua.indexOf("iphone") > -1;
-  let isIpad = ua.indexOf("ipad") > -1;
-  if (isAndroid || isIphone) {
-    return DeviceTypeEnum.MOBILE;
-  }
-  if (isIpad) {
-    return DeviceTypeEnum.Pad;
-  }
-  return DeviceTypeEnum.PC;
+    let ua = navigator.userAgent.toLowerCase();
+    let isAndroid = ua.indexOf("android") > -1;
+    let isIphone = ua.indexOf("iphone") > -1;
+    let isIpad = ua.indexOf("ipad") > -1;
+    if (isAndroid || isIphone) {
+        return DeviceTypeEnum.MOBILE;
+    }
+    if (isIpad) {
+        return DeviceTypeEnum.Pad;
+    }
+    return DeviceTypeEnum.PC;
 };
+
+/**
+ * 判断是mac/window
+ */
+export const GetSystem = () => {
+    let ua = navigator.userAgent.toLowerCase();
+    let isMac = ua.indexOf("macintosh") > -1;
+    let isWindow = ua.indexOf("windows") > -1;
+    if (isMac) {
+        return "mac";
+    }
+    if (isWindow) {
+        return "window";
+    }
+}
