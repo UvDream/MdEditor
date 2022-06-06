@@ -40,32 +40,32 @@ export const TopMenusData: Array<TopMenusType> = [
             {
                 id: "2-1",
                 name: '一级标题',
-                shortcuts: ""
+                shortcuts: "h1"
             },
             {
                 id: "2-2",
                 name: '二级标题',
-                shortcuts: ""
+                shortcuts: "h2"
             },
             {
                 id: "2-3",
                 name: '三级标题',
-                shortcuts: ""
+                shortcuts: "h3"
             },
             {
                 id: "2-4",
                 name: '四级标题',
-                shortcuts: ""
+                shortcuts: "h4"
             },
             {
                 id: "2-5",
                 name: '五级标题',
-                shortcuts: ""
+                shortcuts: "h5"
             },
             {
                 id: "2-6",
                 name: '六级标题',
-                shortcuts: ""
+                shortcuts: "h6"
             },
             {
                 id: "2-7",
@@ -79,12 +79,12 @@ export const TopMenusData: Array<TopMenusType> = [
             {
                 id: "2-9",
                 name: '代码块',
-                shortcuts: ""
+                shortcuts: "code"
             },
             {
                 id: "2-10",
                 name: '公式块',
-                shortcuts: ""
+                shortcuts: "math"
             },
             {
                 id: "2-11",
@@ -93,7 +93,7 @@ export const TopMenusData: Array<TopMenusType> = [
             {
                 id: "2-12",
                 name: '引用',
-                shortcuts: ""
+                shortcuts: "reference"
             },
             {
                 id: "2-13",
@@ -102,17 +102,17 @@ export const TopMenusData: Array<TopMenusType> = [
             {
                 id: "2-14",
                 name: '有序列表',
-                shortcuts: ""
+                shortcuts: "an_ordered_list"
             },
             {
                 id: "2-15",
                 name: '无序列表',
-                shortcuts: ""
+                shortcuts: "unordered_list"
             },
             {
                 id: "2-16",
                 name: "任务列表",
-                shortcuts: ""
+                shortcuts: "task_list"
             },
             {
                 id: "2-17",
@@ -121,12 +121,12 @@ export const TopMenusData: Array<TopMenusType> = [
             {
                 id: "2-18",
                 name: '链接引用',
-                shortcuts: ""
+                shortcuts: "links_to_reference"
             },
             {
                 id: "2-19",
                 name: '水平分割线',
-                shortcuts: ""
+                shortcuts: "horizontal_line"
             }
         ]
     },
@@ -137,22 +137,22 @@ export const TopMenusData: Array<TopMenusType> = [
             {
                 id: "3-1",
                 name: '加粗',
-                shortcuts: ""
+                shortcuts: "bold"
             },
             {
                 id: "3-2",
                 name: '斜体',
-                shortcuts: ""
+                shortcuts: "italic"
             },
             {
                 id: "3-3",
                 name: '下划线',
-                shortcuts: ""
+                shortcuts: "underline"
             },
             {
                 id: "3-4",
                 name: '行内代码',
-                shortcuts: ""
+                shortcuts: "code_block"
             },
             {
                 id: "3-5",
@@ -161,12 +161,12 @@ export const TopMenusData: Array<TopMenusType> = [
             {
                 id: "3-6",
                 name: '删除线',
-                shortcuts: ""
+                shortcuts: "delete_line"
             },
             {
                 id: "3-7",
                 name: '注释',
-                shortcuts: ""
+                shortcuts: "annotation"
             },
             {
                 id: "3-8",
@@ -175,12 +175,12 @@ export const TopMenusData: Array<TopMenusType> = [
             {
                 id: "3-9",
                 name: '超链接',
-                shortcuts: ""
+                shortcuts: "hyperlinks"
             },
             {
                 id: "3-10",
                 name: '图片',
-                shortcuts: ""
+                shortcuts: "image"
             }
         ]
     },
