@@ -6,8 +6,7 @@ import {articleContent} from "@/pages/home/mock";
 import "./index.less";
 import {IconEye, IconEyeInvisible} from "@arco-design/web-react/icon";
 import {BackTop, Grid} from "@arco-design/web-react";
-import {defaultStyle} from "@/utils"
-
+import {defaultStyle,emitter} from "@/utils"
 const Row = Grid.Row;
 const Col = Grid.Col;
 export default function EditorPage() {

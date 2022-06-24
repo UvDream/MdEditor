@@ -16,6 +16,7 @@ specifiers:
   juice: ^8.0.0
   less: ^4.1.2
   markdown-it: ^13.0.0
+  mitt: ^3.0.0
   react: ^18.0.0
   react-dom: ^18.0.0
   react-router-dom: '6'
@@ -32,6 +33,7 @@ dependencies:
   highlight.js: 11.5.1
   juice: 8.0.0
   markdown-it: 13.0.1
+  mitt: 3.0.0
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-router-dom: 6.3.0_react-dom@18.2.0+react@18.2.0
@@ -1506,6 +1508,10 @@ packages:
     resolution: {integrity: sha512-USPkMeET31rOMiarsBNIHZKLGgvKc/LrjofAnBlOttf5ajRvqiRA8QsenbcooctK6d6Ts6aqZXBA+XbkKthiQg==}
     engines: {node: '>=4.0.0'}
     hasBin: true
+    dev: false
+
+  /mitt/3.0.0:
+    resolution: {integrity: sha512-7dX2/10ITVyqh4aOSVI9gdape+t9l2/8QxHrFmUXu4EEUpdlxl6RudZUPZoc+zuY2hk1j7XxVroIVIan/pD/SQ==}
     dev: false
 
   /monaco-editor/0.33.0:

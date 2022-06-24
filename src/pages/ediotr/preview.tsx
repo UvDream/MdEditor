@@ -1,10 +1,16 @@
 import {Icon} from "@arco-design/web-react"
 import {useState} from "react"
+import {emitter} from "@/utils"
 import "./index.less"
 
 const IconFont = Icon.addFromIconFontCn({src: '//at.alicdn.com/t/font_3408739_o2okt6dixt.js'})
 export default function Preview(props: any) {
     const [DeviceType, setDeviceType] = useState('icon-pc')
+    emitter.on("scroll", (val:any) => {
+        // console.log("滚动高度", val)
+        let scrollView = document.getElementById("scroll") as unknown as HTMLElement
+        scrollView.scrollTop=val
+    })
     const IconList = [
         {
             id: 1,
@@ -71,7 +77,7 @@ export default function Preview(props: any) {
 
                 }
             </div>
-            <div className={EditorClass()}>
+            <div className={EditorClass()}  id="scroll">
                 <div style={{paddingBottom: "100px"}} dangerouslySetInnerHTML={{
                     __html: props.content,
                 }}>

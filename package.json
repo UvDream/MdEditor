@@ -19,7 +19,8 @@
     "@uiw/react-codemirror": "4.9.2",
     "@codemirror/lang-markdown": "^6.0.0",
     "@codemirror/language-data": "^6.1.0",
-    "@codemirror/view":"^6.0.2"
+    "@codemirror/view": "^6.0.2",
+    "mitt": "^3.0.0"
   },
   "devDependencies": {
     "@arco-plugins/vite-react": "^1.1.0",
