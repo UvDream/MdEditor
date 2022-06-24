@@ -11,3 +11,4 @@ export * from "./markdown-it";
 export * from "./dom";
 export * from "./themes/default-style"
 export * from "./mitt"
+export * from "./config"

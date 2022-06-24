@@ -9,18 +9,19 @@
   },
   "dependencies": {
     "@arco-design/web-react": "^2.32.1",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
-    "react-router-dom": "6",
-    "markdown-it": "^13.0.0",
-    "@uiw/react-monacoeditor": "^3.5.3",
-    "juice": "^8.0.0",
-    "highlight.js": "^11.5.1",
-    "@uiw/react-codemirror": "4.9.2",
     "@codemirror/lang-markdown": "^6.0.0",
     "@codemirror/language-data": "^6.1.0",
     "@codemirror/view": "^6.0.2",
-    "mitt": "^3.0.0"
+    "@uiw/react-codemirror": "4.9.2",
+    "@uiw/react-monacoeditor": "^3.5.3",
+    "ahooks": "^3.5.0",
+    "highlight.js": "^11.5.1",
+    "juice": "^8.0.0",
+    "markdown-it": "^13.0.0",
+    "mitt": "^3.0.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-router-dom": "6"
   },
   "devDependencies": {
     "@arco-plugins/vite-react": "^1.1.0",

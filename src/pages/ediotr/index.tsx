@@ -1,19 +1,30 @@
-import {DeviceType, DeviceTypeEnum, markdownParser} from "@/utils";
+import {defaultStyle, DeviceType, DeviceTypeEnum, emitter, EventType, getConfig, markdownParser} from "@/utils";
 import Editor from './editor'
 import Preview from './preview'
 import {useState} from "react";
 import {articleContent} from "@/pages/home/mock";
 import "./index.less";
 import {IconEye, IconEyeInvisible} from "@arco-design/web-react/icon";
-import {BackTop, Grid} from "@arco-design/web-react";
-import {defaultStyle,emitter} from "@/utils"
+import {Grid} from "@arco-design/web-react";
+
 const Row = Grid.Row;
 const Col = Grid.Col;
 export default function EditorPage() {
     const [previewState, setPreviewState] = useState(false);
     const [articleMd, setArticleMd] = useState(articleContent);
     const [articleHtml, setArticleHtml] = useState(markdownParser.render(articleContent));
-
+    const [config, setConfig] = useState(getConfig());
+    const getCount = () => {
+        let count = 0
+        let config = getConfig()
+        config.editorArea && count++
+        config.previewArea && count++
+        config.themeArea && count++
+        return count
+    }
+    emitter.on(EventType.EditorShow, () => {
+        setConfig(getConfig())
+    })
     /**
      * 编辑器change事件
      * @param val
@@ -26,17 +37,26 @@ export default function EditorPage() {
         return (
             <div className={"pc-editor"}>
                 <Row style={{height: '100%'}} gutter={[2, 0]}>
-                    <Col span={8} className={'code-editor'}>
-                        <Editor value={articleMd} onChange={(val: string) => {
-                            editorChange(val)
-                        }} language={'markdown'}/>
-                    </Col>
-                    <Col span={8} className={"preview "}>
-                        <Preview content={articleHtml}/>
-                    </Col>
-                    <Col span={8} className={"style-editor "}>
-                        <Editor value={defaultStyle} language={'css'}/>
-                    </Col>
+                    {
+                        config.editorArea ?
+                            <Col span={24 / getCount()} className={'code-editor'}>
+                                <Editor value={articleMd} onChange={(val: string) => {
+                                    editorChange(val)
+                                }} language={'markdown'}/>
+                            </Col> : <></>
+                    }
+                    {
+                        config.previewArea ?
+                            <Col span={24 / getCount()} className={"preview "}>
+                                <Preview content={articleHtml}/>
+                            </Col> : <></>
+                    }
+                    {
+                        config.themeArea ?
+                            <Col span={24 / getCount()} className={"style-editor "}>
+                                <Editor value={defaultStyle} language={'css'}/>
+                            </Col> : <></>
+                    }
                 </Row>
 
             </div>
@@ -57,14 +77,6 @@ export default function EditorPage() {
                             setPreviewState(false)
                         }} style={{fontSize: "18px"}}/>}
                 </div>
-                <div style={{height: '10000px'}}>
-
-                </div>
-                {/*{*/}
-                {/*    previewState? <Preview content={articleHtml}/> :*/}
-                {/*        <Editor value={articleMd} onChange={editorChange}/>*/}
-                {/*}*/}
-
             </div>
         )
     } else {

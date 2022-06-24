@@ -9,7 +9,7 @@ export default function Preview(props: any) {
     emitter.on("scroll", (val: any) => {
         // console.log("滚动高度", val)
         let scrollView = document.getElementById("scroll") as unknown as HTMLElement
-        scrollView.scrollTop = val
+        scrollView.scrollTop = val*0.8
     })
     const IconList = [
         {
