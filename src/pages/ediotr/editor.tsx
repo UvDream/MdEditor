@@ -1,4 +1,7 @@
-import MonacoEditor from '@uiw/react-monacoeditor';
+import CodeMirror from '@uiw/react-codemirror';
+import {markdown, markdownLanguage} from '@codemirror/lang-markdown';
+import {languages} from '@codemirror/language-data';
+import {ViewPlugin} from "@codemirror/view";
 
 type Props = {
     value?: string;
@@ -6,14 +9,23 @@ type Props = {
     onChange?: (value: string) => void;
 };
 export default function Editor(props: Props) {
-    const options= {
+    const scroll = ViewPlugin.fromClass(
+        class {
+            constructor(view:any) {
+                view.scrollDOM.addEventListener("scroll", () => {
+                    console.log("111",view.scrollDOM.scrollTop);
+                });
+            }
+        }
+    );
+    const options = {
         selectOnLineNumbers: true,
         roundedSelection: false,
         readOnly: false,
         cursorStyle: 'line',
         automaticLayout: false,
         //换行
-        wordWrap:'on',
+        wordWrap: 'on',
         minimap: {
             enabled: false,
         },
@@ -39,16 +51,21 @@ export default function Editor(props: Props) {
     };
     return (
         <div className={"editor"}>
-            <MonacoEditor
+            {/*<MonacoEditor*/}
+            {/*    value={props.value}*/}
+            {/*    language={props.language}*/}
+            {/*    height="100%"*/}
+            {/*    width="100%"*/}
+            {/*    // @ts-ignore*/}
+            {/*    options={options}*/}
+            {/*    onChange={(val) => {*/}
+            {/*    props.onChange?props.onChange(val):''*/}
+            {/*}}/>*/}
+            <CodeMirror
+                height="100vh"
                 value={props.value}
-                language={props.language}
-                height="100%"
-                width="100%"
-                // @ts-ignore
-                options={options}
-                onChange={(val) => {
-                props.onChange?props.onChange(val):''
-            }}/>
+                extensions={[scroll,markdown({base: markdownLanguage, codeLanguages: languages})]}
+            />
         </div>
     )
 }
