@@ -1,12 +1,13 @@
 import {Icon} from "@arco-design/web-react"
 import {useState} from "react"
-import {emitter} from "@/utils"
+import {emitter, EventType} from "@/utils"
 import "./index.less"
 
 const IconFont = Icon.addFromIconFontCn({src: '//at.alicdn.com/t/font_3408739_o2okt6dixt.js'})
+
 export default function Preview(props: any) {
     const [DeviceType, setDeviceType] = useState('icon-pc')
-    emitter.on("scroll", (val: any) => {
+    emitter.on(EventType.Scroll, (val: any) => {
         // console.log("滚动高度", val)
         let scrollView = document.getElementById("scroll") as unknown as HTMLElement
         scrollView.scrollTop = val*0.8
@@ -59,7 +60,6 @@ export default function Preview(props: any) {
                     IconList.map((item: any) => {
                         if (item.id === 1 || item.id === 2 || item.type === DeviceType) {
                             return (
-
                                 <IconFont
                                     className={"tool-icon"}
                                     key={item.id}
@@ -72,9 +72,7 @@ export default function Preview(props: any) {
 
                             )
                         }
-
                     })
-
                 }
             </div>
             <div className={EditorClass()} id="scroll">

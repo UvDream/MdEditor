@@ -2,7 +2,7 @@ import CodeMirror from '@uiw/react-codemirror';
 import {markdown, markdownLanguage} from '@codemirror/lang-markdown';
 import {languages} from '@codemirror/language-data';
 import {ViewPlugin} from "@codemirror/view";
-import {emitter} from "@/utils";
+import {emitter, EventType} from "@/utils";
 
 type Props = {
     value?: string;
@@ -15,7 +15,7 @@ export default function Editor(props: Props) {
             constructor(view: any) {
                 view.scrollDOM.addEventListener("scroll", () => {
                     // console.log("111",view.scrollDOM.scrollTop);
-                    emitter.emit("scroll", view.scrollDOM.scrollTop);
+                    emitter.emit(EventType.Scroll, view.scrollDOM.scrollTop);
                 });
             }
         }
