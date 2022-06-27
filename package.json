@@ -14,6 +14,8 @@
     "@codemirror/view": "^6.0.2",
     "@uiw/react-codemirror": "4.9.2",
     "@uiw/react-monacoeditor": "^3.5.3",
+    "@uiw/codemirror-extensions-events": "^4.9.4",
+    "@codemirror/lang-css": "^6.0.0",
     "ahooks": "^3.5.0",
     "highlight.js": "^11.5.1",
     "juice": "^8.0.0",
