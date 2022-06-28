@@ -1,11 +1,11 @@
-import {useRef} from 'react';
+import {useRef, useState} from 'react';
 import CodeMirror from '@uiw/react-codemirror';
 import {markdown, markdownLanguage} from '@codemirror/lang-markdown';
 import {css} from '@codemirror/lang-css';
 import {languages} from '@codemirror/language-data';
-import {ViewPlugin} from "@codemirror/view";
 import {emitter, EventType} from "@/utils";
 import * as events from '@uiw/codemirror-extensions-events';
+import {keymap} from "@codemirror/view"
 
 type Props = {
     value?: string;
@@ -14,7 +14,9 @@ type Props = {
 };
 export default function Editor(props: Props) {
     const editor = useRef(null)
-    // 编辑器语言
+    const [content, setContent] = useState(props.value || '')
+
+    //编辑器语言
     const language = (): any => {
         if (props.language === 'markdown') {
             return markdown({base: markdownLanguage, codeLanguages: languages});
@@ -23,25 +25,17 @@ export default function Editor(props: Props) {
         }
     }
 
-    const scroll = ViewPlugin.fromClass(
-        class {
-            constructor(view: any) {
-                view.scrollDOM.addEventListener("scroll", () => {
-                    // console.log("111",view.scrollDOM.scrollTop);
-                    emitter.emit(EventType.Scroll, view.scrollDOM.scrollTop);
-                });
-            }
-        }
-    );
-
-    const eventExt = events.scroll({
+    //滚动事件
+    const scroll = events.scroll({
         scroll: (evn) => {
-            console.log("滚动", evn);
+            // console.log("滚动", evn);
             // setScrollTop(evn.target.scrollTop);
+            // @ts-ignore
+            emitter.emit(EventType.Scroll, evn.target.scrollTop);
         },
     });
 
-    const eventExt2 = events.content({
+    const eventExt = events.content({
         focus: (evn) => {
             console.log('focus');
             console.log(evn)
@@ -52,23 +46,51 @@ export default function Editor(props: Props) {
             console.log(evn)
         },
     });
-    const getInstance = (instance: any) => {
-        if (instance?.state) {
-            instance.state.replaceSelection("!!!!")
-            console.log("111")
-            console.log(instance.state)
-        }
+    //插入文字
+    const insertText = (text:string) => {
+        // @ts-ignore
+        const state = editor.current.view.viewState.state;
+        const range = state.selection.ranges[0];
+        // @ts-ignore
+        editor.current.view.dispatch({
+            changes: {
+                from: range.from,
+                to: range.to,
+                insert: text
+            }
+        })
     }
 
     return (
         <div className={"editor"}>
+            {/*<button onClick={() => {*/}
+            {/*    insertText("哈哈哈")*/}
+            {/*}}>*/}
+            {/*    添加*/}
+            {/*</button>*/}
             <CodeMirror
                 placeholder={"请输入文章内容"}
                 width="100%"
                 height="100vh"
-                ref={getInstance}
-                value={props.value}
-                extensions={[scroll, eventExt, eventExt2, language()]}
+                autoFocus={true}
+                ref={editor}
+                onChange={(value: string) => {
+                    props.onChange && props.onChange(value)
+                }}
+                value={content}
+                extensions={[
+                    scroll,
+                    eventExt,
+                    language(),
+                    keymap.of([{
+                            key: "Cmd-s",
+                            run: (event) => {
+                                console.log("插入新行")
+                                return false
+                            }
+                        }]
+                    )
+                ]}
             />
         </div>
     )

@@ -8,7 +8,7 @@ import Show from "@/pages/home/components/top-header/show";
 
 type DropListProps = {
     data: TopMenusType;
-    onClick?: (item: string) => void;
+    onClick: (item: TopMenusType) => void;
 };
 export default function DropList(props: DropListProps) {
     const {type} = props.data
@@ -24,7 +24,9 @@ export default function DropList(props: DropListProps) {
                                     // radio={true}
                                     title={item.name}
                                     shortcuts={item.shortcuts}
-                                    onClick={props.onClick}
+                                    onClick={()=>{
+                                       props.onClick(item)
+                                    }}
                                 />
                         }
                         </span>
@@ -53,5 +55,7 @@ export default function DropList(props: DropListProps) {
               <Show/>
             </div>
         )
+    }else {
+        return null
     }
 }
