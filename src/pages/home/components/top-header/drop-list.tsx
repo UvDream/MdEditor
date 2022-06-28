@@ -14,13 +14,13 @@ export default function DropList(props: DropListProps) {
     const {type} = props.data
     if (props.data.children) {
         return (
-            <div>
+            <>
                 {props.data.children.map((item: TopMenusType) => {
-                    return (
-                        <>
+                        return (
+                            <span key={item.id}>
                             {
                                 item.type === "divider" ?
-                                    <Divider style={{margin: "0px auto", minWidth: "unset"}}/> :
+                                    <Divider  style={{margin: "0px auto", minWidth: "unset"}}/> :
                                     <Menu.Item key={item.id}>
                                         <MenusItem
                                             // radio={true}
@@ -31,12 +31,12 @@ export default function DropList(props: DropListProps) {
                                             }}
                                         />
                                     </Menu.Item>
-
                             }
-                        </>
-                    );
-                })}
-            </div>
+                        </span>
+                        );
+                    }
+                )}
+            </>
         )
     } else if (type === "code") {
         //代码主题选择

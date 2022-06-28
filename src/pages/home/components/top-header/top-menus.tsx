@@ -1,16 +1,14 @@
 import {Dropdown, Menu} from '@arco-design/web-react';
 import {TopMenusData, TopMenusType} from '../common';
 import DropList from "./drop-list";
-import {useState} from "react";
+import {emitter, EventType} from "@/utils";
 
 
 export default function TopMenus() {
-    const [menusShow, setMenusShow] = useState(false);
-    const menusItemClick = (key: any) => {
+    const menusItemClick = (key: TopMenusType) => {
         console.log('menusItemClick', key);
-        return true
+        emitter.emit(EventType.keyEvents,key)
     }
-
     return (
         <>
             {
@@ -22,7 +20,8 @@ export default function TopMenus() {
                                 position='bl'
                                 droplist={
                                     <Menu>
-                                        <DropList data={item} onClick={() => {
+                                        <DropList data={item} key={item.id} onClick={(key) => {
+                                            menusItemClick(key)
                                         }}/>
                                     </Menu>
                                 }

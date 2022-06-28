@@ -6,16 +6,25 @@ import {languages} from '@codemirror/language-data';
 import {emitter, EventType} from "@/utils";
 import * as events from '@uiw/codemirror-extensions-events';
 import {keymap} from "@codemirror/view"
+import {h1} from "@/pages/home/components/key-events";
 
 type Props = {
     value?: string;
     language?: string;
+    insert?: boolean;
     onChange?: (value: string) => void;
 };
 export default function Editor(props: Props) {
     const editor = useRef(null)
     const [content, setContent] = useState(props.value || '')
+    emitter.on(EventType.keyEvents, (key) => {
+        if(props.insert){
+            console.log('key11', key)
+            console.log(editor)
 
+            // h1()
+        }
+    })
     //编辑器语言
     const language = (): any => {
         if (props.language === 'markdown') {
@@ -47,7 +56,7 @@ export default function Editor(props: Props) {
         },
     });
     //插入文字
-    const insertText = (text:string) => {
+    const insertText = (text: string) => {
         // @ts-ignore
         const state = editor.current.view.viewState.state;
         const range = state.selection.ranges[0];
@@ -59,6 +68,8 @@ export default function Editor(props: Props) {
                 insert: text
             }
         })
+        console.log("11111")
+        console.log(editor.current)
     }
 
     return (

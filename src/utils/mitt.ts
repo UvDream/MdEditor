@@ -5,4 +5,5 @@ export const emitter = mitt()
 export enum EventType {
     Scroll = 'scroll',
     EditorShow = 'editor-show',
+    keyEvents = 'key-events',
 }
