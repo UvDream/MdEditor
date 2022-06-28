@@ -1,9 +1,9 @@
 import {Shortcuts} from "@/pages/home/components/shortcuts";
-import {Checkbox, Radio} from "@arco-design/web-react";
+import {Checkbox, Menu, Radio} from "@arco-design/web-react";
 
 export default function MenusItem(props: any) {
     return (
-        <div className="top-menus-block" onClick={props.onClick}>
+        <div key={props.title} className="top-menus-block" onClick={props.onClick}>
             <div className={"left"}>
                 {
                     props.radio || props.checkbox ?

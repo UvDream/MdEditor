@@ -1,6 +1,6 @@
 import {TopMenusType} from "@/pages/home/components/common";
 import MenusItem from "@/pages/home/components/top-header/menus-item";
-import {Divider} from "@arco-design/web-react";
+import {Divider, Menu} from "@arco-design/web-react";
 import "./top-header.less"
 import Themes from "@/pages/home/components/top-header/themes";
 import CodeThemes from "@/pages/home/components/top-header/code-themes";
@@ -14,22 +14,26 @@ export default function DropList(props: DropListProps) {
     const {type} = props.data
     if (props.data.children) {
         return (
-            <div className={"menus-item-content"}>
+            <div>
                 {props.data.children.map((item: TopMenusType) => {
                     return (
-                        <span key={item.id}>{
-                            item.type === "divider" ?
-                                <Divider style={{margin: "0px auto",  minWidth: "unset"}}/> :
-                                <MenusItem
-                                    // radio={true}
-                                    title={item.name}
-                                    shortcuts={item.shortcuts}
-                                    onClick={()=>{
-                                       props.onClick(item)
-                                    }}
-                                />
-                        }
-                        </span>
+                        <>
+                            {
+                                item.type === "divider" ?
+                                    <Divider style={{margin: "0px auto", minWidth: "unset"}}/> :
+                                    <Menu.Item key={item.id}>
+                                        <MenusItem
+                                            // radio={true}
+                                            title={item.name}
+                                            shortcuts={item.shortcuts}
+                                            onClick={() => {
+                                                props.onClick(item)
+                                            }}
+                                        />
+                                    </Menu.Item>
+
+                            }
+                        </>
                     );
                 })}
             </div>
@@ -52,10 +56,10 @@ export default function DropList(props: DropListProps) {
         //显示
         return (
             <div className={"menus-item-content"}>
-              <Show/>
+                <Show/>
             </div>
         )
-    }else {
+    } else {
         return null
     }
 }
