@@ -76,12 +76,12 @@ export default function Editor(props: Props) {
 
     return (
         <div className={"editor"}>
-            <button onClick={() => {
-                // insertText("#")
-                insert(editor, '#', 1)
-            }}>
-                添加
-            </button>
+            {/*<button onClick={() => {*/}
+            {/*    // insertText("#")*/}
+            {/*    insert(editor, '#', 1)*/}
+            {/*}}>*/}
+            {/*    添加*/}
+            {/*</button>*/}
             <CodeMirror
                 placeholder={"请输入文章内容"}
                 width="100%"
