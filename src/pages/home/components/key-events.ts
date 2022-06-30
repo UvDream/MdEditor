@@ -7,33 +7,33 @@ import {EditorShortcuts} from "@/pages/home/components/shortcuts";
 const KeyMapConfig = [
     {
         key: EditorShortcuts().h1,
-        code: "#",
-        selection: 1
-    },
-    {
-        key: EditorShortcuts().h2,
-        code: "##",
+        code: "# ",
         selection: 2
     },
     {
-        key: EditorShortcuts().h3,
-        code: "###",
+        key: EditorShortcuts().h2,
+        code: "## ",
         selection: 3
     },
     {
-        key: EditorShortcuts().h4,
-        code: "####",
+        key: EditorShortcuts().h3,
+        code: "### ",
         selection: 4
     },
     {
-        key: EditorShortcuts().h5,
-        code: "#####",
+        key: EditorShortcuts().h4,
+        code: "#### ",
         selection: 5
     },
     {
-        key: EditorShortcuts().h6,
-        code: "######",
+        key: EditorShortcuts().h5,
+        code: "##### ",
         selection: 6
+    },
+    {
+        key: EditorShortcuts().h6,
+        code: "###### ",
+        selection: 7
     },
     {
         key: EditorShortcuts().code,
