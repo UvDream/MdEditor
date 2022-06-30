@@ -5,8 +5,7 @@ import {css} from '@codemirror/lang-css';
 import {languages} from '@codemirror/language-data';
 import {emitter, EventType} from "@/utils";
 import * as events from '@uiw/codemirror-extensions-events';
-import {keymap} from "@codemirror/view"
-import {h1} from "@/pages/home/components/key-events";
+import {insert, keymapEvent} from "@/pages/home/components/key-events";
 
 type Props = {
     value?: string;
@@ -17,12 +16,17 @@ type Props = {
 export default function Editor(props: Props) {
     const editor = useRef(null)
     const [content, setContent] = useState(props.value || '')
-    emitter.on(EventType.keyEvents, (key) => {
-        if(props.insert){
+    emitter.on(EventType.keyEvents, (key: any) => {
+        if (props.insert) {
             console.log('key11', key)
-            console.log(editor)
+            if (key.id === '2-1') {
+                insert(editor, '#', 1)
+            } else if (key.id === '2-2') {
+                insert(editor, '##', 2)
+            }
+            //@ts-ignore
+            // editor.current.view.focus()
 
-            // h1()
         }
     })
     //编辑器语言
@@ -48,7 +52,6 @@ export default function Editor(props: Props) {
         focus: (evn) => {
             console.log('focus');
             console.log(evn)
-            console.log(editor)
         },
         blur: (evn) => {
             console.log('blur');
@@ -66,19 +69,19 @@ export default function Editor(props: Props) {
                 from: range.from,
                 to: range.to,
                 insert: text
-            }
+            },
+            selection: {anchor: range.from + 1}
         })
-        console.log("11111")
-        console.log(editor.current)
     }
 
     return (
         <div className={"editor"}>
-            {/*<button onClick={() => {*/}
-            {/*    insertText("哈哈哈")*/}
-            {/*}}>*/}
-            {/*    添加*/}
-            {/*</button>*/}
+            <button onClick={() => {
+                // insertText("#")
+                insert(editor, '#', 1)
+            }}>
+                添加
+            </button>
             <CodeMirror
                 placeholder={"请输入文章内容"}
                 width="100%"
@@ -93,14 +96,7 @@ export default function Editor(props: Props) {
                     scroll,
                     eventExt,
                     language(),
-                    keymap.of([{
-                            key: "Cmd-s",
-                            run: (event) => {
-                                console.log("插入新行")
-                                return false
-                            }
-                        }]
-                    )
+                    keymapEvent(editor)
                 ]}
             />
         </div>
