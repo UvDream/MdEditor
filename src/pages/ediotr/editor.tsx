@@ -44,7 +44,7 @@ export default function Editor(props: Props) {
             // console.log("滚动", evn);
             // setScrollTop(evn.target.scrollTop);
             // @ts-ignore
-            emitter.emit(EventType.Scroll, evn.target.scrollTop);
+             emitter.emit(EventType.Scroll, evn.target.scrollTop)
         },
     });
 

@@ -62,3 +62,22 @@ export const CalcWordCount = (data:string) => {
     }
     return count;
 };
+
+/**
+ * CopyToClipboard 复制到剪贴板
+ */
+export const CopyToClipboard = (text:string) => {
+    return new Promise((resolve, reject) => {
+        const input = document.createElement("input");
+        input.value = text;
+        document.body.appendChild(input);
+        input.select();
+        const result=document.execCommand("copy");
+        if(result){
+            resolve(true);
+        }else{
+            reject(false);
+        }
+        document.body.removeChild(input);
+    })
+}

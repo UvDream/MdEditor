@@ -2,7 +2,13 @@ export const defaultStyle = `
 /*默认样式*/
 /*全局属性*/
 .md-editor{
-    background:red
+  line-height: 1.25;
+  color: #2b2b2b;
+  font-family: Optima-Regular, Optima, PingFangTC-Light, PingFangSC-light, PingFangTC-light;
+  letter-spacing: 2px;
+  background-image: linear-gradient(90deg, rgba(50, 0, 0, 0.1) 3%, rgba(0, 0, 0, 0) 3%), linear-gradient(360deg, rgba(50, 0, 0, 0.1) 3%, rgba(0, 0, 0, 0) 3%);
+  background-size: 10px 10px;
+  background-position: center center;
 }
 /*标题*/
 .md-editor h1,

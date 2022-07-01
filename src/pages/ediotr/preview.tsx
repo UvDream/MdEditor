@@ -1,16 +1,18 @@
 import {Icon} from "@arco-design/web-react"
-import {useState} from "react"
-import {emitter, EventType} from "@/utils"
+import {useRef, useState} from "react"
+import {CopyToClipboard, defaultStyle, emitter, EventType} from "@/utils"
 import "./index.less"
+import juice from "juice"
 
 const IconFont = Icon.addFromIconFontCn({src: '//at.alicdn.com/t/font_3408739_o2okt6dixt.js'})
 
 export default function Preview(props: any) {
+    const preview = useRef(null)
     const [DeviceType, setDeviceType] = useState('icon-pc')
     emitter.on(EventType.Scroll, (val: any) => {
         // console.log("滚动高度", val)
         let scrollView = document.getElementById("scroll") as unknown as HTMLElement
-        scrollView.scrollTop = val*0.8
+        scrollView.scrollTop = val * 0.8
     })
     const IconList = [
         {
@@ -30,9 +32,28 @@ export default function Preview(props: any) {
             type: 'icon-phone'
         }
     ]
-    const IconClick = (id: number) => {
+    const copy=()=>{
+        let input=document.createElement('input')
+        input.value="教教我继往开来"
+        document.body.appendChild(input)
+        input.select()
+        document.execCommand('copy')
+        document.body.removeChild(input)
+    }
+    const IconClick = async(id: number) => {
         switch (id) {
             case 1:
+                // juice(props.content, defaultStyle)
+                //@ts-ignore
+                // console.log(preview.current.innerHTML)
+                // console.log(defaultStyle)
+                let res = juice.inlineContent(preview.current.innerHTML, defaultStyle, {
+                    inlinePseudoElements: true,
+                    preserveImportant: true,
+                })
+                console.log("1111111")
+                console.log(res)
+                await CopyToClipboard(res)
                 break;
             case 2:
                 break;
@@ -75,10 +96,12 @@ export default function Preview(props: any) {
                     })
                 }
             </div>
-            <div className={EditorClass()} id="scroll">
-                <div style={{paddingBottom: "100px"}} dangerouslySetInnerHTML={{
-                    __html: props.content,
-                }}>
+            <div ref={preview} className={"md-preview-content"} id="scroll">
+                <div className={EditorClass()}>
+                    <div style={{paddingBottom: "100px"}} dangerouslySetInnerHTML={{
+                        __html: props.content,
+                    }}>
+                    </div>
                 </div>
             </div>
         </div>

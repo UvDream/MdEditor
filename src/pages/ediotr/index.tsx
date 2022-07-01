@@ -40,7 +40,9 @@ export default function EditorPage() {
                     {
                         config.editorArea ?
                             <Col span={24 / getCount()} className={'code-editor'}>
-                                <Editor value={articleMd} insert={true} onChange={(val: string) => {
+                                <Editor
+                                    value={articleMd}
+                                    insert={true} onChange={(val: string) => {
                                     editorChange(val)
                                 }} language={'markdown'}/>
                             </Col> : <></>
