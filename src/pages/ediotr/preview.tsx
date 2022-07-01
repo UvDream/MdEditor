@@ -32,21 +32,10 @@ export default function Preview(props: any) {
             type: 'icon-phone'
         }
     ]
-    const copy=()=>{
-        let input=document.createElement('input')
-        input.value="教教我继往开来"
-        document.body.appendChild(input)
-        input.select()
-        document.execCommand('copy')
-        document.body.removeChild(input)
-    }
     const IconClick = async(id: number) => {
         switch (id) {
             case 1:
-                // juice(props.content, defaultStyle)
                 //@ts-ignore
-                // console.log(preview.current.innerHTML)
-                // console.log(defaultStyle)
                 let res = juice.inlineContent(preview.current.innerHTML, defaultStyle, {
                     inlinePseudoElements: true,
                     preserveImportant: true,

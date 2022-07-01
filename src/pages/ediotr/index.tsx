@@ -1,7 +1,16 @@
-import {defaultStyle, DeviceType, DeviceTypeEnum, emitter, EventType, getConfig, markdownParser} from "@/utils";
+import {
+    defaultStyle,
+    DeviceType,
+    DeviceTypeEnum,
+    emitter,
+    EventType,
+    getConfig,
+    markdownParser,
+    setEditorStyle
+} from "@/utils";
 import Editor from './editor'
 import Preview from './preview'
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {articleContent} from "@/pages/home/mock";
 import "./index.less";
 import {IconEye, IconEyeInvisible} from "@arco-design/web-react/icon";
@@ -13,6 +22,9 @@ export default function EditorPage() {
     const [previewState, setPreviewState] = useState(false);
     const [articleMd, setArticleMd] = useState(articleContent);
     const [articleHtml, setArticleHtml] = useState(markdownParser.render(articleContent));
+    useEffect(()=>{
+        setEditorStyle(defaultStyle)
+    },[])
     const [config, setConfig] = useState(getConfig());
     const getCount = () => {
         let count = 0
