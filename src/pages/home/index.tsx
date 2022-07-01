@@ -56,7 +56,7 @@ export default function HomePage(props: any) {
                         <Sider>
                             111
                         </Sider>
-                        <Content className={"content"}>
+                        <Content className={"pc-layout-content"}>
                             <Outlet/>
                         </Content>
                     </Layout>

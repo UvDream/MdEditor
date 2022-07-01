@@ -22,6 +22,11 @@ export const defaultStyle = `
 .md-editor h1{
 }
 .md-editor h2{
+ display: flex;
+  justify-content: center;
+  border: none;
+  color: rgb(130, 127, 196);
+  padding: 0;
 }
 .md-editor h3{
 }
@@ -34,6 +39,13 @@ export const defaultStyle = `
 .md-editor h1 .prefix{
 }
 .md-editor h2 .prefix{
+display: block;
+  width: 35px;
+  height: 35px;
+  background-size:100% 100%;
+  background-repeat:no-repeat;
+  background-image: url(http://www.pic.uvdream.cn/20220421140734.png); 
+  margin-right: -20px;
 }
 .md-editor h3 .prefix{
 }
@@ -46,6 +58,12 @@ export const defaultStyle = `
 .md-editor h1 .suffix{
 }   
 .md-editor h2 .suffix{
+display: block;
+  width: 15px;
+  height: 15px;
+  background-size:100% 100%;
+  background-repeat:no-repeat;
+  background-image: url(http://www.pic.uvdream.cn/20220424093727.png);
 }
 .md-editor h3 .suffix{
 }
