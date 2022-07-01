@@ -24,7 +24,6 @@ export default function EditorPage() {
     const [articleHtml, setArticleHtml] = useState(markdownParser.render(articleContent));
     useEffect(()=>{
         setEditorStyle(defaultStyle)
-        // initStyle('md-editor-theme',defaultStyle)
     },[])
     const [config, setConfig] = useState(getConfig());
     const getCount = () => {
