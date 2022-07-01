@@ -50,12 +50,12 @@ export default function Editor(props: Props) {
 
     const eventExt = events.content({
         focus: (evn) => {
-            console.log('focus');
-            console.log(evn)
+            // console.log('focus');
+            // console.log(evn)
         },
         blur: (evn) => {
-            console.log('blur');
-            console.log(evn)
+            // console.log('blur');
+            // console.log(evn)
         },
     });
     //插入文字

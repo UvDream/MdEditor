@@ -38,10 +38,7 @@ export default function HomePage(props: any) {
     }
     //#endregion
 
-    useEffect(() => {
-        console.log("页面加载完成")
-        setEditorStyle("");
-    })
+
 
     //布局组件
     function multinomialLayout() {

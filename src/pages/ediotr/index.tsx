@@ -24,6 +24,7 @@ export default function EditorPage() {
     const [articleHtml, setArticleHtml] = useState(markdownParser.render(articleContent));
     useEffect(()=>{
         setEditorStyle(defaultStyle)
+        // initStyle('md-editor-theme',defaultStyle)
     },[])
     const [config, setConfig] = useState(getConfig());
     const getCount = () => {
@@ -44,6 +45,9 @@ export default function EditorPage() {
     const editorChange = (val: string) => {
         // setArticleMd(val)
         setArticleHtml(markdownParser.render(val))
+    }
+    const styleEditorChange= (val: string) => {
+        setEditorStyle(val)
     }
     if (DeviceType() === DeviceTypeEnum.PC) {
         return (
@@ -68,7 +72,10 @@ export default function EditorPage() {
                     {
                         config.themeArea ?
                             <Col span={24 / getCount()} className={"style-editor "}>
-                                <Editor value={defaultStyle} language={'css'}/>
+                                <Editor value={defaultStyle} language={'css'} onChange={(val:string)=>{
+                                    styleEditorChange(val)
+                                }
+                                }/>
                             </Col> : <></>
                     }
                 </Row>

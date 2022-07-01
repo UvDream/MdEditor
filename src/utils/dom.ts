@@ -5,12 +5,17 @@
  */
 export const setStyle = (el: string, value: string) => {
     let dom = document.querySelector("#" + el) as HTMLElement;
-    if (dom.innerHTML === "" && dom) {
-        dom.innerHTML = value;
+    if (!dom) {
+        dom = document.createElement("style")
+        dom.id = el;
+        dom.innerHTML = value
+        const head = document.getElementsByTagName("head")[0]
+        head.appendChild(dom)
+    }else{
+        dom.innerHTML = value
     }
-    const head = document.getElementsByTagName("head")[0]
-    head.appendChild(dom)
 }
+
 /**
  * 设置编辑器样式
  * @param value
