@@ -48,7 +48,7 @@ export const GetSystem = () => {
  * CalcWordCount 计算字数
  * @param data
  */
-export const CalcWordCount = (data:string) => {
+export const CalcWordCount = (data: string) => {
     const pattern = /[a-zA-Z0-9_\u0392-\u03c9\u0410-\u04F9]+|[\u4E00-\u9FFF\u3400-\u4dbf\uf900-\ufaff\u3040-\u309f\uac00-\ud7af]+/g;
     const m = data.match(pattern);
     let count = 0;
@@ -66,18 +66,25 @@ export const CalcWordCount = (data:string) => {
 /**
  * CopyToClipboard 复制到剪贴板
  */
-export const CopyToClipboard = (text:string) => {
+export const CopyToClipboard = (text: string) => {
     return new Promise((resolve, reject) => {
         const input = document.createElement("input");
         input.value = text;
         document.body.appendChild(input);
         input.select();
-        const result=document.execCommand("copy");
-        if(result){
+        document.addEventListener("copy", function copyCall(e) {
+            e.preventDefault();
+            e.clipboardData?.setData("text/html", text);
+            e.clipboardData?.setData("text/plain", text);
+            document.removeEventListener("copy", copyCall);
+        });
+        const result = document.execCommand("copy");
+        if (result) {
             resolve(true);
-        }else{
+        } else {
             reject(false);
         }
         document.body.removeChild(input);
     })
+
 }

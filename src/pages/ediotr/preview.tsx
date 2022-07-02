@@ -32,7 +32,7 @@ export default function Preview(props: any) {
             type: 'icon-phone'
         }
     ]
-    const IconClick = async(id: number) => {
+    const IconClick = async (id: number) => {
         switch (id) {
             case 1:
                 //@ts-ignore
@@ -85,14 +85,16 @@ export default function Preview(props: any) {
                     })
                 }
             </div>
-            <div ref={preview} className={"md-preview-content"} id="scroll">
-                <div className={EditorClass()}>
-                    <div style={{paddingBottom: "100px"}} dangerouslySetInnerHTML={{
-                        __html: props.content,
-                    }}>
+            <section ref={preview} className={"md-preview-content"} id="scroll" data-tool={"mdEditor"}>
+                <section className={EditorClass()}>
+                    <span>
+                         <div style={{paddingBottom: "100px"}} dangerouslySetInnerHTML={{
+                             __html: props.content,
+                         }}>
                     </div>
-                </div>
-            </div>
+                    </span>
+                </section>
+            </section>
         </div>
     )
 }

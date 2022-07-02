@@ -18,6 +18,7 @@ export const defaultStyle = `
 .md-editor h5,
 .md-editor h6{
     color:green;
+    margin:8px 0;
  }
 .md-editor h1{
 }
@@ -87,5 +88,14 @@ display: block;
 }
 /*段落*/
 .md-editor p{
+}
+.md-editor p code{
+    word-break: break-word;
+    border-radius: 2px;
+    overflow-x: auto;
+    background-color: #fff5f5;
+    color: #ff502c;
+    font-size: .87em;
+    padding: .065em .4em;
 }
 `;
