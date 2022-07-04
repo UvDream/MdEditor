@@ -14,7 +14,7 @@ import {useEffect, useState} from "react";
 import {articleContent} from "@/pages/home/mock";
 import "./index.less";
 import {IconEye, IconEyeInvisible} from "@arco-design/web-react/icon";
-import {Grid} from "@arco-design/web-react";
+import {Divider, Grid} from "@arco-design/web-react";
 
 const Row = Grid.Row;
 const Col = Grid.Col;
@@ -54,7 +54,7 @@ export default function EditorPage() {
                 <Row style={{height: '100%'}} gutter={[2, 0]}>
                     {
                         config.editorArea ?
-                            <Col span={24 / getCount()} className={'code-editor'}>
+                            <Col span={24 / getCount()} className={'code-editor'} style={{display:"flex"}}>
                                 <Editor
                                     value={articleMd}
                                     insert={true} onChange={(val: string) => {
