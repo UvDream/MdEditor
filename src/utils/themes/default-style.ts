@@ -2,7 +2,7 @@ export const defaultStyle = `
 /*默认样式*/
 /*全局属性*/
 .md-editor{
-  line-height: 1.25;
+  line-height: 2;
   color: #2b2b2b;
   font-family: Optima-Regular, Optima, PingFangTC-Light, PingFangSC-light, PingFangTC-light;
   letter-spacing: 2px;

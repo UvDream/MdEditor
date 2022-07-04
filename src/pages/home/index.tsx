@@ -7,14 +7,14 @@
  * @Email: UvDream@163.com
  */
 import {useEffect, useState} from "react";
-import {Drawer, Grid, Layout} from "@arco-design/web-react";
+import {Drawer, Grid, Layout, ResizeBox} from "@arco-design/web-react";
 import {IconOrderedList} from "@arco-design/web-react/icon";
 import {Outlet} from "react-router-dom";
 
 import "./index.less"
-import {DeviceType, DeviceTypeEnum, setEditorStyle} from "@/utils";
+import {DeviceType, DeviceTypeEnum} from "@/utils";
 import ArticleList from "@/pages/home/components/article-list";
-import "highlight.js/styles/vs2015.css";
+import  "highlight.js/styles/vs2015.css";
 import TopHeader from "./components/top-header/top-header";
 
 
@@ -39,7 +39,6 @@ export default function HomePage(props: any) {
     //#endregion
 
 
-
     //布局组件
     function multinomialLayout() {
         if (DeviceType() === DeviceTypeEnum.PC) {
@@ -50,12 +49,31 @@ export default function HomePage(props: any) {
                         <TopHeader/>
                     </Header>
                     <Layout>
-                        <Sider>
-                            111
-                        </Sider>
-                        <Content className={"pc-layout-content"}>
-                            <Outlet/>
-                        </Content>
+                        {/*@ts-ignore*/}
+                        <ResizeBox.Split
+                            size={0.15}
+                            min={0.1}
+                            max={0.3}
+                            style={{
+                                height: "100%",
+                                width: "100%",
+                                border: '1px solid var(--color-border)',
+                            }}
+                            panes={[
+                                <ArticleList />,
+                                <Content className={"pc-layout-content"}>
+                                    <Outlet/>
+                                </Content>
+                            ]}
+                        >
+
+                        </ResizeBox.Split>
+                        {/*<Sider>*/}
+                        {/*    111*/}
+                        {/*</Sider>*/}
+                        {/*<Content className={"pc-layout-content"}>*/}
+                        {/*    <Outlet/>*/}
+                        {/*</Content>*/}
                     </Layout>
                 </Layout>
             )

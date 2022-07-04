@@ -7,7 +7,7 @@ export interface Config {
 let GlobalConfig = {
     editorArea:true,
     previewArea:true,
-    themeArea:true
+    themeArea:false
 }
 
 export function setConfig(config:Config){
