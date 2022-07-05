@@ -6,6 +6,11 @@
  * @Description:
  * @Email: UvDream@163.com
  */
+import "./index.less"
 export default function LoginPage() {
-  return <div>login</div>;
+  return(
+      <div className={"login"}>
+        login
+      </div>
+  );
 }
