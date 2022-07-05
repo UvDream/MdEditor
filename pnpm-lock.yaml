@@ -7,6 +7,7 @@ specifiers:
   '@codemirror/lang-markdown': ^6.0.0
   '@codemirror/language-data': ^6.1.0
   '@codemirror/view': ^6.0.2
+  '@icon-park/react': ^1.4.2
   '@types/markdown-it': ^12.2.3
   '@types/react': ^18.0.0
   '@types/react-dom': ^18.0.0
@@ -32,6 +33,7 @@ dependencies:
   '@codemirror/lang-markdown': 6.0.0
   '@codemirror/language-data': 6.1.0
   '@codemirror/view': 6.0.2
+  '@icon-park/react': 1.4.2_react-dom@18.2.0+react@18.2.0
   '@uiw/codemirror-extensions-events': 4.9.4
   '@uiw/react-codemirror': 4.9.2_react-dom@18.2.0+react@18.2.0
   '@uiw/react-monacoeditor': 3.5.3_react-dom@18.2.0+react@18.2.0
@@ -573,6 +575,17 @@ packages:
       '@codemirror/state': 6.0.1
       style-mod: 4.0.0
       w3c-keyname: 2.2.4
+    dev: false
+
+  /@icon-park/react/1.4.2_react-dom@18.2.0+react@18.2.0:
+    resolution: {integrity: sha512-+MtQLjNiRuia3fC/NfpSCTIy5KH5b+NkMB9zYd7p3R4aAIK61AjK0OSraaICJdkKooU9jpzk8m0fY4g9A3JqhQ==}
+    engines: {node: '>= 8.0.0', npm: '>= 5.0.0'}
+    peerDependencies:
+      react: '>=16.9'
+      react-dom: '>=16.9'
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
     dev: false
 
   /@jridgewell/gen-mapping/0.1.1:

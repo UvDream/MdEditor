@@ -190,7 +190,7 @@ export const TopMenusData: Array<TopMenusType> = [
     // },
     {
         id: "5",
-        name: '显示',
+        name: '布局',
         type: 'show'
     },
     {

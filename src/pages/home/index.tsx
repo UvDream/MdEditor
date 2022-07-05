@@ -6,16 +6,17 @@
  * @Description:
  * @Email: UvDream@163.com
  */
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {Drawer, Grid, Layout, ResizeBox} from "@arco-design/web-react";
 import {IconOrderedList} from "@arco-design/web-react/icon";
 import {Outlet} from "react-router-dom";
 
 import "./index.less"
 import {DeviceType, DeviceTypeEnum} from "@/utils";
-import ArticleList from "@/pages/home/components/article-list";
-import  "highlight.js/styles/vs2015.css";
+import ArticleList from "@/pages/home/components/left-bar/article-list";
+import "highlight.js/styles/vs2015.css";
 import TopHeader from "./components/top-header/top-header";
+import LeftBar from "./components/left-bar/index";
 
 
 const Sider = Layout.Sider;
@@ -60,7 +61,7 @@ export default function HomePage(props: any) {
                                 border: '1px solid var(--color-border)',
                             }}
                             panes={[
-                                <ArticleList />,
+                                <LeftBar/>,
                                 <Content className={"pc-layout-content"}>
                                     <Outlet/>
                                 </Content>
