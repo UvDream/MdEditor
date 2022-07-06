@@ -7,10 +7,11 @@
  * @Email: UvDream@163.com
  */
 import "./index.less"
+import Login from "@/pages/login/login";
 export default function LoginPage() {
   return(
-      <div className={"login"}>
-        login
+      <div className={"login-page"}>
+          <Login />
       </div>
   );
 }
