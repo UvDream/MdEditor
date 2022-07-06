@@ -1,10 +1,11 @@
 import "./index.less"
 import {Button, Form, Input, Modal, Upload} from "@arco-design/web-react";
-import { FieldError } from "@arco-design/web-react/es/Form/interface";
+import {FieldError} from "@arco-design/web-react/es/Form/interface";
 
 const FormItem = Form.Item
 
 export default function Register() {
+    const [form] = Form.useForm();
     const formItemLayout = {
         labelCol: {
             span: 7,
@@ -13,18 +14,18 @@ export default function Register() {
             span: 17,
         },
     };
-    const onSubmit=(value:FormData)=>{
-        console.log('submit',value)
+    const onSubmit = (value: FormData) => {
+        console.log('submit', value)
     }
-    const onSubmitFailed=(error:{ [key: string]: FieldError })=>{
-        console.log('submit failed',error)
+    const onSubmitFailed = (error: { [key: string]: FieldError }) => {
+        console.log('submit failed', error)
     }
     return (
         <div className="register">
             <div className={"title"}>
                 注册
             </div>
-            <Form {...formItemLayout} onSubmit={onSubmit} onSubmitFailed={onSubmitFailed}>
+            <Form {...formItemLayout} form={form} onSubmit={onSubmit} onSubmitFailed={onSubmitFailed}>
                 <FormItem label="用户名" field="user_name" rules={[{required: true, message: "用户名必填"}]}>
                     <Input style={{width: 270}} placeholder='输入用户名'/>
                 </FormItem>
@@ -32,10 +33,20 @@ export default function Register() {
                     <Input style={{width: 270}} placeholder='输入昵称'/>
                 </FormItem>
                 <FormItem label="密码" field="password" rules={[{required: true, message: "密码必填"}]}>
-                    <Input style={{width: 270}} type="password" placeholder='输入密码'/>
+                    <Input.Password  style={{width: 270}} type="password" placeholder='输入密码' />
                 </FormItem>
-                <FormItem label="再次输入密码" field="password_again" rules={[{required: true, message: ""}]}>
-                    <Input style={{width: 270}} type="password" placeholder='输入密码'/>
+                <FormItem label="再次输入密码" field="password_again" rules={[
+                    {required: true, message: "密码必填"},
+                    {
+                        validator(value, cb) {
+                            if (value !== form.getFieldValue('password')) {
+                                return cb('两次密码填写不一致');
+                            }
+                            return cb();
+                        },
+                    },
+                ]}>
+                    <Input.Password  style={{width: 270}} type="password" placeholder='再次输入密码' />
                 </FormItem>
                 <FormItem label="手机号" field="phone">
                     <Input style={{width: 270}} placeholder='输入手机号'/>
