@@ -5,7 +5,7 @@ const FormItem = Form.Item
 export default function Login() {
     return (
         <div className="login">
-            <div className="login-title">
+            <div className="title">
                 登录
             </div>
             <Form>
@@ -13,7 +13,7 @@ export default function Login() {
                     <Input style={{width: 270}} placeholder='输入用户名'/>
                 </FormItem>
                 <FormItem label="密码" field="password" rules={[{required: true,message:"密码必填"}]}>
-                    <Input style={{width: 270}} placeholder='输入密码'/>
+                    <Input style={{width: 270}} type="password" placeholder='输入密码'/>
                 </FormItem>
                 <FormItem wrapperCol={{ offset: 8}}>
                     <Button type="primary" htmlType="submit" style={{ marginRight: 24,width:150,marginTop:25 }} >

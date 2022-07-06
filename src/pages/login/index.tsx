@@ -8,10 +8,12 @@
  */
 import "./index.less"
 import Login from "@/pages/login/login";
+import Register from "@/pages/login/register";
 export default function LoginPage() {
   return(
       <div className={"login-page"}>
-          <Login />
+          {/*<Login />*/}
+          <Register />
       </div>
   );
 }
