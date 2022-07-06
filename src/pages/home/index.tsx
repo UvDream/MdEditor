@@ -49,7 +49,7 @@ export default function HomePage(props: any) {
                     <Header>
                         <TopHeader/>
                     </Header>
-                    <Layout>
+                    <Layout className={"pc-layout-content"}>
                         {/*@ts-ignore*/}
                         <ResizeBox.Split
                             size={0.15}

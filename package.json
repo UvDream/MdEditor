@@ -24,7 +24,8 @@
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-router-dom": "6",
-    "@icon-park/react":"^1.4.2"
+    "@icon-park/react": "^1.4.2",
+    "axios": "^0.27.2"
   },
   "devDependencies": {
     "@arco-plugins/vite-react": "^1.1.0",

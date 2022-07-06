@@ -11,7 +11,11 @@ export default function UserStatus(props: Props) {
     let navigate = useNavigate()
     const menuItemClick = (key: string) => {
         console.log(key)
-        key==="2"&& navigate('/login')
+        if(key==="1_1"){
+            navigate('/login')
+            localStorage.removeItem('token')
+            localStorage.removeItem('user')
+        }
         props.onClick();
     }
     return (

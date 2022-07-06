@@ -9,11 +9,15 @@
 import "./index.less"
 import Login from "@/pages/login/login";
 import Register from "@/pages/login/register";
+import {useState} from "react";
+
 export default function LoginPage() {
-  return(
-      <div className={"login-page"}>
-          {/*<Login />*/}
-          <Register />
-      </div>
-  );
+    const [status, setStatus] = useState(true);
+    return (
+        <div className={"login-page"}>
+            {
+                status ? <Login/> : <Register/>
+            }
+        </div>
+    );
 }
