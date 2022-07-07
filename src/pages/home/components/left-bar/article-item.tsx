@@ -3,6 +3,7 @@ import {FolderSuccess, FolderSuccessOne, SettingConfig} from "@icon-park/react";
 import "./index.less"
 import {useNavigate} from "react-router-dom";
 import {useState} from "react";
+import dayjs from "dayjs";
 
 type Props = {
     article: ArticleItemType,
@@ -66,7 +67,7 @@ export default function ArticleItem(props: Props) {
                     </div>
                 </div>
                 <div className={"article-item-left-bottom"}>
-                    {props.article.CreatedAt}
+                    {dayjs(props.article.CreatedAt).format("YYYY-MM-DD HH:mm:ss")}
                 </div>
             </div>
             <div className={"article-item-right"}>
