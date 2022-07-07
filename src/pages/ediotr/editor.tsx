@@ -1,11 +1,11 @@
-import {useRef} from 'react';
+import {useEffect, useRef} from 'react';
 import CodeMirror from '@uiw/react-codemirror';
 import {markdown, markdownLanguage} from '@codemirror/lang-markdown';
 import {css} from '@codemirror/lang-css';
 import {languages} from '@codemirror/language-data';
 import {emitter, EventType} from "@/utils";
 import * as events from '@uiw/codemirror-extensions-events';
-import {insert, keymapEvent} from "@/pages/home/components/key-events";
+import {insert, keymapEvent, MenusInsert} from "@/pages/home/components/key-events";
 
 type Props = {
     value?: string;
@@ -16,16 +16,10 @@ type Props = {
 };
 export default function Editor(props: Props) {
     const editor = useRef(null)
-    if (props.mdEditor) {
+
+    if (props.mdEditor && props.insert) {
         emitter.on(EventType.KeyEvents, (key: any) => {
-            if (props.insert) {
-                console.log('key11', key)
-                if (key.id === '2-1') {
-                    insert(editor, '#', 1)
-                } else if (key.id === '2-2') {
-                    insert(editor, '##', 2)
-                }
-            }
+            MenusInsert(editor, key.shortcuts)
         })
     }
 

@@ -1,10 +1,14 @@
 import {keymap} from "@codemirror/view";
 import {EditorShortcuts} from "@/pages/home/components/shortcuts";
-
+type keymapType={
+    key:string,
+    code:string
+    selection:number
+}
 /**
  * 快捷键配置
  */
-const KeyMapConfig = [
+const KeyMapConfig:Array<keymapType>= [
     {
         key: EditorShortcuts().h1,
         code: "# ",
@@ -130,6 +134,10 @@ export const KeyMapFunc = (editor: any): any => {
             }
         }
     })
+}
+export const MenusInsert=(editor:any,shortcuts:string)=>{
+    const obj:keymapType=KeyMapConfig.find(item=>item.key===EditorShortcuts()[shortcuts]) as keymapType
+    insert(editor, obj.code, obj.selection)
 }
 /**
  * 插入光标
