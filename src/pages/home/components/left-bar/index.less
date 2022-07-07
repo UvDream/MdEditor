@@ -25,6 +25,7 @@
     flex-grow: 1;
     overflow: hidden;
     //文章列表小项
+
     .article-list {
       width: 100%;
 
@@ -40,13 +41,19 @@
           color: #fff;
         }
       }
+      &-content{
+        &>div:last-child{
+          border-bottom: 1px solid var(--color-neutral-3);
+
+        }
+      }
+
 
       .article-item {
         padding: 8px 4px;
         display: flex;
         width: 100%;
         border-top: 1px solid var(--color-neutral-3);
-        border-bottom: 1px solid var(--color-neutral-3);
         cursor: default;
 
         &-left {

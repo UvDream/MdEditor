@@ -20,6 +20,8 @@ export default function Editor(props: Props) {
     if (props.mdEditor && props.insert) {
         emitter.on(EventType.KeyEvents, (key: any) => {
             MenusInsert(editor, key.shortcuts)
+            //@ts-ignore
+            editor.current.view.focus()
         })
     }
 

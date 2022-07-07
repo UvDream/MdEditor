@@ -5,10 +5,11 @@ import {ArticleApi} from "@/api/article";
 import {ResponseType} from "@/api/request";
 import "./index.less"
 import {useSearchParams} from "react-router-dom";
-type Props={
-    onChange?: (id:string) => void
+
+type Props = {
+    onChange?: (id: string) => void
 }
-export default function ArticleList(props:Props) {
+export default function ArticleList(props: Props) {
     const [searchParams] = useSearchParams();
     const [articleList, setArticleList] = useState([]);
     const [options] = useState({
@@ -37,19 +38,21 @@ export default function ArticleList(props:Props) {
                     <Empty description={"暂无文章"}/>
                     :
                     <>
-                        {
-                            articleList.map((item: ArticleItemType) => {
-                                return <ArticleItem
-                                    key={item.uuid}
-                                    active={active}
-                                    article={item}
-                                    onClick={(id) => {
-                                        setActive(item.uuid)
-                                        props.onChange && props.onChange(id)
-                                    }
-                                    }/>
-                            })
-                        }
+                        <div className={"article-list-content"}>
+                            {
+                                articleList.map((item: ArticleItemType) => {
+                                    return <ArticleItem
+                                        key={item.uuid}
+                                        active={active}
+                                        article={item}
+                                        onClick={(id) => {
+                                            setActive(item.uuid)
+                                            props.onChange && props.onChange(id)
+                                        }
+                                        }/>
+                                })
+                            }
+                        </div>
                         <div className={"article-list-pagination"}>
                             <Pagination simple total={total} size="small" className={"article-list-pagination"}/>
                         </div>

@@ -2,19 +2,25 @@ import "./index.less";
 import ArticleList from "./article-list";
 import HistoryList from "@/pages/home/components/left-bar/history-list";
 import {Avatar, Config, FolderOpen, FolderSuccess, Log, ViewList} from "@icon-park/react"
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {Popover} from "@arco-design/web-react";
 import UserStatus from "@/pages/home/components/left-bar/user";
 import SetConfig from "@/pages/home/components/left-bar/config";
 import {emitter, EventType} from "@/utils";
 import {ResponseType} from "@/api/request";
 import {ArticleApi} from "@/api/article";
+import {useSearchParams} from "react-router-dom";
 
 export default function LeftBar() {
     const [selected, setSelected] = useState(0);
     const [popupVisible, setPopupVisible] = useState(false);
     const [configVisible, setConfigVisible] = useState(false);
     const [fileStatus, setFileStatus] = useState(false);
+    const [searchParams] = useSearchParams();
+    useEffect(() => {
+        const id = searchParams.get('id');
+        id && getArticleDetail(id)
+    }, [])
     //修改文件状态
     emitter.on(EventType.FileStatus, (key: boolean | any) => {
         setFileStatus(key)
