@@ -28,6 +28,18 @@
     .article-list {
       width: 100%;
 
+      .active-article {
+        background-color: rgb(var(--arcoblue-6));
+
+        .article-item-left-top {
+          color: #fff;
+
+        }
+        .article-item-left-bottom{
+          color: #fff;
+        }
+      }
+
       .article-item {
         padding: 8px 4px;
         display: flex;
@@ -65,6 +77,11 @@
           align-items: center;
         }
       }
+
+      &-pagination {
+        margin-top: 10px;
+      }
+
     }
   }
 }

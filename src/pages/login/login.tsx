@@ -18,7 +18,7 @@ export default function Login() {
         }
 
         let res: ResponseType = await UserApi.login(obj) as ResponseType
-        if (res.code == 0) {
+        if (res.code == 200) {
             Message.success(res.msg)
             localStorage.setItem('token', res.data.token)
             localStorage.setItem('user', JSON.stringify(res.data.user_info))

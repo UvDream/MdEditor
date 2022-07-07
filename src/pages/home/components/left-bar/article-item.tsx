@@ -1,8 +1,13 @@
 import {Button, Divider, Menu, Popover} from "@arco-design/web-react";
 import {FolderSuccess, FolderSuccessOne, SettingConfig} from "@icon-park/react";
 import "./index.less"
+import {useNavigate} from "react-router-dom";
+import {useState} from "react";
+
 type Props = {
-    article:ArticleItemType
+    article: ArticleItemType,
+    onClick?: () => void,
+    active: string
 }
 export type ArticleItemType = {
     uuid: string;
@@ -11,6 +16,7 @@ export type ArticleItemType = {
     CreatedAt: string;
 }
 export default function ArticleItem(props: Props) {
+    const navigate = useNavigate()
     const dropList = (
         <Menu style={{width: 120}}>
             <Menu.Item key='1'>
@@ -36,15 +42,23 @@ export default function ArticleItem(props: Props) {
             </Menu.Item>
         </Menu>
     )
+    const ArticleClick = () => {
+        navigate(`/editor?id=${props.article.uuid}`)
+        props.onClick && props.onClick()
+    }
+    const fillColor = () => {
+        return props.active === props.article.uuid ? "#fff" : "#333"
+    }
     return (
-        <div className={"article-item"}>
+        <div className={["article-item", props.active == props.article.uuid ? "active-article" : ""].join(" ")}
+             onClick={ArticleClick}>
             <div className={"article-item-left"}>
                 <div className={"article-item-left-top"}>
                     <div style={{marginTop: 2, marginRight: 2}}>
                         {
                             props.article.status === "PUBLISHED" ?
-                                <FolderSuccess theme="outline" size="15" fill="#333" strokeWidth={3}/> :
-                                <FolderSuccessOne theme="outline" size="24" fill="#333" strokeWidth={3}/>
+                                <FolderSuccess theme="outline" size="15" fill={fillColor()} strokeWidth={3}/> :
+                                <FolderSuccessOne theme="outline" size="15" fill={fillColor()} strokeWidth={3}/>
                         }
                     </div>
                     <div className={"one-line title"}>
@@ -61,7 +75,7 @@ export default function ArticleItem(props: Props) {
                     content={dropList}
                     position={'rt'}
                 >
-                    <SettingConfig theme="outline" size="20" fill="#333" strokeWidth={3}/>
+                    <SettingConfig theme="outline" size="20" fill={fillColor()} strokeWidth={3}/>
                 </Popover>
             </div>
         </div>
