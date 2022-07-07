@@ -18,8 +18,6 @@ import "highlight.js/styles/vs2015.css";
 import TopHeader from "./components/top-header/top-header";
 import LeftBar from "./components/left-bar/index";
 
-
-const Sider = Layout.Sider;
 const Header = Layout.Header;
 const Content = Layout.Content;
 const Row = Grid.Row;
@@ -69,12 +67,6 @@ export default function HomePage(props: any) {
                         >
 
                         </ResizeBox.Split>
-                        {/*<Sider>*/}
-                        {/*    111*/}
-                        {/*</Sider>*/}
-                        {/*<Content className={"pc-layout-content"}>*/}
-                        {/*    <Outlet/>*/}
-                        {/*</Content>*/}
                     </Layout>
                 </Layout>
             )

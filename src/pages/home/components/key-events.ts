@@ -156,61 +156,6 @@ export const insert = (editor: any, text: string, selection: number) => {
 export const keymapEvent = (editor: any) => {
     return keymap.of(
         KeyMapFunc(editor)
-        // {
-        //     key: EditorShortcuts().h1,
-        //     run: (event) => {
-        //         insert(editor, '#', 1)
-        //         return false
-        //     }
-        // },
-        // {
-        //     key: EditorShortcuts().h2,
-        //     preventDefault: true,
-        //     run: (event) => {
-        //         insert(editor, '##', 2)
-        //         return false
-        //     }
-        // },
-        // {
-        //     key: EditorShortcuts().h3,
-        //     preventDefault: true,
-        //     run: (event) => {
-        //         insert(editor, '###', 3)
-        //         return false
-        //     }
-        // },
-        // {
-        //     key: EditorShortcuts().h4,
-        //     preventDefault: true,
-        //     run: (event) => {
-        //         insert(editor, '####', 4)
-        //         return false
-        //     }
-        // },
-        // {
-        //     key: EditorShortcuts().h5,
-        //     preventDefault: true,
-        //     run: (event) => {
-        //         insert(editor, '####', 5)
-        //         return false
-        //     }
-        // },
-        // {
-        //     key: EditorShortcuts().h6,
-        //     preventDefault: true,
-        //     run: (event) => {
-        //         insert(editor, '######', 6)
-        //         return false
-        //     }
-        // },
-        // {
-        //     key: EditorShortcuts().code,
-        //     preventDefault: true,
-        //     run: (event) => {
-        //         insert(editor, '```\n\n```', 4)
-        //         return false
-        //     }
-        // }
     )
 }
 

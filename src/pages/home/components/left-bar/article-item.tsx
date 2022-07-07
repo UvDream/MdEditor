@@ -4,10 +4,11 @@ import "./index.less"
 import {useNavigate} from "react-router-dom";
 import {useState} from "react";
 import dayjs from "dayjs";
+import {emitter, EventType} from "@/utils";
 
 type Props = {
     article: ArticleItemType,
-    onClick?: () => void,
+    onClick?: (id:string) => void,
     active: string
 }
 export type ArticleItemType = {
@@ -45,7 +46,8 @@ export default function ArticleItem(props: Props) {
     )
     const ArticleClick = () => {
         navigate(`/editor?id=${props.article.uuid}`)
-        props.onClick && props.onClick()
+        props.onClick && props.onClick(props.article.uuid)
+        emitter.emit(EventType.FileStatus,true)
     }
     const fillColor = () => {
         return props.active === props.article.uuid ? "#fff" : "#333"

@@ -14,7 +14,7 @@ import {useEffect, useState} from "react";
 import {articleContent} from "@/pages/home/mock";
 import "./index.less";
 import {IconEye, IconEyeInvisible} from "@arco-design/web-react/icon";
-import {Divider, Grid} from "@arco-design/web-react";
+import {Button, Divider, Grid} from "@arco-design/web-react";
 
 const Row = Grid.Row;
 const Col = Grid.Col;
@@ -22,9 +22,9 @@ export default function EditorPage() {
     const [previewState, setPreviewState] = useState(false);
     const [articleMd, setArticleMd] = useState(articleContent);
     const [articleHtml, setArticleHtml] = useState(markdownParser.render(articleContent));
-    useEffect(()=>{
+    useEffect(() => {
         setEditorStyle(defaultStyle)
-    },[])
+    }, [])
     const [config, setConfig] = useState(getConfig());
     const getCount = () => {
         let count = 0
@@ -37,6 +37,12 @@ export default function EditorPage() {
     emitter.on(EventType.EditorShow, () => {
         setConfig(getConfig())
     })
+    emitter.on(EventType.MdContent, (mdContent: string | any) => {
+        console.log("111111111")
+        console.log(mdContent)
+        setArticleMd(mdContent)
+        emitter.off(EventType.MdContent)
+    })
     /**
      * 编辑器change事件
      * @param val
@@ -45,7 +51,7 @@ export default function EditorPage() {
         // setArticleMd(val)
         setArticleHtml(markdownParser.render(val))
     }
-    const styleEditorChange= (val: string) => {
+    const styleEditorChange = (val: string) => {
         setEditorStyle(val)
     }
     if (DeviceType() === DeviceTypeEnum.PC) {
@@ -54,12 +60,16 @@ export default function EditorPage() {
                 <Row style={{height: '100%'}} gutter={[2, 0]}>
                     {
                         config.editorArea ?
-                            <Col span={24 / getCount()} className={'code-editor'} style={{display:"flex"}}>
+                            <Col span={24 / getCount()} className={'code-editor'} style={{display: "flex"}}>
                                 <Editor
                                     value={articleMd}
-                                    insert={true} onChange={(val: string) => {
-                                    editorChange(val)
-                                }} language={'markdown'}/>
+                                    insert={true}
+                                    mdEditor={true}
+                                    onChange={(val: string) => {
+                                        editorChange(val)
+                                    }}
+                                    language={'markdown'}
+                                />
                             </Col> : <></>
                     }
                     {
@@ -71,14 +81,13 @@ export default function EditorPage() {
                     {
                         config.themeArea ?
                             <Col span={24 / getCount()} className={"style-editor "}>
-                                <Editor value={defaultStyle} language={'css'} onChange={(val:string)=>{
+                                <Editor value={defaultStyle} language={'css'} onChange={(val: string) => {
                                     styleEditorChange(val)
                                 }
                                 }/>
                             </Col> : <></>
                     }
                 </Row>
-
             </div>
         )
     } else if (DeviceType() === DeviceTypeEnum.MOBILE) {

@@ -13,7 +13,7 @@ export const TopMenusData: Array<TopMenusType> = [
         children: [
             {
                 id: "1-1",
-                name: '新建文件',
+                name: '新建文章',
                 shortcuts: 'new_file'
             },
             {

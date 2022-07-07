@@ -5,5 +5,7 @@ export const emitter = mitt()
 export enum EventType {
     Scroll = 'scroll',
     EditorShow = 'editor-show',
-    keyEvents = 'key-events',
+    KeyEvents = 'key-events',
+    FileStatus='file-status',
+    MdContent='md-content',
 }

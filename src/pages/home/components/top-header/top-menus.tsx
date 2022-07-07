@@ -7,7 +7,8 @@ import {emitter, EventType} from "@/utils";
 export default function TopMenus() {
     const menusItemClick = (key: TopMenusType) => {
         console.log('menusItemClick', key);
-        emitter.emit(EventType.keyEvents,key)
+        emitter.emit(EventType.KeyEvents, key)
+        emitter.off(EventType.KeyEvents)
     }
     return (
         <>

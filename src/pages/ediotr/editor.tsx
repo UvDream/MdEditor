@@ -1,4 +1,4 @@
-import {useRef, useState} from 'react';
+import {useRef} from 'react';
 import CodeMirror from '@uiw/react-codemirror';
 import {markdown, markdownLanguage} from '@codemirror/lang-markdown';
 import {css} from '@codemirror/lang-css';
@@ -12,23 +12,23 @@ type Props = {
     language?: string;
     insert?: boolean;
     onChange?: (value: string) => void;
+    mdEditor?: boolean;
 };
 export default function Editor(props: Props) {
     const editor = useRef(null)
-    const [content, setContent] = useState(props.value || '')
-    emitter.on(EventType.keyEvents, (key: any) => {
-        if (props.insert) {
-            console.log('key11', key)
-            if (key.id === '2-1') {
-                insert(editor, '#', 1)
-            } else if (key.id === '2-2') {
-                insert(editor, '##', 2)
+    if (props.mdEditor) {
+        emitter.on(EventType.KeyEvents, (key: any) => {
+            if (props.insert) {
+                console.log('key11', key)
+                if (key.id === '2-1') {
+                    insert(editor, '#', 1)
+                } else if (key.id === '2-2') {
+                    insert(editor, '##', 2)
+                }
             }
-            //@ts-ignore
-            // editor.current.view.focus()
+        })
+    }
 
-        }
-    })
     //编辑器语言
     const language = (): any => {
         if (props.language === 'markdown') {
@@ -44,7 +44,7 @@ export default function Editor(props: Props) {
             // console.log("滚动", evn);
             // setScrollTop(evn.target.scrollTop);
             // @ts-ignore
-             emitter.emit(EventType.Scroll, evn.target.scrollTop)
+            emitter.emit(EventType.Scroll, evn.target.scrollTop)
         },
     });
 
@@ -91,7 +91,7 @@ export default function Editor(props: Props) {
                 onChange={(value: string) => {
                     props.onChange && props.onChange(value)
                 }}
-                value={content}
+                value={props.value}
                 extensions={[
                     scroll,
                     eventExt,

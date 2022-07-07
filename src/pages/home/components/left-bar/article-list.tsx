@@ -5,8 +5,10 @@ import {ArticleApi} from "@/api/article";
 import {ResponseType} from "@/api/request";
 import "./index.less"
 import {useSearchParams} from "react-router-dom";
-
-export default function ArticleList() {
+type Props={
+    onChange?: (id:string) => void
+}
+export default function ArticleList(props:Props) {
     const [searchParams] = useSearchParams();
     const [articleList, setArticleList] = useState([]);
     const [options] = useState({
@@ -19,6 +21,7 @@ export default function ArticleList() {
         setActive(searchParams.get('id') || '')
         getArticleList()
     }, [])
+    //获取文章列表
     const getArticleList = async () => {
         const res: ResponseType = await ArticleApi.list(options) as ResponseType
         if (res.code === 200) {
@@ -40,8 +43,9 @@ export default function ArticleList() {
                                     key={item.uuid}
                                     active={active}
                                     article={item}
-                                    onClick={() => {
+                                    onClick={(id) => {
                                         setActive(item.uuid)
+                                        props.onChange && props.onChange(id)
                                     }
                                     }/>
                             })

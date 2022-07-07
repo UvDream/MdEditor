@@ -25,6 +25,7 @@ specifiers:
   mitt: ^3.0.0
   react: ^18.0.0
   react-dom: ^18.0.0
+  react-mitt: ^1.0.1
   react-router-dom: '6'
   typescript: ^4.6.3
   vite: ^2.9.5
@@ -48,6 +49,7 @@ dependencies:
   mitt: 3.0.0
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
+  react-mitt: 1.0.1_react-dom@18.2.0+react@18.2.0
   react-router-dom: 6.3.0_react-dom@18.2.0+react@18.2.0
 
 devDependencies:
@@ -1628,6 +1630,10 @@ packages:
     hasBin: true
     dev: false
 
+  /mitt/1.2.0:
+    resolution: {integrity: sha512-r6lj77KlwqLhIUku9UWYes7KJtsczvolZkzp8hbaDPPaE24OmWl5s539Mytlj22siEQKosZ26qCBgda2PKwoJw==}
+    dev: false
+
   /mitt/3.0.0:
     resolution: {integrity: sha512-7dX2/10ITVyqh4aOSVI9gdape+t9l2/8QxHrFmUXu4EEUpdlxl6RudZUPZoc+zuY2hk1j7XxVroIVIan/pD/SQ==}
     dev: false
@@ -1793,6 +1799,17 @@ packages:
 
   /react-is/16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
+    dev: false
+
+  /react-mitt/1.0.1_react-dom@18.2.0+react@18.2.0:
+    resolution: {integrity: sha512-qZfeBXxcCUPZrt/vivYSOsEpjtCzsNGMcioca5wSyPAHJXb0Bk1RhLrZJJSZScuuFqEErfTF1z/VXeTV/tY8Zg==}
+    peerDependencies:
+      react: ^16.8.x
+      react-dom: ^16.8.x
+    dependencies:
+      mitt: 1.2.0
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
     dev: false
 
   /react-refresh/0.13.0:
