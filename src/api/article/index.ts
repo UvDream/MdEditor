@@ -1,4 +1,4 @@
-import request from "../request";
+import request, {ResponseType} from "../request";
 
 export const ArticleApi = {
     list: (params: object) => {
@@ -21,7 +21,32 @@ export const ArticleApi = {
             method: "GET",
             params,
         });
+    },
+    create:(data:Object)=>{
+        return request({
+            url: "/article/create",
+            method: "POST",
+            data,
+        })
+    },
+    update:(data:Object)=>{
+        return request({
+            url: "/article/update",
+            method: "POST",
+            data,
+        })
     }
+}
+export const SaveArticleApi = (data:ArticleDetailType)=>{
+    return new Promise(async (resolve,reject)=>{
+        if(data.uuid){
+            const res:ResponseType=await ArticleApi.update(data) as ResponseType
+            res.code==200&&resolve(res)
+        }else{
+            const res:ResponseType=await ArticleApi.create(data) as ResponseType
+            res.code==200&&resolve(res)
+        }
+    })
 }
 
 export interface ArticleDetailType {
