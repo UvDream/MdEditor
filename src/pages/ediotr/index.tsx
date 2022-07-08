@@ -14,18 +14,32 @@ import {useEffect, useState} from "react";
 import {articleContent} from "@/pages/home/mock";
 import "./index.less";
 import {IconEye, IconEyeInvisible} from "@arco-design/web-react/icon";
-import {Button, Divider, Grid} from "@arco-design/web-react";
+import {Grid} from "@arco-design/web-react";
+import {useDebounceEffect} from "ahooks";
 
 const Row = Grid.Row;
 const Col = Grid.Col;
 export default function EditorPage() {
     const [previewState, setPreviewState] = useState(false);
+    //markdown
     const [articleMd, setArticleMd] = useState(articleContent);
+    //html
     const [articleHtml, setArticleHtml] = useState(markdownParser.render(articleContent));
+    //获取配置
+    const [config, setConfig] = useState(getConfig());
+
     useEffect(() => {
         setEditorStyle(defaultStyle)
     }, [])
-    const [config, setConfig] = useState(getConfig());
+    useDebounceEffect(
+        () => {
+            emitter.emit(EventType.EditorMdContent, articleMd)
+        },
+        [articleMd],
+        {
+            wait: 2000,
+        },
+    );
     const getCount = () => {
         let count = 0
         let config = getConfig()
@@ -38,17 +52,14 @@ export default function EditorPage() {
         setConfig(getConfig())
     })
     emitter.on(EventType.MdContent, (mdContent: string | any) => {
-        console.log("111111111")
-        console.log(mdContent)
         setArticleMd(mdContent)
-        emitter.off(EventType.MdContent)
     })
     /**
      * 编辑器change事件
      * @param val
      */
     const editorChange = (val: string) => {
-        // setArticleMd(val)
+        setArticleMd(val)
         setArticleHtml(markdownParser.render(val))
     }
     const styleEditorChange = (val: string) => {
@@ -81,10 +92,13 @@ export default function EditorPage() {
                     {
                         config.themeArea ?
                             <Col span={24 / getCount()} className={"style-editor "}>
-                                <Editor value={defaultStyle} language={'css'} onChange={(val: string) => {
-                                    styleEditorChange(val)
-                                }
-                                }/>
+                                <Editor
+                                    value={defaultStyle}
+                                    language={'css'}
+                                    onChange={(val: string) => {
+                                        styleEditorChange(val)
+                                    }}
+                                />
                             </Col> : <></>
                     }
                 </Row>

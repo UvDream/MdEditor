@@ -1,6 +1,6 @@
 import request from "../request";
 
-export const UserApi={
+export const UserApi = {
     login: (data: object) => {
         return request({
             url: "/public/base/login",
@@ -8,4 +8,13 @@ export const UserApi={
             data,
         });
     },
+}
+
+export interface UserInfo {
+    uuid: string
+    user_name: string
+    nick_name: string
+    phone: string
+    email: string
+    avatar: string
 }

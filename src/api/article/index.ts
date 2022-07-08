@@ -15,7 +15,7 @@ export const ArticleApi = {
             params,
         });
     },
-    detail:(params:object)=>{
+    detail: (params: object) => {
         return request({
             url: "/article/detail",
             method: "GET",
@@ -23,3 +23,28 @@ export const ArticleApi = {
         });
     }
 }
+
+export interface ArticleDetailType {
+    uuid: string,
+    title: string,
+    status: string,
+    slug: string,
+    editor_type: string,
+    summary: string,
+    thumbnail: string,
+    disable_comments: boolean,
+    word_count: number,
+    md_content: string,
+    html_content: string,
+    comment_count: number,
+    tags_id: [],
+    categories_id: [],
+    is_top: boolean,
+    auth_id: string,
+    tags: [],
+    categories: [],
+    visits: number,
+    likes: number,
+    author:[]
+}
+

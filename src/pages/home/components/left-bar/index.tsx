@@ -8,15 +8,22 @@ import UserStatus from "@/pages/home/components/left-bar/user";
 import SetConfig from "@/pages/home/components/left-bar/config";
 import {emitter, EventType} from "@/utils";
 import {ResponseType} from "@/api/request";
-import {ArticleApi} from "@/api/article";
+import {ArticleApi, ArticleDetailType} from "@/api/article";
 import {useSearchParams} from "react-router-dom";
 
 export default function LeftBar() {
+    //bar是否选中
     const [selected, setSelected] = useState(0);
+    //用户状态
     const [popupVisible, setPopupVisible] = useState(false);
+    //设置弹窗状态
     const [configVisible, setConfigVisible] = useState(false);
+    //保存状态
     const [fileStatus, setFileStatus] = useState(false);
+    //路由参数
     const [searchParams] = useSearchParams();
+    //文章详情
+    const [articleDetail,setArticleDetail] = useState<ArticleDetailType>({} as ArticleDetailType);
     useEffect(() => {
         const id = searchParams.get('id');
         id && getArticleDetail(id)
@@ -34,13 +41,23 @@ export default function LeftBar() {
         setConfigVisible(false)
     }
     //#endregion
+    //编辑器变化传入内容
+    emitter.on(EventType.EditorMdContent,(mdContent:string|any)=>{
+        const obj:ArticleDetailType = articleDetail
+        obj.md_content=mdContent
+        setArticleDetail(obj)
+        setFileStatus(false)
+        emitter.off(EventType.EditorMdContent)
+    })
     //获取文章详情
     const getArticleDetail = async (id: string) => {
         const res: ResponseType = await ArticleApi.detail({id}) as ResponseType
         if (res.code === 200) {
             console.log("详情")
             console.log(res.data)
+            setArticleDetail(res.data)
             emitter.emit(EventType.MdContent, res.data.md_content)
+            emitter.off(EventType.MdContent)
         }
     }
     return (

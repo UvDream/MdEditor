@@ -8,4 +8,5 @@ export enum EventType {
     KeyEvents = 'key-events',
     FileStatus='file-status',
     MdContent='md-content',
+    EditorMdContent='editor-md-content',
 }
