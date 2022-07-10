@@ -1,15 +1,19 @@
-import {Button, Divider, Menu, Popover} from "@arco-design/web-react";
+import {Button, Divider, Menu, Message, Popover} from "@arco-design/web-react";
 import {FolderSuccess, FolderSuccessOne, SettingConfig} from "@icon-park/react";
 import "./index.less"
 import {useNavigate} from "react-router-dom";
 import {useState} from "react";
 import dayjs from "dayjs";
 import {emitter, EventType} from "@/utils";
+import {ArticleApi} from "@/api/article";
+import {ResponseType} from "@/api/request";
 
 type Props = {
     article: ArticleItemType,
-    onClick?: (id:string) => void,
-    active: string
+    onClick?: (id: string) => void,
+    active: string,
+    id: string,
+    deleteSuccess: () => void,
 }
 export type ArticleItemType = {
     uuid: string;
@@ -19,6 +23,16 @@ export type ArticleItemType = {
 }
 export default function ArticleItem(props: Props) {
     const navigate = useNavigate()
+    const deleteArticle = async () => {
+        const obj = {
+            id: props.id,
+        }
+        const res: ResponseType = await ArticleApi.delete(obj) as ResponseType
+        if (res.code === 200) {
+            props.deleteSuccess()
+            Message.success('删除成功')
+        }
+    }
     const dropList = (
         <Menu style={{width: 120}}>
             <Menu.Item key='1'>
@@ -38,7 +52,10 @@ export default function ArticleItem(props: Props) {
             </Menu.Item>
             <Divider style={{margin: "2px 0"}}/>
             <Menu.Item key='3'>
-                <Button type='text' status='danger' style={{fontSize: 12, lineHeight: "20px", height: 20}}>
+                <Button type='text' status='danger' style={{fontSize: 12, lineHeight: "20px", height: 20}}
+                        onClick={() => {
+                            deleteArticle()
+                        }}>
                     删除
                 </Button>
             </Menu.Item>
@@ -47,7 +64,7 @@ export default function ArticleItem(props: Props) {
     const ArticleClick = () => {
         navigate(`/editor?id=${props.article.uuid}`)
         props.onClick && props.onClick(props.article.uuid)
-        emitter.emit(EventType.FileStatus,true)
+        emitter.emit(EventType.FileStatus, true)
     }
     const fillColor = () => {
         return props.active === props.article.uuid ? "#fff" : "#333"

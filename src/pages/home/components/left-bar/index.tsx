@@ -27,7 +27,7 @@ export default function LeftBar() {
     //文章详情
     const [articleDetail, setArticleDetail] = useState<ArticleDetailType>({} as ArticleDetailType);
     //文章配置
-    const [articleSaveVisible, setArticleSaveVisible] = useState(true);
+    const [articleSaveVisible, setArticleSaveVisible] = useState(false);
     //#endregion
     useEffect(() => {
         const id = searchParams.get('id');

@@ -43,8 +43,12 @@ export default function ArticleList(props: Props) {
                                 articleList.map((item: ArticleItemType) => {
                                     return <ArticleItem
                                         key={item.uuid}
+                                        id={item.uuid}
                                         active={active}
                                         article={item}
+                                        deleteSuccess={()=>{
+                                            getArticleList()
+                                        }}
                                         onClick={(id) => {
                                             setActive(item.uuid)
                                             props.onChange && props.onChange(id)

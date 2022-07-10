@@ -36,6 +36,13 @@ export const ArticleApi = {
             data,
         })
     },
+    delete:(params: Object) => {
+        return request({
+            url: "/article/delete",
+            method: "DELETE",
+            params,
+        })
+    },
     tagList: (params: object) => {
         return request({
             url: "/tag/list",
