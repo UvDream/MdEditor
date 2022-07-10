@@ -27,7 +27,6 @@ export default function EditorPage() {
     const [articleHtml, setArticleHtml] = useState(markdownParser.render(articleContent));
     //获取配置
     const [config, setConfig] = useState(getConfig());
-
     useEffect(() => {
         setEditorStyle(defaultStyle)
     }, [])

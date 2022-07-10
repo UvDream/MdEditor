@@ -3,7 +3,7 @@ import ArticleList from "./article-list";
 import HistoryList from "@/pages/home/components/left-bar/history-list";
 import {Avatar, Config, FolderOpen, FolderSuccess, Log, ViewList} from "@icon-park/react"
 import {useEffect, useState} from "react";
-import {Modal, Popover} from "@arco-design/web-react";
+import { Popover} from "@arco-design/web-react";
 import UserStatus from "@/pages/home/components/left-bar/user";
 import SetConfig from "@/pages/home/components/left-bar/config";
 import {emitter, EventType} from "@/utils";
@@ -27,7 +27,7 @@ export default function LeftBar() {
     //文章详情
     const [articleDetail, setArticleDetail] = useState<ArticleDetailType>({} as ArticleDetailType);
     //文章配置
-    const [articleSaveVisible, setArticleSaveVisible] = useState(false);
+    const [articleSaveVisible, setArticleSaveVisible] = useState(true);
     //#endregion
     useEffect(() => {
         const id = searchParams.get('id');
@@ -189,7 +189,6 @@ export default function LeftBar() {
                 onOk={articleSaveOk}
                 onCancel={articleSaveCancel}
             />
-
         </div>
     )
 }

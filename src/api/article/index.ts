@@ -22,29 +22,43 @@ export const ArticleApi = {
             params,
         });
     },
-    create:(data:Object)=>{
+    create: (data: Object) => {
         return request({
             url: "/article/create",
             method: "POST",
             data,
         })
     },
-    update:(data:Object)=>{
+    update: (data: Object) => {
         return request({
             url: "/article/update",
             method: "POST",
             data,
         })
+    },
+    tagList: (params: object) => {
+        return request({
+            url: "/tag/list",
+            method: "GET",
+            params,
+        })
+    },
+    categoryList: (params: object) => {
+        return request({
+            url: "/category/list",
+            method: "GET",
+            params,
+        })
     }
 }
-export const SaveArticleApi = (data:ArticleDetailType)=>{
-    return new Promise(async (resolve,reject)=>{
-        if(data.uuid){
-            const res:ResponseType=await ArticleApi.update(data) as ResponseType
-            res.code==200&&resolve(res)
-        }else{
-            const res:ResponseType=await ArticleApi.create(data) as ResponseType
-            res.code==200&&resolve(res)
+export const SaveArticleApi = (data: ArticleDetailType) => {
+    return new Promise(async (resolve, reject) => {
+        if (data.uuid) {
+            const res: ResponseType = await ArticleApi.update(data) as ResponseType
+            res.code == 200 && resolve(res)
+        } else {
+            const res: ResponseType = await ArticleApi.create(data) as ResponseType
+            res.code == 200 && resolve(res)
         }
     })
 }
@@ -70,6 +84,6 @@ export interface ArticleDetailType {
     categories: [],
     visits: number,
     likes: number,
-    author:[]
+    author: []
 }
 

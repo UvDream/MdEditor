@@ -11,8 +11,8 @@ type Props = {
 }
 export default function UserStatus(props: Props) {
     let navigate = useNavigate()
-    const isLogin = useState(localStorage.getItem("token"))
-    const [userInfo] = useState(JSON.parse(localStorage.getItem("user") || "") as UserInfo)
+    const [isLogin] = useState(localStorage.getItem("token"))
+    const [userInfo] = useState(JSON.parse(localStorage.getItem("user") || "{}") as UserInfo)
 
     const menuItemClick = (key: string) => {
         if (key === "2" || key === "1_1") {
