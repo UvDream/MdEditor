@@ -1,7 +1,7 @@
-import {Form, Input, Modal, Select, Switch, TreeSelect, Upload} from "@arco-design/web-react";
+import {Form, Input, Message, Modal, Select, Switch, TreeSelect, Upload} from "@arco-design/web-react";
 import {ArticleApi, ArticleDetailType} from "@/api/article";
 import {ResponseType} from "@/api/request";
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 
 type Props = {
     visible: boolean;
@@ -30,6 +30,7 @@ const Option = Select.Option;
 
 export default function ArticleSave(props: Props) {
     const [form] = Form.useForm<ArticleDetailType>();
+    const formRef = useRef();
     const [tagList, setTagList] = useState<Array<TagItemType>>([]);
     const [categoryList, setCategoryList] = useState<Array<CategoryItemType>>([]);
     useEffect(() => {
@@ -41,27 +42,47 @@ export default function ArticleSave(props: Props) {
         const res: ResponseType = await ArticleApi.tagList(obj) as ResponseType
         if (res.code === 200) {
             setTagList(res.data)
-            console.log(tagList)
         }
     }
     const getCategoryList = async () => {
         const obj = {}
         const res: ResponseType = await ArticleApi.categoryList(obj) as ResponseType
         if (res.code === 200) {
-            console.log(res.data)
             setCategoryList(res.data)
         }
+    }
+    const handleOk = async () => {
+        if (formRef.current) {
+            try {
+                //@ts-ignore
+                await formRef.current.validate();
+                Message.info('校验通过，提交成功！');
+                props.onOk(false)
+            } catch (_) {
+                //@ts-ignore
+                console.log(formRef.current.getFieldsError());
+                Message.error('校验失败，请检查字段！');
+            }
+        }
+    }
+    const handleCancel = () => {
+        props.onCancel(false)
     }
     return (
         <Modal
             title='文章配置'
             visible={props.visible}
-            onOk={() => props.onOk(false)}
-            onCancel={() => props.onCancel(false)}
+            onOk={() => {
+                handleOk()
+            }}
+            onCancel={() => {
+                handleCancel()
+            }}
             autoFocus={false}
             focusLock={true}
         >
-            <Form form={form}>
+            {/*@ts-ignore*/}
+            <Form ref={formRef} form={form}>
                 <FormItem label='文章标题' field={'title'} rules={[{required: true, message: "请输入标题"}]}>
                     <Input/>
                 </FormItem>
@@ -94,13 +115,7 @@ export default function ArticleSave(props: Props) {
                     label='封面'
                     field={'thumbnail'}
                     triggerPropName='fileList'
-                    initialValue={[
-                        {
-                            uid: '-1',
-                            url: '//p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/e278888093bef8910e829486fb45dd69.png~tplv-uwbnlip3yd-webp.webp',
-                            name: '20200717',
-                        },
-                    ]}
+                    initialValue={[]}
                 >
                     <Upload
                         listType='picture-card'
@@ -123,16 +138,12 @@ export default function ArticleSave(props: Props) {
                         }}
                     />
                 </Form.Item>
-                {/*<FormItem label='封面' field={'thumbnail'} >*/}
-                {/*    <Input/>*/}
-                {/*</FormItem>*/}
                 <FormItem label='禁止评论' field={'disable_comments'}>
                     <Switch/>
                 </FormItem>
                 <FormItem label='访问密码' field={'password'}>
                     <Input.Password/>
                 </FormItem>
-
                 <FormItem label='是否置顶' field={'is_top'}>
                     <Switch/>
                 </FormItem>
