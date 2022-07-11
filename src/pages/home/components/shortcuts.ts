@@ -116,6 +116,7 @@ export enum MacEditorShortcuts {
     annotation = "Ctrl--",
     hyperlinks = "Cmd-k",
     image = "Ctrl-Cmd-i",
+    paste = "Cmd-v",
 }
 
 export enum WindowsEditorShortcuts {
@@ -148,4 +149,5 @@ export enum WindowsEditorShortcuts {
     annotation = "⌃ -",
     hyperlinks = "CTRL+K",
     image = "CTRL+I",
+    paste = "CTRL+V",
 }

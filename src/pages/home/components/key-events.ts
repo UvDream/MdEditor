@@ -121,6 +121,11 @@ const KeyMapConfig:Array<keymapType>= [
         key: EditorShortcuts().image,
         code: '![]()',
         selection: 2
+    },
+    {
+        key:EditorShortcuts().paste,
+        code: '![]()',
+        selection: 2
     }
 ]
 export const KeyMapFunc = (editor: any): any => {
@@ -128,7 +133,8 @@ export const KeyMapFunc = (editor: any): any => {
         return {
             key: item.key,
             preventDefault: true,
-            run: () => {
+            run: (event:any) => {
+                console.log(event)
                 insert(editor, item.code, item.selection)
                 return false
             }

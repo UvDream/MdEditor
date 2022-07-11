@@ -25,6 +25,7 @@ specifiers:
   mitt: ^3.0.0
   react: ^18.0.0
   react-dom: ^18.0.0
+  react-easy-crop: ^4.4.0
   react-mitt: ^1.0.1
   react-router-dom: '6'
   typescript: ^4.6.3
@@ -49,6 +50,7 @@ dependencies:
   mitt: 3.0.0
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
+  react-easy-crop: 4.4.0_react-dom@18.2.0+react@18.2.0
   react-mitt: 1.0.1_react-dom@18.2.0+react@18.2.0
   react-router-dom: 6.3.0_react-dom@18.2.0+react@18.2.0
 
@@ -1685,6 +1687,10 @@ packages:
     resolution: {integrity: sha512-U9h1NLROZTq9uE1SNffn6WuPDg8icmi3ns4rEl/oTfIle4iLjTliCzgTsbaIFMq/Xn078/lfY/BL0GWZ+psK4Q==}
     dev: true
 
+  /normalize-wheel/1.0.1:
+    resolution: {integrity: sha512-1OnlAPZ3zgrk8B91HyRj+eVv+kS5u+Z0SCsak6Xil/kmgEia50ga7zfkumayonZrImffAxPU/5WcyGhzetHNPA==}
+    dev: false
+
   /nth-check/2.1.1:
     resolution: {integrity: sha512-lqjrjmaOoAnWfMmBPL+XNnynZh2+swxiX3WUE0s4yEHI6m+AwrK2UZOimIRl3X/4QctVqS8AiZjFqyOGrMXb/w==}
     dependencies:
@@ -1776,6 +1782,18 @@ packages:
       loose-envify: 1.4.0
       react: 18.2.0
       scheduler: 0.23.0
+    dev: false
+
+  /react-easy-crop/4.4.0_react-dom@18.2.0+react@18.2.0:
+    resolution: {integrity: sha512-fR1+rU9wSSloton0RwATI/CMVa04Ox0mufc+bgwA4LY8NAhNgGQdO/tZukrijYnaaFTF4AzcnBNKOIwJWTR3wg==}
+    peerDependencies:
+      react: '>=16.4.0'
+      react-dom: '>=16.4.0'
+    dependencies:
+      normalize-wheel: 1.0.1
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+      tslib: 2.0.1
     dev: false
 
   /react-focus-lock/2.9.1_5d30e9718ea38d687b3bb00a1dc49c11:
@@ -1975,6 +1993,10 @@ packages:
 
   /tr46/0.0.3:
     resolution: {integrity: sha512-N3WMsuqV66lT30CrXNbEjx4GEwlow3v6rr4mCcv6prnfwhS01rkgyFdjPNBYd9br7LpXV1+Emh01fHnq2Gdgrw==}
+    dev: false
+
+  /tslib/2.0.1:
+    resolution: {integrity: sha512-SgIkNheinmEBgx1IUNirK0TUD4X9yjjBRTqqjggWCU3pUEqIk3/Uwl3yRixYKT6WjQuGiwDv4NomL3wqRCj+CQ==}
     dev: false
 
   /tslib/2.4.0:

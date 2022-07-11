@@ -25,6 +25,15 @@ type CategoryItemType = {
     password: string;
     children: CategoryItemType[];
 }
+type fileType = {
+    url: string;
+    status: string;
+    percent: number;
+    name: string;
+    response: any;
+    uid: string;
+    originFileObj: File;
+}
 const FormItem = Form.Item;
 const Option = Select.Option;
 
@@ -33,6 +42,8 @@ export default function ArticleSave(props: Props) {
     const formRef = useRef();
     const [tagList, setTagList] = useState<Array<TagItemType>>([]);
     const [categoryList, setCategoryList] = useState<Array<CategoryItemType>>([]);
+    const [file, setFile] = useState<fileType>();
+    const cs = `arco-upload-list-item${file && file.status === 'error' ? ' is-error' : ''}`;
     useEffect(() => {
         getTagList()
         getCategoryList()
@@ -56,6 +67,7 @@ export default function ArticleSave(props: Props) {
             try {
                 //@ts-ignore
                 await formRef.current.validate();
+                console.log(form.getFieldsValue())
                 Message.info('校验通过，提交成功！');
                 props.onOk(false)
             } catch (_) {
@@ -68,6 +80,7 @@ export default function ArticleSave(props: Props) {
     const handleCancel = () => {
         props.onCancel(false)
     }
+
     return (
         <Modal
             title='文章配置'
@@ -115,18 +128,24 @@ export default function ArticleSave(props: Props) {
                     label='封面'
                     field={'thumbnail'}
                     triggerPropName='fileList'
-                    initialValue={[]}
+                    normalize={(value) => {
+                        console.log("格式化", value)
+                        return value[0].name
+                    }}
                 >
+                    {/*<AvatarUpload />*/}
                     <Upload
                         listType='picture-card'
                         multiple
+                        limit={1}
                         name='files'
                         action='/'
                         onPreview={(file) => {
                             Modal.info({
-                                title: 'Preview',
+                                title: '图片预览',
                                 content: (
                                     <img
+                                        alt="图片预览"
                                         // @ts-ignore
                                         src={file.url || URL.createObjectURL(file.originFile)}
                                         style={{
@@ -137,6 +156,53 @@ export default function ArticleSave(props: Props) {
                             });
                         }}
                     />
+                    {/*<Upload*/}
+                    {/*    action='/'*/}
+                    {/*    fileList={file ? [file] : []}*/}
+                    {/*    showUploadList={false}*/}
+                    {/*    onChange={(_, currentFile) => {*/}
+                    {/*        setFile({*/}
+                    {/*            ...currentFile,*/}
+                    {/*            url: URL.createObjectURL(currentFile.originFile),*/}
+                    {/*        });*/}
+                    {/*    }}*/}
+                    {/*    onProgress={(currentFile) => {*/}
+                    {/*        console.log("上传中")*/}
+                    {/*        console.log(currentFile)*/}
+                    {/*        setFile(currentFile);*/}
+                    {/*    }}*/}
+                    {/*>*/}
+                    {/*    <div className={cs}>*/}
+                    {/*        {file && file.url ? (*/}
+                    {/*            <div className='arco-upload-list-item-picture custom-upload-avatar'>*/}
+                    {/*                <img src={file.url}/>*/}
+                    {/*                <div className='arco-upload-list-item-picture-mask'>*/}
+                    {/*                    <IconEdit/>*/}
+                    {/*                </div>*/}
+                    {/*                {file.status === 'uploading' && file.percent < 100 && (*/}
+                    {/*                    <Progress*/}
+                    {/*                        percent={file.percent}*/}
+                    {/*                        type='circle'*/}
+                    {/*                        size='mini'*/}
+                    {/*                        style={{*/}
+                    {/*                            position: 'absolute',*/}
+                    {/*                            left: '50%',*/}
+                    {/*                            top: '50%',*/}
+                    {/*                            transform: 'translateX(-50%) translateY(-50%)',*/}
+                    {/*                        }}*/}
+                    {/*                    />*/}
+                    {/*                )}*/}
+                    {/*            </div>*/}
+                    {/*        ) : (*/}
+                    {/*            <div className='arco-upload-trigger-picture'>*/}
+                    {/*                <div className='arco-upload-trigger-picture-text'>*/}
+                    {/*                    <IconPlus/>*/}
+                    {/*                    <div style={{marginTop: 10, fontWeight: 600}}>Upload</div>*/}
+                    {/*                </div>*/}
+                    {/*            </div>*/}
+                    {/*        )}*/}
+                    {/*    </div>*/}
+                    {/*</Upload>*/}
                 </Form.Item>
                 <FormItem label='禁止评论' field={'disable_comments'}>
                     <Switch/>
