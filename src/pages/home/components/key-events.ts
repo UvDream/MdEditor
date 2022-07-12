@@ -121,11 +121,6 @@ const KeyMapConfig:Array<keymapType>= [
         key: EditorShortcuts().image,
         code: '![]()',
         selection: 2
-    },
-    {
-        key:EditorShortcuts().paste,
-        code: '![]()',
-        selection: 2
     }
 ]
 export const KeyMapFunc = (editor: any): any => {

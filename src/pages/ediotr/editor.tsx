@@ -46,29 +46,18 @@ export default function Editor(props: Props) {
 
     const eventExt = events.content({
         focus: (evn) => {
-            // console.log('focus');
+            console.log('focus');
             // console.log(evn)
         },
         blur: (evn) => {
             // console.log('blur');
             // console.log(evn)
         },
+        paste: (evn) => {
+            console.log('paste');
+            console.log(evn)
+        }
     });
-    //插入文字
-    const insertText = (text: string) => {
-        // @ts-ignore
-        const state = editor.current.view.viewState.state;
-        const range = state.selection.ranges[0];
-        // @ts-ignore
-        editor.current.view.dispatch({
-            changes: {
-                from: range.from,
-                to: range.to,
-                insert: text
-            },
-            selection: {anchor: range.from + 1}
-        })
-    }
 
     return (
         <div className={"editor"}>

@@ -2,6 +2,7 @@ import {Form, Input, Message, Modal, Select, Switch, TreeSelect, Upload} from "@
 import {ArticleApi, ArticleDetailType} from "@/api/article";
 import {ResponseType} from "@/api/request";
 import {useEffect, useRef, useState} from "react";
+import Config from "@/api/config";
 
 type Props = {
     visible: boolean;
@@ -136,11 +137,22 @@ export default function ArticleSave(props: Props) {
                     {/*<AvatarUpload />*/}
                     <Upload
                         listType='picture-card'
-                        multiple
                         limit={1}
-                        name='files'
-                        action='/'
+                        name='file'
+                        headers={{"x-token": localStorage.getItem('token')}}
+                        action={Config.baseURL + "/file/upload"}
+                        customRequest={(options) => {
+                            options.onSuccess()
+                        }}
+
+                        onProgress={(e, file) => {
+                            console.log("上传进度", e, file)
+                        }}
+                        onChange={(e, file) => {
+                            console.log("在改变", e, file)
+                        }}
                         onPreview={(file) => {
+                            console.log(file)
                             Modal.info({
                                 title: '图片预览',
                                 content: (
@@ -156,53 +168,7 @@ export default function ArticleSave(props: Props) {
                             });
                         }}
                     />
-                    {/*<Upload*/}
-                    {/*    action='/'*/}
-                    {/*    fileList={file ? [file] : []}*/}
-                    {/*    showUploadList={false}*/}
-                    {/*    onChange={(_, currentFile) => {*/}
-                    {/*        setFile({*/}
-                    {/*            ...currentFile,*/}
-                    {/*            url: URL.createObjectURL(currentFile.originFile),*/}
-                    {/*        });*/}
-                    {/*    }}*/}
-                    {/*    onProgress={(currentFile) => {*/}
-                    {/*        console.log("上传中")*/}
-                    {/*        console.log(currentFile)*/}
-                    {/*        setFile(currentFile);*/}
-                    {/*    }}*/}
-                    {/*>*/}
-                    {/*    <div className={cs}>*/}
-                    {/*        {file && file.url ? (*/}
-                    {/*            <div className='arco-upload-list-item-picture custom-upload-avatar'>*/}
-                    {/*                <img src={file.url}/>*/}
-                    {/*                <div className='arco-upload-list-item-picture-mask'>*/}
-                    {/*                    <IconEdit/>*/}
-                    {/*                </div>*/}
-                    {/*                {file.status === 'uploading' && file.percent < 100 && (*/}
-                    {/*                    <Progress*/}
-                    {/*                        percent={file.percent}*/}
-                    {/*                        type='circle'*/}
-                    {/*                        size='mini'*/}
-                    {/*                        style={{*/}
-                    {/*                            position: 'absolute',*/}
-                    {/*                            left: '50%',*/}
-                    {/*                            top: '50%',*/}
-                    {/*                            transform: 'translateX(-50%) translateY(-50%)',*/}
-                    {/*                        }}*/}
-                    {/*                    />*/}
-                    {/*                )}*/}
-                    {/*            </div>*/}
-                    {/*        ) : (*/}
-                    {/*            <div className='arco-upload-trigger-picture'>*/}
-                    {/*                <div className='arco-upload-trigger-picture-text'>*/}
-                    {/*                    <IconPlus/>*/}
-                    {/*                    <div style={{marginTop: 10, fontWeight: 600}}>Upload</div>*/}
-                    {/*                </div>*/}
-                    {/*            </div>*/}
-                    {/*        )}*/}
-                    {/*    </div>*/}
-                    {/*</Upload>*/}
+
                 </Form.Item>
                 <FormItem label='禁止评论' field={'disable_comments'}>
                     <Switch/>
