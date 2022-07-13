@@ -33,13 +33,16 @@ export default function HistoryList() {
             {
                 renderHistoryList().length === 0 ?
                     <Empty description={"暂无历史"}/> :
-                    <Timeline labelPosition="relative">
-                        {renderHistoryList().map((item, index) => {
-                            return <TimelineItem key={index}
-                                                 label={dayjs(item.time).format("YYYY-MM-DD HH:mm:ss")}>{item.title}</TimelineItem>
-                        })
-                        }
-                    </Timeline>
+                    <div className={"history-content"}>
+                        <Timeline labelPosition="relative">
+                            {renderHistoryList().map((item, index) => {
+                                return <TimelineItem key={index}
+                                                     label={dayjs(item.time).format("YYYY-MM-DD HH:mm:ss")}>{item.title}</TimelineItem>
+                            })
+                            }
+                        </Timeline>
+                    </div>
+
             }
 
         </div>

@@ -1,10 +1,15 @@
 import {ArticleDetailType} from "../../../../api/article";
 
 export type Props = {
-    visible: boolean;
+    visible?: boolean;
+    onOk: () => void;
+    onCancel?: () => void;
+}
+export type ArticleSaveProps={
+    visible?: boolean;
     onOk: (status:boolean,articleDetail:ArticleDetailType) => void;
-    onCancel: () => void;
-    detail: ArticleDetailType
+    onCancel?: () => void;
+    detail?: ArticleDetailType
 }
 export  type TagItemType = {
     ID: number;
@@ -30,5 +35,6 @@ export type fileType = {
     name: string;
     response: any;
     uid: string;
+    position: string;
     originFileObj: File;
 }

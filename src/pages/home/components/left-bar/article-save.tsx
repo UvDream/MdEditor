@@ -3,12 +3,12 @@ import {ArticleApi, ArticleDetailType} from "@/api/article";
 import {ResponseType} from "@/api/request";
 import {useEffect, useRef, useState} from "react";
 import UploadFile from "@/components/upload";
-import {CategoryItemType, fileType, Props, TagItemType} from "./index.d";
+import {CategoryItemType, fileType, ArticleSaveProps, TagItemType} from "./index.d";
 
 const FormItem = Form.Item;
 const Option = Select.Option;
 
-export default function ArticleSave(props: Props) {
+export default function ArticleSave(props: ArticleSaveProps) {
     const {detail} = props;
     const [form] = Form.useForm<ArticleDetailType>();
     const formRef = useRef();
@@ -51,7 +51,7 @@ export default function ArticleSave(props: Props) {
         }
     }
     const handleCancel = () => {
-        props.onCancel()
+        props.onCancel&&props.onCancel()
         //@ts-ignore
         formRef.current.resetFields();
     }

@@ -36,7 +36,7 @@ export default function EditorPage() {
         },
         [articleMd],
         {
-            wait: 2000,
+            wait: 1000,
         },
     );
     const getCount = () => {

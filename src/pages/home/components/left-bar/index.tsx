@@ -1,7 +1,7 @@
 import "./index.less";
 import ArticleList from "./article-list";
 import HistoryList from "@/pages/home/components/left-bar/history-list";
-import {Avatar, Config, FolderOpen, FolderSuccess, Log, ViewList} from "@icon-park/react"
+import {Avatar, Config, FolderOpen, FolderSuccess, Log, Picture, ViewList} from "@icon-park/react"
 import {useEffect, useRef, useState} from "react";
 import {Message, Popover} from "@arco-design/web-react";
 import UserStatus from "@/pages/home/components/left-bar/user";
@@ -13,6 +13,7 @@ import {useNavigate, useSearchParams} from "react-router-dom";
 import ArticleSave from "@/pages/home/components/left-bar/article-save";
 import {useKeyPress} from "ahooks";
 import {UserInfo} from "@/api/user";
+import ImgList from "@/pages/home/components/left-bar/img-list";
 
 export default function LeftBar() {
     //#region 变量
@@ -32,6 +33,8 @@ export default function LeftBar() {
     const [articleDetail, setArticleDetail] = useState<ArticleDetailType>({} as ArticleDetailType);
     //文章配置
     const [articleSaveVisible, setArticleSaveVisible] = useState(false);
+    //图片库
+    const [imgVisible, setImgVisible] = useState(false);
     //#endregion
     useEffect(() => {
         const id = searchParams.get('id');
@@ -97,7 +100,7 @@ export default function LeftBar() {
         saveArticle()
     })
     const saveArticle = () => {
-        articleDetail.word_count=CalcWordCount(articleDetail.md_content)
+        articleDetail.word_count = CalcWordCount(articleDetail.md_content)
         return new Promise(async (resolve, reject) => {
             if (articleDetail.uuid) {
                 const res = await ArticleApi.update(articleDetail) as ResponseType
@@ -166,7 +169,7 @@ export default function LeftBar() {
                     <div className={"left-bar-tool-block"}>
                         <ViewList
                             theme={selected === 0 ? 'two-tone' : 'outline'}
-                            size="24"
+                            size="20"
                             fill={selected === 0 ? '#333' : ['#333', '#2F88FF']}
                             strokeWidth={3}
                             onClick={() => {
@@ -177,7 +180,7 @@ export default function LeftBar() {
                     <div className={"left-bar-tool-block"}>
                         <Log
                             theme={selected === 1 ? 'two-tone' : 'outline'}
-                            size="24"
+                            size="20"
                             fill={selected === 1 ? '#333' : ['#333', '#2F88FF']}
                             strokeWidth={3}
                             onClick={() => {
@@ -193,7 +196,7 @@ export default function LeftBar() {
                             fileStatus ?
                                 <FolderSuccess
                                     theme="outline"
-                                    size="24"
+                                    size="20"
                                     fill="#333"
                                     strokeWidth={3}
                                     onClick={() => {
@@ -202,7 +205,7 @@ export default function LeftBar() {
                                 /> :
                                 <FolderOpen
                                     theme="outline"
-                                    size="24"
+                                    size="20"
                                     fill="#333"
                                     strokeWidth={3}
                                     onClick={() => {
@@ -210,6 +213,14 @@ export default function LeftBar() {
                                     }}
                                 />
                         }
+                    </div>
+                    {/*图片库*/}
+                    <div className={"left-bar-tool-block"}>
+                        <Picture theme="outline" size="20" fill="#333" strokeWidth={3}
+                        onClick={()=>{
+                            setImgVisible(true)
+                        }}
+                        />
                     </div>
                     {/*用户*/}
                     <div className={"left-bar-tool-block"}>
@@ -226,7 +237,7 @@ export default function LeftBar() {
                         >
                             <Avatar
                                 theme="outline"
-                                size="24" fill="#333"
+                                size="20" fill="#333"
                                 strokeWidth={3}
                                 onClick={() => {
                                     setPopupVisible(!popupVisible);
@@ -238,7 +249,7 @@ export default function LeftBar() {
                     <div className={"left-bar-tool-block"}>
                         <Config
                             theme="outline"
-                            size="24"
+                            size="20"
                             fill={'#333'}
                             strokeWidth={3}
                             onClick={() => {
@@ -276,6 +287,13 @@ export default function LeftBar() {
                 visible={articleSaveVisible}
                 onOk={articleSaveOk}
                 onCancel={articleSaveCancel}
+            />
+            {/*文件资源*/}
+            <ImgList
+                visible={imgVisible}
+                onOk={()=>{
+                    setImgVisible(false)
+                }}
             />
         </div>
     )
