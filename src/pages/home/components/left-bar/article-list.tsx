@@ -27,7 +27,7 @@ const ArticleList = (props: Props, ref: any) => {
     }, [])
     useImperativeHandle(ref, () => ({
         getList: () => {
-            getArticleList()
+            getArticleList().then()
         }
     }))
 

@@ -6,7 +6,7 @@ import {useEffect, useRef, useState} from "react";
 import {Message, Popover} from "@arco-design/web-react";
 import UserStatus from "@/pages/home/components/left-bar/user";
 import SetConfig from "@/pages/home/components/left-bar/config";
-import {emitter, EventType} from "@/utils";
+import {CalcWordCount, emitter, EventType} from "@/utils";
 import {ResponseType} from "@/api/request";
 import {ArticleApi, ArticleDetailType} from "@/api/article";
 import {useNavigate, useSearchParams} from "react-router-dom";
@@ -97,6 +97,7 @@ export default function LeftBar() {
         saveArticle()
     })
     const saveArticle = () => {
+        articleDetail.word_count=CalcWordCount(articleDetail.md_content)
         return new Promise(async (resolve, reject) => {
             if (articleDetail.uuid) {
                 const res = await ArticleApi.update(articleDetail) as ResponseType
