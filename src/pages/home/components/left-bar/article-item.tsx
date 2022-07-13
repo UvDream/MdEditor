@@ -1,8 +1,7 @@
 import {Button, Divider, Menu, Message, Popover} from "@arco-design/web-react";
 import {FolderSuccess, FolderSuccessOne, SettingConfig} from "@icon-park/react";
 import "./index.less"
-import {useNavigate} from "react-router-dom";
-import {useState} from "react";
+import {useNavigate, useSearchParams} from "react-router-dom";
 import dayjs from "dayjs";
 import {emitter, EventType} from "@/utils";
 import {ArticleApi} from "@/api/article";
@@ -23,6 +22,7 @@ export type ArticleItemType = {
 }
 export default function ArticleItem(props: Props) {
     const navigate = useNavigate()
+    const [searchParams] = useSearchParams();
     const deleteArticle = async () => {
         const obj = {
             id: props.id,
@@ -62,7 +62,7 @@ export default function ArticleItem(props: Props) {
         </Menu>
     )
     const ArticleClick = () => {
-        navigate(`/editor?id=${props.article.uuid}`)
+        props.article.uuid&&navigate(`/editor?id=${props.article.uuid}`)
         props.onClick && props.onClick(props.article.uuid)
         emitter.emit(EventType.FileStatus, true)
     }
@@ -70,7 +70,7 @@ export default function ArticleItem(props: Props) {
         return props.active === props.article.uuid ? "#fff" : "#333"
     }
     return (
-        <div className={["article-item", props.active == props.article.uuid ? "active-article" : ""].join(" ")}
+        <div className={["article-item", props.active == props.article.uuid||props.article.uuid=== searchParams.get('id')? "active-article" : ""].join(" ")}
              onClick={ArticleClick}>
             <div className={"article-item-left"}>
                 <div className={"article-item-left-top"}>

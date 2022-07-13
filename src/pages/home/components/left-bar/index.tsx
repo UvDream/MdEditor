@@ -2,18 +2,22 @@ import "./index.less";
 import ArticleList from "./article-list";
 import HistoryList from "@/pages/home/components/left-bar/history-list";
 import {Avatar, Config, FolderOpen, FolderSuccess, Log, ViewList} from "@icon-park/react"
-import {useEffect, useState} from "react";
-import { Popover} from "@arco-design/web-react";
+import {useEffect, useRef, useState} from "react";
+import {Message, Popover} from "@arco-design/web-react";
 import UserStatus from "@/pages/home/components/left-bar/user";
 import SetConfig from "@/pages/home/components/left-bar/config";
 import {emitter, EventType} from "@/utils";
 import {ResponseType} from "@/api/request";
 import {ArticleApi, ArticleDetailType} from "@/api/article";
-import {useSearchParams} from "react-router-dom";
+import {useNavigate, useSearchParams} from "react-router-dom";
 import ArticleSave from "@/pages/home/components/left-bar/article-save";
+import {useKeyPress} from "ahooks";
+import {UserInfo} from "@/api/user";
 
 export default function LeftBar() {
     //#region 变量
+    const navigate = useNavigate()
+    const articleListRef = useRef()
     //bar是否选中
     const [selected, setSelected] = useState(0);
     //用户状态
@@ -51,8 +55,6 @@ export default function LeftBar() {
     const getArticleDetail = async (id: string) => {
         const res: ResponseType = await ArticleApi.detail({id}) as ResponseType
         if (res.code === 200) {
-            console.log("详情")
-            console.log(res.data)
             setArticleDetail(res.data)
             emitter.emit(EventType.MdContent, res.data.md_content)
             emitter.off(EventType.MdContent)
@@ -70,12 +72,89 @@ export default function LeftBar() {
     //编辑器变化传入内容
     //文章保存配置
     //#region
-    const articleSaveOk = () => {
-        setArticleSaveVisible(false);
-        setFileStatus(true)
+    const articleSaveOk = async (status: boolean, detail: ArticleDetailType) => {
+        console.log("保存文章信息", detail)
+        status ? articleDetail.status = "PUBLISHED" : articleDetail.status = "DRAFT"
+        articleDetail.title = detail.title
+        articleDetail.categories_id = detail.categories_id
+        articleDetail.disable_comments = detail.disable_comments
+        articleDetail.is_top = detail.is_top
+        articleDetail.password = detail.password
+        articleDetail.slug = detail.slug
+        articleDetail.summary = detail.summary
+        articleDetail.tags_id = detail.tags_id
+        articleDetail.thumbnail = detail.thumbnail
+        setArticleDetail(articleDetail)
+        const res = await saveArticle()
+        if (res) {
+            setArticleSaveVisible(false);
+            setFileStatus(true)
+        }
+    }
+    //保存文章
+    useKeyPress('meta.s', (event) => {
+        event.preventDefault()
+        saveArticle()
+    })
+    const saveArticle = () => {
+        return new Promise(async (resolve, reject) => {
+            if (articleDetail.uuid) {
+                const res = await ArticleApi.update(articleDetail) as ResponseType
+                if (res.code === 200) {
+                    console.log("~~~~~~~~~~~~~~~~~~~~~修改文章~~~~~~~~~~~~~~~~~~~~~")
+                    console.log(articleListRef)
+                    navigate(`/editor?id=${res.data.uuid}`)
+                    Message.success("修改成功")
+                    // @ts-ignore
+                    articleListRef.current?.getList()
+                    resolve(true)
+                }
+            } else {
+                const res = await ArticleApi.create(articleDetail) as ResponseType
+                if (res.code === 200) {
+                    console.log("~~~~~~~~~~~~~~~~~~~~~保存文章~~~~~~~~~~~~~~~~~~~~~")
+                    navigate(`/editor?id=${res.data.uuid}`)
+                    Message.success("保存成功")
+                    // @ts-ignore
+                    articleListRef.current.getList()
+                    resolve(true)
+                }
+            }
+        })
     }
     const articleSaveCancel = () => {
         setArticleSaveVisible(false)
+    }
+    //新增文章
+    const addArticle = () => {
+        const userInfo: UserInfo = JSON.parse(localStorage.getItem("user") || "{}")
+        const obj: ArticleDetailType = {
+            auth_id: userInfo.uuid,
+            author: [],
+            categories: [],
+            categories_id: [],
+            comment_count: 0,
+            disable_comments: false,
+            editor_type: "",
+            html_content: "",
+            is_top: false,
+            likes: 0,
+            md_content: "",
+            password: "",
+            slug: "",
+            status: "DRAFT",
+            summary: "",
+            tags: [],
+            tags_id: [],
+            thumbnail: "",
+            title: "新建文章",
+            visits: 0,
+            word_count: 0
+        } as ArticleDetailType
+        setArticleDetail(obj)
+        navigate(`/editor`)
+        emitter.emit(EventType.MdContent, articleDetail.md_content)
+        emitter.off(EventType.MdContent)
     }
     //#endregion
     //#endregion
@@ -170,11 +249,18 @@ export default function LeftBar() {
             </div>
             <div className={"left-bar-list"}>
                 {
-                    selected === 0 ? <ArticleList onChange={
-                        (id: string) => {
-                            getArticleDetail(id)
-                        }
-                    }/> : <HistoryList/>
+                    selected === 0 ?
+                        <ArticleList
+                            ref={articleListRef}
+                            addFunc={() => {
+                                addArticle()
+                            }}
+                            onChange={(id: string) => {
+                                getArticleDetail(id)
+                            }}
+                        />
+                        :
+                        <HistoryList/>
                 }
             </div>
             {/*配置弹窗*/}
@@ -185,6 +271,7 @@ export default function LeftBar() {
             />
             {/*文章配置*/}
             <ArticleSave
+                detail={articleDetail}
                 visible={articleSaveVisible}
                 onOk={articleSaveOk}
                 onCancel={articleSaveCancel}

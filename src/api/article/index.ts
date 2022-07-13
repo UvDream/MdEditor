@@ -32,7 +32,7 @@ export const ArticleApi = {
     update: (data: Object) => {
         return request({
             url: "/article/update",
-            method: "POST",
+            method: "PUT",
             data,
         })
     },
@@ -91,6 +91,7 @@ export interface ArticleDetailType {
     categories: [],
     visits: number,
     likes: number,
-    author: []
+    author: [],
+    password: string,
 }
 

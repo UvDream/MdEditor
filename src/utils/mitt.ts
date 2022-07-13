@@ -9,4 +9,5 @@ export enum EventType {
     FileStatus='file-status',
     MdContent='md-content',
     EditorMdContent='editor-md-content',
+    SaveArticle='save-article',
 }

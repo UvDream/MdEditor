@@ -1,45 +1,15 @@
-import {Button, Form, Input, Message, Modal, Select, Space, Switch, TreeSelect, Upload} from "@arco-design/web-react";
+import {Button, Form, Input, Message, Modal, Select, Space, Switch, TreeSelect} from "@arco-design/web-react";
 import {ArticleApi, ArticleDetailType} from "@/api/article";
 import {ResponseType} from "@/api/request";
 import {useEffect, useRef, useState} from "react";
-import Config from "@/api/config";
 import UploadFile from "@/components/upload";
+import {CategoryItemType, fileType, Props, TagItemType} from "./index.d";
 
-type Props = {
-    visible: boolean;
-    onOk: (visible: boolean) => void;
-    onCancel: (visible: boolean) => void;
-}
-type TagItemType = {
-    ID: number;
-    name: string;
-    slug: string;
-    thumbnail: string;
-    color: string;
-}
-type CategoryItemType = {
-    ID: number;
-    name: string;
-    slug: string;
-    description: string;
-    thumbnail: string;
-    parent_id: number;
-    password: string;
-    children: CategoryItemType[];
-}
-type fileType = {
-    url: string;
-    status: string;
-    percent: number;
-    name: string;
-    response: any;
-    uid: string;
-    originFileObj: File;
-}
 const FormItem = Form.Item;
 const Option = Select.Option;
 
 export default function ArticleSave(props: Props) {
+    const {detail} = props;
     const [form] = Form.useForm<ArticleDetailType>();
     const formRef = useRef();
     const [tagList, setTagList] = useState<Array<TagItemType>>([]);
@@ -47,9 +17,10 @@ export default function ArticleSave(props: Props) {
     const [file, setFile] = useState<fileType>();
     const cs = `arco-upload-list-item${file && file.status === 'error' ? ' is-error' : ''}`;
     useEffect(() => {
-        getTagList()
-        getCategoryList()
+        getTagList().then()
+        getCategoryList().then()
     }, [])
+
     const getTagList = async () => {
         const obj = {}
         const res: ResponseType = await ArticleApi.tagList(obj) as ResponseType
@@ -64,14 +35,14 @@ export default function ArticleSave(props: Props) {
             setCategoryList(res.data)
         }
     }
-    const handleOk = async () => {
+    const handleOk = async (status: boolean) => {
         if (formRef.current) {
             try {
                 //@ts-ignore
                 await formRef.current.validate();
-                console.log(form.getFieldsValue())
                 Message.info('校验通过，提交成功！');
-                props.onOk(false)
+                // @ts-ignore
+                props.onOk(status, form.getFieldsValue())
             } catch (_) {
                 //@ts-ignore
                 console.log(formRef.current.getFieldsError());
@@ -80,7 +51,7 @@ export default function ArticleSave(props: Props) {
         }
     }
     const handleCancel = () => {
-        props.onCancel(false)
+        props.onCancel()
         //@ts-ignore
         formRef.current.resetFields();
     }
@@ -90,9 +61,11 @@ export default function ArticleSave(props: Props) {
                 <Button onClick={() => {
                     handleCancel()
                 }}>取消</Button>
-                <Button type='outline'>保存草稿</Button>
+                <Button type='outline' onClick={() => {
+                    handleOk(false).then()
+                }}>保存草稿</Button>
                 <Button type='primary' onClick={() => {
-                    handleOk()
+                    handleOk(true).then()
                 }}>
                     保存
                 </Button>
@@ -104,17 +77,14 @@ export default function ArticleSave(props: Props) {
             footer={footer}
             title='文章配置'
             visible={props.visible}
-            onOk={() => {
-                handleOk()
-            }}
+            autoFocus={false}
             onCancel={() => {
                 handleCancel()
             }}
-            autoFocus={false}
             focusLock={true}
         >
             {/*@ts-ignore*/}
-            <Form ref={formRef} form={form}>
+            <Form ref={formRef} form={form} initialValues={props.detail}>
                 <FormItem label='文章标题' field={'title'} rules={[{required: true, message: "请输入标题"}]}>
                     <Input/>
                 </FormItem>
@@ -147,7 +117,7 @@ export default function ArticleSave(props: Props) {
                     label='封面'
                     field={'thumbnail'}
                 >
-                    <UploadFile />
+                    <UploadFile/>
                 </Form.Item>
                 <FormItem label='禁止评论' field={'disable_comments'}>
                     <Switch/>
