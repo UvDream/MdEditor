@@ -1,8 +1,9 @@
-import {Form, Input, Message, Modal, Select, Switch, TreeSelect, Upload} from "@arco-design/web-react";
+import {Button, Form, Input, Message, Modal, Select, Space, Switch, TreeSelect, Upload} from "@arco-design/web-react";
 import {ArticleApi, ArticleDetailType} from "@/api/article";
 import {ResponseType} from "@/api/request";
 import {useEffect, useRef, useState} from "react";
 import Config from "@/api/config";
+import UploadFile from "@/components/upload";
 
 type Props = {
     visible: boolean;
@@ -80,10 +81,27 @@ export default function ArticleSave(props: Props) {
     }
     const handleCancel = () => {
         props.onCancel(false)
+        //@ts-ignore
+        formRef.current.resetFields();
     }
-
+    const footer = () => {
+        return (
+            <Space>
+                <Button onClick={() => {
+                    handleCancel()
+                }}>取消</Button>
+                <Button type='outline'>保存草稿</Button>
+                <Button type='primary' onClick={() => {
+                    handleOk()
+                }}>
+                    保存
+                </Button>
+            </Space>
+        )
+    }
     return (
         <Modal
+            footer={footer}
             title='文章配置'
             visible={props.visible}
             onOk={() => {
@@ -128,47 +146,8 @@ export default function ArticleSave(props: Props) {
                 <Form.Item
                     label='封面'
                     field={'thumbnail'}
-                    triggerPropName='fileList'
-                    normalize={(value) => {
-                        console.log("格式化", value)
-                        return value[0].name
-                    }}
                 >
-                    {/*<AvatarUpload />*/}
-                    <Upload
-                        listType='picture-card'
-                        limit={1}
-                        name='file'
-                        headers={{"x-token": localStorage.getItem('token')}}
-                        action={Config.baseURL + "/file/upload"}
-                        customRequest={(options) => {
-                            options.onSuccess()
-                        }}
-
-                        onProgress={(e, file) => {
-                            console.log("上传进度", e, file)
-                        }}
-                        onChange={(e, file) => {
-                            console.log("在改变", e, file)
-                        }}
-                        onPreview={(file) => {
-                            console.log(file)
-                            Modal.info({
-                                title: '图片预览',
-                                content: (
-                                    <img
-                                        alt="图片预览"
-                                        // @ts-ignore
-                                        src={file.url || URL.createObjectURL(file.originFile)}
-                                        style={{
-                                            maxWidth: '100%',
-                                        }}
-                                    />
-                                ),
-                            });
-                        }}
-                    />
-
+                    <UploadFile />
                 </Form.Item>
                 <FormItem label='禁止评论' field={'disable_comments'}>
                     <Switch/>

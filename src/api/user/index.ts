@@ -8,6 +8,13 @@ export const UserApi = {
             data,
         });
     },
+    upload: (data: object) => {
+        return request({
+            url: "/file/upload",
+            method: "POST",
+            data,
+        });
+    }
 }
 
 export interface UserInfo {
