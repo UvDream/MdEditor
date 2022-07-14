@@ -2,7 +2,7 @@
  * @Author: wangzhongjie
  * @Date: 2022-04-26 22:34:36
  * @LastEditors: wangzhongjie
- * @LastEditTime: 2022-04-26 22:34:36
+ * @LastEditTime: 2022-07-14 19:03:41
  * @Description:
  * @Email: UvDream@163.com
  */
@@ -36,7 +36,6 @@ export default function HomePage(props: any) {
         setDrawerVisible(!drawerVisible);
     }
     //#endregion
-
 
     //布局组件
     function multinomialLayout() {
