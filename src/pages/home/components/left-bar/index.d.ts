@@ -29,6 +29,7 @@ export type CategoryItemType = {
     children: CategoryItemType[];
 }
 export type fileType = {
+    ID: number;
     url: string;
     status: string;
     percent: number;

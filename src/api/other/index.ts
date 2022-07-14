@@ -7,5 +7,12 @@ export const OtherApi = {
             method: "GET",
             params,
         })
+    },
+    deleteFile:(params:Object)=>{
+        return request({
+            url: "/file/delete",
+            method: "DELETE",
+            params,
+        })
     }
 }

@@ -1,7 +1,7 @@
 import "./index.less";
 import ArticleList from "./article-list";
 import HistoryList from "@/pages/home/components/left-bar/history-list";
-import {Avatar, Config, FolderOpen, FolderSuccess, Log, Picture, ViewList} from "@icon-park/react"
+import {Avatar, CheckOne, CloseOne, Config, FolderOpen, FolderSuccess, Log, Picture, ViewList} from "@icon-park/react"
 import {useEffect, useRef, useState} from "react";
 import {Message, Popover} from "@arco-design/web-react";
 import UserStatus from "@/pages/home/components/left-bar/user";
@@ -34,7 +34,7 @@ export default function LeftBar() {
     //文章配置
     const [articleSaveVisible, setArticleSaveVisible] = useState(false);
     //图片库
-    const [imgVisible, setImgVisible] = useState(false);
+    const [imgVisible, setImgVisible] = useState(true);
     //#endregion
     useEffect(() => {
         const id = searchParams.get('id');
@@ -97,7 +97,7 @@ export default function LeftBar() {
     //保存文章
     useKeyPress('meta.s', (event) => {
         event.preventDefault()
-        saveArticle()
+        saveArticle().then()
     })
     const saveArticle = () => {
         articleDetail.word_count = CalcWordCount(articleDetail.md_content)
@@ -194,7 +194,7 @@ export default function LeftBar() {
                     <div className={"left-bar-tool-block"}>
                         {
                             fileStatus ?
-                                <FolderSuccess
+                                <CloseOne
                                     theme="outline"
                                     size="20"
                                     fill="#333"
@@ -203,7 +203,7 @@ export default function LeftBar() {
                                         setArticleSaveVisible(true)
                                     }}
                                 /> :
-                                <FolderOpen
+                                <CheckOne
                                     theme="outline"
                                     size="20"
                                     fill="#333"
@@ -237,7 +237,8 @@ export default function LeftBar() {
                         >
                             <Avatar
                                 theme="outline"
-                                size="20" fill="#333"
+                                size="20"
+                                fill="#333"
                                 strokeWidth={3}
                                 onClick={() => {
                                     setPopupVisible(!popupVisible);
@@ -268,7 +269,7 @@ export default function LeftBar() {
                                 addArticle()
                             }}
                             onChange={(id: string) => {
-                                getArticleDetail(id)
+                                getArticleDetail(id).then()
                             }}
                         />
                         :
