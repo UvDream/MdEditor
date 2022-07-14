@@ -6,7 +6,7 @@ import {useEffect, useRef, useState} from "react";
 import {Message, Popover} from "@arco-design/web-react";
 import UserStatus from "@/pages/home/components/left-bar/user";
 import SetConfig from "@/pages/home/components/left-bar/config";
-import {ArticleDetailState, CalcWordCount, emitter, EventType} from "@/utils";
+import {ArticleDetailState, CalcWordCount, EditorState, emitter, EventType} from "@/utils";
 import {ResponseType} from "@/api/request";
 import {ArticleApi, ArticleDetailType} from "@/api/article";
 import {useNavigate, useSearchParams} from "react-router-dom";
@@ -20,16 +20,15 @@ export default function LeftBar() {
     //#region 变量
     const navigate = useNavigate()
     const articleListRef = useRef()
+    //markdown 内容
     const [articleMd, setArticleMd] = useRecoilState(ArticleDetailState);
-
+    const [editorState, setEditorState] = useRecoilState(EditorState);
     //bar是否选中
     const [selected, setSelected] = useState(0);
     //用户状态
     const [popupVisible, setPopupVisible] = useState(false);
     //设置弹窗状态
     const [configVisible, setConfigVisible] = useState(false);
-    //保存状态
-    const [fileStatus, setFileStatus] = useState(false);
     //路由参数
     const [searchParams] = useSearchParams();
     //文章详情
@@ -43,12 +42,6 @@ export default function LeftBar() {
         const id = searchParams.get('id');
         id && getArticleDetail(id)
     }, [])
-    //#region 通讯方法
-    //修改文件状态
-    emitter.on(EventType.FileStatus, (key: boolean | any) => {
-        setFileStatus(key)
-    })
-    //#endregion
     //#region 方法
     //获取文章详情
     const getArticleDetail = async (id: string) => {
@@ -87,7 +80,7 @@ export default function LeftBar() {
         const res = await saveArticle()
         if (res) {
             setArticleSaveVisible(false);
-            setFileStatus(true)
+            setEditorState(true)
         }
     }
     //保存文章
@@ -108,7 +101,7 @@ export default function LeftBar() {
                     Message.success("修改成功")
                     // @ts-ignore
                     articleListRef.current?.getList()
-                    setFileStatus(true)
+                    setEditorState(true)
                     resolve(true)
                 }
             } else {
@@ -119,7 +112,7 @@ export default function LeftBar() {
                     Message.success("保存成功")
                     // @ts-ignore
                     articleListRef.current.getList()
-                    setFileStatus(true)
+                    setEditorState(true)
                     resolve(true)
                 }
             }
@@ -191,7 +184,7 @@ export default function LeftBar() {
                     {/*保存按键*/}
                     <div className={"left-bar-tool-block"}>
                         {
-                            fileStatus ?
+                            editorState ?
                                 <CheckOne
                                     theme="outline"
                                     size="20"

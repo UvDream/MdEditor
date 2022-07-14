@@ -3,9 +3,10 @@ import {FolderSuccess, FolderSuccessOne, SettingConfig} from "@icon-park/react";
 import "./index.less"
 import {useNavigate, useSearchParams} from "react-router-dom";
 import dayjs from "dayjs";
-import {emitter, EventType} from "@/utils";
+import {EditorState, emitter, EventType} from "@/utils";
 import {ArticleApi} from "@/api/article";
 import {ResponseType} from "@/api/request";
+import {useRecoilState} from "recoil";
 
 type Props = {
     article: ArticleItemType,
@@ -23,6 +24,7 @@ export type ArticleItemType = {
 export default function ArticleItem(props: Props) {
     const navigate = useNavigate()
     const [searchParams] = useSearchParams();
+    const [editorState, setEditorState] = useRecoilState(EditorState);
     const deleteArticle = async () => {
         const obj = {
             id: props.id,
@@ -64,7 +66,7 @@ export default function ArticleItem(props: Props) {
     const ArticleClick = () => {
         props.article.uuid&&navigate(`/editor?id=${props.article.uuid}`)
         props.onClick && props.onClick(props.article.uuid)
-        emitter.emit(EventType.FileStatus, false)
+        setEditorState(false)
     }
     const fillColor = () => {
         return props.active === props.article.uuid ? "#fff" : "#333"
