@@ -5,8 +5,9 @@ import {ArticleApi} from "@/api/article";
 import {ResponseType} from "@/api/request";
 import "./index.less"
 import {useSearchParams} from "react-router-dom";
-import {emitter, EventType} from "@/utils";
+import {ArticleDetailState} from "@/utils";
 import {AddOne} from "@icon-park/react";
+import {useRecoilState} from "recoil";
 
 type Props = {
     onChange?: (id: string) => void
@@ -21,6 +22,8 @@ const ArticleList = (props: Props, ref: any) => {
     })
     const [total, setTotal] = useState(0);
     const [active, setActive] = useState('')
+    const [articleMd, setArticleMd] = useRecoilState(ArticleDetailState);
+
     useEffect(() => {
         setActive(searchParams.get('id') || '')
         getArticleList().then()
@@ -37,7 +40,6 @@ const ArticleList = (props: Props, ref: any) => {
         if (res.code === 200) {
             setArticleList(res.data.list)
             setTotal(res.data.total)
-            // setActive(searchParams.get('id') || '')
         }
     }
     return (
@@ -50,8 +52,7 @@ const ArticleList = (props: Props, ref: any) => {
                 }, ...articleList] as ArticleItemType[]
                 setArticleList(arr)
                 setActive("add")
-                // emitter.emit(EventType.MdContent, "")
-                // emitter.off(EventType.MdContent)
+                setArticleMd("")
                 props.addFunc && props.addFunc()
             }}>
                 <AddOne theme="outline" size="14" fill="#2d5cf6" strokeWidth={3} style={{marginRight: "4px"}}/>新增文章

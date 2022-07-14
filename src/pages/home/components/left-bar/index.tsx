@@ -6,7 +6,7 @@ import {useEffect, useRef, useState} from "react";
 import {Message, Popover} from "@arco-design/web-react";
 import UserStatus from "@/pages/home/components/left-bar/user";
 import SetConfig from "@/pages/home/components/left-bar/config";
-import {CalcWordCount, emitter, eventEmitter, EventType} from "@/utils";
+import {ArticleDetailState, CalcWordCount, emitter, EventType} from "@/utils";
 import {ResponseType} from "@/api/request";
 import {ArticleApi, ArticleDetailType} from "@/api/article";
 import {useNavigate, useSearchParams} from "react-router-dom";
@@ -14,11 +14,14 @@ import ArticleSave from "@/pages/home/components/left-bar/article-save";
 import {useKeyPress} from "ahooks";
 import {UserInfo} from "@/api/user";
 import ImgList from "@/pages/home/components/left-bar/img-list";
+import {useRecoilState} from "recoil";
 
 export default function LeftBar() {
     //#region 变量
     const navigate = useNavigate()
     const articleListRef = useRef()
+    const [articleMd, setArticleMd] = useRecoilState(ArticleDetailState);
+
     //bar是否选中
     const [selected, setSelected] = useState(0);
     //用户状态
@@ -45,13 +48,6 @@ export default function LeftBar() {
     emitter.on(EventType.FileStatus, (key: boolean | any) => {
         setFileStatus(key)
     })
-    emitter.on(EventType.EditorMdContent, (mdContent: string | any) => {
-        const obj: ArticleDetailType = articleDetail
-        obj.md_content = mdContent
-        setArticleDetail(obj)
-        setFileStatus(false)
-        emitter.off(EventType.EditorMdContent)
-    })
     //#endregion
     //#region 方法
     //获取文章详情
@@ -60,8 +56,7 @@ export default function LeftBar() {
         if (res.code === 200) {
             setArticleDetail(res.data)
             console.log("获取文章详情")
-            // emitter.emit(EventType.MdContent, res.data.md_content)
-            // emitter.off(EventType.MdContent)
+            setArticleMd(res.data.md_content)
         }
     }
     //设置弹窗方法
@@ -101,6 +96,7 @@ export default function LeftBar() {
         saveArticle().then()
     })
     const saveArticle = () => {
+        articleDetail.md_content = articleMd
         articleDetail.word_count = CalcWordCount(articleDetail.md_content)
         return new Promise(async (resolve, reject) => {
             if (articleDetail.uuid) {
@@ -161,8 +157,6 @@ export default function LeftBar() {
         setArticleDetail(obj)
         navigate(`/editor?id=add`)
         console.log("新增文章")
-        // emitter.emit(EventType.MdContent, articleDetail.md_content)
-        // emitter.off(EventType.MdContent)
     }
     //#endregion
     //#endregion

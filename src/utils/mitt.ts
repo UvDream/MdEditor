@@ -5,7 +5,4 @@ export enum EventType {
     EditorShow = 'editor-show',
     KeyEvents = 'key-events',
     FileStatus='file-status',
-    MdContent='md-content',
-    EditorMdContent='editor-md-content',
-    SaveArticle='save-article',
 }

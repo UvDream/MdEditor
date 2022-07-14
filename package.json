@@ -28,7 +28,8 @@
     "axios": "^0.27.2",
     "dayjs": "^1.11.3",
     "react-mitt": "^1.0.1",
-    "react-easy-crop":"^4.4.0"
+    "react-easy-crop":"^4.4.0",
+    "recoil":"^0.7.4"
   },
   "devDependencies": {
     "@arco-plugins/vite-react": "^1.1.0",

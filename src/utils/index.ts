@@ -12,3 +12,4 @@ export * from "./dom";
 export * from "./themes/default-style"
 export * from "./mitt"
 export * from "./config"
+export * from "./state"
