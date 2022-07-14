@@ -1,4 +1,4 @@
-import {Button, Grid, Image, Message, Modal, Pagination} from "@arco-design/web-react";
+import {Button, Grid, Image, Message, Modal, Pagination, Typography} from "@arco-design/web-react";
 import {useEffect, useState} from "react";
 import {fileType, Props} from "./index.d";
 import {OtherApi} from "@/api/other";
@@ -60,7 +60,6 @@ export default function ImgList(props: Props) {
                                 >
                                     <Image
                                         width={"100%"}
-                                        // title={item.name}
                                         height={100}
                                         previewProps={{
                                             visible: previewVisible,
@@ -89,7 +88,7 @@ export default function ImgList(props: Props) {
                                                 fill="#333"
                                                 strokeWidth={3}
                                                 onClick={() => {
-                                                    deleteImg(item.ID)
+                                                    deleteImg(item.ID).then()
                                                 }}
                                             />
                                         ]}
