@@ -23,7 +23,7 @@ const ArticleList = (props: Props, ref: any) => {
     const [active, setActive] = useState('')
     useEffect(() => {
         setActive(searchParams.get('id') || '')
-        getArticleList()
+        getArticleList().then()
     }, [])
     useImperativeHandle(ref, () => ({
         getList: () => {
@@ -70,7 +70,7 @@ const ArticleList = (props: Props, ref: any) => {
                                         active={active}
                                         article={item}
                                         deleteSuccess={() => {
-                                            getArticleList()
+                                            getArticleList().then()
                                         }}
                                         onClick={(id) => {
                                             setActive(item.uuid)
@@ -81,7 +81,17 @@ const ArticleList = (props: Props, ref: any) => {
                             }
                         </div>
                         <div className={"article-list-pagination"}>
-                            <Pagination simple total={total} size="small" className={"article-list-pagination"}/>
+                            <Pagination
+                                simple
+                                total={total}
+                                size="small"
+                                className={"article-list-pagination"}
+                                onChange={(page, pageSize) => {
+                                    options.page = page
+                                    options.page_size = pageSize
+                                    getArticleList().then()
+                                }}
+                            />
                         </div>
                     </>
             }

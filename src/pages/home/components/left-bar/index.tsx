@@ -34,7 +34,7 @@ export default function LeftBar() {
     //文章配置
     const [articleSaveVisible, setArticleSaveVisible] = useState(false);
     //图片库
-    const [imgVisible, setImgVisible] = useState(true);
+    const [imgVisible, setImgVisible] = useState(false);
     //#endregion
     useEffect(() => {
         const id = searchParams.get('id');
@@ -111,6 +111,7 @@ export default function LeftBar() {
                     Message.success("修改成功")
                     // @ts-ignore
                     articleListRef.current?.getList()
+                    setFileStatus(true)
                     resolve(true)
                 }
             } else {
@@ -121,6 +122,7 @@ export default function LeftBar() {
                     Message.success("保存成功")
                     // @ts-ignore
                     articleListRef.current.getList()
+                    setFileStatus(true)
                     resolve(true)
                 }
             }
@@ -194,7 +196,7 @@ export default function LeftBar() {
                     <div className={"left-bar-tool-block"}>
                         {
                             fileStatus ?
-                                <CloseOne
+                                <CheckOne
                                     theme="outline"
                                     size="20"
                                     fill="#333"
@@ -203,7 +205,7 @@ export default function LeftBar() {
                                         setArticleSaveVisible(true)
                                     }}
                                 /> :
-                                <CheckOne
+                                <CloseOne
                                     theme="outline"
                                     size="20"
                                     fill="#333"

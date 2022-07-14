@@ -64,7 +64,7 @@ export default function ArticleItem(props: Props) {
     const ArticleClick = () => {
         props.article.uuid&&navigate(`/editor?id=${props.article.uuid}`)
         props.onClick && props.onClick(props.article.uuid)
-        emitter.emit(EventType.FileStatus, true)
+        emitter.emit(EventType.FileStatus, false)
     }
     const fillColor = () => {
         return props.active === props.article.uuid ? "#fff" : "#333"

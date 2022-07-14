@@ -55,6 +55,7 @@ export default function ImgList(props: Props) {
                         imgList.map((item, index) => {
                             return (
                                 <Col
+                                    key={index}
                                     span={5}
                                     offset={1} style={{marginBottom: "10px"}}
                                 >
