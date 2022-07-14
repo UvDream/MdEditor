@@ -4,7 +4,8 @@ import {fileType, Props} from "./index.d";
 import {OtherApi} from "@/api/other";
 import {ResponseType} from "@/api/request";
 import Config from "@/api/config";
-import {DeleteOne, PreviewOpen} from "@icon-park/react";
+import {Copy, DeleteOne, PreviewOpen} from "@icon-park/react";
+import {CopyToClipboard} from "@/utils";
 
 const Row = Grid.Row;
 const Col = Grid.Col;
@@ -90,6 +91,18 @@ export default function ImgList(props: Props) {
                                                 strokeWidth={3}
                                                 onClick={() => {
                                                     deleteImg(item.ID).then()
+                                                }}
+                                            />,
+                                            <Copy
+                                                theme="outline"
+                                                size="15"
+                                                fill="#333"
+                                                strokeWidth={3}
+                                                onClick={()=>{
+                                                    const text=`![](${Config.apiURL}${item.url})`
+                                                    CopyToClipboard(text).then(()=>{
+                                                        Message.success("复制成功,去编辑器粘贴吧!")
+                                                    })
                                                 }}
                                             />
                                         ]}

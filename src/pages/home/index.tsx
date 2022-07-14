@@ -57,6 +57,11 @@ export default function HomePage(props: any) {
                                 width: "100%",
                                 border: '1px solid var(--color-border)',
                             }}
+                            trigger={[
+                                <></>,
+                                <div className={"pc-layout-content-resize"} />,
+                                <></>
+                            ]}
                             panes={[
                                 <LeftBar/>,
                                 <Content className={"pc-layout-content"}>
