@@ -18,6 +18,7 @@ specifiers:
   ahooks: ^3.5.0
   axios: ^0.27.2
   dayjs: ^1.11.3
+  events: ^3.3.0
   highlight.js: ^11.5.1
   juice: ^8.0.0
   less: ^4.1.2
@@ -44,6 +45,7 @@ dependencies:
   ahooks: 3.5.0_react@18.2.0
   axios: 0.27.2
   dayjs: 1.11.3
+  events: 3.3.0
   highlight.js: 11.5.1
   juice: 8.0.0
   markdown-it: 13.0.1
@@ -1379,6 +1381,11 @@ packages:
   /estree-walker/2.0.2:
     resolution: {integrity: sha512-Rfkk/Mp/DL7JVje3u18FxFujQlTNR2q6QfMSMB7AvCBx91NGj/ba3kCfza0f6dVDbw7YlRf/nDrn7pQrCCyQ/w==}
     dev: true
+
+  /events/3.3.0:
+    resolution: {integrity: sha512-mQw+2fkQbALzQ7V0MY0IqdnXNOeTtP4r0lN9z7AAawCXgqea7bDii20AYrIBrFd/Hx0M2Ocz6S111CaFkUcb0Q==}
+    engines: {node: '>=0.8.x'}
+    dev: false
 
   /focus-lock/0.11.2:
     resolution: {integrity: sha512-pZ2bO++NWLHhiKkgP1bEXHhR1/OjVcSvlCJ98aNJDFeb7H5OOQaO+SKOZle6041O9rv2tmbrO4JzClAvDUHf0g==}

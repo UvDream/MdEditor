@@ -50,8 +50,8 @@ const ArticleList = (props: Props, ref: any) => {
                 }, ...articleList] as ArticleItemType[]
                 setArticleList(arr)
                 setActive("add")
-                emitter.emit(EventType.MdContent, "")
-                emitter.off(EventType.MdContent)
+                // emitter.emit(EventType.MdContent, "")
+                // emitter.off(EventType.MdContent)
                 props.addFunc && props.addFunc()
             }}>
                 <AddOne theme="outline" size="14" fill="#2d5cf6" strokeWidth={3} style={{marginRight: "4px"}}/>新增文章

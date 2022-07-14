@@ -1,12 +1,12 @@
 import "./index.less";
 import ArticleList from "./article-list";
 import HistoryList from "@/pages/home/components/left-bar/history-list";
-import {Avatar, CheckOne, CloseOne, Config, FolderOpen, FolderSuccess, Log, Picture, ViewList} from "@icon-park/react"
+import {Avatar, CheckOne, CloseOne, Config, Log, Picture, ViewList} from "@icon-park/react"
 import {useEffect, useRef, useState} from "react";
 import {Message, Popover} from "@arco-design/web-react";
 import UserStatus from "@/pages/home/components/left-bar/user";
 import SetConfig from "@/pages/home/components/left-bar/config";
-import {CalcWordCount, emitter, EventType} from "@/utils";
+import {CalcWordCount, emitter, eventEmitter, EventType} from "@/utils";
 import {ResponseType} from "@/api/request";
 import {ArticleApi, ArticleDetailType} from "@/api/article";
 import {useNavigate, useSearchParams} from "react-router-dom";
@@ -59,8 +59,9 @@ export default function LeftBar() {
         const res: ResponseType = await ArticleApi.detail({id}) as ResponseType
         if (res.code === 200) {
             setArticleDetail(res.data)
-            emitter.emit(EventType.MdContent, res.data.md_content)
-            emitter.off(EventType.MdContent)
+            console.log("获取文章详情")
+            // emitter.emit(EventType.MdContent, res.data.md_content)
+            // emitter.off(EventType.MdContent)
         }
     }
     //设置弹窗方法
@@ -158,9 +159,10 @@ export default function LeftBar() {
             word_count: 0
         } as ArticleDetailType
         setArticleDetail(obj)
-        navigate(`/editor`)
-        emitter.emit(EventType.MdContent, articleDetail.md_content)
-        emitter.off(EventType.MdContent)
+        navigate(`/editor?id=add`)
+        console.log("新增文章")
+        // emitter.emit(EventType.MdContent, articleDetail.md_content)
+        // emitter.off(EventType.MdContent)
     }
     //#endregion
     //#endregion
@@ -219,9 +221,9 @@ export default function LeftBar() {
                     {/*图片库*/}
                     <div className={"left-bar-tool-block"}>
                         <Picture theme="outline" size="20" fill="#333" strokeWidth={3}
-                        onClick={()=>{
-                            setImgVisible(true)
-                        }}
+                                 onClick={() => {
+                                     setImgVisible(true)
+                                 }}
                         />
                     </div>
                     {/*用户*/}
@@ -294,7 +296,7 @@ export default function LeftBar() {
             {/*文件资源*/}
             <ImgList
                 visible={imgVisible}
-                onOk={()=>{
+                onOk={() => {
                     setImgVisible(false)
                 }}
             />
