@@ -99,14 +99,14 @@ export default function ImgList(props: Props) {
                                                 fill="#333"
                                                 strokeWidth={3}
                                                 onClick={()=>{
-                                                    const text=`![](${Config.apiURL}${item.url})`
+                                                    const text=`![](${Config.baseURL}${item.url})`
                                                     CopyToClipboard(text).then(()=>{
                                                         Message.success("复制成功,去编辑器粘贴吧!")
                                                     })
                                                 }}
                                             />
                                         ]}
-                                        src={item.position == "local" ? Config.apiURL + item.url : item.url}
+                                        src={item.position == "local" ? Config.baseURL + item.url : item.url}
                                     />
                                 </Col>
                             )

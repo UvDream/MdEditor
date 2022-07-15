@@ -30,12 +30,12 @@ export default function UploadFile(props: Props) {
         if (res.code === 200) {
             if (res.data.position === 'local') {
                 setFile({
-                    url: Config.apiURL + res.data.url,
+                    url: Config.baseURL + res.data.url,
                     ID: res.data.ID,
                     position: res.data.position,
                     name: res.data.name
                 })
-                props.onChange && props.onChange(Config.apiURL + res.data.url)
+                props.onChange && props.onChange(Config.baseURL + res.data.url)
             }
         }
     }

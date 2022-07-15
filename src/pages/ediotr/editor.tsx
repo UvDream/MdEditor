@@ -3,9 +3,10 @@ import CodeMirror from '@uiw/react-codemirror';
 import {markdown, markdownLanguage} from '@codemirror/lang-markdown';
 import {css} from '@codemirror/lang-css';
 import {languages} from '@codemirror/language-data';
-import {emitter, EventType} from "@/utils";
+import { emitter, EventType} from "@/utils";
 import * as events from '@uiw/codemirror-extensions-events';
-import {insert, keymapEvent, MenusInsert} from "@/pages/home/components/key-events";
+import { keymapEvent, MenusInsert} from "@/pages/home/components/key-events";
+import {useDebounceFn} from "ahooks";
 
 type Props = {
     value?: string;
@@ -15,13 +16,20 @@ type Props = {
     mdEditor?: boolean;
 };
 export default function Editor(props: Props) {
-    const editor = useRef(null)
-
-    if (props.mdEditor && props.insert) {
-        emitter.on(EventType.KeyEvents, (key: any) => {
+    const editor = useRef(null) ;
+    const { run } = useDebounceFn(
+        (key) => {
             MenusInsert(editor, key.shortcuts)
             //@ts-ignore
             editor.current.view.focus()
+        },
+        {
+            wait: 500,
+        },
+    );
+    if (props.mdEditor && props.insert) {
+        emitter.on(EventType.KeyEvents, (key)=>{
+            run(key)
         })
     }
 

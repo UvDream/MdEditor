@@ -3,11 +3,10 @@ export default {
     method: "post",
     // 基础url前缀
     baseURL: baseUrl,
-    apiURL:"http://localhost:8989",
     // 请求头信息
     headers: {
         "Content-Type": "application/json;charset=UTF-8",
-        "x-token":localStorage.getItem('token')||"11"
+        "x-token":localStorage.getItem('token')||"token"
     },
     // 参数
     data: {},

@@ -18,7 +18,6 @@ import {IconEye, IconEyeInvisible} from "@arco-design/web-react/icon";
 import {Grid} from "@arco-design/web-react";
 import {useSearchParams} from "react-router-dom";
 import {useRecoilState} from "recoil";
-import MarkdownIt from "markdown-it";
 
 const Row = Grid.Row;
 const Col = Grid.Col;

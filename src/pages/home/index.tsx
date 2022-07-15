@@ -58,9 +58,7 @@ export default function HomePage(props: any) {
                                 border: '1px solid var(--color-border)',
                             }}
                             trigger={[
-                                <></>,
-                                <div className={"pc-layout-content-resize"} />,
-                                <></>
+                                <div key="2" className={"pc-layout-content-resize"} />,
                             ]}
                             panes={[
                                 <LeftBar/>,
@@ -69,7 +67,6 @@ export default function HomePage(props: any) {
                                 </Content>
                             ]}
                         >
-
                         </ResizeBox.Split>
                     </Layout>
                 </Layout>

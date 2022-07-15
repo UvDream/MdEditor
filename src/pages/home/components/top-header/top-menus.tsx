@@ -1,14 +1,14 @@
 import {Dropdown, Menu} from '@arco-design/web-react';
 import {TopMenusData, TopMenusType} from '../common';
 import DropList from "./drop-list";
-import {emitter, EventType} from "@/utils";
+import { emitter, EventType} from "@/utils";
 
 
 export default function TopMenus() {
     const menusItemClick = (key: TopMenusType) => {
-        console.log('menusItemClick', key);
+        console.log("---------菜单点击----------", key)
         emitter.emit(EventType.KeyEvents, key)
-        emitter.off(EventType.KeyEvents)
+        emitter.all.delete(EventType.KeyEvents)
     }
     return (
         <>
