@@ -1,3 +1,5 @@
+@import "./editor/index.less";
+@import "./home/index.less";
 * {
   margin: 0
 }
@@ -17,21 +19,21 @@ html, body, #root {
 
 @font-face {
   font-family: JetBrainsMono;
-  src: url('@/assets/fonts/JetBrainsMono-Regular.ttf');
+  src: url("@/assets/fonts/JetBrainsMono-Regular.ttf");
 }
 
 .custom {
   .hljs {
-    font-family: JetBrainsMono;
+    font-family: JetBrainsMono, serif;
   }
 }
-
+//一行溢出
 .one-line {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-
+//两行溢出
 .two-line {
   display: -webkit-box;
   -webkit-line-clamp: 2;
