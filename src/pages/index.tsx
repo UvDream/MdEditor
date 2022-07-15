@@ -15,8 +15,8 @@ export default function IndexPage() {
     return (
         <Routes>
             <Route path="/" element={<HomePage/>}>
-                <Route path="/editor" element={<EditorPage />}>
-                </Route>
+                <Route path="/" element={<EditorPage />} />
+                <Route path="/editor" element={<EditorPage />} />
             </Route>
             <Route path="/login" element={<LoginPage/>}/>
         </Routes>
