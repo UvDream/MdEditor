@@ -56,8 +56,8 @@
     "windows": [
       {
         "fullscreen": false,
-        "width": 1400,
-        "height": 1000,
+        "width": 1200,
+        "height": 800,
         "resizable": true,
         "title": "MdEditor"
       }
