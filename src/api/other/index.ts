@@ -14,5 +14,19 @@ export const OtherApi = {
             method: "DELETE",
             params,
         })
+    },
+    themeList: (params: Object) => {
+        return request({
+            url: "/theme/list",
+            method: "GET",
+            params,
+        })
+    },
+    publicTheme:(params: Object) => {
+        return request({
+            url: "/theme/public",
+            method: "GET",
+            params,
+        })
     }
 }

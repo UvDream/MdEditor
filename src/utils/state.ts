@@ -9,5 +9,7 @@ export const EditorState = atom({
     key: 'EditorState',
     default:true
 })
-
-
+export const ThemeID=atom({
+    key:"ThemeID",
+    default:9999
+})

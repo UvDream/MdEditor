@@ -9,10 +9,10 @@ export default function MenusItem(props: any) {
                     props.radio || props.checkbox ?
                         <div className={"select"}>
                             {props.radio ? <Radio value={props.value} onChange={(val => {
-                                props.onChange(val)
+                                props.onChange&&props.onChange(val)
                             })}/> : <></>}
                             {props.checkbox ? <Checkbox checked={props.value} onChange={(val => {
-                                props.onChange(val)
+                                props.onChange&&props.onChange(val)
                             })}/> : <></>}
                         </div>
                         : <></>
