@@ -76,7 +76,7 @@ const ArticleList = (props: Props, ref: any) => {
       {articleList.length === 0 ? (
         <Empty description={"暂无文章"} />
       ) : (
-        <>
+        < >
           <div className={"article-list-content"}>
             {articleList.map((item: ArticleItemType) => {
               return (

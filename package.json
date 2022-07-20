@@ -7,7 +7,9 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "tauri:dev": "tauri dev",
-    "tauri:build": "tauri build"
+    "tauri:dev-debug": "tarui dev --debug",
+    "tauri:build": "tauri build",
+    "tauri:build-debug": "tauri build --debug"
   },
   "dependencies": {
     "@arco-design/web-react": "^2.32.1",
@@ -30,9 +32,9 @@
     "axios": "^0.27.2",
     "dayjs": "^1.11.3",
     "react-mitt": "^1.0.1",
-    "react-easy-crop":"^4.4.0",
-    "recoil":"^0.7.4",
-    "@tauri-apps/api":"^1.0.2"
+    "react-easy-crop": "^4.4.0",
+    "recoil": "^0.7.4",
+    "@tauri-apps/api": "^1.0.2"
   },
   "devDependencies": {
     "@arco-plugins/vite-react": "^1.1.0",
@@ -43,6 +45,6 @@
     "less": "^4.1.2",
     "typescript": "^4.6.3",
     "vite": "^2.9.5",
-    "@tauri-apps/cli":"^1.0.4"
+    "@tauri-apps/cli": "^1.0.4"
   }
 }
