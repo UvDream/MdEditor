@@ -1,9 +1,13 @@
 import {configureStore} from "@reduxjs/toolkit";
 import SaveStateSlice from "@/store/save-state";
+import ThemeDetailSlice from "@/store/theme";
+import ArticleDetailSlice from "@/store/article";
 
 const store = configureStore({
     reducer: {
-        saveState: SaveStateSlice
+        saveState: SaveStateSlice,
+        themeDetail: ThemeDetailSlice,
+        articleDetail: ArticleDetailSlice,
     }
 })
 

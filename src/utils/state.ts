@@ -5,7 +5,3 @@ export const ArticleDetailState = atom({
     default:"编辑器内容"
 })
 
-export const ThemeID=atom({
-    key:"ThemeID",
-    default:9999
-})

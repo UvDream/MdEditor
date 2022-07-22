@@ -4,8 +4,8 @@ import MenusItem from "./menus-item";
 import {OtherApi} from "@/api/other";
 import {ResponseType} from "@/api/request";
 import {UserInfo} from "@/api/user";
-import {useRecoilState} from "recoil";
-import {ThemeID} from "@/utils";
+import {useDispatch} from "react-redux";
+import {getArticleDetail} from "@/store/article";
 
 const RadioGroup = Radio.Group;
 type ThemeType = {
@@ -14,7 +14,6 @@ type ThemeType = {
     author?: UserInfo
 }
 export default function Themes() {
-    const [selectID, setSelectID] = useRecoilState<number>(ThemeID);
     const [theme, setTheme] = useState<Array<ThemeType>>([
         {
             name: "默认主题",
@@ -22,6 +21,7 @@ export default function Themes() {
         }
     ]);
     const [myTheme, setMyTheme] = useState<Array<ThemeType>>([]);
+    const dispatch = useDispatch();
     useEffect(() => {
         getTheme().then()
     }, [])
@@ -41,8 +41,10 @@ export default function Themes() {
             setMyTheme(res2.data)
         }
     }
-    const radioChange = (value:number) => {
-        setSelectID(value)
+    const radioChange = (value: number) => {
+        // setSelectID(value)
+        //@ts-ignore
+        dispatch(getArticleDetail({id:value}))
     }
 
     return (

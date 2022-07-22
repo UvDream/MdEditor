@@ -28,5 +28,12 @@ export const OtherApi = {
             method: "GET",
             params,
         })
+    },
+    themeDetail: (params: Object) => {
+        return request({
+            url: "/theme/detail",
+            method: "GET",
+            params,
+        })
     }
 }
