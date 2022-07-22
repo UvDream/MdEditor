@@ -6,7 +6,7 @@ import {useEffect, useRef, useState} from "react";
 import {Message, Popover} from "@arco-design/web-react";
 import UserStatus from "@/pages/home/components/left-bar/user";
 import SetConfig from "@/pages/home/components/left-bar/config";
-import {ArticleDetailState, CalcWordCount, EditorState, emitter, EventType} from "@/utils";
+import {ArticleDetailState, CalcWordCount} from "@/utils";
 import {ResponseType} from "@/api/request";
 import {ArticleApi, ArticleDetailType} from "@/api/article";
 import {useNavigate, useSearchParams} from "react-router-dom";
@@ -15,6 +15,9 @@ import {useKeyPress} from "ahooks";
 import {UserInfo} from "@/api/user";
 import ImgList from "@/pages/home/components/left-bar/img-list";
 import {useRecoilState} from "recoil";
+import {useDispatch, useSelector} from "react-redux";
+import {RootState} from "@/store";
+import {changeState} from "@/store/save-state";
 
 export default function LeftBar() {
     //#region 变量
@@ -22,7 +25,8 @@ export default function LeftBar() {
     const articleListRef = useRef()
     //markdown 内容
     const [articleMd, setArticleMd] = useRecoilState(ArticleDetailState);
-    const [editorState, setEditorState] = useRecoilState(EditorState);
+    const saveState = useSelector((store: RootState) => store.saveState)
+    const dispatch = useDispatch();
     //bar是否选中
     const [selected, setSelected] = useState(0);
     //用户状态
@@ -80,7 +84,8 @@ export default function LeftBar() {
         const res = await saveArticle()
         if (res) {
             setArticleSaveVisible(false);
-            setEditorState(true)
+            dispatch(changeState(false))
+            dispatch(changeState(true))
         }
     }
     //保存文章
@@ -101,7 +106,7 @@ export default function LeftBar() {
                     Message.success("修改成功")
                     // @ts-ignore
                     articleListRef.current?.getList()
-                    setEditorState(true)
+                    dispatch(changeState(true))
                     resolve(true)
                 }
             } else {
@@ -112,7 +117,7 @@ export default function LeftBar() {
                     Message.success("保存成功")
                     // @ts-ignore
                     articleListRef.current.getList()
-                    setEditorState(true)
+                    dispatch(changeState(true))
                     resolve(true)
                 }
             }
@@ -120,6 +125,7 @@ export default function LeftBar() {
     }
     const articleSaveCancel = () => {
         setArticleSaveVisible(false)
+        dispatch(changeState(false))
     }
     //新增文章
     const addArticle = () => {
@@ -184,7 +190,7 @@ export default function LeftBar() {
                     {/*保存按键*/}
                     <div className={"left-bar-tool-block"}>
                         {
-                            editorState ?
+                            saveState ?
                                 <CheckOne
                                     theme="outline"
                                     size="20"

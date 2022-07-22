@@ -4,13 +4,17 @@ import {BrowserRouter} from "react-router-dom";
 import IndexPage from "./pages/index";
 import "./style/index.less";
 import {RecoilRoot} from "recoil";
+import {Provider} from "react-redux";
+import store from "@/store";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
     // <React.StrictMode>
-    <RecoilRoot>
-        <BrowserRouter>
-            <IndexPage/>
-        </BrowserRouter>
-    </RecoilRoot>
+        <Provider store={store}>
+            <RecoilRoot>
+                <BrowserRouter>
+                    <IndexPage/>
+                </BrowserRouter>
+            </RecoilRoot>
+        </Provider>
     // </React.StrictMode>
 );

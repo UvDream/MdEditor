@@ -3,10 +3,10 @@ import {FolderSuccess, FolderSuccessOne, SettingConfig} from "@icon-park/react";
 import "./index.less"
 import {useNavigate, useSearchParams} from "react-router-dom";
 import dayjs from "dayjs";
-import {EditorState, emitter, EventType} from "@/utils";
 import {ArticleApi} from "@/api/article";
 import {ResponseType} from "@/api/request";
-import {useRecoilState} from "recoil";
+import {useDispatch} from "react-redux";
+import {changeState} from "@/store/save-state";
 
 type Props = {
     article: ArticleItemType,
@@ -24,7 +24,7 @@ export type ArticleItemType = {
 export default function ArticleItem(props: Props) {
     const navigate = useNavigate()
     const [searchParams] = useSearchParams();
-    const [editorState, setEditorState] = useRecoilState(EditorState);
+    const dispatch = useDispatch();
     const deleteArticle = async () => {
         const obj = {
             id: props.id,
@@ -64,16 +64,17 @@ export default function ArticleItem(props: Props) {
         </Menu>
     )
     const ArticleClick = () => {
-        props.article.uuid&&navigate(`/editor?id=${props.article.uuid}`)
+        props.article.uuid && navigate(`/editor?id=${props.article.uuid}`)
         props.onClick && props.onClick(props.article.uuid)
-        setEditorState(false)
+        dispatch(changeState(false))
     }
     const fillColor = () => {
         return props.active === props.article.uuid ? "#fff" : "#333"
     }
     return (
-        <div className={["article-item", props.active == props.article.uuid||props.article.uuid=== searchParams.get('id')? "active-article" : ""].join(" ")}
-             onClick={ArticleClick}>
+        <div
+            className={["article-item", props.active == props.article.uuid || props.article.uuid === searchParams.get('id') ? "active-article" : ""].join(" ")}
+            onClick={ArticleClick}>
             <div className={"article-item-left"}>
                 <div className={"article-item-left-top"}>
                     <div style={{marginTop: 2, marginRight: 2}}>
