@@ -5,7 +5,7 @@ import {OtherApi} from "@/api/other";
 import {ResponseType} from "@/api/request";
 import {UserInfo} from "@/api/user";
 import {useDispatch} from "react-redux";
-import {getArticleDetail} from "@/store/article";
+
 
 const RadioGroup = Radio.Group;
 type ThemeType = {
