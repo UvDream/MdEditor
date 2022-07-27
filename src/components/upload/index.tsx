@@ -5,20 +5,21 @@ import {useState} from "react";
 import {ResponseType} from "@/api/request";
 import "../index.less"
 import Config from "@/api/config";
+
 type Props = {
     value?: string;
     onChange?: (value: string) => void;
 }
 type FileType = {
     url: string;
-    ID: number;
+    id: number;
     position: string,
     name: string;
 }
 export default function UploadFile(props: Props) {
     const [file, setFile] = useState<FileType>({
-        url: props.value|| '',
-        ID: 0,
+        url: props.value || '',
+        id: 0,
         position: '',
         name: ''
     });
@@ -31,7 +32,7 @@ export default function UploadFile(props: Props) {
             if (res.data.position === 'local') {
                 setFile({
                     url: Config.baseURL + res.data.url,
-                    ID: res.data.ID,
+                    id: res.data.id,
                     position: res.data.position,
                     name: res.data.name
                 })

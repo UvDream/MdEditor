@@ -11,18 +11,21 @@ import {defaultStyle} from "@/utils";
 const RadioGroup = Radio.Group;
 
 export default function Themes() {
+    //公开主题
     const [theme, setTheme] = useState<Array<ThemeType>>([
         {
             name: "默认主题",
-            ID: 9999
+            id: 9999
         }
     ]);
-    const [themeID, setThemeID] = useState(localStorage.getItem("theme_id"));
+    //选中主题id
+    const [themeID, setThemeID] = useState(Number(localStorage.getItem("theme_id")));
+    //我的主题
     const [myTheme, setMyTheme] = useState<Array<ThemeType>>([]);
     const dispatch = useDispatch();
     useEffect(() => {
         getTheme().then()
-        setThemeID(localStorage.getItem("theme_id") ? JSON.parse(localStorage.getItem("theme_id") as string) : "999")
+        setThemeID(localStorage.getItem("theme_id") ? JSON.parse(localStorage.getItem("theme_id") as string) : 999)
     }, [])
 
     const getTheme = async () => {
@@ -30,7 +33,7 @@ export default function Themes() {
         if (res.code === 200) {
             const arr: Array<ThemeType> = [{
                 name: "默认主题",
-                ID: 999
+                id: 999
             }]
             arr.push(...res.data)
             setTheme(arr)
@@ -63,18 +66,17 @@ export default function Themes() {
                 dispatch(SetTheme(res.data.theme))
             }
         }
-
     }
     return (
         <>
             <div className={'theme-title'}>
-                公开主题{themeID}
+                公开主题
             </div>
             <RadioGroup onChange={radioChange} defaultValue={Number(themeID)}>
                 {
                     theme.map(item => {
                         return (
-                            <MenusItem key={item.ID} value={item.ID} auth={item.author?.nick_name} radio={true}
+                            <MenusItem key={item.id} value={item.id} auth={item.author?.nick_name} radio={true}
                                        title={item.name}/>
                         )
                     })
@@ -85,7 +87,7 @@ export default function Themes() {
                 {
                     myTheme?.map(item => {
                         return (
-                            <MenusItem key={item.ID} value={item.ID} auth={item.author?.nick_name} radio={true}
+                            <MenusItem key={item.id} value={item.id} auth={item.author?.nick_name} radio={true}
                                        title={item.name}/>
                         )
                     })

@@ -90,7 +90,7 @@ export default function ImgList(props: Props) {
                                                 fill="#333"
                                                 strokeWidth={3}
                                                 onClick={() => {
-                                                    deleteImg(item.ID).then()
+                                                    deleteImg(item.id).then()
                                                 }}
                                             />,
                                             <Copy
@@ -98,9 +98,9 @@ export default function ImgList(props: Props) {
                                                 size="15"
                                                 fill="#333"
                                                 strokeWidth={3}
-                                                onClick={()=>{
-                                                    const text=`![](${Config.baseURL}${item.url})`
-                                                    CopyToClipboard(text).then(()=>{
+                                                onClick={() => {
+                                                    const text = `![](${Config.baseURL}${item.url})`
+                                                    CopyToClipboard(text).then(() => {
                                                         Message.success("复制成功,去编辑器粘贴吧!")
                                                     })
                                                 }}

@@ -18,6 +18,9 @@ import {Grid} from "@arco-design/web-react";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "@/store";
 import {SetArticleDetail} from "@/store/article";
+import {SetTheme, ThemeType, UpdateTheme} from "@/store/theme";
+import {OtherApi} from "@/api/other";
+import {ResponseType} from "@/api/request";
 
 const Row = Grid.Row;
 const Col = Grid.Col;
@@ -37,12 +40,33 @@ export default function EditorPage() {
     const {theme}=useSelector((state: RootState) => state.themeDetail);
     useEffect(() => {
         setEditorStyle(defaultStyle)
+        // getThemeDetail(themeID).then()
+        getThemeDetail(Number(localStorage.getItem("theme_id"))).then()
     }, [])
     useEffect(() => {
         setArticleMd(md_content ? md_content : '暂无');
         setArticleHtml(markdownParser.render(articleMd));
     }, [md_content])
 
+    //获取主题详情
+    const getThemeDetail = async (id: number) => {
+        if (id === 999) {
+            dispatch(SetTheme(defaultStyle))
+            const obj: ThemeType = {
+                description: "默认主题",
+                name: "默认主题",
+                thumbnail: "",
+                is_public: true
+            }
+            dispatch(UpdateTheme(obj))
+            dispatch(SetTheme(defaultStyle))
+        } else {
+            const res = await OtherApi.themeDetail({id}) as ResponseType
+            if (res.code === 200) {
+                dispatch(SetTheme(res.data.theme))
+            }
+        }
+    }
     const getCount = () => {
         let count = 0
         let config = getConfig()

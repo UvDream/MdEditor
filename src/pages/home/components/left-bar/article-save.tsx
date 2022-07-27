@@ -98,7 +98,7 @@ export default function ArticleSave(props: ArticleSaveProps) {
                 <FormItem label='标签' field={'tags_id'}>
                     <Select mode='multiple'>
                         {tagList.map((item) => (
-                            <Option key={item.ID} value={item.name}>
+                            <Option key={item.id} value={item.name}>
                                 {item.name}
                             </Option>
                         ))}
@@ -108,7 +108,7 @@ export default function ArticleSave(props: ArticleSaveProps) {
                     <TreeSelect
                         treeData={categoryList}
                         fieldNames={{
-                            key: 'ID',
+                            key: 'id',
                             title: 'name',
                             children: 'children',
                         }}
