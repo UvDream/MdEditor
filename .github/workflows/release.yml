@@ -96,7 +96,7 @@ jobs:
 
       # 安装依赖执行构建，以及推送 github release
       - name: Install app dependencies and build it
-        run: pnpm install && pnpm tauri:build
+        run: yarn install && yarn tauri:build
       - uses: tauri-apps/tauri-action@v0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
