@@ -33,6 +33,8 @@ export default function EditorPage() {
     const [articleHtml, setArticleHtml] = useState(markdownParser.render(articleMd));
     //获取配置
     const [config, setConfig] = useState(getConfig());
+    //获取主题
+    const {theme}=useSelector((state: RootState) => state.themeDetail);
     useEffect(() => {
         setEditorStyle(defaultStyle)
     }, [])
@@ -93,7 +95,7 @@ export default function EditorPage() {
                         config.themeArea ?
                             <Col span={24 / getCount()} className={"style-editor "}>
                                 <Editor
-                                    value={defaultStyle}
+                                    value={theme}
                                     language={'css'}
                                     onChange={(val: string) => {
                                         styleEditorChange(val)

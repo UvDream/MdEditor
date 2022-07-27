@@ -3,16 +3,13 @@ import {useEffect, useState} from "react";
 import MenusItem from "./menus-item";
 import {OtherApi} from "@/api/other";
 import {ResponseType} from "@/api/request";
-import {UserInfo} from "@/api/user";
 import {useDispatch} from "react-redux";
+import {SetTheme, ThemeType, UpdateTheme} from "@/store/theme";
+import {defaultStyle} from "@/utils";
 
 
 const RadioGroup = Radio.Group;
-type ThemeType = {
-    ID?: number,
-    name?: string,
-    author?: UserInfo
-}
+
 export default function Themes() {
     const [theme, setTheme] = useState<Array<ThemeType>>([
         {
@@ -20,10 +17,12 @@ export default function Themes() {
             ID: 9999
         }
     ]);
+    const [themeID, setThemeID] = useState(localStorage.getItem("theme_id"));
     const [myTheme, setMyTheme] = useState<Array<ThemeType>>([]);
     const dispatch = useDispatch();
     useEffect(() => {
         getTheme().then()
+        setThemeID(localStorage.getItem("theme_id") ? JSON.parse(localStorage.getItem("theme_id") as string) : "999")
     }, [])
 
     const getTheme = async () => {
@@ -42,17 +41,36 @@ export default function Themes() {
         }
     }
     const radioChange = (value: number) => {
-        // setSelectID(value)
-        //@ts-ignore
-        dispatch(getArticleDetail({id:value}))
+        getThemeDetail(value).then()
     }
+    //获取主题详情
+    const getThemeDetail = async (id: number) => {
+        if (id === 999) {
+            dispatch(SetTheme(defaultStyle))
+            const obj: ThemeType = {
+                description: "默认主题",
+                name: "默认主题",
+                thumbnail: "",
+                is_public: true
+            }
+            dispatch(UpdateTheme(obj))
+            dispatch(SetTheme(defaultStyle))
+            localStorage.setItem("theme_id", "999")
+        } else {
+            const res = await OtherApi.themeDetail({id}) as ResponseType
+            if (res.code === 200) {
+                localStorage.setItem("theme_id", id.toString())
+                dispatch(SetTheme(res.data.theme))
+            }
+        }
 
+    }
     return (
         <>
             <div className={'theme-title'}>
-                公开主题
+                公开主题{themeID}
             </div>
-            <RadioGroup onChange={radioChange}>
+            <RadioGroup onChange={radioChange} defaultValue={Number(themeID)}>
                 {
                     theme.map(item => {
                         return (
@@ -61,11 +79,9 @@ export default function Themes() {
                         )
                     })
                 }
-                {/*</RadioGroup>*/}
                 <div className={'theme-title'}>
                     我的主题
                 </div>
-                {/*<RadioGroup>*/}
                 {
                     myTheme?.map(item => {
                         return (
