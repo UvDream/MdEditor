@@ -1,5 +1,13 @@
 @import "./editor/index.less";
 @import "./home/index.less";
+@font-face {
+  font-family: JetBrainsMono;
+  src: url("@/assets/fonts/JetBrainsMono-Regular.ttf");
+}
+@font-face {
+  font-family: WenKai;
+  src: url("@/assets/fonts/LXGWWenKai-Regular.ttf");
+}
 * {
   margin: 0
 }
@@ -8,7 +16,8 @@ html, body, #root {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background-color: #fff
+  background-color: #fff;
+  font-family: WenKai,Inter,-apple-system,BlinkMacSystemFont,PingFang SC,Hiragino Sans GB,noto sans,Microsoft YaHei,Helvetica Neue,Helvetica,Arial,sans-serif;
 }
 
 .flex-center {
@@ -17,10 +26,7 @@ html, body, #root {
   align-items: center;
 }
 
-@font-face {
-  font-family: JetBrainsMono;
-  src: url("@/assets/fonts/JetBrainsMono-Regular.ttf");
-}
+
 
 .custom {
   .hljs {
