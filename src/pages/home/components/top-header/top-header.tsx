@@ -5,8 +5,8 @@ const Row=Grid.Row;
 const Col=Grid.Col;
 export default function TopHeader() {
   return (
-      <Row className={'top-header'}>
-          <Col className={'logo'} span={3}>
+      <Row className={'top-header'} align="center">
+          <Col className={'logo'} span={2} style={{textAlign:"center"}}>
               MdEditor
           </Col>
           <Col span={18} className={'menus'}>

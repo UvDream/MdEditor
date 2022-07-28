@@ -11,12 +11,13 @@ import HomePage from "./home";
 import LoginPage from "./login";
 import EditorPage from "@/pages/ediotr";
 
+
 export default function IndexPage() {
     return (
         <Routes>
             <Route path="/" element={<HomePage/>}>
-                <Route path="/" element={<EditorPage />} />
-                <Route path="/editor" element={<EditorPage />} />
+                <Route path="/" element={<EditorPage/>}/>
+                <Route path="/editor" element={<EditorPage/>}/>
             </Route>
             <Route path="/login" element={<LoginPage/>}/>
         </Routes>

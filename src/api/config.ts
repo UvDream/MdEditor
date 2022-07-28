@@ -1,4 +1,9 @@
 let  baseUrl= 'http://127.0.0.1:8989';
+if (process.env.NODE_ENV==='development') {
+    baseUrl = 'http://localhost:8989';
+}else if (process.env.NODE_ENV==='production') {
+    baseUrl = 'http://124.223.8.237:8989';
+}
 export default {
     method: "post",
     // 基础url前缀
