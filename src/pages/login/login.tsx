@@ -4,9 +4,11 @@ import {FieldError} from "@arco-design/web-react/es/Form/interface";
 import {UserApi} from "@/api/user";
 import {ResponseType} from "@/api/request";
 import {useNavigate} from "react-router-dom";
-
+type Props={
+    onSwitch:()=>void
+}
 const FormItem = Form.Item
-export default function Login() {
+export default function Login(props:Props) {
     let navigate = useNavigate()
     const [form] = Form.useForm();
     const onSubmit = async (value: FormData) => {
@@ -22,7 +24,9 @@ export default function Login() {
             Message.success(res.msg)
             localStorage.setItem('token', res.data.token)
             localStorage.setItem('user', JSON.stringify(res.data.user_info))
-            navigate('/editor')
+                navigate('/editor')
+        }else{
+            Message.error(res.msg)
         }
     }
     const onSubmitFailed = (error: { [key: string]: FieldError }) => {
@@ -46,7 +50,7 @@ export default function Login() {
                     </Button>
                 </FormItem>
                 <div style={{textAlign: "center", width: "100%"}}>
-                    <Button type='text' style={{width: 150, marginLeft: 15}}>注册</Button>
+                    <Button type='text' style={{width: 150, marginLeft: 15}} onClick={props.onSwitch}>注册</Button>
                 </div>
             </Form>
         </div>

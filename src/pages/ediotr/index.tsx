@@ -30,7 +30,7 @@ export default function EditorPage() {
     //状态管理取出articleMd
     const {md_content} = useSelector((state: RootState) => state.articleDetail);
     //markdown
-    const [articleMd, setArticleMd] = useState(md_content ? md_content : '暂无');
+    const [articleMd, setArticleMd] = useState(md_content ? md_content : '');
     const dispatch = useDispatch();
     //html
     const [articleHtml, setArticleHtml] = useState(markdownParser.render(articleMd));
@@ -44,7 +44,7 @@ export default function EditorPage() {
         getThemeDetail(Number(localStorage.getItem("theme_id"))).then()
     }, [])
     useEffect(() => {
-        setArticleMd(md_content ? md_content : '暂无');
+        setArticleMd(md_content ? md_content : '');
         setArticleHtml(markdownParser.render(articleMd));
     }, [md_content])
 

@@ -14,6 +14,13 @@ export const UserApi = {
             method: "POST",
             data,
         });
+    },
+    register: (data: Object) => {
+        return request({
+            url: "/public/base/register",
+            method: "POST",
+            data,
+        })
     }
 }
 

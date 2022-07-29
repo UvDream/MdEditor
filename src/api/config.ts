@@ -11,7 +11,6 @@ export default {
     // 请求头信息
     headers: {
         "Content-Type": "application/json;charset=UTF-8",
-        "x-token":localStorage.getItem('token')||"token"
     },
     // 参数
     data: {},

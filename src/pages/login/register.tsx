@@ -1,10 +1,14 @@
 import "./index.less"
-import {Button, Form, Input, Modal, Upload} from "@arco-design/web-react";
+import {Button, Form, Input, Modal, Upload, Message} from "@arco-design/web-react";
 import {FieldError} from "@arco-design/web-react/es/Form/interface";
+import {UserApi} from "@/api/user";
+import {ResponseType} from "@/api/request";
 
 const FormItem = Form.Item
-
-export default function Register() {
+type Props={
+    onSwitch:()=>void
+}
+export default function Register(props:Props) {
     const [form] = Form.useForm();
     const formItemLayout = {
         labelCol: {
@@ -14,8 +18,16 @@ export default function Register() {
             span: 17,
         },
     };
-    const onSubmit = (value: FormData) => {
+    const onSubmit = async (value: FormData) => {
         console.log('submit', value)
+        const res= await UserApi.register(value) as  ResponseType
+        if (res.code===200){
+            Message.success("注册成功!")
+            props.onSwitch()
+        }else{
+            Message.error(res.msg)
+        }
+
     }
     const onSubmitFailed = (error: { [key: string]: FieldError }) => {
         console.log('submit failed', error)
@@ -54,46 +66,39 @@ export default function Register() {
                 <FormItem label="邮箱" field="email">
                     <Input style={{width: 270}} placeholder='输入邮箱'/>
                 </FormItem>
-                <Form.Item
-                    label='头像'
-                    field='avatar'
-                    triggerPropName='fileList'
-                    initialValue={[
-                        {
-                            uid: '-1',
-                            url: '//p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/e278888093bef8910e829486fb45dd69.png~tplv-uwbnlip3yd-webp.webp',
-                            name: '20200717',
-                        },
-                    ]}
-                >
-                    <Upload
-                        listType='picture-card'
-                        multiple
-                        name='files'
-                        action='/'
-                        onPreview={(file) => {
-                            Modal.info({
-                                title: '预览',
-                                content: (
-                                    <img
-                                        //@ts-ignore
-                                        src={file.url || URL.createObjectURL(file.originFile)}
-                                        style={{
-                                            maxWidth: '100%',
-                                        }}
-                                    />
-                                ),
-                            });
-                        }}
-                    />
-                </Form.Item>
+                {/*<Form.Item*/}
+                {/*    label='头像'*/}
+                {/*    field='avatar'*/}
+                {/*    triggerPropName='fileList'*/}
+                {/*>*/}
+                {/*    <Upload*/}
+                {/*        listType='picture-card'*/}
+                {/*        multiple*/}
+                {/*        name='files'*/}
+                {/*        action='/'*/}
+                {/*        onPreview={(file) => {*/}
+                {/*            Modal.info({*/}
+                {/*                title: '预览',*/}
+                {/*                content: (*/}
+                {/*                    <img*/}
+                {/*                        //@ts-ignore*/}
+                {/*                        src={file.url || URL.createObjectURL(file.originFile)}*/}
+                {/*                        style={{*/}
+                {/*                            maxWidth: '100%',*/}
+                {/*                        }}*/}
+                {/*                    />*/}
+                {/*                ),*/}
+                {/*            });*/}
+                {/*        }}*/}
+                {/*    />*/}
+                {/*</Form.Item>*/}
                 <FormItem wrapperCol={{offset: 9}}>
                     <Button type="primary" htmlType="submit" style={{marginRight: 24, width: 150, marginTop: 25}}>
                         注册
                     </Button>
                 </FormItem>
                 <div style={{textAlign: "center", width: "100%"}}>
-                    <Button type='text' style={{width: 150, marginLeft: 15}}>登录</Button>
+                    <Button type='text' style={{width: 150, marginLeft: 15}} onClick={props.onSwitch}>登录</Button>
                 </div>
             </Form>
         </div>

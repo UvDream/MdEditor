@@ -9,7 +9,8 @@ export interface ResponseType{
 
 export default function request(options: any) {
     return new Promise((resolve, reject) => {
-        // console.log(localStorage.getItem("token"))
+        //@ts-ignore
+        config.headers["x-token"]=localStorage.getItem('token')||"token"
         let service = axios.create({
             baseURL: config.baseURL,
             timeout: config.timeout,
