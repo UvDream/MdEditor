@@ -3,6 +3,9 @@ import {useRef, useState} from "react"
 import {CopyToClipboard, defaultStyle, emitter, EventType} from "@/utils"
 import "./index.less"
 import juice from "juice"
+import {ZhiHuIcon} from "@/components/icons/zhihu"
+import {WeXinIcon} from "@/components/icons/weixin";
+import {Computer, Iphone} from "@icon-park/react"
 
 const IconFont = Icon.addFromIconFontCn({src: '//at.alicdn.com/t/font_3408739_o2okt6dixt.js'})
 
@@ -17,34 +20,36 @@ export default function Preview(props: any) {
     const IconList = [
         {
             id: 1,
+            icon: <ZhiHuIcon/>,
             type: "icon-zhihu"
         },
         {
             id: 2,
+            icon: <WeXinIcon/>,
             type: "icon-wx"
         },
         {
             id: 3,
+            icon: <Computer theme="outline" size="20" fill="#333" strokeWidth={3}/>,
             type: 'icon-pc'
         },
         {
             id: 4,
+            icon: <Iphone theme="outline" size="20" fill="#333" strokeWidth={3}/>,
             type: 'icon-phone'
         }
     ]
     const IconClick = async (id: number) => {
         switch (id) {
             case 1:
+                break;
+            case 2:
                 //@ts-ignore
                 let res = juice.inlineContent(preview.current.innerHTML, defaultStyle, {
                     inlinePseudoElements: true,
                     preserveImportant: true,
                 })
-                console.log("1111111")
-                console.log(res)
                 await CopyToClipboard(res)
-                break;
-            case 2:
                 break;
             case 3:
                 setDeviceType('icon-phone')
@@ -70,16 +75,18 @@ export default function Preview(props: any) {
                     IconList.map((item: any) => {
                         if (item.id === 1 || item.id === 2 || item.type === DeviceType) {
                             return (
-                                <IconFont
-                                    className={"tool-icon"}
-                                    key={item.id}
-                                    type={item.type}
-                                    style={{
-                                        fontSize: '22px',
-                                    }}
-                                    onClick={() => IconClick(item.id)}
-                                />
-
+                                // <IconFont
+                                //     className={"tool-icon"}
+                                //     key={item.id}
+                                //     type={item.type}
+                                //     style={{
+                                //         fontSize: '22px',
+                                //     }}
+                                //     onClick={() => IconClick(item.id)}
+                                // />
+                                <span className="tool-icon" onClick={() => IconClick(item.id)}>
+                                    {item.icon}
+                                </span>
                             )
                         }
                     })
