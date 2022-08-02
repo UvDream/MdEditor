@@ -8,14 +8,18 @@
   },
   "package": {
     "productName": "MdEditor",
-    "version": "0.3.0"
+    "version": "0.3.1"
   },
   "tauri": {
     "allowlist": {
       "all": true,
       "http": {
         "all": true,
-        "request": true
+        "request": true,
+        "scope": [
+          "http://**",
+          "https://**"
+        ]
       }
     },
     "bundle": {
