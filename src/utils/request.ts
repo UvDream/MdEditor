@@ -1,16 +1,14 @@
-import axios from "axios"
-import config from './config';
-
-export interface ResponseType{
-    code: number;
-    msg: string;
-    data: any;
+import config from "@/config";
+import axios from "axios";
+export type ResponseType={
+    data:any
+    code:number
+    msg:string
 }
-
-export default function request(options: any) {
+export default function request(options: any): any {
     return new Promise((resolve, reject) => {
         //@ts-ignore
-        config.headers["x-token"]=localStorage.getItem('token')||"token"
+        config.headers["x-token"] = localStorage.getItem('token') || "token"
         let service = axios.create({
             baseURL: config.baseURL,
             timeout: config.timeout,

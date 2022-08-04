@@ -20,7 +20,7 @@ import {RootState} from "@/store";
 import {SetArticleDetail} from "@/store/article";
 import {SetTheme, ThemeType, UpdateTheme} from "@/store/theme";
 import {OtherApi} from "@/api/other";
-import {ResponseType} from "@/api/request";
+import {ResponseType} from "@/utils/request";
 
 const Row = Grid.Row;
 const Col = Grid.Col;
@@ -37,7 +37,7 @@ export default function EditorPage() {
     //获取配置
     const [config, setConfig] = useState(getConfig());
     //获取主题
-    const {theme}=useSelector((state: RootState) => state.themeDetail);
+    const {theme} = useSelector((state: RootState) => state.themeDetail);
     useEffect(() => {
         setEditorStyle(defaultStyle)
         // getThemeDetail(themeID).then()
@@ -86,7 +86,7 @@ export default function EditorPage() {
     const editorChange = (val: string) => {
         setArticleMd(val)
         setArticleHtml(markdownParser.render(val))
-        dispatch(SetArticleDetail({md_content: val,word_count:CalcWordCount(val)}))
+        dispatch(SetArticleDetail({md_content: val, word_count: CalcWordCount(val)}))
     }
     const styleEditorChange = (val: string) => {
         setEditorStyle(val)

@@ -1,4 +1,4 @@
-import request from "@/api/request";
+import request from "@/utils/request";
 
 export const OtherApi = {
     fileList: (params: Object) => {
@@ -8,7 +8,7 @@ export const OtherApi = {
             params,
         })
     },
-    deleteFile:(params:Object)=>{
+    deleteFile: (params: Object) => {
         return request({
             url: "/file/delete",
             method: "DELETE",
@@ -22,7 +22,7 @@ export const OtherApi = {
             params,
         })
     },
-    publicTheme:(params: Object) => {
+    publicTheme: (params: Object) => {
         return request({
             url: "/theme/public",
             method: "GET",

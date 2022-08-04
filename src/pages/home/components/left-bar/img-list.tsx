@@ -2,8 +2,8 @@ import {Button, Grid, Image, Message, Modal, Pagination, Typography} from "@arco
 import {useEffect, useState} from "react";
 import {fileType, Props} from "./index.d";
 import {OtherApi} from "@/api/other";
-import {ResponseType} from "@/api/request";
-import Config from "@/api/config";
+import {ResponseType} from "@/utils/request";
+import Config from "@/config";
 import {Copy, DeleteOne, PreviewOpen} from "@icon-park/react";
 import {CopyToClipboard} from "@/utils";
 

@@ -1,6 +1,6 @@
 import {Button, Form, Input, Message, Modal, Select, Space, Switch, TreeSelect} from "@arco-design/web-react";
 import {ArticleApi, ArticleDetailType} from "@/api/article";
-import {ResponseType} from "@/api/request";
+import {ResponseType} from "@/utils/request";
 import {useEffect, useRef, useState} from "react";
 import UploadFile from "@/components/upload";
 import {ArticleSaveProps, CategoryItemType, fileType, TagItemType} from "./index.d";

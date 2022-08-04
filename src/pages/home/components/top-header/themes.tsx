@@ -2,7 +2,7 @@ import {Radio} from "@arco-design/web-react";
 import {useEffect, useState} from "react";
 import MenusItem from "./menus-item";
 import {OtherApi} from "@/api/other";
-import {ResponseType} from "@/api/request";
+import {ResponseType} from "@/utils/request";
 import {useDispatch} from "react-redux";
 import {SetTheme, ThemeType, UpdateTheme} from "@/store/theme";
 import {defaultStyle} from "@/utils";

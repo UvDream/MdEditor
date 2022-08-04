@@ -2,13 +2,14 @@ import {Button, Form, Input, Message} from "@arco-design/web-react";
 import "./index.less"
 import {FieldError} from "@arco-design/web-react/es/Form/interface";
 import {UserApi} from "@/api/user";
-import {ResponseType} from "@/api/request";
+import {ResponseType} from "@/utils/request";
 import {useNavigate} from "react-router-dom";
-type Props={
-    onSwitch:()=>void
+
+type Props = {
+    onSwitch: () => void
 }
 const FormItem = Form.Item
-export default function Login(props:Props) {
+export default function Login(props: Props) {
     let navigate = useNavigate()
     const [form] = Form.useForm();
     const onSubmit = async (value: FormData) => {
@@ -24,8 +25,8 @@ export default function Login(props:Props) {
             Message.success(res.msg)
             localStorage.setItem('token', res.data.token)
             localStorage.setItem('user', JSON.stringify(res.data.user_info))
-                navigate('/editor')
-        }else{
+            navigate('/editor')
+        } else {
             Message.error(res.msg)
         }
     }

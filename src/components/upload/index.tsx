@@ -2,9 +2,9 @@ import {Image, Upload} from "@arco-design/web-react";
 import {RequestOptions} from "@arco-design/web-react/es/Upload";
 import {UserApi} from "@/api/user";
 import {useState} from "react";
-import {ResponseType} from "@/api/request";
+import {ResponseType} from "@/utils/request";
 import "../index.less"
-import Config from "@/api/config";
+import Config from "@/config";
 
 type Props = {
     value?: string;

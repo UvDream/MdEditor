@@ -2,7 +2,7 @@ import {Divider, Empty, Timeline} from "@arco-design/web-react";
 import {useSearchParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {ArticleApi} from "@/api/article";
-import {ResponseType} from "@/api/request";
+import {ResponseType} from "@/utils/request";
 import dayjs from "dayjs";
 
 const TimelineItem = Timeline.Item;

@@ -4,7 +4,7 @@ import ArticleItem, {
     ArticleItemType,
 } from "@/pages/home/components/left-bar/article-item";
 import {ArticleApi} from "@/api/article";
-import {ResponseType} from "@/api/request";
+import {ResponseType} from "@/utils/request";
 import "./index.less";
 import {useSearchParams} from "react-router-dom";
 import {ArticleDetailState} from "@/utils";

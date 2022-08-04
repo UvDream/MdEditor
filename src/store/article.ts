@@ -1,10 +1,7 @@
 import {ArticleApi, ArticleDetailType} from "@/api/article";
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-import {ResponseType} from "@/api/request";
-import {Message} from "@arco-design/web-react";
+import {ResponseType} from "@/utils/request";
 import {Simulate} from "react-dom/test-utils";
-import play = Simulate.play;
-import {CalcWordCount} from "@/utils";
 
 const initialState: ArticleDetailType = {}
 export const GetArticleDetail = createAsyncThunk("article/detail", async (params: object) => {

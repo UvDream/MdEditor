@@ -6,7 +6,7 @@ import {useEffect, useRef, useState} from "react";
 import {Message, Popover} from "@arco-design/web-react";
 import UserStatus from "@/pages/home/components/left-bar/user";
 import SetConfig from "@/pages/home/components/left-bar/config";
-import {ResponseType} from "@/api/request";
+import {ResponseType} from "@/utils/request";
 import {ArticleApi, ArticleDetailType} from "@/api/article";
 import {useNavigate, useSearchParams} from "react-router-dom";
 import ArticleSave from "@/pages/home/components/left-bar/article-save";
@@ -22,7 +22,7 @@ export default function LeftBar() {
     //#region 变量
     const navigate = useNavigate()
     const articleListRef = useRef()
-    const store=useStore()
+    const store = useStore()
     const saveState = useSelector((store: RootState) => store.saveState)
     const dispatch = useDispatch();
     //bar是否选中
@@ -76,7 +76,7 @@ export default function LeftBar() {
         event.preventDefault()
         saveArticle(articleDetail).then()
     })
-    const saveArticle = (data:ArticleDetailType) => {
+    const saveArticle = (data: ArticleDetailType) => {
         return new Promise(async (resolve, reject) => {
             if (articleDetail.uuid) {
                 const res = await ArticleApi.update(data) as ResponseType

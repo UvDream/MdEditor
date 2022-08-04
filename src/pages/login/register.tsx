@@ -2,13 +2,13 @@ import "./index.less"
 import {Button, Form, Input, Modal, Upload, Message} from "@arco-design/web-react";
 import {FieldError} from "@arco-design/web-react/es/Form/interface";
 import {UserApi} from "@/api/user";
-import {ResponseType} from "@/api/request";
+import {ResponseType} from "@/utils/request";
 
 const FormItem = Form.Item
-type Props={
-    onSwitch:()=>void
+type Props = {
+    onSwitch: () => void
 }
-export default function Register(props:Props) {
+export default function Register(props: Props) {
     const [form] = Form.useForm();
     const formItemLayout = {
         labelCol: {
@@ -20,11 +20,11 @@ export default function Register(props:Props) {
     };
     const onSubmit = async (value: FormData) => {
         console.log('submit', value)
-        const res= await UserApi.register(value) as  ResponseType
-        if (res.code===200){
+        const res = await UserApi.register(value) as ResponseType
+        if (res.code === 200) {
             Message.success("注册成功!")
             props.onSwitch()
-        }else{
+        } else {
             Message.error(res.msg)
         }
 
@@ -45,7 +45,7 @@ export default function Register(props:Props) {
                     <Input style={{width: 270}} placeholder='输入昵称'/>
                 </FormItem>
                 <FormItem label="密码" field="password" rules={[{required: true, message: "密码必填"}]}>
-                    <Input.Password  style={{width: 270}} type="password" placeholder='输入密码' />
+                    <Input.Password style={{width: 270}} type="password" placeholder='输入密码'/>
                 </FormItem>
                 <FormItem label="再次输入密码" field="password_again" rules={[
                     {required: true, message: "密码必填"},
@@ -58,7 +58,7 @@ export default function Register(props:Props) {
                         },
                     },
                 ]}>
-                    <Input.Password  style={{width: 270}} type="password" placeholder='再次输入密码' />
+                    <Input.Password style={{width: 270}} type="password" placeholder='再次输入密码'/>
                 </FormItem>
                 <FormItem label="手机号" field="phone">
                     <Input style={{width: 270}} placeholder='输入手机号'/>

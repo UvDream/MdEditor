@@ -1,4 +1,4 @@
-import request, {ResponseType} from "../request";
+import request, {ResponseType} from "@/utils/request";
 
 export const ArticleApi = {
     list: (params: object) => {
@@ -36,7 +36,7 @@ export const ArticleApi = {
             data,
         })
     },
-    delete:(params: Object) => {
+    delete: (params: Object) => {
         return request({
             url: "/article/delete",
             method: "DELETE",
