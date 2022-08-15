@@ -44,6 +44,7 @@ function deploy_version(version) {
         fs.writeFileSync("./package.json", JSON.stringify(pkg, null, 4));
         fs.writeFileSync("./src-tauri/tauri.conf.json", JSON.stringify(tauriPkg, null, 4));
         //    修改完文件,开始打tag推送
+        
     } catch (e) {
         console.log("错误", e)
     }
