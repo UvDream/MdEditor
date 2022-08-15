@@ -49,8 +49,8 @@ async function deploy_version(version) {
         //    修改完文件,开始打tag推送
         chalk.green("准备推送发版....")
         shell.exec("git add .");
-        shell.exec("git commit -m '" + version + "'");
-        shell.exec("git tag -a " + version + " -m '" + version + "'");
+        shell.exec("git commit -m 'v" + version + "'");
+        shell.exec("git tag -a " +"v"+ version + " -m '" + version + "'");
         shell.exec("git push origin master --tags");
         // await $`git add .`;
         // await $`git commit -m "tag: 发版${version}"`;
