@@ -7,7 +7,6 @@ const shell = require("shelljs");
 module.exports.make_version = async () => {
     const old = pkg.version;
     const oldArr = old.split(".");
-    //小版本
     const small = oldArr[0] + "." + oldArr[1] + "." + (parseInt(oldArr[2]) + 1);
     const middle = oldArr[0] + "." + (parseInt(oldArr[1]) + 1) + "." + oldArr[2];
     const big = parseInt(oldArr[0]) + 1 + "." + oldArr[1] + "." + oldArr[2];
@@ -50,7 +49,7 @@ async function deploy_version(version) {
         chalk.green("准备推送发版....")
         shell.exec("git add .");
         shell.exec("git commit -m 'v" + version + "'");
-        shell.exec("git tag -a " +"v"+ version + " -m '" + version + "'");
+        shell.exec("git tag -a " + "v" + version + " -m '" + version + "'");
         shell.exec("git push origin master --tags");
     } catch (e) {
         console.log("错误", e)
