@@ -52,10 +52,6 @@ async function deploy_version(version) {
         shell.exec("git commit -m 'v" + version + "'");
         shell.exec("git tag -a " +"v"+ version + " -m '" + version + "'");
         shell.exec("git push origin master --tags");
-        // await $`git add .`;
-        // await $`git commit -m "tag: 发版${version}"`;
-        // await $`git tag -a ${version} -m "发版${version}"`;
-        // await $`git push origin master --tags`;
     } catch (e) {
         console.log("错误", e)
     }
