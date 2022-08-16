@@ -1,7 +1,7 @@
 {
     "name": "md-editor",
     "private": true,
-    "version": "0.3.7",
+    "version": "0.3.8",
     "bin": {
         "mdc": "bin/cli.js"
     },
@@ -59,6 +59,7 @@
         "inquirer": "^8.1.2",
         "chalk": "^4.1.0",
         "tsx": "^3.2.1",
-        "shelljs": "^0.8.5"
+        "shelljs": "^0.8.5",
+        "@types/shelljs": "^0.8.11"
     }
 }

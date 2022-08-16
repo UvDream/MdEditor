@@ -6,6 +6,7 @@ import tauriPkg from "./src-tauri/tauri.conf.json"
 import inquirer from "inquirer"
 // @ts-ignore
 import chalk from "chalk";
+// @ts-ignore
 import shell from "shelljs";
 // @ts-ignore
 import fs from "fs";
@@ -26,7 +27,7 @@ const question = [
         choices: opt,
     }
 ];
-inquirer.prompt(question).then(answer => {
+inquirer.prompt(question).then((answer: any) => {
     opt.forEach((element, index) => {
         if (element === answer.operation) {
             if (index === 3) {
@@ -44,7 +45,7 @@ inquirer.prompt(question).then(answer => {
     })
 })
 
-async function deploy_version(version) {
+async function deploy_version(version: string) {
     try {
         pkg.version = version;
         tauriPkg.package.version = version
