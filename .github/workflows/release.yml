@@ -31,6 +31,7 @@ jobs:
         id: create_release
         uses: actions/create-release@v1
         env:
+          NODE_OPTIONS: "--max_old_space_size=4096"
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: '${{ steps.get_version.outputs.VERSION }}'
