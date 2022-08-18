@@ -1,4 +1,4 @@
-import {Icon} from "@arco-design/web-react"
+import {Icon, Message} from "@arco-design/web-react"
 import {useRef, useState} from "react"
 import {CopyToClipboard, defaultStyle, emitter, EventType} from "@/utils"
 import "./index.less"
@@ -50,9 +50,11 @@ export default function Preview(props: any) {
                     preserveImportant: true,
                 })
                 await CopyToClipboard(res)
+                Message.success("复制成功!去微信公众号编辑器粘贴吧!")
                 break;
             case 3:
                 setDeviceType('icon-phone')
+                Message.info("暂未支持!敬请期待!")
                 break;
             case 4:
                 setDeviceType('icon-pc')
