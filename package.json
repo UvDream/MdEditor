@@ -1,7 +1,7 @@
 {
     "name": "md-editor",
     "private": true,
-    "version": "0.3.10",
+    "version": "0.3.11",
     "bin": {
         "mdc": "bin/cli.js"
     },
@@ -14,7 +14,8 @@
         "tauri:build": "tauri build --debug",
         "tauri:build-debug": "tauri build --debug",
         "openapi": "node openapi.config.js",
-        "publish": "tsx publish.ts"
+        "publish": "tsx publish.ts",
+        "release": "release-it"
     },
     "dependencies": {
         "@arco-design/web-react": "^2.32.1",
@@ -60,6 +61,7 @@
         "chalk": "^4.1.0",
         "tsx": "^3.2.1",
         "shelljs": "^0.8.5",
-        "@types/shelljs": "^0.8.11"
+        "@types/shelljs": "^0.8.11",
+        "release-it": "^15.3.0"
     }
 }

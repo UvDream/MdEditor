@@ -1,8 +1,8 @@
-let  baseUrl= 'http://127.0.0.1:8989';
-if (process.env.NODE_ENV==='development') {
+let baseUrl = 'http://127.0.0.1:8989';
+if (process.env.NODE_ENV === 'development') {
     baseUrl = 'http://localhost:8989';
-}else if (process.env.NODE_ENV==='production') {
-    baseUrl = 'http://124.223.8.237:8989';
+} else if (process.env.NODE_ENV === 'production') {
+    baseUrl = 'https://uvdream.cn/v2';
 }
 export default {
     method: "post",

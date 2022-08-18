@@ -1,7 +1,6 @@
 import {ArticleApi, ArticleDetailType} from "@/api/article";
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {ResponseType} from "@/utils/request";
-import {Simulate} from "react-dom/test-utils";
 
 const initialState: ArticleDetailType = {}
 export const GetArticleDetail = createAsyncThunk("article/detail", async (params: object) => {
