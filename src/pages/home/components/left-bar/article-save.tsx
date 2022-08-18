@@ -45,7 +45,6 @@ export default function ArticleSave(props: ArticleSaveProps) {
             try {
                 //@ts-ignore
                 await formRef.current.validate();
-                Message.info('校验通过，提交成功！');
                 props.onOk(status, form.getFieldsValue())
             } catch (_) {
                 //@ts-ignore

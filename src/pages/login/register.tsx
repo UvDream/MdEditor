@@ -3,7 +3,6 @@ import {Button, Form, Input, Modal, Upload, Message, Tooltip} from "@arco-design
 import {FieldError} from "@arco-design/web-react/es/Form/interface";
 import {ResponseType} from "@/utils/request";
 import {postPublicBaseRegister} from "@/services/api/user";
-import {IconExclamationCircle} from "@arco-design/web-react/icon";
 
 const FormItem = Form.Item
 type Props = {
