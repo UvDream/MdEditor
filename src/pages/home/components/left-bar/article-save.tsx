@@ -1,5 +1,5 @@
 import {Button, Form, Input, Message, Modal, Select, Space, Switch, TreeSelect} from "@arco-design/web-react";
-import {ArticleApi, ArticleDetailType} from "@/api/article";
+import {ArticleApi} from "@/api/article";
 import {ResponseType} from "@/utils/request";
 import {useEffect, useRef, useState} from "react";
 import UploadFile from "@/components/upload";
@@ -11,7 +11,7 @@ const FormItem = Form.Item;
 const Option = Select.Option;
 
 export default function ArticleSave(props: ArticleSaveProps) {
-    const [form] = Form.useForm<ArticleDetailType>();
+    const [form] = Form.useForm<API.Article>();
     const formRef = useRef();
     const articleDetail = useSelector((store: RootState) => store.articleDetail)
     useEffect(() => {

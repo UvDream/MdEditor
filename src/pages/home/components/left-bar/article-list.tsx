@@ -1,15 +1,13 @@
 import {forwardRef, useEffect, useImperativeHandle, useState} from "react";
 import {Button, Divider, Empty, Pagination} from "@arco-design/web-react";
-import ArticleItem, {
-    ArticleItemType,
-} from "@/pages/home/components/left-bar/article-item";
-import {ArticleApi} from "@/api/article";
+import ArticleItem from "@/pages/home/components/left-bar/article-item";
 import {ResponseType} from "@/utils/request";
 import "./index.less";
 import {useSearchParams} from "react-router-dom";
 import {ArticleDetailState} from "@/utils";
 import {AddOne} from "@icon-park/react";
 import {useRecoilState} from "recoil";
+import {getArticleList} from "@/services/api/article";
 
 type Props = {
     onClick?: (id: string) => void;
@@ -17,10 +15,10 @@ type Props = {
 };
 const ArticleList = (props: Props, ref: any) => {
     const [searchParams] = useSearchParams();
-    const [articleList, setArticleList] = useState<Array<ArticleItemType>>([]);
-    const [options] = useState({
+    const [articleList, setArticleList] = useState<Array<API.Article>>([]);
+    const [options] = useState<API.getArticleListParams>({
         page: 1,
-        page_size: 10,
+        page_size: 10
     });
     const [total, setTotal] = useState(0);
     const [active, setActive] = useState("");
@@ -28,17 +26,17 @@ const ArticleList = (props: Props, ref: any) => {
     const [articleMd, setArticleMd] = useRecoilState(ArticleDetailState);
     useEffect(() => {
         setActive(searchParams.get("id") || "");
-        getArticleList().then();
+        ArticleList().then();
     }, []);
     useImperativeHandle(ref, () => ({
         getList: () => {
-            getArticleList().then();
+            ArticleList().then();
         },
     }));
 
     //获取文章列表
-    const getArticleList = async () => {
-        const res: ResponseType = (await ArticleApi.list(options)) as ResponseType;
+    const ArticleList = async () => {
+        const res = await getArticleList(options) as unknown as ResponseType;
         if (res.code === 200) {
             setArticleList(res.data.list);
             setTotal(res.data.total);
@@ -57,7 +55,7 @@ const ArticleList = (props: Props, ref: any) => {
                             uuid: "add",
                         },
                         ...articleList,
-                    ] as ArticleItemType[];
+                    ] as API.Article[];
                     setArticleList(arr);
                     setActive("add");
                     setArticleMd("");
@@ -78,18 +76,19 @@ const ArticleList = (props: Props, ref: any) => {
             ) : (
                 < >
                     <div className={"article-list-content"}>
-                        {articleList.map((item: ArticleItemType) => {
+                        {articleList.map((item: API.Article) => {
+                            console.log(item)
                             return (
                                 <ArticleItem
-                                    key={item.uuid}
-                                    id={item.uuid}
+                                    id={item.id||""}
+                                    key={item.id}
                                     active={active}
                                     article={item}
                                     deleteSuccess={() => {
-                                        getArticleList().then();
+                                        ArticleList().then();
                                     }}
                                     onClick={(id) => {
-                                        setActive(item.uuid);
+                                        item.id&&setActive(item.id);
                                         props.onClick && props.onClick(id);
                                     }}
                                 />
@@ -105,7 +104,7 @@ const ArticleList = (props: Props, ref: any) => {
                             onChange={(page, pageSize) => {
                                 options.page = page;
                                 options.page_size = pageSize;
-                                getArticleList().then();
+                                ArticleList().then();
                             }}
                         />
                     </div>

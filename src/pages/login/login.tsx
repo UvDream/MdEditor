@@ -1,9 +1,8 @@
 import {Button, Form, Input, Message} from "@arco-design/web-react";
 import "./index.less"
 import {FieldError} from "@arco-design/web-react/es/Form/interface";
-import {UserApi} from "@/api/user";
-import {ResponseType} from "@/utils/request";
 import {useNavigate} from "react-router-dom";
+import {postPublicBaseLogin} from "@/services/api/user";
 
 type Props = {
     onSwitch: () => void
@@ -12,22 +11,23 @@ const FormItem = Form.Item
 export default function Login(props: Props) {
     let navigate = useNavigate()
     const [form] = Form.useForm();
-    const onSubmit = async (value: FormData) => {
+    const onSubmit = async (value: any) => {
         console.log('submit', value)
-        let obj = {
-            "captcha": "6013",
-            "captcha_id": "7SsF0eT6M8fnFzKtrSQs",
-            ...value
+        let obj: API.LoginRequest = {
+            captcha: "6013",
+            captcha_id: "7SsF0eT6M8fnFzKtrSQs",
+            password: value.password,
+            user_name: value.user_name
         }
 
-        let res: ResponseType = await UserApi.login(obj) as ResponseType
-        if (res.code == 200) {
-            Message.success(res.msg)
+        let res = await postPublicBaseLogin(obj) as unknown as API.Response
+        if (res.success) {
+            res.msg&&Message.success(res.msg)
             localStorage.setItem('token', res.data.token)
             localStorage.setItem('user', JSON.stringify(res.data.user_info))
             navigate('/editor')
         } else {
-            Message.error(res.msg)
+            res.msg&&Message.error(res.msg)
         }
     }
     const onSubmitFailed = (error: { [key: string]: FieldError }) => {

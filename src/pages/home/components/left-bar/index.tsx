@@ -6,8 +6,6 @@ import {useEffect, useRef, useState} from "react";
 import {Message, Popover} from "@arco-design/web-react";
 import UserStatus from "@/pages/home/components/left-bar/user";
 import SetConfig from "@/pages/home/components/left-bar/config";
-import {ResponseType} from "@/utils/request";
-import {ArticleApi, ArticleDetailType} from "@/api/article";
 import {useNavigate, useSearchParams} from "react-router-dom";
 import ArticleSave from "@/pages/home/components/left-bar/article-save";
 import {useKeyPress} from "ahooks";
@@ -17,6 +15,7 @@ import {useDispatch, useSelector, useStore} from "react-redux";
 import {RootState} from "@/store";
 import {changeState} from "@/store/save-state";
 import {GetArticleDetail, SetArticleDetail} from "@/store/article";
+import {postArticleCreate, putArticleUpdate} from "@/services/api/article";
 
 export default function LeftBar() {
     //#region 变量
@@ -60,7 +59,7 @@ export default function LeftBar() {
     //编辑器变化传入内容
     //文章保存配置
     //#region
-    const articleSaveOk = async (status: boolean, detail: ArticleDetailType) => {
+    const articleSaveOk = async (status: boolean, detail: API.Article) => {
         status ? detail.status = "PUBLISHED" : detail.status = "DRAFT"
         dispatch(SetArticleDetail(detail))
         //@ts-ignore
@@ -76,10 +75,11 @@ export default function LeftBar() {
         event.preventDefault()
         saveArticle(articleDetail).then()
     })
-    const saveArticle = (data: ArticleDetailType) => {
+    const saveArticle = (data: API.Article) => {
         return new Promise(async (resolve, reject) => {
-            if (articleDetail.uuid) {
-                const res = await ArticleApi.update(data) as ResponseType
+            if (articleDetail.id) {
+                console.log("更新文章", data)
+                const res = await putArticleUpdate(data) as unknown as API.Response
                 if (res.code === 200) {
                     navigate(`/editor?id=${res.data.uuid}`)
                     Message.success("修改成功")
@@ -89,7 +89,9 @@ export default function LeftBar() {
                     resolve(true)
                 }
             } else {
-                const res = await ArticleApi.create(data) as ResponseType
+                console.log("保存文章", data)
+
+                const res = await postArticleCreate(data) as unknown as API.Response
                 if (res.code === 200) {
                     navigate(`/editor?id=${res.data.uuid}`)
                     Message.success("保存成功")
@@ -108,7 +110,7 @@ export default function LeftBar() {
     //新增文章
     const addArticle = () => {
         const userInfo: UserInfo = JSON.parse(localStorage.getItem("user") || "{}")
-        const obj: ArticleDetailType = {
+        const obj: API.Article = {
             auth_id: userInfo.uuid,
             author: [],
             categories: [],
@@ -130,7 +132,7 @@ export default function LeftBar() {
             title: "新建文章",
             visits: 0,
             word_count: 0
-        } as ArticleDetailType
+        } as API.Article
         // setArticleDetail(obj)
         dispatch(SetArticleDetail(obj))
         navigate(`/editor?id=add`)

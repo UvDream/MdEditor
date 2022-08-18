@@ -7,20 +7,16 @@ import {ArticleApi} from "@/api/article";
 import {ResponseType} from "@/utils/request";
 import {useDispatch} from "react-redux";
 import {changeState} from "@/store/save-state";
+import {deleteArticle__openAPI__delete} from "@/services/api/article";
 
 type Props = {
-    article: ArticleItemType,
+    article: API.Article,
     onClick?: (id: string) => void,
     active: string,
     id: string,
     deleteSuccess: () => void,
 }
-export type ArticleItemType = {
-    uuid: string;
-    title: string;
-    status: string;
-    CreatedAt: string;
-}
+
 export default function ArticleItem(props: Props) {
     const navigate = useNavigate()
     const [searchParams] = useSearchParams();
@@ -29,7 +25,8 @@ export default function ArticleItem(props: Props) {
         const obj = {
             id: props.id,
         }
-        const res: ResponseType = await ArticleApi.delete(obj) as ResponseType
+        console.log("删除",props)
+        const res: ResponseType = await deleteArticle__openAPI__delete(obj) as unknown as ResponseType
         if (res.code === 200) {
             props.deleteSuccess()
             Message.success('删除成功')
@@ -64,16 +61,18 @@ export default function ArticleItem(props: Props) {
         </Menu>
     )
     const ArticleClick = () => {
-        props.article.uuid && navigate(`/editor?id=${props.article.uuid}`)
-        props.onClick && props.onClick(props.article.uuid)
+        props.article.id && navigate(`/editor?id=${props.article.id}`)
+        if (props.article.id != null) {
+            props.onClick && props.onClick(props.article.id)
+        }
         dispatch(changeState(false))
     }
     const fillColor = () => {
-        return props.active === props.article.uuid ? "#fff" : "#333"
+        return props.active === props.article.id ? "#fff" : "#333"
     }
     return (
         <div
-            className={["article-item", props.active == props.article.uuid || props.article.uuid === searchParams.get('id') ? "active-article" : ""].join(" ")}
+            className={["article-item", props.active == props.article.id || props.article.id === searchParams.get('id') ? "active-article" : ""].join(" ")}
             onClick={ArticleClick}>
             <div className={"article-item-left"}>
                 <div className={"article-item-left-top"}>
@@ -89,7 +88,7 @@ export default function ArticleItem(props: Props) {
                     </div>
                 </div>
                 <div className={"article-item-left-bottom"}>
-                    {dayjs(props.article.CreatedAt).format("YYYY-MM-DD HH:mm:ss")}
+                    {dayjs(props.article.create_time).format("YYYY-MM-DD HH:mm:ss")}
                 </div>
             </div>
             <div className={"article-item-right"}>

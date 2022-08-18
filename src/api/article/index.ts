@@ -58,40 +58,4 @@ export const ArticleApi = {
         })
     }
 }
-export const SaveArticleApi = (data: ArticleDetailType) => {
-    return new Promise(async (resolve, reject) => {
-        if (data.uuid) {
-            const res: ResponseType = await ArticleApi.update(data) as ResponseType
-            res.code == 200 && resolve(res)
-        } else {
-            const res: ResponseType = await ArticleApi.create(data) as ResponseType
-            res.code == 200 && resolve(res)
-        }
-    })
-}
-
-export interface ArticleDetailType {
-    uuid?: string,
-    title?: string,
-    status?: string,
-    slug?: string,
-    editor_type?: string,
-    summary?: string,
-    thumbnail?: string,
-    disable_comments?: boolean,
-    word_count?: number,
-    md_content?: string,
-    html_content?: string,
-    comment_count?: number,
-    tags_id?: [],
-    categories_id?: [],
-    is_top?: boolean,
-    auth_id?: string,
-    tags?: [],
-    categories?: [],
-    visits?: number,
-    likes?: number,
-    author?: [],
-    password?: string,
-}
 

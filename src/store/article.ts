@@ -1,10 +1,9 @@
-import {ArticleApi, ArticleDetailType} from "@/api/article";
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-import {ResponseType} from "@/utils/request";
+import {getArticleDetail} from "@/services/api/article";
 
-const initialState: ArticleDetailType = {}
-export const GetArticleDetail = createAsyncThunk("article/detail", async (params: object) => {
-    const res = await ArticleApi.detail(params) as ResponseType;
+const initialState: API.Article = {status: "", title: ""}
+export const GetArticleDetail = createAsyncThunk("article/detail", async (params: API.getArticleDetailParams) => {
+    const res = await getArticleDetail(params) as unknown as API.Response;
     return res.data;
 })
 
@@ -18,7 +17,6 @@ export const ArticleDetailState = createSlice({
             state = {...state, ...payload}
             return state
         },
-
     },
     extraReducers(builder) {
         builder

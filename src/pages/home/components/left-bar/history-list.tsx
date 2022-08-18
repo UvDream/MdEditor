@@ -1,9 +1,9 @@
 import {Divider, Empty, Timeline} from "@arco-design/web-react";
 import {useSearchParams} from "react-router-dom";
 import {useEffect, useState} from "react";
-import {ArticleApi} from "@/api/article";
 import {ResponseType} from "@/utils/request";
 import dayjs from "dayjs";
+import {getArticleHistory} from "@/services/api/article";
 
 const TimelineItem = Timeline.Item;
 export default function HistoryList() {
@@ -13,7 +13,8 @@ export default function HistoryList() {
         getHistoryList()
     }, [])
     const getHistoryList = async () => {
-        const res: ResponseType = await ArticleApi.history({id: searchParams.get('id')}) as ResponseType
+        // @ts-ignore
+        const res: ResponseType = await getArticleHistory({id: searchParams.get('id')}) as unknown as API.Response
         if (res.code === 200) {
             setHistoryList(res.data.list)
         }
