@@ -15,8 +15,8 @@ program.version(pkg.version)
 const old = pkg.version;
 const oldArr = old.split(".");
 const small = oldArr[0] + "." + oldArr[1] + "." + (parseInt(oldArr[2]) + 1);
-const middle = oldArr[0] + "." + (parseInt(oldArr[1]) + 1) + "." + oldArr[2];
-const big = parseInt(oldArr[0]) + 1 + "." + oldArr[1] + "." + oldArr[2];
+const middle = oldArr[0] + "." + (parseInt(oldArr[1]) + 1) + ".0";
+const big = parseInt(oldArr[0]) + 1 + "." + oldArr[1] + ".0";
 const versions = [small, middle, big]
 const opt = ["小版本(" + small + ")", "中版本(" + middle + ")", "大版本(" + big + ")", "其它"];
 const question = [
