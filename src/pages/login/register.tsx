@@ -1,8 +1,9 @@
 import "./index.less"
-import {Button, Form, Input, Modal, Upload, Message} from "@arco-design/web-react";
+import {Button, Form, Input, Modal, Upload, Message, Tooltip} from "@arco-design/web-react";
 import {FieldError} from "@arco-design/web-react/es/Form/interface";
 import {ResponseType} from "@/utils/request";
 import {postPublicBaseRegister} from "@/services/api/user";
+import {IconExclamationCircle} from "@arco-design/web-react/icon";
 
 const FormItem = Form.Item
 type Props = {
@@ -39,7 +40,18 @@ export default function Register(props: Props) {
                 注册
             </div>
             <Form {...formItemLayout} form={form} onSubmit={onSubmit} onSubmitFailed={onSubmitFailed}>
-                <FormItem label="用户名" field="user_name" rules={[{required: true, message: "用户名必填"}]}>
+                <FormItem label="用户名" field="user_name"
+                          rules={[{
+                              required: true,
+                              message: "用户名必填"
+                          }, {
+                              validator: (value, callback) => {
+
+                                  if (/[\u4e00-\u9fa5]/g.test(value)) {
+                                      callback("用户名不能包含中文")
+                                  }
+                              }
+                          }]}>
                     <Input style={{width: 270}} placeholder='输入用户名'/>
                 </FormItem>
                 <FormItem label="昵称" field="nick_name" rules={[{required: true, message: "昵称必填"}]}>
