@@ -19,8 +19,6 @@ import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "@/store";
 import {SetArticleDetail} from "@/store/article";
 import {SetTheme, ThemeType, UpdateTheme} from "@/store/theme";
-import {OtherApi} from "@/api/other";
-import {ResponseType} from "@/utils/request";
 
 const Row = Grid.Row;
 const Col = Grid.Col;
@@ -61,7 +59,8 @@ export default function EditorPage() {
             dispatch(UpdateTheme(obj))
             dispatch(SetTheme(defaultStyle))
         } else {
-            const res = await OtherApi.themeDetail({id}) as ResponseType
+            //@ts-ignore
+            const res = await getThemeDetail({id}) as unknown as API.Response
             if (res.code === 200) {
                 dispatch(SetTheme(res.data.theme))
             }

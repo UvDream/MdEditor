@@ -1,11 +1,11 @@
 import {Button, Form, Input, Message, Modal, Select, Space, Switch, TreeSelect} from "@arco-design/web-react";
-import {ArticleApi} from "@/api/article";
-import {ResponseType} from "@/utils/request";
 import {useEffect, useRef, useState} from "react";
 import UploadFile from "@/components/upload";
 import {ArticleSaveProps, CategoryItemType, fileType, TagItemType} from "./index.d";
 import {useSelector} from "react-redux";
 import {RootState} from "@/store";
+import {getTagList} from "@/services/api/tag";
+import {getCategoryGet} from "@/services/api/category";
 
 const FormItem = Form.Item;
 const Option = Select.Option;
@@ -22,20 +22,20 @@ export default function ArticleSave(props: ArticleSaveProps) {
     const [file, setFile] = useState<fileType>();
     const cs = `arco-upload-list-item${file && file.status === 'error' ? ' is-error' : ''}`;
     useEffect(() => {
-        getTagList().then()
-        getCategoryList().then()
+        TagList().then()
+        CategoryList().then()
     }, [])
 
-    const getTagList = async () => {
+    const TagList = async () => {
         const obj = {}
-        const res: ResponseType = await ArticleApi.tagList(obj) as ResponseType
+        const res = await getTagList(obj) as unknown as API.Response
         if (res.code === 200) {
             setTagList(res.data)
         }
     }
-    const getCategoryList = async () => {
+    const CategoryList = async () => {
         const obj = {}
-        const res: ResponseType = await ArticleApi.categoryList(obj) as ResponseType
+        const res = await getCategoryGet(obj) as unknown as  API.Response
         if (res.code === 200) {
             setCategoryList(res.data)
         }

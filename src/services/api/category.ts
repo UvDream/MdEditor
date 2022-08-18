@@ -28,6 +28,14 @@ export async function deleteCategory__openAPI__delete(
   });
 }
 
+/** 查询Category 查询Category GET /category/get */
+export async function getCategoryGet(options?: { [key: string]: any }) {
+  return request<API.Response>('/category/get', {
+    method: 'GET',
+    ...(options || {}),
+  });
+}
+
 /** 修改Category 修改Category PUT /category/update */
 export async function putCategoryUpdate(body: API.Category, options?: { [key: string]: any }) {
   return request<API.Response>('/category/update', {

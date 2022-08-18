@@ -1,11 +1,11 @@
 import {Button, Grid, Image, Message, Modal, Pagination, Typography} from "@arco-design/web-react";
 import {useEffect, useState} from "react";
 import {fileType, Props} from "./index.d";
-import {OtherApi} from "@/api/other";
 import {ResponseType} from "@/utils/request";
 import Config from "@/config";
 import {Copy, DeleteOne, PreviewOpen} from "@icon-park/react";
 import {CopyToClipboard} from "@/utils";
+import {deleteFile__openAPI__deleteId, getFileList} from "@/services/api/file";
 
 const Row = Grid.Row;
 const Col = Grid.Col;
@@ -23,14 +23,15 @@ export default function ImgList(props: Props) {
     }, [])
 
     const getImgList = async () => {
-        const res: ResponseType = await OtherApi.fileList(options) as ResponseType
+        const res: ResponseType = await getFileList(options) as unknown as API.Response
         if (res.code === 200) {
             setImgList(res.data.list)
             setTotal(res.data.total)
         }
     }
     const deleteImg = async (id: number) => {
-        const res = await OtherApi.deleteFile({id}) as ResponseType
+        //@ts-ignore
+        const res = await deleteFile__openAPI__deleteId({id}) as unknown as API.Response
         if (res.code === 200) {
             Message.success("删除成功")
             getImgList().then()

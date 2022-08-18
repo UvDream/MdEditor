@@ -1,8 +1,8 @@
 import "./index.less"
 import {Button, Form, Input, Modal, Upload, Message} from "@arco-design/web-react";
 import {FieldError} from "@arco-design/web-react/es/Form/interface";
-import {UserApi} from "@/api/user";
 import {ResponseType} from "@/utils/request";
+import {postPublicBaseRegister} from "@/services/api/user";
 
 const FormItem = Form.Item
 type Props = {
@@ -20,7 +20,8 @@ export default function Register(props: Props) {
     };
     const onSubmit = async (value: FormData) => {
         console.log('submit', value)
-        const res = await UserApi.register(value) as ResponseType
+        //@ts-ignore
+        const res = await postPublicBaseRegister(value) as unknown as ResponseType
         if (res.code === 200) {
             Message.success("注册成功!")
             props.onSwitch()
