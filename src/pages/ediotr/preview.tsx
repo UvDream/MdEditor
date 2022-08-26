@@ -121,7 +121,7 @@ export default function Preview(props: Props) {
                         IconList.map((item: any) => {
                             if (item.id === 1 || item.id === 2 || item.id === 5 || item.id === 6 || item.type === DeviceType) {
                                 return (
-                                    <span className="tool-icon" onClick={() => IconClick(item.id)}>
+                                    <span className="tool-icon" onClick={() => IconClick(item.id)} key={item.id}>
                                           <Tooltip position='lt' trigger='hover' content={item.title}>
                                               {item.icon}
                                           </Tooltip>

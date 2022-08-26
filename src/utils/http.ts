@@ -1,5 +1,6 @@
 import axios, {AxiosResponse} from "axios";
 import config from "@/config";
+import {Message} from "@arco-design/web-react";
 
 
 interface IRequest {
@@ -16,8 +17,11 @@ interface IRequest {
 
 const request: IRequest = (url: string, opts: any = {method: 'GET'}) => {
     return new Promise((resolve, reject) => {
-        //@ts-ignore
-        config.headers["x-token"] = localStorage.getItem('token') || "token"
+        let token = localStorage.getItem('token')
+        if (token) {
+            //@ts-ignore
+            config.headers["x-token"] = token
+        }
         let service = axios.create({
             baseURL: config.baseURL,
             timeout: config.timeout,
@@ -38,13 +42,17 @@ const request: IRequest = (url: string, opts: any = {method: 'GET'}) => {
                 data = response.data;
             }
             switch (data.code) {
-                case "110":
+                case 50000:
+                    Message.error("未登录,请先登录!")
+                    break;
+                case 50001:
+                    Message.error("授权过期,请重新登录!")
                     break;
                 default:
             }
             return data;
         }, err => {
-            if (err.response && err.response.status) {
+            if (err?.response.status) {
                 switch (err.response.status) {
                     case 400:
                         err.message = "请求错误";
