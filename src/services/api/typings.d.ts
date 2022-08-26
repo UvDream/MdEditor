@@ -145,6 +145,11 @@ declare namespace API {
     page_size: number;
   };
 
+  type getArticleMdParams = {
+    /** 参数 */
+    id: string;
+  };
+
   type getFileListParams = {
     /** 关键字 */
     key_word?: string;

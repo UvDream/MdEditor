@@ -28,9 +28,9 @@ export async function deleteCategory__openAPI__delete(
   });
 }
 
-/** 查询Category 查询Category GET /category/get */
-export async function getCategoryGet(options?: { [key: string]: any }) {
-  return request<API.Response>('/category/get', {
+/** 查询Category 查询Category GET /category/list */
+export async function getCategoryList(options?: { [key: string]: any }) {
+  return request<API.Response>('/category/list', {
     method: 'GET',
     ...(options || {}),
   });

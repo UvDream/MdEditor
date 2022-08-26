@@ -5,7 +5,7 @@ import {ArticleSaveProps, CategoryItemType, fileType, TagItemType} from "./index
 import {useSelector} from "react-redux";
 import {RootState} from "@/store";
 import {getTagList} from "@/services/api/tag";
-import {getCategoryGet} from "@/services/api/category";
+import { getCategoryList} from "@/services/api/category";
 
 const FormItem = Form.Item;
 const Option = Select.Option;
@@ -35,7 +35,7 @@ export default function ArticleSave(props: ArticleSaveProps) {
     }
     const CategoryList = async () => {
         const obj = {}
-        const res = await getCategoryGet(obj) as unknown as  API.Response
+        const res = await getCategoryList(obj) as unknown as  API.Response
         if (res.code === 200) {
             setCategoryList(res.data)
         }

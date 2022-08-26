@@ -10,6 +10,7 @@ import {Routes, Route} from "react-router-dom";
 import HomePage from "./home";
 import LoginPage from "./login";
 import EditorPage from "@/pages/ediotr";
+import PreviewPage from "@/pages/preview";
 
 
 export default function IndexPage() {
@@ -19,6 +20,8 @@ export default function IndexPage() {
                 <Route path="/" element={<EditorPage/>}/>
                 <Route path="/editor" element={<EditorPage/>}/>
             </Route>
+            {/*手机端预览页面*/}
+            <Route path="/preview" element={<PreviewPage/>}/>
             <Route path="/login" element={<LoginPage/>}/>
         </Routes>
     );

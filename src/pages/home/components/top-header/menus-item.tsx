@@ -1,5 +1,5 @@
 import {Shortcuts} from "@/pages/home/components/shortcuts";
-import {Checkbox, Menu, Radio} from "@arco-design/web-react";
+import {Checkbox, Radio, Tooltip} from "@arco-design/web-react";
 
 export default function MenusItem(props: any) {
     return (
@@ -18,7 +18,9 @@ export default function MenusItem(props: any) {
                         : <></>
                 }
                 <div className={"title"}>
-                    {props.title}
+                    <Tooltip position='rt' trigger='hover' content={props.title}>
+                        {props.title}
+                    </Tooltip>
                 </div>
             </div>
             <div className={"shortcuts"}>

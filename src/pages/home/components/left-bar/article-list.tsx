@@ -1,8 +1,8 @@
 import {forwardRef, useEffect, useImperativeHandle, useState} from "react";
-import {Button, Divider, Empty, Pagination} from "@arco-design/web-react";
+import {Button, Divider, Empty, Message, Pagination} from "@arco-design/web-react";
 import ArticleItem from "@/pages/home/components/left-bar/article-item";
 import {ResponseType} from "@/utils/request";
-import "./index.less";
+import "../../../../style/home/left-bar.less";
 import {useSearchParams} from "react-router-dom";
 import {ArticleDetailState} from "@/utils";
 import {AddOne} from "@icon-park/react";
@@ -12,6 +12,8 @@ import {getArticleList} from "@/services/api/article";
 type Props = {
     onClick?: (id: string) => void;
     addFunc?: () => void;
+    publish?:()=>void
+    history?:()=>void
 };
 const ArticleList = (props: Props, ref: any) => {
     const [searchParams] = useSearchParams();
@@ -22,8 +24,6 @@ const ArticleList = (props: Props, ref: any) => {
     });
     const [total, setTotal] = useState(0);
     const [active, setActive] = useState("");
-    // markdown 内容
-    const [articleMd, setArticleMd] = useRecoilState(ArticleDetailState);
     useEffect(() => {
         setActive(searchParams.get("id") || "");
         ArticleList().then();
@@ -49,16 +49,18 @@ const ArticleList = (props: Props, ref: any) => {
                 long
                 type="text"
                 onClick={() => {
+                    if(articleList.some(item=>!item.id)){
+                        Message.error("已经存在草稿文章未保存!")
+                        return
+                    }
                     let arr = [
                         {
                             title: "新建文章",
-                            uuid: "add",
                         },
                         ...articleList,
                     ] as API.Article[];
                     setArticleList(arr);
                     setActive("add");
-                    setArticleMd("");
                     props.addFunc && props.addFunc();
                 }}
             >
@@ -77,9 +79,14 @@ const ArticleList = (props: Props, ref: any) => {
                 < >
                     <div className={"article-list-content"}>
                         {articleList.map((item: API.Article) => {
-                            console.log(item)
                             return (
                                 <ArticleItem
+                                    publish={()=>{
+                                        props.publish&&props.publish()
+                                    }}
+                                    history={()=>{
+                                        props.history&&props.history()
+                                    }}
                                     id={item.id||""}
                                     key={item.id}
                                     active={active}
@@ -88,7 +95,7 @@ const ArticleList = (props: Props, ref: any) => {
                                         ArticleList().then();
                                     }}
                                     onClick={(id) => {
-                                        item.id&&setActive(item.id);
+                                        setActive(item.id||"add");
                                         props.onClick && props.onClick(id);
                                     }}
                                 />

@@ -21,6 +21,7 @@ export enum MacShortcuts {
     task_list = "⌥ ⌘ X",
     links_to_reference = "⌥ ⌘ L",
     horizontal_line = "⌥ ⌘ -",
+    indent="⌥ ⌘ T",
 //    格式
     bold = "⌘ B",
     italic = "⌘ I",
@@ -53,6 +54,7 @@ export enum WindowsShortcuts {
     task_list = "⌥ ⌘ X",
     links_to_reference = "⌥ ⌘ L",
     horizontal_line = "⌥ ⌘ -",
+    indent="⌥ ⌘ T",
 //    格式
     bold = "CTRL+B",
     italic = "CTRL+I",
@@ -107,6 +109,7 @@ export enum MacEditorShortcuts {
     task_list = "Alt-Cmd-x",
     links_to_reference = "Alt-Cmd-l",
     horizontal_line = "Alt-Cmd--",
+    indent="Alt-Cmd-y",
 //    格式
     bold = "Cmd-b",
     italic = "Cmd-i",
@@ -140,6 +143,7 @@ export enum WindowsEditorShortcuts {
     task_list = "⌥ ⌘ X",
     links_to_reference = "⌥ ⌘ L",
     horizontal_line = "⌥ ⌘ -",
+    indent="Alt-Cmd-T",
 //    格式
     bold = "CTRL+B",
     italic = "CTRL+I",

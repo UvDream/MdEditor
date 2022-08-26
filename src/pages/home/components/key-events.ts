@@ -81,6 +81,11 @@ const KeyMapConfig:Array<keymapType>= [
         selection: 8
     },
     {
+        key: EditorShortcuts().indent,
+        code: '&#x3000;&#x3000;',
+        selection: 16
+    },
+    {
         key: EditorShortcuts().bold,
         code: '****',
         selection: 2
@@ -129,7 +134,6 @@ export const KeyMapFunc = (editor: any): any => {
             key: item.key,
             preventDefault: true,
             run: (event:any) => {
-                console.log(event)
                 insert(editor, item.code, item.selection)
                 return false
             }

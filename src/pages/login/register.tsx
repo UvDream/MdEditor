@@ -1,5 +1,5 @@
 import "./index.less"
-import {Button, Form, Input, Modal, Upload, Message, Tooltip} from "@arco-design/web-react";
+import {Button, Form, Input, Message} from "@arco-design/web-react";
 import {FieldError} from "@arco-design/web-react/es/Form/interface";
 import {ResponseType} from "@/utils/request";
 import {postPublicBaseRegister} from "@/services/api/user";

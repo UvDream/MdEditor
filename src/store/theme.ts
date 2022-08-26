@@ -1,18 +1,8 @@
-import {UserInfo} from "@/api/user";
 import {createSlice} from "@reduxjs/toolkit";
 
-export interface ThemeType {
-    id?: number;
-    name?: string;
-    description?: string;
-    thumbnail?: string;
-    auth_id?: string;
-    is_public?: boolean;
-    author?: UserInfo;
-    theme?: string;
-}
 
-const initialState: ThemeType = {};
+
+const initialState: API.Theme = {theme: ""};
 export const ThemeDetail = createSlice({
     name: "theme",
     initialState,
@@ -25,8 +15,6 @@ export const ThemeDetail = createSlice({
         //新建主题
         CreateTheme: (state, action) => {
             delete state.id
-            let user = JSON.parse(localStorage.getItem("user") || "") as UserInfo
-            state.auth_id = user.uuid
             state.name = "新建主题"
             state.description = "新建主题描述"
             state.thumbnail = ""

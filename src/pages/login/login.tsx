@@ -3,7 +3,6 @@ import "./index.less"
 import {FieldError} from "@arco-design/web-react/es/Form/interface";
 import {useNavigate} from "react-router-dom";
 import {postPublicBaseLogin} from "@/services/api/user";
-import {IconExclamationCircle} from "@arco-design/web-react/icon";
 
 type Props = {
     onSwitch: () => void

@@ -1,4 +1,4 @@
-import "./index.less";
+import "@/style/home/left-bar.less";
 import ArticleList from "./article-list";
 import HistoryList from "@/pages/home/components/left-bar/history-list";
 import {Avatar, CheckOne, CloseOne, Config, Log, Picture, ViewList} from "@icon-park/react"
@@ -9,12 +9,11 @@ import SetConfig from "@/pages/home/components/left-bar/config";
 import {useNavigate, useSearchParams} from "react-router-dom";
 import ArticleSave from "@/pages/home/components/left-bar/article-save";
 import {useKeyPress} from "ahooks";
-import {UserInfo} from "@/api/user";
 import ImgList from "@/pages/home/components/left-bar/img-list";
 import {useDispatch, useSelector, useStore} from "react-redux";
 import {RootState} from "@/store";
 import {changeState} from "@/store/save-state";
-import {GetArticleDetail, SetArticleDetail} from "@/store/article";
+import {AddArticle, GetArticleDetail, SetArticleDetail} from "@/store/article";
 import {postArticleCreate, putArticleUpdate} from "@/services/api/article";
 
 export default function LeftBar() {
@@ -34,7 +33,6 @@ export default function LeftBar() {
     const [searchParams] = useSearchParams();
     //文章详情
     const articleDetail = useSelector((store: RootState) => store.articleDetail)
-    // const [articleDetail, setArticleDetail] = useState<ArticleDetailType>({} as ArticleDetailType);
     //文章配置
     const [articleSaveVisible, setArticleSaveVisible] = useState(false);
     //图片库
@@ -44,7 +42,6 @@ export default function LeftBar() {
         const id = searchParams.get('id');
         //@ts-ignore
         id && dispatch(GetArticleDetail({id}))
-        // setArticleDetail(detail)
     }, [])
     //#region 方法
     //设置弹窗方法
@@ -90,7 +87,6 @@ export default function LeftBar() {
                 }
             } else {
                 console.log("保存文章", data)
-
                 const res = await postArticleCreate(data) as unknown as API.Response
                 if (res.code === 200) {
                     navigate(`/editor?id=${res.data.uuid}`)
@@ -107,37 +103,7 @@ export default function LeftBar() {
         setArticleSaveVisible(false)
         dispatch(changeState(false))
     }
-    //新增文章
-    const addArticle = () => {
-        const userInfo: UserInfo = JSON.parse(localStorage.getItem("user") || "{}")
-        const obj: API.Article = {
-            auth_id: userInfo.uuid,
-            author: [],
-            categories: [],
-            categories_id: [],
-            comment_count: 0,
-            disable_comments: false,
-            editor_type: "",
-            html_content: "",
-            is_top: false,
-            likes: 0,
-            md_content: "",
-            password: "",
-            slug: "",
-            status: "DRAFT",
-            summary: "",
-            tags: [],
-            tags_id: [],
-            thumbnail: "",
-            title: "新建文章",
-            visits: 0,
-            word_count: 0
-        } as API.Article
-        // setArticleDetail(obj)
-        dispatch(SetArticleDetail(obj))
-        navigate(`/editor?id=add`)
-        console.log("新增文章")
-    }
+
     //#endregion
     //#endregion
 
@@ -206,7 +172,7 @@ export default function LeftBar() {
                         <Popover
                             trigger='click'
                             position='rb'
-                            popupVisible={popupVisible}
+                            // popupVisible={popupVisible}
                             content={
                                 <UserStatus onClick={() => {
                                     setPopupVisible(!popupVisible)
@@ -243,9 +209,16 @@ export default function LeftBar() {
                 {
                     selected === 0 ?
                         <ArticleList
+                            publish={() => {
+                                setArticleSaveVisible(true)
+                            }}
+                            history={()=>{
+                                setSelected(1)
+                            }}
                             ref={articleListRef}
                             addFunc={() => {
-                                addArticle()
+                                dispatch(AddArticle())
+                                navigate(`/editor?id=add`)
                             }}
                             onClick={(id: string) => {
                                 //@ts-ignore

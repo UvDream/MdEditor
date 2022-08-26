@@ -1,4 +1,4 @@
-import {Button, Grid, Image, Message, Modal, Pagination, Typography} from "@arco-design/web-react";
+import {Button, Empty, Grid, Image, Message, Modal, Pagination, Upload} from "@arco-design/web-react";
 import {useEffect, useState} from "react";
 import {fileType, Props} from "./index.d";
 import {ResponseType} from "@/utils/request";
@@ -6,6 +6,8 @@ import Config from "@/config";
 import {Copy, DeleteOne, PreviewOpen} from "@icon-park/react";
 import {CopyToClipboard} from "@/utils";
 import {deleteFile__openAPI__deleteId, getFileList} from "@/services/api/file";
+import config from "@/config";
+import {UploadItem} from "@arco-design/web-react/es/Upload";
 
 const Row = Grid.Row;
 const Col = Grid.Col;
@@ -37,6 +39,17 @@ export default function ImgList(props: Props) {
             getImgList().then()
         }
     }
+
+    const uploadSuccess = (fileList: UploadItem[], file: any) => {
+        if (file.response&&file.response.success) {
+            if (file.response.data.position === "local") {
+                CopyToClipboard("![" + file.response.data.name + "](" + config.baseURL + file.response.data.url + ")").then(r => {
+                    Message.success("上传成功,已复制为Markdown链接")
+                    getImgList().then()
+                })
+            }
+        }
+    }
     return (
         <Modal
             title="图片资源"
@@ -51,81 +64,97 @@ export default function ImgList(props: Props) {
                 }}>关闭</Button>
             }
         >
+            <div style={{marginBottom:10}}>
+                <Upload
+                    multiple
+                    headers={{"x-token": localStorage.getItem('token')}}
+                    accept='image/*'
+                    showUploadList={false}
+                    action={config.baseURL + '/file/upload'}
+                    onChange={uploadSuccess}
+                />
+            </div>
             <Image.PreviewGroup infinite current={currentPreview}>
-                <Row gutter={24}>
-                    {
-                        imgList.map((item, index) => {
-                            return (
-                                <Col
-                                    key={index}
-                                    span={5}
-                                    offset={1} style={{marginBottom: "10px"}}
-                                >
-                                    <Image
-                                        width={"100%"}
-                                        height={100}
-                                        previewProps={{
-                                            visible: previewVisible,
-                                            onVisibleChange: (e) => {
-                                                setPreviewVisible(false);
-                                            },
-                                        }}
-                                        onClick={() => {
-                                            setCurrentPreview(index)
-                                        }}
-                                        actions={[
-                                            <PreviewOpen
-                                                key="1"
-                                                theme="outline"
-                                                size="15"
-                                                fill="#333" strokeWidth={3}
-                                                onClick={() => {
-                                                    setPreviewVisible(true);
-                                                    setCurrentPreview(index);
+                {
+                    imgList.length === 0 ? <Empty/> :
+                        <Row gutter={24}>
+                            {
+                                imgList.map((item, index) => {
+                                    return (
+                                        <Col
+                                            key={index}
+                                            span={5}
+                                            offset={1} style={{marginBottom: "10px"}}
+                                        >
+                                            <Image
+                                                width={"100%"}
+                                                height={120}
+                                                previewProps={{
+                                                    visible: previewVisible,
+                                                    onVisibleChange: (e) => {
+                                                        setPreviewVisible(false);
+                                                    },
                                                 }}
-                                            />,
-                                            <DeleteOne
-                                                key="2"
-                                                theme="outline"
-                                                size="15"
-                                                fill="#333"
-                                                strokeWidth={3}
                                                 onClick={() => {
-                                                    deleteImg(item.id).then()
+                                                    setCurrentPreview(index)
                                                 }}
-                                            />,
-                                            <Copy
-                                                theme="outline"
-                                                size="15"
-                                                fill="#333"
-                                                strokeWidth={3}
-                                                onClick={() => {
-                                                    const text = `![](${Config.baseURL}${item.url})`
-                                                    CopyToClipboard(text).then(() => {
-                                                        Message.success("复制成功,去编辑器粘贴吧!")
-                                                    })
-                                                }}
+                                                actions={[
+                                                    <PreviewOpen
+                                                        key="1"
+                                                        theme="outline"
+                                                        size="15"
+                                                        fill="#333" strokeWidth={3}
+                                                        onClick={() => {
+                                                            setPreviewVisible(true);
+                                                            setCurrentPreview(index);
+                                                        }}
+                                                    />,
+                                                    <DeleteOne
+                                                        key="2"
+                                                        theme="outline"
+                                                        size="15"
+                                                        fill="#333"
+                                                        strokeWidth={3}
+                                                        onClick={() => {
+                                                            deleteImg(item.id).then()
+                                                        }}
+                                                    />,
+                                                    <Copy
+                                                        theme="outline"
+                                                        size="15"
+                                                        fill="#333"
+                                                        strokeWidth={3}
+                                                        onClick={() => {
+                                                            const text = `![](${Config.baseURL}${item.url})`
+                                                            CopyToClipboard(text).then(() => {
+                                                                Message.success("复制成功,去编辑器粘贴吧!")
+                                                            })
+                                                        }}
+                                                    />
+                                                ]}
+                                                src={item.position == "local" ? Config.baseURL + item.url : item.url}
                                             />
-                                        ]}
-                                        src={item.position == "local" ? Config.baseURL + item.url : item.url}
-                                    />
-                                </Col>
-                            )
-                        })
-                    }
-                </Row>
+                                        </Col>
+                                    )
+                                })
+                            }
+                        </Row>
+                }
             </Image.PreviewGroup>
             <div style={{textAlign: "center"}}>
-                <Pagination
-                    style={{margin: "0 auto", display: "inline-block"}}
-                    total={total}
-                    onChange={(page, pageSize) => {
-                        options.page = page
-                        options.page_size = pageSize
-                        setOptions(options)
-                        getImgList().then()
-                    }}
-                />
+                {
+                    total != 0 && <Pagination
+                        style={{margin: "0 auto", display: "inline-block"}}
+                        total={total}
+                        onChange={(page, pageSize) => {
+                            options.page = page
+                            options.page_size = pageSize
+                            setOptions(options)
+                            getImgList().then()
+                        }}
+                    />
+                }
+
             </div>
         </Modal>
     )

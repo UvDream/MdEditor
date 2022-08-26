@@ -1,8 +1,7 @@
 import {Menu} from "@arco-design/web-react";
 import {useNavigate} from "react-router-dom";
-import "./index.less";
-import {useEffect, useState} from "react";
-import {UserInfo} from "@/api/user";
+import "../../../../style/home/left-bar.less";
+import {useState} from "react";
 
 const MenuItem = Menu.Item;
 const SubMenu = Menu.SubMenu;
@@ -12,7 +11,7 @@ type Props = {
 export default function UserStatus(props: Props) {
     let navigate = useNavigate()
     const [isLogin] = useState(localStorage.getItem("token"))
-    const [userInfo] = useState(JSON.parse(localStorage.getItem("user") || "{}") as UserInfo)
+    const [userInfo] = useState(JSON.parse(localStorage.getItem("user") || "{}") as API.User)
 
     const menuItemClick = (key: string) => {
         if (key === "2" || key === "1_1") {
@@ -31,9 +30,9 @@ export default function UserStatus(props: Props) {
                             key='1'
                             style={{height: 30, lineHeight: "30px"}}
                             title={
-                                <>
+                                <span onClick={props.onClick}>
                                     {userInfo.nick_name}
-                                </>
+                                </span>
                             }
                         >
                             <MenuItem key='1_0'>用户设置</MenuItem>

@@ -12,13 +12,13 @@ import {
 import Editor from './editor'
 import Preview from './preview'
 import {useEffect, useState} from "react";
-import "./index.less";
+import "../../style/editor/index.less";
 import {IconEye, IconEyeInvisible} from "@arco-design/web-react/icon";
 import {Grid} from "@arco-design/web-react";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "@/store";
 import {SetArticleDetail} from "@/store/article";
-import {SetTheme, ThemeType, UpdateTheme} from "@/store/theme";
+import ThemeEditor from "@/pages/ediotr/theme-editor";
 
 const Row = Grid.Row;
 const Col = Grid.Col;
@@ -34,38 +34,14 @@ export default function EditorPage() {
     const [articleHtml, setArticleHtml] = useState(markdownParser.render(articleMd));
     //获取配置
     const [config, setConfig] = useState(getConfig());
-    //获取主题
-    const {theme} = useSelector((state: RootState) => state.themeDetail);
     useEffect(() => {
         setEditorStyle(defaultStyle)
-        // getThemeDetail(themeID).then()
-        getThemeDetail(Number(localStorage.getItem("theme_id"))).then()
     }, [])
     useEffect(() => {
         setArticleMd(md_content ? md_content : '');
         setArticleHtml(markdownParser.render(articleMd));
     }, [md_content])
 
-    //获取主题详情
-    const getThemeDetail = async (id: number) => {
-        if (id === 999) {
-            dispatch(SetTheme(defaultStyle))
-            const obj: ThemeType = {
-                description: "默认主题",
-                name: "默认主题",
-                thumbnail: "",
-                is_public: true
-            }
-            dispatch(UpdateTheme(obj))
-            dispatch(SetTheme(defaultStyle))
-        } else {
-            //@ts-ignore
-            const res = await getThemeDetail({id}) as unknown as API.Response
-            if (res.code === 200) {
-                dispatch(SetTheme(res.data.theme))
-            }
-        }
-    }
     const getCount = () => {
         let count = 0
         let config = getConfig()
@@ -87,9 +63,7 @@ export default function EditorPage() {
         setArticleHtml(markdownParser.render(val))
         dispatch(SetArticleDetail({md_content: val, word_count: CalcWordCount(val)}))
     }
-    const styleEditorChange = (val: string) => {
-        setEditorStyle(val)
-    }
+
     if (DeviceType() === DeviceTypeEnum.PC) {
         return (
             <div className={"pc-editor"}>
@@ -110,20 +84,14 @@ export default function EditorPage() {
                     }
                     {
                         config.previewArea ?
-                            <Col span={24 / getCount()} className={"preview "}>
-                                <Preview content={articleHtml}/>
+                            <Col span={24 / getCount()} className={"preview"}>
+                                <Preview tool content={articleHtml}/>
                             </Col> : <></>
                     }
                     {
                         config.themeArea ?
-                            <Col span={24 / getCount()} className={"style-editor "}>
-                                <Editor
-                                    value={theme}
-                                    language={'css'}
-                                    onChange={(val: string) => {
-                                        styleEditorChange(val)
-                                    }}
-                                />
+                            <Col span={24 / getCount()} className={"style-editor"}>
+                                <ThemeEditor/>
                             </Col> : <></>
                     }
                 </Row>
@@ -140,6 +108,19 @@ export default function EditorPage() {
                             setPreviewState(false)
                         }} style={{fontSize: "18px"}}/>}
                 </div>
+                {
+                    !previewState ?
+                        <Editor
+                            value={articleMd}
+                            insert={true}
+                            mdEditor={true}
+                            onChange={(val: string) => {
+                                editorChange(val)
+                            }}
+                            language={'markdown'}
+                        /> :
+                        <Preview tool={false} content={articleHtml}/>
+                }
             </div>
         )
     } else {

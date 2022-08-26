@@ -1,6 +1,6 @@
 import {Image, Upload} from "@arco-design/web-react";
 import {RequestOptions} from "@arco-design/web-react/es/Upload";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {ResponseType} from "@/utils/request";
 import "../index.less"
 import Config from "@/config";
@@ -11,7 +11,7 @@ type Props = {
     onChange?: (value: string) => void;
 }
 type FileType = {
-    url: string;
+    url: string|undefined;
     id: number;
     position: string,
     name: string;
@@ -23,11 +23,13 @@ export default function UploadFile(props: Props) {
         position: '',
         name: ''
     });
+    useEffect(()=>{
+        file.url=props.value
+        setFile(file)
+    },[props.value])
     const uploadFunc = async (opts: RequestOptions) => {
         const {onProgress, onError, onSuccess, file} = opts;
-        const formData = new FormData();
-        formData.append('file', file);
-        const res = await postFileUpload(formData) as unknown as ResponseType
+        const res = await postFileUpload({file}) as unknown as ResponseType
         if (res.code === 200) {
             if (res.data.position === 'local') {
                 setFile({

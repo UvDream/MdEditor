@@ -1,7 +1,7 @@
 {
     "name": "md-editor",
     "private": true,
-    "version": "0.4.0",
+    "version": "0.4.1",
     "bin": {
         "mdc": "bin/cli.js"
     },
@@ -27,7 +27,7 @@
         "@uiw/codemirror-extensions-events": "^4.9.4",
         "@codemirror/lang-css": "^6.0.0",
         "ahooks": "^3.5.0",
-        "highlight.js": "^11.5.1",
+        "highlight.js": "^11.6.0",
         "juice": "^8.0.0",
         "markdown-it": "^13.0.0",
         "mitt": "^3.0.0",
@@ -42,7 +42,8 @@
         "recoil": "^0.7.4",
         "@tauri-apps/api": "^1.0.2",
         "@reduxjs/toolkit": "^1.8.3",
-        "react-redux": "^8.0.2"
+        "react-redux": "^8.0.2",
+        "qrcode.react": "^3.1.0"
     },
     "devDependencies": {
         "@arco-plugins/vite-react": "^1.1.0",
@@ -62,6 +63,7 @@
         "tsx": "^3.2.1",
         "shelljs": "^0.8.5",
         "@types/shelljs": "^0.8.11",
-        "release-it": "^15.3.0"
+        "release-it": "^15.3.0",
+        "@types/qrcode": "^1.5.0"
     }
 }

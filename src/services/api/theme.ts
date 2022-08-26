@@ -35,10 +35,11 @@ export async function getThemeDetail(
   params: API.getThemeDetailParams,
   options?: { [key: string]: any },
 ) {
-  const { id: param0, ...queryParams } = params;
   return request<API.Response>('/theme/detail', {
     method: 'GET',
-    params: { ...queryParams },
+    params: {
+      ...params,
+    },
     ...(options || {}),
   });
 }

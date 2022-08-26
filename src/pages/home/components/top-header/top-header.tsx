@@ -1,6 +1,6 @@
 import TopMenus from "./top-menus";
 import {Grid} from "@arco-design/web-react"
-import "./top-header.less"
+import "../../../../style/home/top-header.less"
 const Row=Grid.Row;
 const Col=Grid.Col;
 export default function TopHeader() {
