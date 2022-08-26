@@ -12,7 +12,7 @@ import {
     Upload,
 } from "@arco-design/web-react";
 import {useEffect, useState} from "react";
-import {fileType, Props} from "./index.d";
+import {Props} from "./index.d";
 import {ResponseType} from "@/utils/request";
 import Config from "@/config";
 import {Copy, DeleteOne, PreviewOpen} from "@icon-park/react";
@@ -31,7 +31,7 @@ export default function ImgList(props: Props) {
     const [imgList, setImgList] = useState<Array<API.File>>([]);
     const [options, setOptions] = useState({
         page: 1,
-        page_size: 16,
+        page_size: 8,
     });
     const [total, setTotal] = useState(0);
     const [previewVisible, setPreviewVisible] = useState(false);
