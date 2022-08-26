@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {useSearchParams} from "react-router-dom";
-import {getArticleMd} from "@/services/api/article";
+import {getPublicBaseMd} from "@/services/api/article";
 import {defaultStyle, markdownParser, setEditorStyle} from "@/utils";
 import "@/style/editor/preview_phone.less"
 import {Refresh} from "@icon-park/react";
@@ -14,9 +14,9 @@ export default function PreviewPage() {
         getContent().then()
     }, [])
     const getContent = async () => {
-        const res = await getArticleMd({id: searchParams.get("id") || ""}) as unknown as API.Response
+        const res = await getPublicBaseMd({id: searchParams.get("id") || ""}) as unknown as API.Response
         if (res.success) {
-            setContent(markdownParser.render(res.data))
+            setContent(markdownParser.render(res.data.md_content))
         }
         setEditorStyle(defaultStyle)
     }
