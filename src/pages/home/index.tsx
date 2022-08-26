@@ -11,7 +11,7 @@ import {Drawer, Grid, Layout, ResizeBox} from "@arco-design/web-react";
 import {IconOrderedList} from "@arco-design/web-react/icon";
 import {Outlet, useNavigate} from "react-router-dom";
 
-import "../../style/home/index.less";
+import "@/style/home/index.less";
 import {DeviceType, DeviceTypeEnum} from "@/utils";
 import ArticleList from "@/pages/home/components/left-bar/article-list";
 import "highlight.js/styles/vs2015.css";

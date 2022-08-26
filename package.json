@@ -11,7 +11,7 @@
         "preview": "vite preview",
         "tauri:dev": "tauri dev",
         "tauri:dev-debug": "tarui dev --debug",
-        "tauri:build": "tauri build --debug",
+        "tauri:build": "tauri build",
         "tauri:build-debug": "tauri build --debug",
         "openapi": "node openapi.config.js",
         "publish": "tsx publish.ts",
