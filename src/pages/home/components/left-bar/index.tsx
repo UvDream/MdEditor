@@ -78,7 +78,7 @@ export default function LeftBar() {
                 console.log("更新文章", data)
                 const res = await putArticleUpdate(data) as unknown as API.Response
                 if (res.code === 200) {
-                    navigate(`/editor?id=${res.data.uuid}`)
+                    navigate(`/editor?id=${res.data.id}`)
                     Message.success("修改成功")
                     // @ts-ignore
                     articleListRef.current?.getList()
@@ -89,7 +89,7 @@ export default function LeftBar() {
                 console.log("保存文章", data)
                 const res = await postArticleCreate(data) as unknown as API.Response
                 if (res.code === 200) {
-                    navigate(`/editor?id=${res.data.uuid}`)
+                    navigate(`/editor?id=${res.data.id}`)
                     Message.success("保存成功")
                     // @ts-ignore
                     articleListRef.current.getList()

@@ -162,16 +162,21 @@ declare namespace API {
     page_size: number;
   };
 
-  type getArticleMdParams = {
-    /** 参数 */
-    id: string;
-  };
-
   type getFileListParams = {
     /** 关键字 */
     key_word?: string;
     page: number;
     page_size: number;
+  };
+
+  type getPublicBaseDetailParams = {
+    /** 参数 */
+    id: string;
+  };
+
+  type getPublicBaseMdParams = {
+    /** 参数 */
+    id: string;
   };
 
   type getThemeDetailParams = {
@@ -250,7 +255,7 @@ declare namespace API {
     /** 名字 */
     name?: string;
     /** 主题 */
-    theme: string;
+    theme?: string;
     /** 简略图 */
     thumbnail?: string;
     update_time?: string;

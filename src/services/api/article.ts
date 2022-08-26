@@ -74,21 +74,6 @@ export async function getArticleList(
   });
 }
 
-/** 查询文章markdown内容 GET /article/md */
-export async function getArticleMd(
-  // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
-  params: API.getArticleMdParams,
-  options?: { [key: string]: any },
-) {
-  return request<API.Response>('/article/md', {
-    method: 'GET',
-    params: {
-      ...params,
-    },
-    ...(options || {}),
-  });
-}
-
 /** 修改文章 PUT /article/update */
 export async function putArticleUpdate(body: API.Article, options?: { [key: string]: any }) {
   return request<API.Response>('/article/update', {
@@ -97,6 +82,36 @@ export async function putArticleUpdate(body: API.Article, options?: { [key: stri
       'Content-Type': 'application/json',
     },
     data: body,
+    ...(options || {}),
+  });
+}
+
+/** 查询文章详情 GET /public/base/detail */
+export async function getPublicBaseDetail(
+  // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
+  params: API.getPublicBaseDetailParams,
+  options?: { [key: string]: any },
+) {
+  return request<API.Response>('/public/base/detail', {
+    method: 'GET',
+    params: {
+      ...params,
+    },
+    ...(options || {}),
+  });
+}
+
+/** 查询文章markdown内容 GET /public/base/md */
+export async function getPublicBaseMd(
+  // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
+  params: API.getPublicBaseMdParams,
+  options?: { [key: string]: any },
+) {
+  return request<API.Response>('/public/base/md', {
+    method: 'GET',
+    params: {
+      ...params,
+    },
     ...(options || {}),
   });
 }
