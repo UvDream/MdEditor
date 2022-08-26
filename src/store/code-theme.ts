@@ -4,7 +4,7 @@ import {setCodeStyle} from "@/utils";
 
 const initialState: CodeThemeType = CodeThemeList.filter(element => {
     return element.value == localStorage.getItem("code-theme")
-})[0]
+})[0]||""
 export const CodeTheme = createSlice({
     name: "code-theme",
     initialState,
