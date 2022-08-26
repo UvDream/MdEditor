@@ -37,6 +37,9 @@ declare namespace API {
     tags?: Tag[];
     /** tags id */
     tags_id?: number[];
+    theme?: Theme;
+    /** 主题ID */
+    theme_id?: string;
     /** 缩略图 */
     thumbnail?: string;
     /** 标题 */
@@ -121,6 +124,20 @@ declare namespace API {
     id: string;
   };
 
+  type File = {
+    auth_id?: string;
+    create_time?: string;
+    delete_time?: DeletedAt;
+    id?: string;
+    key?: string;
+    name?: string;
+    position?: string;
+    size?: number;
+    type?: string;
+    update_time?: string;
+    url?: string;
+  };
+
   type getArticleDetailParams = {
     /** 参数 */
     id: string;
@@ -177,6 +194,11 @@ declare namespace API {
     captcha_id: string;
     password: string;
     user_name: string;
+  };
+
+  type PaginatedData = {
+    list?: any;
+    total?: number;
   };
 
   type Response = {

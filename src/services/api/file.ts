@@ -24,7 +24,14 @@ export async function getFileList(
   params: API.getFileListParams,
   options?: { [key: string]: any },
 ) {
-  return request<string>('/file/list', {
+  return request<
+    API.Response & {
+      code?: number;
+      data?: API.PaginatedData & { list?: API.File[]; total?: number };
+      msg?: string;
+      success?: boolean;
+    }
+  >('/file/list', {
     method: 'GET',
     params: {
       ...params,
