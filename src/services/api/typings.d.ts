@@ -83,7 +83,7 @@ declare namespace API {
     /** 分类名 */
     name: string;
     /** 父级ID */
-    parent_id?: number;
+    parent_id?: string;
     /** 访问密码 */
     password?: string;
     /** 别名 */
