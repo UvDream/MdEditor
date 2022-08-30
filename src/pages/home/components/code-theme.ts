@@ -72,396 +72,391 @@ import tomorrow_night_bright from "highlight.js/styles/tomorrow-night-bright.css
 import xt256 from "highlight.js/styles/xt256.css";
 
 export interface CodeThemeType {
-    name?: string;
-    value?: string;
-    code?: string;
+  name?: string;
+  value?: string;
+  code?: string;
 }
 
 export const CodeLightThemeList: Array<CodeThemeType> = [
-    {
-        name: "默认",
-        value: "default",
-        code: default_theme,
-    },
+  {
+    name: "默认",
+    value: "default",
+    code: default_theme,
+  },
+  {
+    name: "atom_one_light",
+    value: "atom_one_light",
+    code: atom_one_light,
+  },
+  {
+    name: "xcode",
+    value: "xcode",
+    code: xcode,
+  },
+  {
+    name: "vs",
+    value: "vs",
+    code: vs,
+  },
+  {
+    name: "github",
+    value: "github",
+    code: github,
+  },
+  {
+    name: "aa11y_light",
+    value: "a11y_light",
+    code: a11y_light,
+  },
 
-    {
-        name: "atom_one_light",
-        value: "atom_one_light",
-        code: atom_one_light,
-    },
-    {
-        name: "xcode",
-        value: "xcode",
-        code: xcode,
-    },
-    {
-        name: "vs",
-        value: "vs",
-        code: vs,
-    },
-    {
-        name: "github",
-        value: "github",
-        code: github,
-    },
-    {
-        name: "aa11y_light",
-        value: "a11y_light",
-        code: a11y_light,
-    },
+  {
+    name: "arduino_light",
+    value: "arduino_light",
+    code: arduino_light,
+  },
 
-    {
-        name: "arduino_light",
-        value: "arduino_light",
-        code: arduino_light,
-    },
+  {
+    name: "ascetic",
+    value: "ascetic",
+    code: ascetic,
+  },
+  {
+    name: "brown_paper",
+    value: "brown_paper",
+    code: brown_paper,
+  },
 
-    {
-        name: "ascetic",
-        value: "ascetic",
-        code: ascetic,
-    },
-    {
-        name: "brown_paper",
-        value: "brown_paper",
-        code: brown_paper,
-    },
+  {
+    name: "color_brewer",
+    value: "color_brewer",
+    code: color_brewer,
+  },
 
-    {
-        name: "color_brewer",
-        value: "color_brewer",
-        code: color_brewer,
-    },
+  {
+    name: "docco",
+    value: "docco",
+    code: docco,
+  },
 
-    {
-        name: "docco",
-        value: "docco",
-        code: docco,
-    },
+  {
+    name: "foundation",
+    value: "foundation",
+    code: foundation,
+  },
 
+  {
+    name: "googlecode",
+    value: "googlecode",
+    code: googlecode,
+  },
+  {
+    name: "gradient_light",
+    value: "gradient_light",
+    code: gradient_light,
+  },
+  // {
+  //     name: "grayscale",
+  //     value: "grayscale",
+  //     code: grayscale,
+  // },
+  // {
+  //     name: "idea",
+  //     value: "idea",
+  //     code: idea,
+  // },
+  {
+    name: "intellij_light",
+    value: "intellij_light",
+    code: intellij_light,
+  },
 
-    {
-        name: "foundation",
-        value: "foundation",
-        code: foundation,
-    },
+  {
+    name: "isbl_editor_light",
+    value: "isbl_editor_light",
+    code: isbl_editor_light,
+  },
+  {
+    name: "kimbie_light",
+    value: "kimbie_light",
+    code: kimbie_light,
+  },
 
-    {
-        name: "googlecode",
-        value: "googlecode",
-        code: googlecode,
-    },
-    {
-        name: "gradient_light",
-        value: "gradient_light",
-        code: gradient_light,
-    },
-    // {
-    //     name: "grayscale",
-    //     value: "grayscale",
-    //     code: grayscale,
-    // },
-    {
-        name: "idea",
-        value: "idea",
-        code: idea,
-    },
-    {
-        name: "intellij_light",
-        value: "intellij_light",
-        code: intellij_light,
-    },
+  {
+    name: "lightfair",
+    value: "lightfair",
+    code: lightfair,
+  },
+  {
+    name: "magula",
+    value: "magula",
+    code: magula,
+  },
+  {
+    name: "mono_blue",
+    value: "mono_blue",
+    code: mono_blue,
+  },
 
-    {
-        name: "isbl_editor_light",
-        value: "isbl_editor_light",
-        code: isbl_editor_light,
-    },
-    {
-        name: "kimbie_light",
-        value: "kimbie_light",
-        code: kimbie_light,
-    },
+  {
+    name: "nnfx_light",
+    value: "nnfx_light",
+    code: nnfx_light,
+  },
 
-    {
-        name: "lightfair",
-        value: "lightfair",
-        code: lightfair,
-    },
-    {
-        name: "magula",
-        value: "magula",
-        code: magula,
-    },
-    {
-        name: "mono_blue",
-        value: "mono_blue",
-        code: mono_blue,
-    },
+  {
+    name: "panda_syntax_light",
+    value: "panda_syntax_light",
+    code: panda_syntax_light,
+  },
+  {
+    name: "paraiso_light",
+    value: "paraiso_light",
+    code: paraiso_light,
+  },
 
-    {
-        name: "nnfx_light",
-        value: "nnfx_light",
-        code: nnfx_light,
-    },
+  {
+    name: "purebasic",
+    value: "purebasic",
+    code: purebasic,
+  },
+  {
+    name: "qtcreator_light",
+    value: "qtcreator_light",
+    code: qtcreator_light,
+  },
 
+  {
+    name: "routeros",
+    value: "routeros",
+    code: routeros,
+  },
+  {
+    name: "school_book",
+    value: "school_book",
+    code: school_book,
+  },
 
-    {
-        name: "panda_syntax_light",
-        value: "panda_syntax_light",
-        code: panda_syntax_light,
-    },
-    {
-        name: "paraiso_light",
-        value: "paraiso_light",
-        code: paraiso_light,
-    },
-
-    {
-        name: "purebasic",
-        value: "purebasic",
-        code: purebasic,
-    },
-    {
-        name: "qtcreator_light",
-        value: "qtcreator_light",
-        code: qtcreator_light,
-    },
-
-    {
-        name: "routeros",
-        value: "routeros",
-        code: routeros,
-    },
-    {
-        name: "school_book",
-        value: "school_book",
-        code: school_book,
-    },
-
-
-    {
-        name: "stackoverflow_light",
-        value: "stackoverflow_light",
-        code: stackoverflow_light,
-    },
-    {
-        name: "tokyo_night_light",
-        value: "tokyo_night_light",
-        code: tokyo_night_light,
-    },
-
+  {
+    name: "stackoverflow_light",
+    value: "stackoverflow_light",
+    code: stackoverflow_light,
+  },
+  {
+    name: "tokyo_night_light",
+    value: "tokyo_night_light",
+    code: tokyo_night_light,
+  },
 ];
 export const CodeDarkThemeList: Array<CodeThemeType> = [
-    {
-        name: "atom_one_dark",
-        value: "atom_one_dark",
-        code: atom_one_dark,
-    },
-    {
-        name: "aa11y_dark",
-        value: "a11y_dark",
-        code: a11y_dark,
-    },
-    {
-        name: "android_studio",
-        value: "android_studio",
-        code: android_studio,
-    },
-    {
-        name: "github_dark",
-        value: "github_dark",
-        code: github_dark,
-    },
-    {
-        name: "vs2015",
-        value: "vs2015",
-        code: vs2015,
-    },
-    {
-        name: "atom_one_dark_reasonable",
-        value: "atom_one_dark_reasonable",
-        code: atom_one_dark_reasonable,
-    },
-    {
-        name: "dark",
-        value: "dark",
-        code: dark,
-    },
-    {
-        name: "github_dark_dimmed",
-        value: "github_dark_dimmed",
-        code: github_dark_dimmed,
-    },
-    {
-        name: "gradient_dark",
-        value: "gradient_dark",
-        code: gradient_dark,
-    },
-    {
-        name: "isbl_editor_dark",
-        value: "isbl_editor_dark",
-        code: isbl_editor_dark,
-    },
-    {
-        name: "kimbie_dark",
-        value: "kimbie_dark",
-        code: kimbie_dark,
-    },
-    {
-        name: "nnfx_dark",
-        value: "nnfx_dark",
-        code: nnfx_dark,
-    },
-    {
-        name: "panda_syntax_dark",
-        value: "panda_syntax_dark",
-        code: panda_syntax_dark,
-    },
-    {
-        name: "paraiso_dark",
-        value: "paraiso_dark",
-        code: paraiso_dark,
-    },
-    {
-        name: "qtcreator_dark",
-        value: "qtcreator_dark",
-        code: qtcreator_dark,
-    },
-    {
-        name: "stackoverflow_dark",
-        value: "stackoverflow_dark",
-        code: stackoverflow_dark,
-    },
-    {
-        name: "tokyo_night_dark",
-        value: "tokyo_night_dark",
-        code: tokyo_night_dark,
-    },
-    {
-        name: "tomorrow_night_blue",
-        value: "tomorrow_night_blue",
-        code: tomorrow_night_blue,
-    },
-    {
-        name: "tomorrow_night_bright",
-        value: "tomorrow_night_bright",
-        code: tomorrow_night_bright,
-    },
-    {
-        name: "agate",
-        value: "agate",
-        code: agate,
-    },
-    {
-        name: "xt256",
-        value: "xt256",
-        code: xt256,
-    },
-    {
-        name: "an_old_hope",
-        value: "an_old_hope",
-        code: an_old_hope,
-    },
-    {
-        name: "arta",
-        value: "arta",
-        code: arta,
-    },
-    {
-        name: "codepen_embed",
-        value: "codepen_embed",
-        code: codepen_embed,
-    },
-    {
-        name: "devibeans",
-        value: "devibeans",
-        code: devibeans,
-    },
-    {
-        name: "far",
-        value: "far",
-        code: far,
-    },
-    {
-        name: "felipec",
-        value: "felipec",
-        code: felipec,
-    },
-    {
-        name: "gml",
-        value: "gml",
-        code: gml,
-    },
-    {
-        name: "hybrid",
-        value: "hybrid",
-        code: hybrid,
-    },
-    {
-        name: "ir_black",
-        value: "ir_black",
-        code: ir_black,
-    },
+  {
+    name: "atom_one_dark",
+    value: "atom_one_dark",
+    code: atom_one_dark,
+  },
+  {
+    name: "aa11y_dark",
+    value: "a11y_dark",
+    code: a11y_dark,
+  },
+  {
+    name: "android_studio",
+    value: "android_studio",
+    code: android_studio,
+  },
+  {
+    name: "github_dark",
+    value: "github_dark",
+    code: github_dark,
+  },
+  {
+    name: "vs2015",
+    value: "vs2015",
+    code: vs2015,
+  },
+  {
+    name: "atom_one_dark_reasonable",
+    value: "atom_one_dark_reasonable",
+    code: atom_one_dark_reasonable,
+  },
+  {
+    name: "dark",
+    value: "dark",
+    code: dark,
+  },
+  {
+    name: "github_dark_dimmed",
+    value: "github_dark_dimmed",
+    code: github_dark_dimmed,
+  },
+  {
+    name: "gradient_dark",
+    value: "gradient_dark",
+    code: gradient_dark,
+  },
+  {
+    name: "isbl_editor_dark",
+    value: "isbl_editor_dark",
+    code: isbl_editor_dark,
+  },
+  {
+    name: "kimbie_dark",
+    value: "kimbie_dark",
+    code: kimbie_dark,
+  },
+  {
+    name: "nnfx_dark",
+    value: "nnfx_dark",
+    code: nnfx_dark,
+  },
+  {
+    name: "panda_syntax_dark",
+    value: "panda_syntax_dark",
+    code: panda_syntax_dark,
+  },
+  {
+    name: "paraiso_dark",
+    value: "paraiso_dark",
+    code: paraiso_dark,
+  },
+  {
+    name: "qtcreator_dark",
+    value: "qtcreator_dark",
+    code: qtcreator_dark,
+  },
+  {
+    name: "stackoverflow_dark",
+    value: "stackoverflow_dark",
+    code: stackoverflow_dark,
+  },
+  {
+    name: "tokyo_night_dark",
+    value: "tokyo_night_dark",
+    code: tokyo_night_dark,
+  },
+  {
+    name: "tomorrow_night_blue",
+    value: "tomorrow_night_blue",
+    code: tomorrow_night_blue,
+  },
+  {
+    name: "tomorrow_night_bright",
+    value: "tomorrow_night_bright",
+    code: tomorrow_night_bright,
+  },
+  {
+    name: "agate",
+    value: "agate",
+    code: agate,
+  },
+  {
+    name: "xt256",
+    value: "xt256",
+    code: xt256,
+  },
+  {
+    name: "an_old_hope",
+    value: "an_old_hope",
+    code: an_old_hope,
+  },
+  {
+    name: "arta",
+    value: "arta",
+    code: arta,
+  },
+  {
+    name: "codepen_embed",
+    value: "codepen_embed",
+    code: codepen_embed,
+  },
+  {
+    name: "devibeans",
+    value: "devibeans",
+    code: devibeans,
+  },
+  {
+    name: "far",
+    value: "far",
+    code: far,
+  },
+  {
+    name: "felipec",
+    value: "felipec",
+    code: felipec,
+  },
+  {
+    name: "gml",
+    value: "gml",
+    code: gml,
+  },
+  {
+    name: "hybrid",
+    value: "hybrid",
+    code: hybrid,
+  },
+  {
+    name: "ir_black",
+    value: "ir_black",
+    code: ir_black,
+  },
 
-    {
-        name: "lioshi",
-        value: "lioshi",
-        code: lioshi,
-    },
+  {
+    name: "lioshi",
+    value: "lioshi",
+    code: lioshi,
+  },
 
-    {
-        name: "monokai_sublime",
-        value: "monokai_sublime",
-        code: monokai_sublime,
-    },
-    {
-        name: "monokai",
-        value: "monokai",
-        code: monokai,
-    },
-    {
-        name: "night_owl",
-        value: "night_owl",
-        code: night_owl,
-    },
-    {
-        name: "nord",
-        value: "nord",
-        code: nord,
-    },
-    {
-        name: "obsidian",
-        value: "obsidian",
-        code: obsidian,
-    },
-    {
-        name: "pojoaque",
-        value: "pojoaque",
-        code: pojoaque,
-    },
-    {
-        name: "rainbow",
-        value: "rainbow",
-        code: rainbow,
-    },
-    {
-        name: "shades_of_purple",
-        value: "shades_of_purple",
-        code: shades_of_purple,
-    },
-    {
-        name: "srcery",
-        value: "srcery",
-        code: srcery,
-    },
-    {
-        name: "sunburst",
-        value: "sunburst",
-        code: sunburst,
-    },
+  {
+    name: "monokai_sublime",
+    value: "monokai_sublime",
+    code: monokai_sublime,
+  },
+  {
+    name: "monokai",
+    value: "monokai",
+    code: monokai,
+  },
+  {
+    name: "night_owl",
+    value: "night_owl",
+    code: night_owl,
+  },
+  {
+    name: "nord",
+    value: "nord",
+    code: nord,
+  },
+  {
+    name: "obsidian",
+    value: "obsidian",
+    code: obsidian,
+  },
+  {
+    name: "pojoaque",
+    value: "pojoaque",
+    code: pojoaque,
+  },
+  {
+    name: "rainbow",
+    value: "rainbow",
+    code: rainbow,
+  },
+  {
+    name: "shades_of_purple",
+    value: "shades_of_purple",
+    code: shades_of_purple,
+  },
+  {
+    name: "srcery",
+    value: "srcery",
+    code: srcery,
+  },
+  {
+    name: "sunburst",
+    value: "sunburst",
+    code: sunburst,
+  },
 ];
 export const CodeThemeList: Array<CodeThemeType> = [
-    ...CodeLightThemeList,
-    ...CodeDarkThemeList,
+  ...CodeLightThemeList,
+  ...CodeDarkThemeList,
 ];
