@@ -10,7 +10,7 @@ const RadioGroup = Radio.Group;
 export default function CodeThemes() {
     const dispatch = useDispatch();
     // const [codeThemes] = useState(CodeThemeList)
-    const [codeThemeId, setCodeThemeID] = useState(localStorage.getItem("code-theme"))
+    const [codeThemeId, setCodeThemeID] = useState(localStorage.getItem("code-theme")||"default")
     const codeThemeChange = (val: string) => {
         setCodeThemeID(val)
         CodeThemeList.forEach(element => {

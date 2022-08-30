@@ -14,7 +14,7 @@ export default function Themes() {
     const [theme, setTheme] = useState<Array<API.Theme>>([
         {
             name: "默认主题",
-            id: "9999",
+            id: "999",
             theme:"",
         }
     ]);
@@ -25,8 +25,7 @@ export default function Themes() {
     const dispatch = useDispatch();
     useEffect(() => {
         getTheme().then()
-        console.log(localStorage.getItem("theme_id"))
-        setThemeID(localStorage.getItem("theme_id") ? localStorage.getItem("theme_id") as string : "999")
+        setThemeID( localStorage.getItem("theme_id")||"999")
     }, [])
 
     const getTheme = async () => {

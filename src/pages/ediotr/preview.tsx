@@ -1,6 +1,6 @@
 import {Icon, Message, Modal, Tooltip, Image} from "@arco-design/web-react"
 import {useRef, useState} from "react"
-import {CopyToClipboard, defaultStyle, emitter, EventType} from "@/utils"
+import {CopyToClipboard, defaultStyle, emitter, EventType, markdownParser} from "@/utils"
 import "@/style/editor/index.less"
 import juice from "juice"
 import {ZhiHuIcon} from "@/components/icons/zhihu"
@@ -53,11 +53,12 @@ export default function Preview(props: Props) {
             type: 'icon-phone',
             title: "手机端样式预览"
         },
-        // {
-        //     id: 5,
-        //     icon: <UpdateRotation theme="outline" size="20" fill="#333" strokeWidth={3}/>,
-        //     type: 'icon-sync'
-        // }
+        {
+            id: 5,
+            icon: <UpdateRotation theme="outline" size="20" fill="#333" strokeWidth={3}/>,
+            type: 'icon-sync',
+            title:"多平台发布"
+        },
         {
             id: 6,
             icon: <PayCodeOne theme="outline" size="20" fill="#333" strokeWidth={3}/>,
@@ -86,12 +87,19 @@ export default function Preview(props: Props) {
                 setDeviceType('icon-pc')
                 break;
             case 5:
-                console.log(articleDetail, "文章详情")
+                if(articleDetail.title===""){
+                    Message.error("缺乏标题!")
+                    return
+                }
+                if (articleDetail.md_content===""){
+                    Message.error("缺乏文章内容!")
+                    return
+                }
                 //@ts-ignore
                 window.syncPost({
                     title: articleDetail.title,
-                    // desc:articleDetail.desc,
-                    content: articleDetail.md_content,
+                    desc:articleDetail.summary,
+                    content: markdownParser.render(articleDetail.md_content||""),
                     thumb: articleDetail.thumbnail,
                 })
                 break;
