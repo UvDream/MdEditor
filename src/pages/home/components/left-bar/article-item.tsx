@@ -1,26 +1,23 @@
 import {Button, Divider, Menu, Message, Popover} from "@arco-design/web-react";
 import {FolderSuccess, FolderSuccessOne, SettingConfig} from "@icon-park/react";
-import "./index.less"
+import "../../../../style/home/left-bar.less"
 import {useNavigate, useSearchParams} from "react-router-dom";
 import dayjs from "dayjs";
-import {ArticleApi} from "@/api/article";
-import {ResponseType} from "@/api/request";
+import {ResponseType} from "@/utils/request";
 import {useDispatch} from "react-redux";
 import {changeState} from "@/store/save-state";
+import {deleteArticle__openAPI__delete} from "@/services/api/article";
 
 type Props = {
-    article: ArticleItemType,
+    article: API.Article,
     onClick?: (id: string) => void,
     active: string,
     id: string,
     deleteSuccess: () => void,
+    publish:()=>void
+    history:()=>void
 }
-export type ArticleItemType = {
-    uuid: string;
-    title: string;
-    status: string;
-    CreatedAt: string;
-}
+
 export default function ArticleItem(props: Props) {
     const navigate = useNavigate()
     const [searchParams] = useSearchParams();
@@ -29,7 +26,7 @@ export default function ArticleItem(props: Props) {
         const obj = {
             id: props.id,
         }
-        const res: ResponseType = await ArticleApi.delete(obj) as ResponseType
+        const res: ResponseType = await deleteArticle__openAPI__delete(obj) as unknown as ResponseType
         if (res.code === 200) {
             props.deleteSuccess()
             Message.success('删除成功')
@@ -38,17 +35,12 @@ export default function ArticleItem(props: Props) {
     const dropList = (
         <Menu style={{width: 120}}>
             <Menu.Item key='1'>
-                <Button type='text' style={{fontSize: 12, lineHeight: "30px", height: 30}}>
+                <Button type='text' style={{fontSize: 12, lineHeight: "30px", height: 30}} onClick={props.publish}>
                     发布文章
                 </Button>
             </Menu.Item>
-            <Menu.Item key='2'>
-                <Button type='text' style={{fontSize: 12, lineHeight: "30px", height: 30}}>
-                    设置
-                </Button>
-            </Menu.Item>
             <Menu.Item key='4'>
-                <Button type='text' style={{fontSize: 12, lineHeight: "30px", height: 30}}>
+                <Button type='text' style={{fontSize: 12, lineHeight: "30px", height: 30}} onClick={props.history}>
                     查看文章历史
                 </Button>
             </Menu.Item>
@@ -64,16 +56,24 @@ export default function ArticleItem(props: Props) {
         </Menu>
     )
     const ArticleClick = () => {
-        props.article.uuid && navigate(`/editor?id=${props.article.uuid}`)
-        props.onClick && props.onClick(props.article.uuid)
+        if (props.article.id) {
+            navigate(`/editor?id=${props.article.id}`)
+        } else {
+            navigate(`/editor?id=add`)
+        }
+        props.onClick && props.onClick(props.article.id||"")
         dispatch(changeState(false))
     }
     const fillColor = () => {
-        return props.active === props.article.uuid ? "#fff" : "#333"
+        let color=props.active === props.article.id ? "#fff" : "#333"
+        if (props.active==="add"&&!props.article.id){
+            color="#fff"
+        }
+        return color
     }
     return (
         <div
-            className={["article-item", props.active == props.article.uuid || props.article.uuid === searchParams.get('id') ? "active-article" : ""].join(" ")}
+            className={["article-item", (props.article.id === props.active) || props.article.id === searchParams.get('id')||(props.active==="add"&& !props.article.id) ? "active-article" : ""].join(" ")}
             onClick={ArticleClick}>
             <div className={"article-item-left"}>
                 <div className={"article-item-left-top"}>
@@ -89,7 +89,7 @@ export default function ArticleItem(props: Props) {
                     </div>
                 </div>
                 <div className={"article-item-left-bottom"}>
-                    {dayjs(props.article.CreatedAt).format("YYYY-MM-DD HH:mm:ss")}
+                    {dayjs(props.article.create_time).format("YYYY-MM-DD HH:mm:ss")}
                 </div>
             </div>
             <div className={"article-item-right"}>

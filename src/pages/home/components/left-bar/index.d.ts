@@ -12,14 +12,14 @@ export type ArticleSaveProps={
     detail?: ArticleDetailType
 }
 export  type TagItemType = {
-    ID: number;
+    id: number;
     name: string;
     slug: string;
     thumbnail: string;
     color: string;
 }
 export type CategoryItemType = {
-    ID: number;
+    id: number;
     name: string;
     slug: string;
     description: string;
@@ -29,7 +29,7 @@ export type CategoryItemType = {
     children: CategoryItemType[];
 }
 export type fileType = {
-    ID: number;
+    id: number;
     url: string;
     status: string;
     percent: number;

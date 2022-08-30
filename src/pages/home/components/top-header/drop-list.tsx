@@ -1,7 +1,7 @@
 import {TopMenusType} from "@/pages/home/components/common";
 import MenusItem from "@/pages/home/components/top-header/menus-item";
 import {Divider, Menu} from "@arco-design/web-react";
-import "./top-header.less"
+import "../../../../style/home/top-header.less"
 import Themes from "@/pages/home/components/top-header/themes";
 import CodeThemes from "@/pages/home/components/top-header/code-themes";
 import Show from "@/pages/home/components/top-header/show";

@@ -16,7 +16,11 @@ export default function LoginPage() {
     return (
         <div className={"login-page"}>
             {
-                status ? <Login/> : <Register/>
+                status ? <Login onSwitch={()=>{
+                    setStatus(false)
+                }}/> : <Register onSwitch={()=>{
+                    setStatus(true)
+                }} />
             }
         </div>
     );

@@ -1,0 +1,131 @@
+.left-bar {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  //工具栏
+  &-tool {
+    flex-basis: 30px;
+    flex-shrink: 0;
+    border-right: 1px solid var(--color-neutral-3);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0;
+
+    &-block {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 45px;
+    }
+  }
+
+  //列表
+  &-list {
+    height: 100%;
+    flex-grow: 1;
+    overflow: hidden;
+    border-right: 1px solid var(--color-neutral-3);
+
+  }
+
+  //历史记录
+  .history {
+    height: 100%;
+
+    &-content {
+      height: 100%;
+      overflow: auto;
+    }
+  }
+}
+
+//文章列表小项
+.article-list {
+  width: 100%;
+  height: 100%;
+
+  .active-article {
+    background-color: rgb(var(--arcoblue-6));
+
+    .article-item-left-top {
+      color: #fff;
+    }
+
+    .article-item-left-bottom {
+      color: #fff;
+    }
+  }
+
+  &-content {
+    max-height: calc(100% - 145px);
+    overflow-y: auto;
+
+    & > div:last-child {
+      border-bottom: 1px solid var(--color-neutral-3);
+    }
+  }
+
+
+  .article-item {
+    padding: 8px 5px;
+    display: flex;
+    user-select: none;
+    width: 100%;
+    border-top: 1px solid var(--color-neutral-3);
+    cursor: default;
+
+    &-left {
+      width: calc(100% - 30px);
+
+      &-top {
+        display: flex;
+        align-items: center;
+        height: 30px;
+        font-size: 14px;
+
+        .title {
+          width: 100%;
+        }
+      }
+
+      &-bottom {
+        display: flex;
+        align-items: center;
+        font-size: 12px;
+        height: 30px;
+        color: var(--color-text-3);
+      }
+    }
+
+    &-right {
+      width: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  &-pagination {
+    margin-top: 10px;
+  }
+}
+
+.arco-menu-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+}
+
+.arco-popover-content {
+  padding: 0
+}
+
+.arco-menu-light {
+  border-radius: 5px;
+}
+
+.user-status {
+}

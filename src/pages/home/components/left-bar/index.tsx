@@ -1,4 +1,4 @@
-import "./index.less";
+import "@/style/home/left-bar.less";
 import ArticleList from "./article-list";
 import HistoryList from "@/pages/home/components/left-bar/history-list";
 import {Avatar, CheckOne, CloseOne, Config, Log, Picture, ViewList} from "@icon-park/react"
@@ -6,25 +6,21 @@ import {useEffect, useRef, useState} from "react";
 import {Message, Popover} from "@arco-design/web-react";
 import UserStatus from "@/pages/home/components/left-bar/user";
 import SetConfig from "@/pages/home/components/left-bar/config";
-import {ArticleDetailState, CalcWordCount} from "@/utils";
-import {ResponseType} from "@/api/request";
-import {ArticleApi, ArticleDetailType} from "@/api/article";
 import {useNavigate, useSearchParams} from "react-router-dom";
 import ArticleSave from "@/pages/home/components/left-bar/article-save";
 import {useKeyPress} from "ahooks";
-import {UserInfo} from "@/api/user";
 import ImgList from "@/pages/home/components/left-bar/img-list";
-import {useRecoilState} from "recoil";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch, useSelector, useStore} from "react-redux";
 import {RootState} from "@/store";
 import {changeState} from "@/store/save-state";
+import {AddArticle, GetArticleDetail, SetArticleDetail} from "@/store/article";
+import {postArticleCreate, putArticleUpdate} from "@/services/api/article";
 
 export default function LeftBar() {
     //#region 变量
     const navigate = useNavigate()
     const articleListRef = useRef()
-    //markdown 内容
-    const [articleMd, setArticleMd] = useRecoilState(ArticleDetailState);
+    const store = useStore()
     const saveState = useSelector((store: RootState) => store.saveState)
     const dispatch = useDispatch();
     //bar是否选中
@@ -36,7 +32,7 @@ export default function LeftBar() {
     //路由参数
     const [searchParams] = useSearchParams();
     //文章详情
-    const [articleDetail, setArticleDetail] = useState<ArticleDetailType>({} as ArticleDetailType);
+    const articleDetail = useSelector((store: RootState) => store.articleDetail)
     //文章配置
     const [articleSaveVisible, setArticleSaveVisible] = useState(false);
     //图片库
@@ -44,18 +40,10 @@ export default function LeftBar() {
     //#endregion
     useEffect(() => {
         const id = searchParams.get('id');
-        id && getArticleDetail(id)
+        //@ts-ignore
+        id && dispatch(GetArticleDetail({id}))
     }, [])
     //#region 方法
-    //获取文章详情
-    const getArticleDetail = async (id: string) => {
-        const res: ResponseType = await ArticleApi.detail({id}) as ResponseType
-        if (res.code === 200) {
-            setArticleDetail(res.data)
-            console.log("获取文章详情")
-            setArticleMd(res.data.md_content)
-        }
-    }
     //设置弹窗方法
     //#region
     const configOk = () => {
@@ -68,41 +56,29 @@ export default function LeftBar() {
     //编辑器变化传入内容
     //文章保存配置
     //#region
-    const articleSaveOk = async (status: boolean, detail: ArticleDetailType) => {
-        console.log("保存文章信息", detail)
-        status ? articleDetail.status = "PUBLISHED" : articleDetail.status = "DRAFT"
-        articleDetail.title = detail.title
-        articleDetail.categories_id = detail.categories_id
-        articleDetail.disable_comments = detail.disable_comments
-        articleDetail.is_top = detail.is_top
-        articleDetail.password = detail.password
-        articleDetail.slug = detail.slug
-        articleDetail.summary = detail.summary
-        articleDetail.tags_id = detail.tags_id
-        articleDetail.thumbnail = detail.thumbnail
-        setArticleDetail(articleDetail)
-        const res = await saveArticle()
+    const articleSaveOk = async (status: boolean, detail: API.Article) => {
+        status ? detail.status = "PUBLISHED" : detail.status = "DRAFT"
+        dispatch(SetArticleDetail(detail))
+        //@ts-ignore
+        const res = await saveArticle(store.getState().articleDetail)
         if (res) {
             setArticleSaveVisible(false);
-            dispatch(changeState(false))
             dispatch(changeState(true))
         }
     }
+
     //保存文章
     useKeyPress('meta.s', (event) => {
         event.preventDefault()
-        saveArticle().then()
+        saveArticle(articleDetail).then()
     })
-    const saveArticle = () => {
-        articleDetail.md_content = articleMd
-        articleDetail.word_count = CalcWordCount(articleDetail.md_content)
+    const saveArticle = (data: API.Article) => {
         return new Promise(async (resolve, reject) => {
-            if (articleDetail.uuid) {
-                const res = await ArticleApi.update(articleDetail) as ResponseType
+            if (articleDetail.id) {
+                console.log("更新文章", data)
+                const res = await putArticleUpdate(data) as unknown as API.Response
                 if (res.code === 200) {
-                    console.log("~~~~~~~~~~~~~~~~~~~~~修改文章~~~~~~~~~~~~~~~~~~~~~")
-                    console.log(articleListRef)
-                    navigate(`/editor?id=${res.data.uuid}`)
+                    navigate(`/editor?id=${res.data.id}`)
                     Message.success("修改成功")
                     // @ts-ignore
                     articleListRef.current?.getList()
@@ -110,10 +86,10 @@ export default function LeftBar() {
                     resolve(true)
                 }
             } else {
-                const res = await ArticleApi.create(articleDetail) as ResponseType
+                console.log("保存文章", data)
+                const res = await postArticleCreate(data) as unknown as API.Response
                 if (res.code === 200) {
-                    console.log("~~~~~~~~~~~~~~~~~~~~~保存文章~~~~~~~~~~~~~~~~~~~~~")
-                    navigate(`/editor?id=${res.data.uuid}`)
+                    navigate(`/editor?id=${res.data.id}`)
                     Message.success("保存成功")
                     // @ts-ignore
                     articleListRef.current.getList()
@@ -127,38 +103,10 @@ export default function LeftBar() {
         setArticleSaveVisible(false)
         dispatch(changeState(false))
     }
-    //新增文章
-    const addArticle = () => {
-        const userInfo: UserInfo = JSON.parse(localStorage.getItem("user") || "{}")
-        const obj: ArticleDetailType = {
-            auth_id: userInfo.uuid,
-            author: [],
-            categories: [],
-            categories_id: [],
-            comment_count: 0,
-            disable_comments: false,
-            editor_type: "",
-            html_content: "",
-            is_top: false,
-            likes: 0,
-            md_content: "",
-            password: "",
-            slug: "",
-            status: "DRAFT",
-            summary: "",
-            tags: [],
-            tags_id: [],
-            thumbnail: "",
-            title: "新建文章",
-            visits: 0,
-            word_count: 0
-        } as ArticleDetailType
-        setArticleDetail(obj)
-        navigate(`/editor?id=add`)
-        console.log("新增文章")
-    }
+
     //#endregion
     //#endregion
+
     return (
         <div className={"left-bar"}>
             <div className={"left-bar-tool"}>
@@ -224,7 +172,7 @@ export default function LeftBar() {
                         <Popover
                             trigger='click'
                             position='rb'
-                            popupVisible={popupVisible}
+                            // popupVisible={popupVisible}
                             content={
                                 <UserStatus onClick={() => {
                                     setPopupVisible(!popupVisible)
@@ -261,12 +209,20 @@ export default function LeftBar() {
                 {
                     selected === 0 ?
                         <ArticleList
+                            publish={() => {
+                                setArticleSaveVisible(true)
+                            }}
+                            history={()=>{
+                                setSelected(1)
+                            }}
                             ref={articleListRef}
                             addFunc={() => {
-                                addArticle()
+                                dispatch(AddArticle())
+                                navigate(`/editor?id=add`)
                             }}
-                            onChange={(id: string) => {
-                                getArticleDetail(id).then()
+                            onClick={(id: string) => {
+                                //@ts-ignore
+                                dispatch(GetArticleDetail({id}))
                             }}
                         />
                         :
@@ -281,7 +237,6 @@ export default function LeftBar() {
             />
             {/*文章配置*/}
             <ArticleSave
-                detail={articleDetail}
                 visible={articleSaveVisible}
                 onOk={articleSaveOk}
                 onCancel={articleSaveCancel}

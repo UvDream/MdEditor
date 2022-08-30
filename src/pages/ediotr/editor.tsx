@@ -1,4 +1,4 @@
-import {useEffect, useRef} from 'react';
+import { useRef} from 'react';
 import CodeMirror from '@uiw/react-codemirror';
 import {markdown, markdownLanguage} from '@codemirror/lang-markdown';
 import {css} from '@codemirror/lang-css';
@@ -14,6 +14,7 @@ type Props = {
     insert?: boolean;
     onChange?: (value: string) => void;
     mdEditor?: boolean;
+    readOnly?: boolean;
 };
 export default function Editor(props: Props) {
     const editor = useRef(null) ;
@@ -78,6 +79,7 @@ export default function Editor(props: Props) {
             <CodeMirror
                 placeholder={"请输入文章内容"}
                 width="100%"
+                readOnly={props.readOnly}
                 height="100vh"
                 autoFocus={true}
                 ref={editor}

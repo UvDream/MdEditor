@@ -1,36 +1,41 @@
 import {Button, Form, Input, Message, Modal, Select, Space, Switch, TreeSelect} from "@arco-design/web-react";
-import {ArticleApi, ArticleDetailType} from "@/api/article";
-import {ResponseType} from "@/api/request";
 import {useEffect, useRef, useState} from "react";
 import UploadFile from "@/components/upload";
-import {CategoryItemType, fileType, ArticleSaveProps, TagItemType} from "./index.d";
+import {ArticleSaveProps, CategoryItemType, fileType, TagItemType} from "./index.d";
+import {useSelector} from "react-redux";
+import {RootState} from "@/store";
+import {getTagList} from "@/services/api/tag";
+import { getCategoryList} from "@/services/api/category";
 
 const FormItem = Form.Item;
 const Option = Select.Option;
 
 export default function ArticleSave(props: ArticleSaveProps) {
-    const {detail} = props;
-    const [form] = Form.useForm<ArticleDetailType>();
+    const [form] = Form.useForm<API.Article>();
     const formRef = useRef();
+    const articleDetail = useSelector((store: RootState) => store.articleDetail)
+    useEffect(() => {
+        form.setFieldsValue(articleDetail)
+    }, [articleDetail])
     const [tagList, setTagList] = useState<Array<TagItemType>>([]);
     const [categoryList, setCategoryList] = useState<Array<CategoryItemType>>([]);
     const [file, setFile] = useState<fileType>();
     const cs = `arco-upload-list-item${file && file.status === 'error' ? ' is-error' : ''}`;
     useEffect(() => {
-        getTagList().then()
-        getCategoryList().then()
+        TagList().then()
+        CategoryList().then()
     }, [])
 
-    const getTagList = async () => {
+    const TagList = async () => {
         const obj = {}
-        const res: ResponseType = await ArticleApi.tagList(obj) as ResponseType
+        const res = await getTagList(obj) as unknown as API.Response
         if (res.code === 200) {
             setTagList(res.data)
         }
     }
-    const getCategoryList = async () => {
+    const CategoryList = async () => {
         const obj = {}
-        const res: ResponseType = await ArticleApi.categoryList(obj) as ResponseType
+        const res = await getCategoryList(obj) as unknown as  API.Response
         if (res.code === 200) {
             setCategoryList(res.data)
         }
@@ -40,8 +45,6 @@ export default function ArticleSave(props: ArticleSaveProps) {
             try {
                 //@ts-ignore
                 await formRef.current.validate();
-                Message.info('校验通过，提交成功！');
-                // @ts-ignore
                 props.onOk(status, form.getFieldsValue())
             } catch (_) {
                 //@ts-ignore
@@ -51,7 +54,7 @@ export default function ArticleSave(props: ArticleSaveProps) {
         }
     }
     const handleCancel = () => {
-        props.onCancel&&props.onCancel()
+        props.onCancel && props.onCancel()
         //@ts-ignore
         formRef.current.resetFields();
     }
@@ -84,17 +87,17 @@ export default function ArticleSave(props: ArticleSaveProps) {
             focusLock={true}
         >
             {/*@ts-ignore*/}
-            <Form ref={formRef} form={form} initialValues={props.detail}>
+            <Form ref={formRef} form={form} initialValues={articleDetail}>
                 <FormItem label='文章标题' field={'title'} rules={[{required: true, message: "请输入标题"}]}>
                     <Input/>
                 </FormItem>
-                <FormItem label='文章摘要' field={'summary'} rules={[{required: true, message: "请输入文章摘要"}]}>
+                <FormItem label='文章摘要' field={'summary'}>
                     <Input/>
                 </FormItem>
                 <FormItem label='标签' field={'tags_id'}>
                     <Select mode='multiple'>
                         {tagList.map((item) => (
-                            <Option key={item.ID} value={item.name}>
+                            <Option key={item.id} value={item.name}>
                                 {item.name}
                             </Option>
                         ))}
@@ -104,7 +107,7 @@ export default function ArticleSave(props: ArticleSaveProps) {
                     <TreeSelect
                         treeData={categoryList}
                         fieldNames={{
-                            key: 'ID',
+                            key: 'id',
                             title: 'name',
                             children: 'children',
                         }}

@@ -1,3 +1,6 @@
+
+
+
 export interface TopMenusType {
     id: string;
     name?: string;
@@ -127,6 +130,11 @@ export const TopMenusData: Array<TopMenusType> = [
                 id: "2-19",
                 name: '水平分割线',
                 shortcuts: "horizontal_line"
+            },
+            {
+                id: "2-20",
+                name: '缩进',
+                shortcuts: "indent"
             }
         ]
     },
