@@ -89,6 +89,7 @@ export default function ThemeEditor() {
                 language={'css'}
                 onChange={(val: string) => {
                     setEditorStyle(val)
+                    dispatch(SetTheme(val))
                 }}
             />
             <Modal

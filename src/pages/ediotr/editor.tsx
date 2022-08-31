@@ -80,7 +80,6 @@ export default function Editor(props: Props) {
                 placeholder={"请输入文章内容"}
                 width="100%"
                 readOnly={props.readOnly}
-                height="100vh"
                 autoFocus={true}
                 ref={editor}
                 onChange={(value: string) => {
