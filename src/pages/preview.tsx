@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {useSearchParams} from "react-router-dom";
-import {getPublicBaseMd} from "@/services/api/article";
+import {getPublicBaseMd} from "@/api/article";
 import {defaultStyle, markdownParser, setEditorStyle} from "@/utils";
 import "@/style/editor/preview_phone.less"
 import {Refresh} from "@icon-park/react";

@@ -5,7 +5,7 @@ import {defaultStyle, setEditorStyle} from "@/utils";
 import {Button, Form, Input, Modal, Switch, Message} from "@arco-design/web-react";
 import "@/style/editor/index.less";
 import {useEffect, useState} from "react";
-import {postThemeCreate, putThemeUpdate} from "@/services/api/theme";
+import {postThemeCreate, putThemeUpdate} from "@/api/theme";
 import {SetTheme, UpdateTheme} from "@/store/theme";
 
 export default function ThemeEditor() {
@@ -43,7 +43,7 @@ export default function ThemeEditor() {
             //@ts-ignore
             const res = await getThemeDetail({id}) as unknown as API.Response
             if (res.success) {
-                console.log("获取主题详情",res.data)
+                console.log("获取主题详情", res.data)
                 dispatch(UpdateTheme(res.data))
             }
         }
@@ -56,7 +56,7 @@ export default function ThemeEditor() {
                 theme: theme ? theme : "",
                 ...form.getFieldsValue(),
             }
-            if (!id||id === "") {
+            if (!id || id === "") {
                 const res = await postThemeCreate(themeDetail) as unknown as API.Response
                 if (res.success) {
                     Message.success("发布主题成功!")
