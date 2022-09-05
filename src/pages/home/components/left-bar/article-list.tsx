@@ -7,13 +7,13 @@ import {useSearchParams} from "react-router-dom";
 import {ArticleDetailState} from "@/utils";
 import {AddOne} from "@icon-park/react";
 import {useRecoilState} from "recoil";
-import {getArticleList} from "@/services/api/article";
+import {getArticleList} from "@/api/article";
 
 type Props = {
     onClick?: (id: string) => void;
     addFunc?: () => void;
-    publish?:()=>void
-    history?:()=>void
+    publish?: () => void
+    history?: () => void
 };
 const ArticleList = (props: Props, ref: any) => {
     const [searchParams] = useSearchParams();
@@ -49,7 +49,7 @@ const ArticleList = (props: Props, ref: any) => {
                 long
                 type="text"
                 onClick={() => {
-                    if(articleList.some(item=>!item.id)){
+                    if (articleList.some(item => !item.id)) {
                         Message.error("已经存在草稿文章未保存!")
                         return
                     }
@@ -81,13 +81,13 @@ const ArticleList = (props: Props, ref: any) => {
                         {articleList.map((item: API.Article) => {
                             return (
                                 <ArticleItem
-                                    publish={()=>{
-                                        props.publish&&props.publish()
+                                    publish={() => {
+                                        props.publish && props.publish()
                                     }}
-                                    history={()=>{
-                                        props.history&&props.history()
+                                    history={() => {
+                                        props.history && props.history()
                                     }}
-                                    id={item.id||""}
+                                    id={item.id || ""}
                                     key={item.id}
                                     active={active}
                                     article={item}
@@ -95,7 +95,7 @@ const ArticleList = (props: Props, ref: any) => {
                                         ArticleList().then();
                                     }}
                                     onClick={(id) => {
-                                        setActive(item.id||"add");
+                                        setActive(item.id || "add");
                                         props.onClick && props.onClick(id);
                                     }}
                                 />
