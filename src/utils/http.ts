@@ -44,9 +44,13 @@ const request: IRequest = (url: string, opts: any = {method: 'GET'}) => {
             switch (data.code) {
                 case 50000:
                     Message.error("未登录,请先登录!")
+                    localStorage.removeItem("user")
+                    localStorage.removeItem("token")
                     break;
                 case 50001:
                     Message.error("授权过期,请重新登录!")
+                    localStorage.removeItem("user")
+                    localStorage.removeItem("token")
                     break;
                 default:
             }

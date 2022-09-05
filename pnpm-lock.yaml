@@ -33,6 +33,7 @@ specifiers:
   katex: ^0.6.0
   less: ^4.1.2
   markdown-it: ^13.0.0
+  markdown-it-cjk-breaks: ^1.1.3
   markdown-it-emoji: ^2.0.2
   markdown-it-katex: ^2.0.3
   mitt: ^3.0.0
@@ -70,6 +71,7 @@ dependencies:
   juice: 8.1.0
   katex: 0.6.0
   markdown-it: 13.0.1
+  markdown-it-cjk-breaks: 1.1.3
   markdown-it-emoji: 2.0.2
   markdown-it-katex: 2.0.3
   mitt: 3.0.0
@@ -3670,7 +3672,6 @@ packages:
 
   /eastasianwidth/0.2.0:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
-    dev: true
 
   /electron-to-chromium/1.4.230:
     resolution: {integrity: sha512-3pwjAK0qHSDN9+YAF4fJknsSruP7mpjdWzUSruIJD/JCH77pEh0SorEyb3xVaKkfwk2tzjOt2D8scJ0KAdfXLA==}
@@ -5948,6 +5949,12 @@ packages:
     resolution: {integrity: sha512-hdN1wVrZbb29eBGiGjJbeP8JbKjq1urkHJ/LIP/NY48MZ1QVXUsQBV1G1zvYFHn1XE06cwjBsOI2K3Ulnj1YXQ==}
     engines: {node: '>=8'}
     dev: true
+
+  /markdown-it-cjk-breaks/1.1.3:
+    resolution: {integrity: sha512-/gX3LueMp+5FdUkqcFPK5nHI6t85uq1rMv8yhrmCOZhU90XqybQj8OT1hVrxrdseajaHLPBK43xLzEKPosgTDA==}
+    dependencies:
+      eastasianwidth: 0.2.0
+    dev: false
 
   /markdown-it-emoji/2.0.2:
     resolution: {integrity: sha512-zLftSaNrKuYl0kR5zm4gxXjHaOI3FAOEaloKmRA5hijmJZvSjmxcokOLlzycb/HXlUFWzXqpIEoyEMCE4i9MvQ==}
