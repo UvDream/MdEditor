@@ -1,4 +1,4 @@
-import {Icon, Message, Modal, Tooltip, Image} from "@arco-design/web-react"
+import {Icon, Message, Modal, Tooltip, Image, Button} from "@arco-design/web-react"
 import {useRef, useState} from "react"
 import {CopyToClipboard, defaultStyle, emitter, EventType, markdownParser} from "@/utils"
 import "@/style/editor/index.less"
@@ -26,6 +26,7 @@ export default function Preview(props: Props) {
     emitter.on(EventType.Scroll, (val: any) => {
         // console.log("滚动高度", val)
         let scrollView = document.getElementById("scroll") as unknown as HTMLElement
+        // console.log("滚动")
         scrollView.scrollTop = val * 0.8
     })
     const IconList = [
@@ -153,6 +154,7 @@ export default function Preview(props: Props) {
             <Modal
                 title='手机扫码预览'
                 visible={visible}
+                footer={null}
                 onOk={() => setVisible(false)}
                 onCancel={() => setVisible(false)}
                 autoFocus={false}

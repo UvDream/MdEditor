@@ -12,6 +12,7 @@ specifiers:
   '@tauri-apps/api': ^1.0.2
   '@tauri-apps/cli': ^1.0.5
   '@types/markdown-it': ^12.2.3
+  '@types/markdown-it-emoji': ^2.0.2
   '@types/qrcode': ^1.5.0
   '@types/react': ^18.0.0
   '@types/react-dom': ^18.0.0
@@ -29,8 +30,12 @@ specifiers:
   highlight.js: ^11.6.0
   inquirer: ^8.1.2
   juice: ^8.0.0
+  katex: ^0.6.0
   less: ^4.1.2
   markdown-it: ^13.0.0
+  markdown-it-cjk-breaks: ^1.1.3
+  markdown-it-emoji: ^2.0.2
+  markdown-it-katex: ^2.0.3
   mitt: ^3.0.0
   qrcode.react: ^3.1.0
   react: ^18.0.0
@@ -64,7 +69,11 @@ dependencies:
   dayjs: 1.11.5
   highlight.js: 11.6.0
   juice: 8.1.0
+  katex: 0.6.0
   markdown-it: 13.0.1
+  markdown-it-cjk-breaks: 1.1.3
+  markdown-it-emoji: 2.0.2
+  markdown-it-katex: 2.0.3
   mitt: 3.0.0
   qrcode.react: 3.1.0_react@18.2.0
   react: 18.2.0
@@ -79,6 +88,7 @@ devDependencies:
   '@arco-plugins/vite-react': 1.3.1
   '@tauri-apps/cli': 1.0.5
   '@types/markdown-it': 12.2.3
+  '@types/markdown-it-emoji': 2.0.2
   '@types/qrcode': 1.5.0
   '@types/react': 18.0.17
   '@types/react-dom': 18.0.6
@@ -2288,6 +2298,12 @@ packages:
     resolution: {integrity: sha512-HZQYqbiFVWufzCwexrvh694SOim8z2d+xJl5UNamcvQFejLY/2YUtzXHYi3cHdI7PMlS8ejH2slRAOJQ32aNbA==}
     dev: true
 
+  /@types/markdown-it-emoji/2.0.2:
+    resolution: {integrity: sha512-2ln8Wjbcj/0oRi/6VnuMeWEHHuK8uapFttvcLmDIe1GKCsFBLOLBX+D+xhDa9oWOQV0IpvxwrSfKKssAqqroog==}
+    dependencies:
+      '@types/markdown-it': 12.2.3
+    dev: true
+
   /@types/markdown-it/12.2.3:
     resolution: {integrity: sha512-GKMHFfv3458yYy+v/N8gjufHO6MSZKCOXpZc5GXIWWy8uldwfmPn98vp81gZ5f9SVw8YYBctgfJ22a2d7AOMeQ==}
     dependencies:
@@ -3656,7 +3672,6 @@ packages:
 
   /eastasianwidth/0.2.0:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
-    dev: true
 
   /electron-to-chromium/1.4.230:
     resolution: {integrity: sha512-3pwjAK0qHSDN9+YAF4fJknsSruP7mpjdWzUSruIJD/JCH77pEh0SorEyb3xVaKkfwk2tzjOt2D8scJ0KAdfXLA==}
@@ -5735,6 +5750,13 @@ packages:
       - encoding
     dev: false
 
+  /katex/0.6.0:
+    resolution: {integrity: sha512-rS4mY3SvHYg5LtQV6RBcK0if7ur6plyEukAOV+jGGPqFImuzu8fHL6M752iBmRGoUyF0bhZbAPoezehn7xYksA==}
+    hasBin: true
+    dependencies:
+      match-at: 0.1.1
+    dev: false
+
   /keyv/4.4.1:
     resolution: {integrity: sha512-PzByhNxfBLnSBW2MZi1DF+W5+qB/7BMpOokewqIvqS8GFtP7xHm2oeGU72Y1fhtfOv/FiEnI4+nyViYDmUChnw==}
     dependencies:
@@ -5928,6 +5950,22 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
+  /markdown-it-cjk-breaks/1.1.3:
+    resolution: {integrity: sha512-/gX3LueMp+5FdUkqcFPK5nHI6t85uq1rMv8yhrmCOZhU90XqybQj8OT1hVrxrdseajaHLPBK43xLzEKPosgTDA==}
+    dependencies:
+      eastasianwidth: 0.2.0
+    dev: false
+
+  /markdown-it-emoji/2.0.2:
+    resolution: {integrity: sha512-zLftSaNrKuYl0kR5zm4gxXjHaOI3FAOEaloKmRA5hijmJZvSjmxcokOLlzycb/HXlUFWzXqpIEoyEMCE4i9MvQ==}
+    dev: false
+
+  /markdown-it-katex/2.0.3:
+    resolution: {integrity: sha512-nUkkMtRWeg7OpdflamflE/Ho/pWl64Lk9wNBKOmaj33XkQdumhXAIYhI0WO03GeiycPCsxbmX536V5NEXpC3Ng==}
+    dependencies:
+      katex: 0.6.0
+    dev: false
+
   /markdown-it/13.0.1:
     resolution: {integrity: sha512-lTlxriVoy2criHP0JKRhO2VDG9c2ypWCsT237eDiLqi09rmbKoUetyGHq2uOIRoRS//kfoJckS0eUzzkDR+k2Q==}
     hasBin: true
@@ -5937,6 +5975,10 @@ packages:
       linkify-it: 4.0.1
       mdurl: 1.0.1
       uc.micro: 1.0.6
+    dev: false
+
+  /match-at/0.1.1:
+    resolution: {integrity: sha512-h4Yd392z9mST+dzc+yjuybOGFNOZjmXIPKWjxBd1Bb23r4SmDOsk2NYCU2BMUBGbSpZqwVsZYNq26QS3xfaT3Q==}
     dev: false
 
   /mathml-tag-names/2.1.3:

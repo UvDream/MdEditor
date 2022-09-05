@@ -1,67 +1,116 @@
 export const themeTemplate = `
 /*默认样式*/
 /*全局属性*/
-.md-editor{
-}
+.md-editor {}
+
 /*标题*/
 .md-editor h1,
 .md-editor h2,
 .md-editor h3,
 .md-editor h4,
 .md-editor h5,
-.md-editor h6{
- }
-.md-editor h1{
-}
-.md-editor h2{
-}
-.md-editor h3{
-}
-.md-editor h4{
-}
-.md-editor h5{
-}
-.md-editor h6{
-}
-.md-editor h1 .prefix{
-}
-.md-editor h2 .prefix{
-}
-.md-editor h3 .prefix{
-}
-.md-editor h4 .prefix{
-}
-.md-editor h5 .prefix{
-}
-.md-editor h6 .prefix{
-}
-.md-editor h1 .suffix{
-}   
-.md-editor h2 .suffix{
-}
-.md-editor h3 .suffix{
-}
-.md-editor h4 .suffix{
-}
-.md-editor h5 .suffix{
-}
-.md-editor h6 .suffix{
-}
-.md-editor h1 .content{
-}
-.md-editor h2 .content{
-}
-.md-editor h3 .content{
-}
-.md-editor h4 .content{
-}
-.md-editor h5 .content{
-}
-.md-editor h6 .content{
-}
+.md-editor h6 {}
+
+/*********一级标题*********/
+.md-editor h1 {}
+
+.md-editor h1:before {}
+
+.md-editor h1:after {}
+
+/*前缀*/
+.md-editor h1 .prefix {}
+
+/*内容*/
+.md-editor h1 .content {}
+
+/*后缀*/
+.md-editor h1 .suffix {}
+
+/*********二级标题*********/
+.md-editor h2 {}
+
+.md-editor h2:before {}
+
+.md-editor h2:after {}
+
+/*前缀*/
+.md-editor h2 .prefix {}
+
+/*内容*/
+.md-editor h2 .content {}
+
+/*后缀*/
+.md-editor h2 .suffix {}
+
+
+/*********三级标题*********/
+.md-editor h3 {}
+
+.md-editor h3:before {}
+
+.md-editor h3:after {}
+
+/*前缀*/
+.md-editor h3 .prefix {}
+
+/*内容*/
+.md-editor h3 .content {}
+
+/*后缀*/
+.md-editor h3 .suffix {}
+
+
+/*********四级标题*********/
+.md-editor h4 {}
+
+.md-editor h4:before {}
+
+.md-editor h4:after {}
+
+/*前缀*/
+.md-editor h4 .prefix {}
+
+/*内容*/
+.md-editor h4 .content {}
+
+/*后缀*/
+.md-editor h4 .suffix {}
+
+/*********五级标题*********/
+.md-editor h5 {}
+
+.md-editor h5:before {}
+
+.md-editor h5:after {}
+
+/*前缀*/
+.md-editor h5 .prefix {}
+
+/*内容*/
+.md-editor h5 .content {}
+
+
+/*********六级标题*********/
+.md-editor h6 {}
+
+.md-editor h6:before {}
+
+.md-editor h6:after {}
+
+/*前缀*/
+.md-editor h6 .prefix {}
+
+/*内容*/
+.md-editor h6 .content {}
+
+/*后缀*/
+.md-editor h6 .suffix {}
+
+/*后缀*/
+.md-editor h3 .suffix {}
 /*段落*/
-.md-editor p{
-}
-.md-editor p code{
-}
+.md-editor p {}
+
+.md-editor p code {}
 `;

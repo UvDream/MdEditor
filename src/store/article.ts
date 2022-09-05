@@ -1,5 +1,5 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-import {getArticleDetail} from "@/services/api/article";
+import {getArticleDetail} from "@/api/article";
 import {useNavigate} from "react-router-dom";
 
 const initialState: API.Article = {status: "", title: ""}
@@ -19,8 +19,8 @@ export const ArticleDetailState = createSlice({
             state = {...state, ...payload}
             return state
         },
-        AddArticle:(state)=>{
-            state={
+        AddArticle: (state) => {
+            state = {
                 id: "",
                 author: [],
                 categories: [],
@@ -63,5 +63,5 @@ export const ArticleDetailState = createSlice({
             })
     }
 })
-export const {SetArticleDetail,AddArticle} = ArticleDetailState.actions;
+export const {SetArticleDetail, AddArticle} = ArticleDetailState.actions;
 export default ArticleDetailState.reducer;

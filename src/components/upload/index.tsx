@@ -4,14 +4,14 @@ import {useEffect, useState} from "react";
 import {ResponseType} from "@/utils/request";
 import "../index.less"
 import Config from "@/config";
-import {postFileUpload} from "@/services/api/file";
+import {postFileUpload} from "@/api/file";
 
 type Props = {
     value?: string;
     onChange?: (value: string) => void;
 }
 type FileType = {
-    url: string|undefined;
+    url: string | undefined;
     id: number;
     position: string,
     name: string;
@@ -23,10 +23,10 @@ export default function UploadFile(props: Props) {
         position: '',
         name: ''
     });
-    useEffect(()=>{
-        file.url=props.value
+    useEffect(() => {
+        file.url = props.value
         setFile(file)
-    },[props.value])
+    }, [props.value])
     const uploadFunc = async (opts: RequestOptions) => {
         const {onProgress, onError, onSuccess, file} = opts;
         const res = await postFileUpload({file}) as unknown as ResponseType

@@ -2,7 +2,7 @@ import {Button, Form, Input, Message, Tooltip} from "@arco-design/web-react";
 import "./index.less"
 import {FieldError} from "@arco-design/web-react/es/Form/interface";
 import {useNavigate} from "react-router-dom";
-import {postPublicBaseLogin} from "@/services/api/user";
+import {postPublicBaseLogin} from "@/api/user";
 
 type Props = {
     onSwitch: () => void
@@ -22,12 +22,12 @@ export default function Login(props: Props) {
 
         let res = await postPublicBaseLogin(obj) as unknown as API.Response
         if (res.success) {
-            res.msg&&Message.success(res.msg)
+            res.msg && Message.success(res.msg)
             localStorage.setItem('token', res.data.token)
             localStorage.setItem('user', JSON.stringify(res.data.user_info))
             navigate('/editor')
         } else {
-            res.msg&&Message.error(res.msg)
+            res.msg && Message.error(res.msg)
         }
     }
     const onSubmitFailed = (error: { [key: string]: FieldError }) => {
