@@ -1,8 +1,9 @@
 import {createSlice} from "@reduxjs/toolkit";
+import {defaultStyle} from "@/utils";
 
 
 
-const initialState: API.Theme = {theme: ""};
+const initialState: API.Theme = {theme: defaultStyle};
 export const ThemeDetail = createSlice({
     name: "theme",
     initialState,

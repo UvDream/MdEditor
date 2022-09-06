@@ -91,6 +91,10 @@ display: block;
    line-height:2.2;
    margin-top:10px;
 }
+/*图片*/
+.md-editor img{
+  width:100%;
+}
 .md-editor p code{
     word-break: break-word;
     border-radius: 2px;
