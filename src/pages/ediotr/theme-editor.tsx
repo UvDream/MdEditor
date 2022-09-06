@@ -101,6 +101,7 @@ export default function ThemeEditor() {
       <Editor
         value={theme}
         language={"css"}
+        scroll={false}
         onChange={(val: string) => {
           setEditorStyle(val);
           dispatch(SetTheme(val));

@@ -81,6 +81,7 @@ export default function EditorPage() {
                 value={articleMd}
                 insert={true}
                 mdEditor={true}
+                scroll={true}
                 onChange={(val: string) => {
                   editorChange(val);
                 }}
