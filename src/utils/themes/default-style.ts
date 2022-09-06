@@ -4,6 +4,7 @@ export const defaultStyle = `
 .md-editor{
   color: #2b2b2b;
   letter-spacing: 2px;
+  font-family: Optima-Regular, Optima, PingFangTC-Light, PingFangSC-light, PingFangTC-light;
   background-image: linear-gradient(90deg, rgba(50, 0, 0, 0.1) 3%, rgba(0, 0, 0, 0) 3%), linear-gradient(360deg, rgba(50, 0, 0, 0.1) 3%, rgba(0, 0, 0, 0) 3%);
   background-size: 10px 10px;
   background-position: center center;
@@ -87,7 +88,8 @@ display: block;
 }
 /*段落*/
 .md-editor p{
-   line-height:2.4
+   line-height:2.2;
+   margin-top:10px;
 }
 .md-editor p code{
     word-break: break-word;

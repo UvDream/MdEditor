@@ -19,7 +19,9 @@ type Props = {
 export default function Preview(props: Props) {
     const preview = useRef(null)
     const [searchParams] = useSearchParams();
-
+    const { theme } = useSelector(
+        (state: RootState) => state.themeDetail
+    );
     const [DeviceType, setDeviceType] = useState('icon-pc')
     const articleDetail = useSelector((state: RootState) => state.articleDetail);
     const [visible, setVisible] = useState(false)
@@ -74,7 +76,7 @@ export default function Preview(props: Props) {
                 break;
             case 2:
                 //@ts-ignore
-                let res = juice.inlineContent(preview.current.innerHTML, defaultStyle, {
+                let res = juice.inlineContent(preview.current.innerHTML, theme, {
                     inlinePseudoElements: true,
                     preserveImportant: true,
                 })
