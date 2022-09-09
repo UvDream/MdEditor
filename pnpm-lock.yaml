@@ -33,10 +33,10 @@ specifiers:
   katex: ^0.6.0
   less: ^4.1.2
   markdown-it: ^13.0.0
-  markdown-it-cjk-breaks: ^1.1.3
   markdown-it-emoji: ^2.0.2
   markdown-it-katex: ^2.0.3
   mitt: ^3.0.0
+  pinyin-pro: ^3.11.0
   qrcode.react: ^3.1.0
   react: ^18.0.0
   react-dom: ^18.0.0
@@ -71,10 +71,10 @@ dependencies:
   juice: 8.1.0
   katex: 0.6.0
   markdown-it: 13.0.1
-  markdown-it-cjk-breaks: 1.1.3
   markdown-it-emoji: 2.0.2
   markdown-it-katex: 2.0.3
   mitt: 3.0.0
+  pinyin-pro: 3.11.0
   qrcode.react: 3.1.0_react@18.2.0
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
@@ -3672,6 +3672,7 @@ packages:
 
   /eastasianwidth/0.2.0:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
+    dev: true
 
   /electron-to-chromium/1.4.230:
     resolution: {integrity: sha512-3pwjAK0qHSDN9+YAF4fJknsSruP7mpjdWzUSruIJD/JCH77pEh0SorEyb3xVaKkfwk2tzjOt2D8scJ0KAdfXLA==}
@@ -5950,12 +5951,6 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /markdown-it-cjk-breaks/1.1.3:
-    resolution: {integrity: sha512-/gX3LueMp+5FdUkqcFPK5nHI6t85uq1rMv8yhrmCOZhU90XqybQj8OT1hVrxrdseajaHLPBK43xLzEKPosgTDA==}
-    dependencies:
-      eastasianwidth: 0.2.0
-    dev: false
-
   /markdown-it-emoji/2.0.2:
     resolution: {integrity: sha512-zLftSaNrKuYl0kR5zm4gxXjHaOI3FAOEaloKmRA5hijmJZvSjmxcokOLlzycb/HXlUFWzXqpIEoyEMCE4i9MvQ==}
     dev: false
@@ -6732,25 +6727,29 @@ packages:
     dev: true
 
   /picomatch/2.3.1:
-    resolution: {integrity: sha512-JU3teHTNjmE2VCGFzuY8EXzCDVwEqB2a8fsIvwaStHhAWJEeVd1o1QD80CU6+ZdEXXSLbSsuLwJjkCBWqRQUVA==}
-    engines: {node: '>=8.6'}
+    resolution: { integrity: sha512-JU3teHTNjmE2VCGFzuY8EXzCDVwEqB2a8fsIvwaStHhAWJEeVd1o1QD80CU6+ZdEXXSLbSsuLwJjkCBWqRQUVA== }
+    engines: { node: '>=8.6' }
     dev: true
 
   /pify/4.0.1:
-    resolution: {integrity: sha512-uB80kBFb/tfd68bVleG9T5GGsGPjJrLAUpR5PZIrhBnIaRTQRjqdJSsIKkOP6OAIFbj7GOrcudc5pNjZ+geV2g==}
-    engines: {node: '>=6'}
+    resolution: { integrity: sha512-uB80kBFb/tfd68bVleG9T5GGsGPjJrLAUpR5PZIrhBnIaRTQRjqdJSsIKkOP6OAIFbj7GOrcudc5pNjZ+geV2g== }
+    engines: { node: '>=6' }
     dev: true
     optional: true
 
+  /pinyin-pro/3.11.0:
+    resolution: { integrity: sha512-l2JDFyEIMdTIyff3OkuoSIJCpYTwrxrR2KuMyGMjdNEcHGcEVSKIEb7mvKEKOhJaZLp2FB++Jax+MD0BWafbhg== }
+    dev: false
+
   /plur/4.0.0:
-    resolution: {integrity: sha512-4UGewrYgqDFw9vV6zNV+ADmPAUAfJPKtGvb/VdpQAx25X5f3xXdGdyOEVFwkl8Hl/tl7+xbeHqSEM+D5/TirUg==}
-    engines: {node: '>=10'}
+    resolution: { integrity: sha512-4UGewrYgqDFw9vV6zNV+ADmPAUAfJPKtGvb/VdpQAx25X5f3xXdGdyOEVFwkl8Hl/tl7+xbeHqSEM+D5/TirUg== }
+    engines: { node: '>=10' }
     dependencies:
       irregular-plurals: 3.3.0
     dev: true
 
   /pluralize/8.0.0:
-    resolution: {integrity: sha512-Nc3IT5yHzflTfbjgqWcCPpo7DaKy4FnpB0l/zCAW0Tc7jxAiuqSxHasntB3D7887LSrA93kDJ9IXovxJYxyLCA==}
+    resolution: { integrity: sha512-Nc3IT5yHzflTfbjgqWcCPpo7DaKy4FnpB0l/zCAW0Tc7jxAiuqSxHasntB3D7887LSrA93kDJ9IXovxJYxyLCA== }
     engines: {node: '>=4'}
     dev: true
 

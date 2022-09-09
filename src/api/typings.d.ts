@@ -55,7 +55,7 @@ declare namespace API {
   };
 
   type Captcha = {
-    "bg-color"?: RGBA;
+    'bg-color'?: RGBA;
     /** 验证码高度 */
     height?: number;
     /** 验证码语言 zh/en */
@@ -63,9 +63,9 @@ declare namespace API {
     /** 验证码长度 */
     length?: number;
     /** 噪点数量 */
-    "noise-count"?: number;
+    'noise-count'?: number;
     /** 显示线条选项  2/4/8 */
-    "show-line-options"?: number;
+    'show-line-options'?: number;
     /** 验证码类型 default/audio/math/string/math/chinese */
     type?: string;
     /** 验证码宽度 */
@@ -112,6 +112,11 @@ declare namespace API {
   type deleteFile_openAPI_deleteIdParams = {
     /** 参数 */
     id: string;
+  };
+
+  type deleteLedger_openAPI_deleteParams = {
+    /** 账本ID */
+    id: number;
   };
 
   type deleteTag_openAPI_deleteParams = {
@@ -169,6 +174,18 @@ declare namespace API {
     page_size: number;
   };
 
+  type getLedgerDetailParams = {
+    /** 账本ID */
+    id: number;
+  };
+
+  type getLedgerListParams = {
+    /** 关键字 */
+    key_word?: string;
+    page: number;
+    page_size: number;
+  };
+
   type getPublicBaseDetailParams = {
     /** 参数 */
     id: string;
@@ -192,6 +209,70 @@ declare namespace API {
   type getThemePublicParams = {
     /** 关键词 */
     keyword?: string;
+  };
+
+  type Ledger = {
+    /** 分类 */
+    categories?: LedgerCategory[];
+    create_time?: string;
+    creator?: User;
+    /** 账本创建者ID */
+    creator_id?: string;
+    delete_time?: DeletedAt;
+    /** 账本描述 */
+    description?: string;
+    id?: string;
+    /** 账本成员数量 */
+    member_count?: number;
+    /** 账本名称 */
+    name?: string;
+    /** 账本状态 */
+    status?: string;
+    /** 标签 */
+    tags?: LedgerTag[];
+    /** 缩略图 */
+    thumbnail?: string;
+    /** 账本类型 */
+    type?: string;
+    update_time?: string;
+    /** 账本成员ID */
+    user?: User[];
+  };
+
+  type LedgerCategory = {
+    create_time?: string;
+    creator?: User;
+    /** 分类创建者ID */
+    creator_id?: string;
+    delete_time?: DeletedAt;
+    /** 分类描述 */
+    description?: string;
+    id?: string;
+    /** 分类名称 */
+    name?: string;
+    /** 分类状态 */
+    status?: string;
+    /** 分类缩略图 */
+    thumbnail?: string;
+    update_time?: string;
+  };
+
+  type LedgerTag = {
+    create_time?: string;
+    creator?: User;
+    /** 标签创建者ID */
+    creator_id?: string;
+    delete_time?: DeletedAt;
+    /** 标签描述 */
+    description?: string;
+    id?: string;
+    /** 标签名称 */
+    name?: string;
+    /** 标签状态 */
+    status?: string;
+    /** 标签缩略图 */
+    thumbnail?: string;
+    update_time?: string;
   };
 
   type LoginRequest = {

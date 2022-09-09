@@ -45,7 +45,8 @@
     "@tauri-apps/api": "^1.0.2",
     "@reduxjs/toolkit": "^1.8.3",
     "react-redux": "^8.0.2",
-    "qrcode.react": "^3.1.0"
+    "qrcode.react": "^3.1.0",
+    "pinyin-pro": "^3.11.0"
   },
   "devDependencies": {
     "@arco-plugins/vite-react": "^1.1.0",
