@@ -18,7 +18,6 @@ export default function HaloPublish(props: Props) {
     const [tags, setTags] = useState<Array<any>>([])
     const {title, html_content, md_content} = useSelector((state: RootState) => state.articleDetail);
     const article = useSelector((state: RootState) => state.articleDetail);
-    const store = useStore();
 
     useEffect(() => {
         GetTags().then(res => {
