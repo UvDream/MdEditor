@@ -6,7 +6,11 @@ import {RootState} from "@/store";
 import {pinyin} from "pinyin-pro"
 
 const Option = Select.Option;
-export default function HaloPublish() {
+type Props = {
+    onOk: () => void
+    onCancel: () => void
+}
+export default function HaloPublish(props: Props) {
     const [form] = Form.useForm();
     const [categories, setCategories] = useState<Array<treeItem>>([]);
     const [tags, setTags] = useState<Array<any>>([])
@@ -29,7 +33,9 @@ export default function HaloPublish() {
             console.log(val)
             val.content = html_content
             val.originalContent = html_content
-            PostArticle(val).then()
+            PostArticle(val).then(res => {
+                props.onOk()
+            })
         }}>
             <Form.Item label="文章标题" field="title" rules={[{required: true, message: "请输入文章标题"}]}>
                 <Input onChange={(val) => {
@@ -73,7 +79,7 @@ export default function HaloPublish() {
             <Form.Item wrapperCol={{offset: 9}}>
                 <Space>
                     <Button htmlType='submit' type='primary'>同步</Button>
-                    <Button>取消</Button>
+                    <Button onClick={props.onCancel}>取消</Button>
                 </Space>
             </Form.Item>
         </Form>

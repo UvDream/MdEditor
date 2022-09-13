@@ -8,7 +8,7 @@ import {RootState} from "@/store";
 import {QRCodeCanvas} from "qrcode.react";
 import {useSearchParams} from "react-router-dom";
 import HaloPage from "@/pages/ediotr/components/halo";
-import {IconList} from "@/pages/ediotr/icon";
+import {IconList, IconType} from "@/pages/ediotr/icon";
 import {SetArticleDetail} from "@/store/article";
 
 type Props = {
@@ -104,9 +104,8 @@ export default function Preview(props: Props) {
         <div className={"md-preview"}>
             {props.tool && (
                 <div className={"tool"}>
-                    {IconList.map((item: any) => {
-                        if (
-                            item.id === 1 ||
+                    {IconList.map((item: IconType) => {
+                        if (item.id === 1 ||
                             item.id === 2 ||
                             //  @ts-ignore
                             (item.id === 5 && !window.__TAURI__) ||
@@ -120,10 +119,12 @@ export default function Preview(props: Props) {
                                     onClick={() => IconClick(item.id)}
                                     key={item.id}
                                 >
-                  <Tooltip position="lt" trigger="hover" content={item.title}>
-                    {item.icon}
-                  </Tooltip>
-                </span>
+                                  <Tooltip position="lt" trigger="hover" content={item.title}>
+                                      {
+                                          item.url ? <img src={item.url} alt=""/> : <>{item.icon}</>
+                                      }
+                                  </Tooltip>
+                                 </span>
                             );
                         }
                     })}

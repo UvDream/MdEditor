@@ -52,7 +52,7 @@ export default function HaloPage(props: Props) {
                 props.onCancel();
             }}
         >
-            {token ? <HaloPublish/> :
+            {token ? <HaloPublish onOk={props.onOk} onCancel={props.onCancel}/> :
                 <>
                     <Divider orientation="center">Halo博客配置</Divider>
                     <Form form={form}>
