@@ -6,7 +6,7 @@ export enum MacShortcuts {
     export_markdown = "⌘ M",
     export_pdf = "⌘ P",
     import = "⌘ I",
-//    段落
+    //    段落
     h1 = "⌘ 1",
     h2 = "⌘ 2",
     h3 = "⌘ 3",
@@ -21,8 +21,8 @@ export enum MacShortcuts {
     task_list = "⌥ ⌘ X",
     links_to_reference = "⌥ ⌘ L",
     horizontal_line = "⌥ ⌘ -",
-    indent="⌥ ⌘ T",
-//    格式
+    indent = "⌥ ⌘ T",
+    //    格式
     bold = "⌘ B",
     italic = "⌘ I",
     underline = "⌘ U",
@@ -39,7 +39,7 @@ export enum WindowsShortcuts {
     export_markdown = "CTRL+M",
     export_pdf = "CTRL+P",
     import = "CTRL+I",
-//    段落
+    //    段落
     h1 = "CTRL+1",
     h2 = "CTRL+2",
     h3 = "CTRL+3",
@@ -54,8 +54,8 @@ export enum WindowsShortcuts {
     task_list = "⌥ ⌘ X",
     links_to_reference = "⌥ ⌘ L",
     horizontal_line = "⌥ ⌘ -",
-    indent="⌥ ⌘ T",
-//    格式
+    indent = "⌥ ⌘ T",
+    //    格式
     bold = "CTRL+B",
     italic = "CTRL+I",
     underline = "CTRL+U",
@@ -74,7 +74,7 @@ export function Shortcuts(): MacShortcuts | WindowsShortcuts | any {
     let system = GetSystem();
     if (system === "mac") return MacShortcuts;
     if (system === "window") return WindowsShortcuts;
-    return MacShortcuts
+    return MacShortcuts;
 }
 
 /**
@@ -85,7 +85,7 @@ export function EditorShortcuts(): MacShortcuts | WindowsShortcuts | any {
     let system = GetSystem();
     if (system === "mac") return MacEditorShortcuts;
     if (system === "window") return WindowsEditorShortcuts;
-    return WindowsEditorShortcuts
+    return WindowsEditorShortcuts;
 }
 
 export enum MacEditorShortcuts {
@@ -94,7 +94,7 @@ export enum MacEditorShortcuts {
     export_markdown = "⌘ M",
     export_pdf = "⌘ P",
     import = "⌘ I",
-//    段落
+    //    段落
     h1 = "Cmd-1",
     h2 = "Cmd-2",
     h3 = "Cmd-3",
@@ -109,8 +109,8 @@ export enum MacEditorShortcuts {
     task_list = "Alt-Cmd-x",
     links_to_reference = "Alt-Cmd-l",
     horizontal_line = "Alt-Cmd--",
-    indent="Alt-Cmd-y",
-//    格式
+    indent = "Alt-Cmd-y",
+    //    格式
     bold = "Cmd-b",
     italic = "Cmd-i",
     underline = "Cmd-u",
@@ -128,7 +128,7 @@ export enum WindowsEditorShortcuts {
     export_markdown = "CTRL+M",
     export_pdf = "CTRL+P",
     import = "CTRL+I",
-//    段落
+    //    段落
     h1 = "CTRL+1",
     h2 = "CTRL+2",
     h3 = "CTRL+3",
@@ -143,8 +143,8 @@ export enum WindowsEditorShortcuts {
     task_list = "⌥ ⌘ X",
     links_to_reference = "⌥ ⌘ L",
     horizontal_line = "⌥ ⌘ -",
-    indent="Alt-Cmd-T",
-//    格式
+    indent = "Alt-Cmd-T",
+    //    格式
     bold = "CTRL+B",
     italic = "CTRL+I",
     underline = "CTRL+U",

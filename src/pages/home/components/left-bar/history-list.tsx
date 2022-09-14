@@ -9,9 +9,9 @@ import {markdownParser} from "@/utils";
 
 const TimelineItem = Timeline.Item;
 export default function HistoryList() {
-  const [searchParams] = useSearchParams();
-  const [historyList, setHistoryList] = useState<any>({});
-  useEffect(() => {
+    const [searchParams] = useSearchParams();
+    const [historyList, setHistoryList] = useState<any>({});
+    useEffect(() => {
     getHistoryList().then();
   }, []);
   const getHistoryList = async () => {
@@ -37,39 +37,44 @@ export default function HistoryList() {
   };
   return (
       <div className={"history"}>
-        <Divider orientation={"center"}>历史记录</Divider>
-        {renderHistoryList().length === 0 ? (
-            <Empty description={"暂无历史"}/>
-        ) : (
-            <div className={"history-content"}>
-              <Timeline labelPosition="relative">
-                {renderHistoryList().map((item, index) => {
-                  return (
-                      <TimelineItem
-                          key={index}
-                          label={dayjs(item.time).format("YYYY-MM-DD HH:mm:ss")}
-                      >
-                        <Popover
-                            content={
-                              <div style={{padding: 10, minWidth: 200, overflow: "auto", maxHeight: 800}}>
-                                <Preview
-                                    content={markdownParser.render(item.md_content)}
-                                    tool={false}
-                                />
-                              </div>
-                            }
-                            position={"right"}
-                        >
-                    <span style={{cursor: "pointer"}}>
-                      {item.title}
-                    </span>
-                        </Popover>
-                      </TimelineItem>
-                  );
-                })}
-              </Timeline>
-            </div>
-        )}
+          <Divider orientation={"center"}>历史记录</Divider>
+          {renderHistoryList().length === 0 ? (
+              <Empty description={"暂无历史"}/>
+          ) : (
+              <div className={"history-content"}>
+                  <Timeline labelPosition="relative">
+                      {renderHistoryList().map((item, index) => {
+                          return (
+                              <TimelineItem
+                                  key={index}
+                                  label={dayjs(item.time).format("YYYY-MM-DD HH:mm:ss")}
+                              >
+                                  <Popover
+                                      content={
+                                          <div
+                                              style={{
+                                                  padding: 10,
+                                                  minWidth: 200,
+                                                  overflow: "auto",
+                                                  maxHeight: 800,
+                                              }}
+                                          >
+                                              <Preview
+                                                  content={markdownParser.render(item.md_content)}
+                                                  tool={false}
+                                              />
+                                          </div>
+                                      }
+                                      position={"right"}
+                                  >
+                                      <span style={{cursor: "pointer"}}>{item.title}</span>
+                                  </Popover>
+                              </TimelineItem>
+                          );
+                      })}
+                  </Timeline>
+              </div>
+          )}
       </div>
   );
 }

@@ -56,7 +56,7 @@ export const IconList: Array<IconType> = [
         ),
         type: "icon-halo1.ts",
         title: "Halo博客系统",
-        url: "https://halo.run/upload/2021/03/Adaptive256-463ca9b92e2d40268431018c07735842.png"
+        url: "https://halo.run/upload/2021/03/Adaptive256-463ca9b92e2d40268431018c07735842.png",
     },
     {
         id: 6,

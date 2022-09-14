@@ -1,6 +1,12 @@
 import {Message, Modal, Tooltip} from "@arco-design/web-react";
 import {useEffect, useRef, useState, useLayoutEffect} from "react";
-import {CalcWordCount, CopyToClipboard, emitter, EventType, markdownParser} from "@/utils";
+import {
+    CalcWordCount,
+    CopyToClipboard,
+    emitter,
+    EventType,
+    markdownParser,
+} from "@/utils";
 import "@/style/editor/index.less";
 import juice from "juice";
 import {useDispatch, useSelector} from "react-redux";
@@ -38,10 +44,8 @@ export default function Preview(props: Props) {
             inlinePseudoElements: true,
             preserveImportant: true,
         });
-        dispatch(
-            SetArticleDetail({html_content: res})
-        );
-    }, [props.content])
+        dispatch(SetArticleDetail({html_content: res}));
+    }, [props.content]);
     const IconClick = async (id: number) => {
         switch (id) {
             case 1:
@@ -105,7 +109,8 @@ export default function Preview(props: Props) {
             {props.tool && (
                 <div className={"tool"}>
                     {IconList.map((item: IconType) => {
-                        if (item.id === 1 ||
+                        if (
+                            item.id === 1 ||
                             item.id === 2 ||
                             //  @ts-ignore
                             (item.id === 5 && !window.__TAURI__) ||
@@ -119,12 +124,14 @@ export default function Preview(props: Props) {
                                     onClick={() => IconClick(item.id)}
                                     key={item.id}
                                 >
-                                  <Tooltip position="lt" trigger="hover" content={item.title}>
-                                      {
-                                          item.url ? <img src={item.url} alt=""/> : <>{item.icon}</>
-                                      }
-                                  </Tooltip>
-                                 </span>
+                  <Tooltip position="lt" trigger="hover" content={item.title}>
+                    {item.url ? (
+                        <img src={item.url} alt=""/>
+                    ) : (
+                        <>{item.icon}</>
+                    )}
+                  </Tooltip>
+                </span>
                             );
                         }
                     })}

@@ -9,12 +9,12 @@ import store from "@/store";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
     // <React.StrictMode>
-        <Provider store={store}>
-            <RecoilRoot>
-                <HashRouter>
-                    <IndexPage/>
-                </HashRouter>
-            </RecoilRoot>
-        </Provider>
+    <Provider store={store}>
+        <RecoilRoot>
+            <HashRouter>
+                <IndexPage/>
+            </HashRouter>
+        </RecoilRoot>
+    </Provider>
     // </React.StrictMode>
 );

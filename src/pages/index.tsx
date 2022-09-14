@@ -14,7 +14,6 @@ import PreviewPage from "@/pages/preview";
 import {useEffect} from "react";
 import {process, tauri, app} from "@tauri-apps/api";
 
-
 export default function IndexPage() {
     useEffect(() => {
         // console.log("寻找环境变量11")
@@ -25,7 +24,7 @@ export default function IndexPage() {
         //     console.log(res)
         // })
         // console.log(window.__TAURI__)
-    }, [])
+    }, []);
     return (
         <Routes>
             <Route path="/" element={<HomePage/>}>

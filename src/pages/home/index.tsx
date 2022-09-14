@@ -28,7 +28,7 @@ const Col = Grid.Col;
 export default function HomePage(props: any) {
     const {title} = useSelector((state: RootState) => state.articleDetail);
     const dispatch = useDispatch();
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     //----------------------PC端处理----------------------
     //#region
@@ -93,8 +93,7 @@ export default function HomePage(props: any) {
                             >
                                 {title}
                             </Col>
-                            <Col span={4} className={["flex-center", "mobile-row"]}>
-                            </Col>
+                            <Col span={4} className={["flex-center", "mobile-row"]}></Col>
                         </Row>
                     </Header>
                     <Content className={"mobile-content"}>
@@ -104,7 +103,6 @@ export default function HomePage(props: any) {
             );
         }
     }
-
 
     return (
         <div className={"home"}>
@@ -123,15 +121,18 @@ export default function HomePage(props: any) {
                 }}
             >
                 <div>
-                    <ArticleList addFunc={() => {
-                        dispatch(AddArticle())
-                        navigate(`/editor?id=add`)
-                        setDrawerVisible(false)
-                    }} onClick={(id: string) => {
-                        //@ts-ignore
-                        dispatch(GetArticleDetail({id}))
-                        setDrawerVisible(false)
-                    }}/>
+                    <ArticleList
+                        addFunc={() => {
+                            dispatch(AddArticle());
+                            navigate(`/editor?id=add`);
+                            setDrawerVisible(false);
+                        }}
+                        onClick={(id: string) => {
+                            //@ts-ignore
+                            dispatch(GetArticleDetail({id}));
+                            setDrawerVisible(false);
+                        }}
+                    />
                 </div>
             </Drawer>
         </div>

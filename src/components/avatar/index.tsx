@@ -1,23 +1,35 @@
-import React, {useMemo, useState} from 'react';
-import {Button, Grid, Message, Modal, Slider, Upload} from '@arco-design/web-react';
-import {IconMinus, IconPlus, IconRotateLeft} from '@arco-design/web-react/icon';
-import EasyCropper from 'react-easy-crop';
+import React, {useMemo, useState} from "react";
+import {
+    Button,
+    Grid,
+    Message,
+    Modal,
+    Slider,
+    Upload,
+} from "@arco-design/web-react";
+import {
+    IconMinus,
+    IconPlus,
+    IconRotateLeft,
+} from "@arco-design/web-react/icon";
+import EasyCropper from "react-easy-crop";
 
-async function _getCroppedImg(url:string, pixelCrop:any, rotation = 0) {
-    const image:any = await new Promise((resolve, reject) => {
+async function _getCroppedImg(url: string, pixelCrop: any, rotation = 0) {
+    const image: any = await new Promise((resolve, reject) => {
         const image = new Image();
-        image.addEventListener('load', () => resolve(image));
-        image.addEventListener('error', (error) => reject(error));
+        image.addEventListener("load", () => resolve(image));
+        image.addEventListener("error", (error) => reject(error));
         image.src = url;
     });
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
 
     if (!ctx || !image) {
         return null;
     }
 
-    const imageSize = 2 * ((Math.max(image.width, image.height) / 2) * Math.sqrt(2));
+    const imageSize =
+        2 * ((Math.max(image.width, image.height) / 2) * Math.sqrt(2));
     canvas.width = imageSize;
     canvas.height = imageSize;
 
@@ -27,7 +39,11 @@ async function _getCroppedImg(url:string, pixelCrop:any, rotation = 0) {
         ctx.translate(-imageSize / 2, -imageSize / 2);
     }
 
-    ctx.drawImage(image, imageSize / 2 - image.width / 2, imageSize / 2 - image.height / 2);
+    ctx.drawImage(
+        image,
+        imageSize / 2 - image.width / 2,
+        imageSize / 2 - image.height / 2
+    );
     const data = ctx.getImageData(0, 0, imageSize, imageSize);
     canvas.width = pixelCrop.width;
     canvas.height = pixelCrop.height;
@@ -43,7 +59,7 @@ async function _getCroppedImg(url:string, pixelCrop:any, rotation = 0) {
     });
 } // 裁剪组件
 
-const Cropper = (props:any) => {
+const Cropper = (props: any) => {
     const {file, onOk} = props;
     const [crop, setCrop] = useState({
         x: 0,
@@ -59,15 +75,15 @@ const Cropper = (props:any) => {
         <div>
             <div
                 style={{
-                    width: '100%',
+                    width: "100%",
                     height: 280,
-                    position: 'relative',
+                    position: "relative",
                 }}
             >
                 <EasyCropper
                     style={{
                         containerStyle: {
-                            width: '100%',
+                            width: "100%",
                             height: 280,
                         },
                     }}
@@ -85,19 +101,22 @@ const Cropper = (props:any) => {
                     onZoomChange={setZoom}
                     onCropComplete={async (_, pixels) => {
                         console.log(pixels);
-                        const blob = await _getCroppedImg(url || '', pixels, rotation);
+                        const blob = await _getCroppedImg(url || "", pixels, rotation);
 
                         if (blob) {
                             //@ts-ignore
-                            const newFile = new File([blob], file.name || 'image', {
-                                type: file.type || 'image/*',
+                            const newFile = new File([blob], file.name || "image", {
+                                type: file.type || "image/*",
                             });
                             setNewFile(newFile);
                         }
                     }}
                 />
             </div>
-            <Grid.Row justify='space-between' style={{marginTop: 20, marginBottom: 20}}>
+            <Grid.Row
+                justify="space-between"
+                style={{marginTop: 20, marginBottom: 20}}
+            >
                 <Grid.Row
                     style={{
                         flex: 1,
@@ -135,12 +154,12 @@ const Cropper = (props:any) => {
                 />
             </Grid.Row>
 
-            <Grid.Row justify='end'>
+            <Grid.Row justify="end">
                 <Button onClick={props.onCancel} style={{marginRight: 20}}>
                     取消
                 </Button>
                 <Button
-                    type='primary'
+                    type="primary"
                     onClick={() => {
                         props.onOk(newFile);
                     }}
@@ -155,14 +174,14 @@ const Cropper = (props:any) => {
 export default function AvatarUpload() {
     return (
         <Upload
-            listType='picture-card'
-            action='/'
+            listType="picture-card"
+            action="/"
             beforeUpload={(file) => {
                 return new Promise((resolve) => {
                     const modal = Modal.confirm({
-                        title: '裁剪图片',
+                        title: "裁剪图片",
                         onCancel: () => {
-                            Message.info('取消上传');
+                            Message.info("取消上传");
                             resolve(false);
                             modal.close();
                         },
@@ -170,13 +189,13 @@ export default function AvatarUpload() {
                         content: (
                             <Cropper
                                 file={file}
-                                onOk={(file:File) => {
+                                onOk={(file: File) => {
                                     resolve(file);
                                     modal.close();
                                 }}
                                 onCancel={() => {
                                     resolve(false);
-                                    Message.info('取消上传');
+                                    Message.info("取消上传");
                                     modal.close();
                                 }}
                             />
@@ -186,5 +205,5 @@ export default function AvatarUpload() {
                 });
             }}
         />
-    )
+    );
 }

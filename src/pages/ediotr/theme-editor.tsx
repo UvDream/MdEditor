@@ -11,9 +11,9 @@ import {
   Message,
 } from "@arco-design/web-react";
 import "@/style/editor/index.less";
-import { useEffect, useState } from "react";
-import { postThemeCreate, putThemeUpdate ,getThemeDetail} from "@/api/theme";
-import { SetTheme, UpdateTheme } from "@/store/theme";
+import {useEffect, useState} from "react";
+import {postThemeCreate, putThemeUpdate, getThemeDetail} from "@/api/theme";
+import {SetTheme, UpdateTheme} from "@/store/theme";
 
 export default function ThemeEditor() {
   const [visible, setVisible] = useState(false);
@@ -32,7 +32,7 @@ export default function ThemeEditor() {
     });
   }, [theme]);
   useEffect(() => {
-    ThemeDetail(localStorage.getItem("theme_id")||"999").then();
+      ThemeDetail(localStorage.getItem("theme_id") || "999").then();
   }, []);
 
   //获取主题详情

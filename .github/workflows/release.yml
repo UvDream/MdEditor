@@ -5,7 +5,7 @@ on:
   push:
     # 匹配特定标签 (refs/tags)
     tags:
-      - 'v*' # 推送事件匹配 v*, 例如 v1.0，v20.15.10 等来触发工作流
+      - "v*" # 推送事件匹配 v*, 例如 v1.0，v20.15.10 等来触发工作流
 
 # 需要运行的作业组合
 jobs:
@@ -34,9 +34,9 @@ jobs:
           NODE_OPTIONS: "--max_old_space_size=1024000"
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: '${{ steps.get_version.outputs.VERSION }}'
-          release_name: 'app ${{ steps.get_version.outputs.VERSION }}'
-          body: 'See the assets to download this version and install.'
+          tag_name: "${{ steps.get_version.outputs.VERSION }}"
+          release_name: "app ${{ steps.get_version.outputs.VERSION }}"
+          body: "See the assets to download this version and install."
 
   # 编译 Tauri
   build-tauri:

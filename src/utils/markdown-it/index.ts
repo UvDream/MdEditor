@@ -3,8 +3,8 @@ import MarkdownItSpan from "./markdown-it-span";
 import highlightjs from "highlight.js";
 import emoji from "markdown-it-emoji";
 //@ts-ignore
-import katex from "markdown-it-katex"
-import "katex/dist/katex.min.css"
+import katex from "markdown-it-katex";
+import "katex/dist/katex.min.css";
 import markdownItTable from "@/utils/markdown-it/markdown-it-table";
 import implicitFigures from "markdown-it-implicit-figures";
 //markdown 解析器
@@ -41,5 +41,5 @@ export const markdownParser = new MarkdownIt({
 markdownParser.use(MarkdownItSpan);
 markdownParser.use(emoji);
 markdownParser.use(katex);
-markdownParser.use(markdownItTable)
-markdownParser.use(implicitFigures)
+markdownParser.use(markdownItTable);
+markdownParser.use(implicitFigures);

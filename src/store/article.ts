@@ -2,22 +2,24 @@ import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {getArticleDetail} from "@/api/article";
 import {useNavigate} from "react-router-dom";
 
-const initialState: API.Article = {status: "", title: ""}
-export const GetArticleDetail = createAsyncThunk("article/detail", async (params: API.getArticleDetailParams) => {
-    const res = await getArticleDetail(params) as unknown as API.Response;
-    return res.data;
-})
+const initialState: API.Article = {status: "", title: ""};
+export const GetArticleDetail = createAsyncThunk(
+    "article/detail",
+    async (params: API.getArticleDetailParams) => {
+        const res = (await getArticleDetail(params)) as unknown as API.Response;
+        return res.data;
+    }
+);
 // const navigate = useNavigate()
-
 
 export const ArticleDetailState = createSlice({
     name: "articleDetail",
     initialState,
     reducers: {
         SetArticleDetail: (state, action) => {
-            const {payload} = action
-            state = {...state, ...payload}
-            return state
+            const {payload} = action;
+            state = {...state, ...payload};
+            return state;
         },
         AddArticle: (state) => {
             state = {
@@ -41,11 +43,11 @@ export const ArticleDetailState = createSlice({
                 thumbnail: "",
                 title: "新建文章",
                 visits: 0,
-                word_count: 0
-            } as API.Article
+                word_count: 0,
+            } as API.Article;
             // navigate(`/editor?id=add`)
-            return state
-        }
+            return state;
+        },
     },
     extraReducers(builder) {
         builder
@@ -54,14 +56,14 @@ export const ArticleDetailState = createSlice({
             })
             .addCase(GetArticleDetail.fulfilled, (state, action) => {
                 console.log("🚀 ~ 成功!");
-                console.log(action)
+                console.log(action);
                 state = action.payload;
                 return state;
             })
             .addCase(GetArticleDetail.rejected, (state, err) => {
                 console.log("🚀 ~ 失败!");
-            })
-    }
-})
+            });
+    },
+});
 export const {SetArticleDetail, AddArticle} = ArticleDetailState.actions;
 export default ArticleDetailState.reducer;

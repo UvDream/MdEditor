@@ -3,7 +3,8 @@ import {
     Divider,
     Drawer,
     Form,
-    Input, Modal,
+    Input,
+    Modal,
     Radio,
 } from "@arco-design/web-react";
 import {GetToken} from "@/utils";
@@ -29,14 +30,18 @@ export default function HaloPage(props: Props) {
                 token: localStorage.getItem("halo-token"),
             });
         }
-    }, [])
+    }, []);
     const getToken = async () => {
         try {
             const res = await form.validate();
-            const token = await GetToken("https://" + res.url + "/api/admin", res.username, res.password);
-            localStorage.setItem("halo-url", res.url)
-            form.setFieldValue("token", token)
-            setToken(token)
+            const token = await GetToken(
+                "https://" + res.url + "/api/admin",
+                res.username,
+                res.password
+            );
+            localStorage.setItem("halo-url", res.url);
+            form.setFieldValue("token", token);
+            setToken(token);
         } catch (e) {
         }
     };
@@ -52,7 +57,9 @@ export default function HaloPage(props: Props) {
                 props.onCancel();
             }}
         >
-            {token ? <HaloPublish onOk={props.onOk} onCancel={props.onCancel}/> :
+            {token ? (
+                <HaloPublish onOk={props.onOk} onCancel={props.onCancel}/>
+            ) : (
                 <>
                     <Divider orientation="center">Halo博客配置</Divider>
                     <Form form={form}>
@@ -74,12 +81,18 @@ export default function HaloPage(props: Props) {
                                     </Form.Item>
                                 ) : (
                                     <>
-                                        <Form.Item field="username" label="账户名"
-                                                   rules={[{message: "请输入账号", required: true}]}>
+                                        <Form.Item
+                                            field="username"
+                                            label="账户名"
+                                            rules={[{message: "请输入账号", required: true}]}
+                                        >
                                             <Input/>
                                         </Form.Item>
-                                        <Form.Item field="password" label="Halo密码"
-                                                   rules={[{message: "请输入密码", required: true}]}>
+                                        <Form.Item
+                                            field="password"
+                                            label="Halo密码"
+                                            rules={[{message: "请输入密码", required: true}]}
+                                        >
                                             <Input.Password/>
                                         </Form.Item>
                                         <Form.Item wrapperCol={{offset: 5}}>
@@ -95,7 +108,8 @@ export default function HaloPage(props: Props) {
                             }}
                         </Form.Item>
                     </Form>
-                </>}
+                </>
+            )}
         </Modal>
     );
 }

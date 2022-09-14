@@ -11,46 +11,56 @@ export type treeItem = {
     key: string;
     children?: treeItem[];
 };
-const url = "https://" + localStorage.getItem("halo-url") + "/api/admin"
-let token = localStorage.getItem("halo-token")
+const url = "https://" + localStorage.getItem("halo-url") + "/api/admin";
+let token = localStorage.getItem("halo-token");
 //获取halo token
-export const GetToken = async (url: string, username: string, password: string) => {
-    const res = await axios.post(url + "/login", {username: username, password: password})
-    const result = res.data
+export const GetToken = async (
+    url: string,
+    username: string,
+    password: string
+) => {
+    const res = await axios.post(url + "/login", {
+        username: username,
+        password: password,
+    });
+    const result = res.data;
     if (result.status === 200) {
-        localStorage.setItem("halo-token", result.data.access_token)
-        token = result.data.access_token
-        return result.data.access_token
+        localStorage.setItem("halo-token", result.data.access_token);
+        token = result.data.access_token;
+        return result.data.access_token;
     }
-    return ""
-}
-
+    return "";
+};
 
 //获取halo 标签
 export const GetTags = async () => {
     try {
         // @ts-ignore
-        const {data} = await axios.get(url + "/tags", {headers: {"Admin-Authorization": token}})
+        const {data} = await axios.get(url + "/tags", {
+            headers: {"Admin-Authorization": token},
+        });
         if (data.status === 200) {
-            return data.data
+            return data.data;
         }
     } catch (e) {
-        localStorage.removeItem("halo-token")
+        localStorage.removeItem("halo-token");
     }
-}
+};
 
 //获取halo 分类
 export const GetCategories = async () => {
     try {
         // @ts-ignore
-        const {data} = await axios.get(url + "/categories", {headers: {"Admin-Authorization": token}})
+        const {data} = await axios.get(url + "/categories", {
+            headers: {"Admin-Authorization": token},
+        });
         if (data.status === 200) {
-            return getTreData(data.data)
+            return getTreData(data.data);
         }
     } catch (e) {
-        localStorage.removeItem("halo-token")
+        localStorage.removeItem("halo-token");
     }
-}
+};
 type HaloArticle = {
     id?: string;
     title: string;
@@ -61,31 +71,37 @@ type HaloArticle = {
     content: string;
     md_content: string;
     halo_id: string;
-}
+};
 // const dispatch = useDispatch();
 
 //提交文章
 export const PostArticle = async (article: HaloArticle) => {
     if (article.halo_id) {
-        article.id = article.halo_id
+        article.id = article.halo_id;
         //@ts-ignore
-        const {data} = await axios.put(url + "/posts/" + article.halo_id, article, {headers: {"Admin-Authorization": token}})
-        processing_results(data, true)
+        const {data} = await axios.put(
+            url + "/posts/" + article.halo_id,
+            article,
+            {headers: {"Admin-Authorization": token}}
+        );
+        processing_results(data, true);
     } else {
         //@ts-ignore
-        const {data} = await axios.post(url + "/posts", article, {headers: {"Admin-Authorization": token}})
-        processing_results(data, false)
+        const {data} = await axios.post(url + "/posts", article, {
+            headers: {"Admin-Authorization": token},
+        });
+        processing_results(data, false);
     }
-    return ""
-}
+    return "";
+};
 
 function processing_results(data: any, edit: boolean) {
     if (data.status === 200) {
-        console.log(data)
-        Message.success(edit ? "编辑同步成功!" : "同步成功!")
-        return data.data.id
+        console.log(data);
+        Message.success(edit ? "编辑同步成功!" : "同步成功!");
+        return data.data.id;
     } else if (data.status === 401) {
-        localStorage.removeItem("halo-token")
+        localStorage.removeItem("halo-token");
     }
 }
 
@@ -124,7 +140,7 @@ const getTreData = (data: any) => {
             arr.push(obj);
         }
     });
-    return arr
+    return arr;
 };
 const getChildren = (id: string, data: any) => {
     const arr: Array<treeItem> = [];
@@ -139,5 +155,5 @@ const getChildren = (id: string, data: any) => {
             arr.push(obj);
         }
     });
-    return arr
+    return arr;
 };

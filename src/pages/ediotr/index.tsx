@@ -38,7 +38,6 @@ export default function EditorPage() {
     //获取配置
     const [config, setConfig] = useState(getConfig());
 
-
     useEffect(() => {
         setEditorStyle(defaultStyle);
     }, []);
