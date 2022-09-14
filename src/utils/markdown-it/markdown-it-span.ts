@@ -1,4 +1,3 @@
-import MarkdownIt from "markdown-it";
 
 export default (md: any, opt: any) => {
     let defaults = {

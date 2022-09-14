@@ -35,7 +35,7 @@ export const GetTags = async () => {
             return data.data
         }
     } catch (e) {
-        // localStorage.removeItem("halo-token")
+        localStorage.removeItem("halo-token")
     }
 }
 
@@ -48,10 +48,11 @@ export const GetCategories = async () => {
             return getTreData(data.data)
         }
     } catch (e) {
-        // localStorage.removeItem("halo-token")
+        localStorage.removeItem("halo-token")
     }
 }
 type HaloArticle = {
+    id?: string;
     title: string;
     originalContent: string;
     slug: string;
@@ -59,23 +60,35 @@ type HaloArticle = {
     status: string;
     content: string;
     md_content: string;
+    halo_id: string;
 }
 // const dispatch = useDispatch();
 
 //提交文章
 export const PostArticle = async (article: HaloArticle) => {
-    //@ts-ignore
-    const {data} = await axios.post(url + "/posts", article, {headers: {"Admin-Authorization": token}})
+    if (article.halo_id) {
+        article.id = article.halo_id
+        //@ts-ignore
+        const {data} = await axios.put(url + "/posts/" + article.halo_id, article, {headers: {"Admin-Authorization": token}})
+        processing_results(data, true)
+    } else {
+        //@ts-ignore
+        const {data} = await axios.post(url + "/posts", article, {headers: {"Admin-Authorization": token}})
+        processing_results(data, false)
+    }
+    return ""
+}
+
+function processing_results(data: any, edit: boolean) {
     if (data.status === 200) {
         console.log(data)
-        // dispatch(SetArticleDetail({halo_id: data.data.id}))
-        Message.success("同步成功!")
+        Message.success(edit ? "编辑同步成功!" : "同步成功!")
         return data.data.id
     } else if (data.status === 401) {
         localStorage.removeItem("halo-token")
     }
-    return ""
 }
+
 export const saveArticle = (data: API.Article) => {
     return new Promise(async (resolve, reject) => {
         if (data.id) {

@@ -5,6 +5,7 @@ import emoji from "markdown-it-emoji";
 //@ts-ignore
 import katex from "markdown-it-katex"
 import "katex/dist/katex.min.css"
+import markdownItTable from "@/utils/markdown-it/markdown-it-table";
 //markdown 解析器
 export const markdownParser = new MarkdownIt({
   html: true,
@@ -39,3 +40,4 @@ export const markdownParser = new MarkdownIt({
 markdownParser.use(MarkdownItSpan);
 markdownParser.use(emoji);
 markdownParser.use(katex);
+markdownParser.use(markdownItTable)
