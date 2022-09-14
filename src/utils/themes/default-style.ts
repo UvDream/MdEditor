@@ -18,7 +18,6 @@ export const defaultStyle = `
 .md-editor h4,
 .md-editor h5,
 .md-editor h6 {
-    color : green;
     margin: 8px 0;
 }
 
@@ -98,7 +97,7 @@ export const defaultStyle = `
 }
 
 /*图片*/
-.md-editor img {
+.md-editor p>img {
     width: 100%;
 }
 
