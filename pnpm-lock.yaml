@@ -34,6 +34,7 @@ specifiers:
   less: ^4.1.2
   markdown-it: ^13.0.0
   markdown-it-emoji: ^2.0.2
+  markdown-it-implicit-figures: ^0.10.0
   markdown-it-katex: ^2.0.3
   mitt: ^3.0.0
   pinyin-pro: ^3.11.0
@@ -72,6 +73,7 @@ dependencies:
   katex: 0.6.0
   markdown-it: 13.0.1
   markdown-it-emoji: 2.0.2
+  markdown-it-implicit-figures: 0.10.0
   markdown-it-katex: 2.0.3
   mitt: 3.0.0
   pinyin-pro: 3.11.0
@@ -5947,22 +5949,27 @@ packages:
     dev: true
 
   /map-obj/4.3.0:
-    resolution: {integrity: sha512-hdN1wVrZbb29eBGiGjJbeP8JbKjq1urkHJ/LIP/NY48MZ1QVXUsQBV1G1zvYFHn1XE06cwjBsOI2K3Ulnj1YXQ==}
-    engines: {node: '>=8'}
+    resolution: { integrity: sha512-hdN1wVrZbb29eBGiGjJbeP8JbKjq1urkHJ/LIP/NY48MZ1QVXUsQBV1G1zvYFHn1XE06cwjBsOI2K3Ulnj1YXQ== }
+    engines: { node: '>=8' }
     dev: true
 
   /markdown-it-emoji/2.0.2:
-    resolution: {integrity: sha512-zLftSaNrKuYl0kR5zm4gxXjHaOI3FAOEaloKmRA5hijmJZvSjmxcokOLlzycb/HXlUFWzXqpIEoyEMCE4i9MvQ==}
+    resolution: { integrity: sha512-zLftSaNrKuYl0kR5zm4gxXjHaOI3FAOEaloKmRA5hijmJZvSjmxcokOLlzycb/HXlUFWzXqpIEoyEMCE4i9MvQ== }
+    dev: false
+
+  /markdown-it-implicit-figures/0.10.0:
+    resolution: { integrity: sha512-1TWr6+apyoJvRa4Z7eIolZdeajZCRBcc1ckVXon7XwdL8MfydIWsHnZOS5zRrpUNX5b0/O9giWcmuItSkleK5A== }
+    engines: { node: '>=0.10.0' }
     dev: false
 
   /markdown-it-katex/2.0.3:
-    resolution: {integrity: sha512-nUkkMtRWeg7OpdflamflE/Ho/pWl64Lk9wNBKOmaj33XkQdumhXAIYhI0WO03GeiycPCsxbmX536V5NEXpC3Ng==}
+    resolution: { integrity: sha512-nUkkMtRWeg7OpdflamflE/Ho/pWl64Lk9wNBKOmaj33XkQdumhXAIYhI0WO03GeiycPCsxbmX536V5NEXpC3Ng== }
     dependencies:
       katex: 0.6.0
     dev: false
 
   /markdown-it/13.0.1:
-    resolution: {integrity: sha512-lTlxriVoy2criHP0JKRhO2VDG9c2ypWCsT237eDiLqi09rmbKoUetyGHq2uOIRoRS//kfoJckS0eUzzkDR+k2Q==}
+    resolution: { integrity: sha512-lTlxriVoy2criHP0JKRhO2VDG9c2ypWCsT237eDiLqi09rmbKoUetyGHq2uOIRoRS//kfoJckS0eUzzkDR+k2Q== }
     hasBin: true
     dependencies:
       argparse: 2.0.1
