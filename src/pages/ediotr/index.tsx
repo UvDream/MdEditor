@@ -37,7 +37,10 @@ export default function EditorPage() {
     );
     //获取配置
     const [config, setConfig] = useState(getConfig());
-
+    useEffect(() => {
+        console.log("主题")
+        setEditorStyle(theme || "")
+    }, [theme])
     useEffect(() => {
         setEditorStyle(defaultStyle);
     }, []);
