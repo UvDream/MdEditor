@@ -20,8 +20,8 @@ export default function Register(props: Props) {
   };
   const onSubmit = async (value: FormData) => {
       console.log("submit", value);
-      //@ts-ignore
       const res = (await postPublicBaseRegister(
+          //@ts-ignore
           value
       )) as unknown as ResponseType;
       if (res.code === 200) {

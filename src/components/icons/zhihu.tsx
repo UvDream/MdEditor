@@ -1,7 +1,7 @@
 export const ZhiHuIcon = () => {
     return (
-        // @ts-ignore
         <svg
+            // @ts-ignore
             t="1659060843479"
             width="22"
             height="22"
