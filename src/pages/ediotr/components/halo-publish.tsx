@@ -27,6 +27,7 @@ type Props = {
 export default function HaloPublish(props: Props) {
     const [form] = Form.useForm();
     const dispatch = useDispatch();
+    const store = useStore();
     const [categories, setCategories] = useState<Array<treeItem>>([]);
     const [tags, setTags] = useState<Array<any>>([]);
     const {title, html_content, md_content} = useSelector(
@@ -52,13 +53,18 @@ export default function HaloPublish(props: Props) {
         <Form
             form={form}
             onSubmit={(val) => {
-                console.log(val);
                 val.content = html_content;
                 val.originalContent = html_content;
+                if (article.halo_id) {
+                    val.id = Number(article.halo_id);
+                }
                 PostArticle(val).then(async (res) => {
                     dispatch(SetArticleDetail({halo_id: res}));
-                    const result = await saveArticle(article);
+                    const data: API.Article = {...article};
+                    data.halo_id = res.toString()
+                    const result = await saveArticle(data);
                     result && props.onOk();
+
                 });
             }}
         >

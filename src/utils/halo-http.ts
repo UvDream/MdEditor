@@ -43,6 +43,7 @@ export const GetTags = async () => {
             return data.data;
         }
     } catch (e) {
+        console.log(e, "11");
         localStorage.removeItem("halo-token");
     }
 };
@@ -76,23 +77,22 @@ type HaloArticle = {
 
 //提交文章
 export const PostArticle = async (article: HaloArticle) => {
-    if (article.halo_id) {
-        article.id = article.halo_id;
-        //@ts-ignore
+    console.log(article, "1111");
+    if (article.id) {
         const {data} = await axios.put(
-            url + "/posts/" + article.halo_id,
+            url + "/posts/" + article.id,
             article,
+            //@ts-ignore
             {headers: {"Admin-Authorization": token}}
         );
-        processing_results(data, true);
+        return processing_results(data, true);
     } else {
-        //@ts-ignore
         const {data} = await axios.post(url + "/posts", article, {
+            //@ts-ignore
             headers: {"Admin-Authorization": token},
         });
-        processing_results(data, false);
+        return processing_results(data, false);
     }
-    return "";
 };
 
 function processing_results(data: any, edit: boolean) {
@@ -103,6 +103,7 @@ function processing_results(data: any, edit: boolean) {
     } else if (data.status === 401) {
         localStorage.removeItem("halo-token");
     }
+    return ""
 }
 
 export const saveArticle = (data: API.Article) => {
