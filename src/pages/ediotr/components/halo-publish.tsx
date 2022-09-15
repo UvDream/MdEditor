@@ -74,6 +74,7 @@ export default function HaloPublish(props: Props) {
                 rules={[{required: true, message: "请输入文章标题"}]}
             >
                 <Input
+                    disabled
                     onChange={(val) => {
                         if (
                             form.getFieldValue("slug") === "" ||

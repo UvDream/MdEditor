@@ -35,8 +35,8 @@ export const GetToken = async (
 //获取halo 标签
 export const GetTags = async () => {
     try {
-        // @ts-ignore
         const {data} = await axios.get(url + "/tags", {
+            // @ts-ignore
             headers: {"Admin-Authorization": token},
         });
         if (data.status === 200) {
@@ -51,8 +51,8 @@ export const GetTags = async () => {
 //获取halo 分类
 export const GetCategories = async () => {
     try {
-        // @ts-ignore
         const {data} = await axios.get(url + "/categories", {
+            // @ts-ignore
             headers: {"Admin-Authorization": token},
         });
         if (data.status === 200) {

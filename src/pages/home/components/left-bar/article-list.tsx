@@ -10,9 +10,7 @@ import ArticleItem from "@/pages/home/components/left-bar/article-item";
 import {ResponseType} from "@/utils/request";
 import "../../../../style/home/left-bar.less";
 import {useSearchParams} from "react-router-dom";
-import {ArticleDetailState} from "@/utils";
 import {AddOne} from "@icon-park/react";
-import {useRecoilState} from "recoil";
 import {getArticleList} from "@/api/article";
 
 type Props = {
