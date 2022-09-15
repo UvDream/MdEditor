@@ -9,11 +9,10 @@ const store = configureStore({
         saveState: SaveStateSlice,
         themeDetail: ThemeDetailSlice,
         articleDetail: ArticleDetailSlice,
-        codeTheme: CodeThemeSlice
-    }
-})
+        codeTheme: CodeThemeSlice,
+    },
+});
 
 export default store;
-
 
 export type RootState = ReturnType<typeof store.getState>;

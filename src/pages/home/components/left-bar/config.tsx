@@ -26,31 +26,31 @@ export default function SetConfig(props: Props) {
     >
       <Tabs defaultActiveTab="1" direction="vertical">
         <TabPane
-          key="1"
-          title={
-            <span>
-              <IconApps style={{ marginRight: 6 }} />
-              通&#x3000;&#x3000;用
-            </span>
-          }
-        >
-          Tab2
-        </TabPane>
-        <TabPane
-            key="2"
+            key="1"
             title={
-              <span>
-              <IconPalette style={{ marginRight: 6 }}  />
-              外&#x3000;&#x3000;观
+                <span>
+              <IconApps style={{marginRight: 6}}/>
+              通&#x3000;&#x3000;用
             </span>
             }
         >
-          Tab2
+            Tab2
         </TabPane>
-        <TabPane
-          key="3"
-          title={
-            <span>
+          <TabPane
+              key="2"
+              title={
+                  <span>
+              <IconPalette style={{marginRight: 6}}/>
+              外&#x3000;&#x3000;观
+            </span>
+              }
+          >
+              Tab2
+          </TabPane>
+          <TabPane
+              key="3"
+              title={
+                  <span>
               <IconMindMapping style={{ marginRight: 6 }} />
               分类管理
             </span>
@@ -59,27 +59,27 @@ export default function SetConfig(props: Props) {
           tab2
         </TabPane>
         <TabPane
-          key="4"
-          title={
-            <span>
-              <IconTags style={{ marginRight: 6 }} />
-              标签管理
-            </span>
-          }
-        >
-          tab3
-        </TabPane>
-        <TabPane
-            key="5"
+            key="4"
             title={
-              <span>
-              <IconImage style={{ marginRight: 6 }} />
-              图床配置
+                <span>
+              <IconTags style={{marginRight: 6}}/>
+              标签管理
             </span>
             }
         >
-          tab3
+            tab3
         </TabPane>
+          <TabPane
+              key="5"
+              title={
+                  <span>
+              <IconImage style={{marginRight: 6}}/>
+              图床配置
+            </span>
+              }
+          >
+              tab3
+          </TabPane>
       </Tabs>
     </Modal>
   );

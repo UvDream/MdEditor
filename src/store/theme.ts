@@ -1,8 +1,7 @@
 import {createSlice} from "@reduxjs/toolkit";
+import {defaultStyle} from "@/utils";
 
-
-
-const initialState: API.Theme = {theme: ""};
+const initialState: API.Theme = {theme: defaultStyle};
 export const ThemeDetail = createSlice({
     name: "theme",
     initialState,
@@ -10,22 +9,22 @@ export const ThemeDetail = createSlice({
         //设置主题代码
         SetTheme: (state, action) => {
             state.theme = action.payload;
-            return state
+            return state;
         },
         //新建主题
         CreateTheme: (state, action) => {
-            delete state.id
-            state.name = "新建主题"
-            state.description = "新建主题描述"
-            state.thumbnail = ""
-            return state
+            delete state.id;
+            state.name = "新建主题";
+            state.description = "新建主题描述";
+            state.thumbnail = "";
+            return state;
         },
         //修改主题
         UpdateTheme: (state, action) => {
-            state = {...action.payload}
-            return state
-        }
-    }
-})
+            state = {...action.payload};
+            return state;
+        },
+    },
+});
 export const {SetTheme, CreateTheme, UpdateTheme} = ThemeDetail.actions;
 export default ThemeDetail.reducer;

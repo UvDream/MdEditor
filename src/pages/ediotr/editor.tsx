@@ -9,12 +9,13 @@ import { keymapEvent, MenusInsert } from "@/pages/home/components/key-events";
 import { useDebounceFn } from "ahooks";
 
 type Props = {
-  value?: string;
-  language?: string;
-  insert?: boolean;
-  onChange?: (value: string) => void;
-  mdEditor?: boolean;
-  readOnly?: boolean;
+    value?: string;
+    language?: string;
+    insert?: boolean;
+    onChange?: (value: string) => void;
+    mdEditor?: boolean;
+    readOnly?: boolean;
+    scroll?: boolean;
 };
 export default function Editor(props: Props) {
   const editor = useRef(null);
@@ -49,7 +50,7 @@ export default function Editor(props: Props) {
       // console.log("滚动", evn);
       // setScrollTop(evn.target.scrollTop);
       // @ts-ignore
-      emitter.emit(EventType.Scroll, evn.target.scrollTop);
+        props.scroll && emitter.emit(EventType.Scroll, evn.target.scrollTop);
     },
   });
 

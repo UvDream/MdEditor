@@ -5,14 +5,11 @@ import {EventType, getConfig, setConfig, emitter} from "@/utils";
 import {useState} from "react";
 
 export default function Show() {
-    const [isFullscreen, {
-        enterFullscreen,
-        exitFullscreen,
-        toggleFullscreen
-    }] = useFullscreen(document.getElementsByTagName('body')[0]);
+    const [isFullscreen, {enterFullscreen, exitFullscreen, toggleFullscreen}] =
+        useFullscreen(document.getElementsByTagName("body")[0]);
     const fullScreen = (isFull: boolean) => {
-        isFull ? enterFullscreen() : exitFullscreen()
-    }
+        isFull ? enterFullscreen() : exitFullscreen();
+    };
     const [editorArea, setEditorArea] = useState(getConfig().editorArea);
     const [previewArea, setPreviewArea] = useState(getConfig().previewArea);
     const [themeArea, setThemeArea] = useState(getConfig().themeArea);
@@ -53,16 +50,11 @@ export default function Show() {
                 }}
             />
             <Divider style={{margin: "0px auto", minWidth: "unset"}}/>
-            {isFullscreen
-                ?
-                <MenusItem
-                    title={"退出全屏"}
-                    onClick={() => fullScreen(false)}
-                /> :
-                <MenusItem
-                    title={"全屏"}
-                    onClick={() => fullScreen(true)}
-                />}
+            {isFullscreen ? (
+                <MenusItem title={"退出全屏"} onClick={() => fullScreen(false)}/>
+            ) : (
+                <MenusItem title={"全屏"} onClick={() => fullScreen(true)}/>
+            )}
         </div>
-    )
+    );
 }

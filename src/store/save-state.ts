@@ -7,9 +7,9 @@ export const SaveState = createSlice({
     reducers: {
         changeState: (state, {payload}) => {
             state = payload;
-            return state
-        }
-    }
-})
+            return state;
+        },
+    },
+});
 export const {changeState} = SaveState.actions;
 export default SaveState.reducer;

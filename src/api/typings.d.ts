@@ -12,6 +12,8 @@ declare namespace API {
     disable_comments?: boolean;
     /** 编辑器类型 */
     editor_type?: string;
+    /** halo的文章ID */
+    halo_id?: string;
     /** html内容 */
     html_content?: string;
     id?: string;
@@ -54,22 +56,45 @@ declare namespace API {
     word_count?: number;
   };
 
-  type Captcha = {
-    'bg-color'?: RGBA;
-    /** 验证码高度 */
-    height?: number;
-    /** 验证码语言 zh/en */
-    language?: string;
-    /** 验证码长度 */
-    length?: number;
-    /** 噪点数量 */
-    'noise-count'?: number;
-    /** 显示线条选项  2/4/8 */
-    'show-line-options'?: number;
-    /** 验证码类型 default/audio/math/string/math/chinese */
+  type Bill = {
+    /** 账单金额 */
+    amount?: number;
+    /** 账单分类ID */
+    category_id?: string;
+    create_time?: string;
+    creator?: User;
+    /** 账单创建者ID */
+    creator_id?: string;
+    delete_time?: DeletedAt;
+    id?: string;
+    ledger_category?: LedgerCategory;
+    /** 账单名称 */
+    name?: string;
+    /** 账单状态 */
+    status?: string;
+    /** 账单标签 */
+    tags?: LedgerTag[];
+    /** 账单类型 */
     type?: string;
-    /** 验证码宽度 */
-    width?: number;
+    update_time?: string;
+  };
+
+  type Captcha = {
+      "bg-color"?: RGBA;
+      /** 验证码高度 */
+      height?: number;
+      /** 验证码语言 zh/en */
+      language?: string;
+      /** 验证码长度 */
+      length?: number;
+      /** 噪点数量 */
+      "noise-count"?: number;
+      /** 显示线条选项  2/4/8 */
+      "show-line-options"?: number;
+      /** 验证码类型 default/audio/math/string/math/chinese */
+      type?: string;
+      /** 验证码宽度 */
+      width?: number;
   };
 
   type Category = {
@@ -93,6 +118,29 @@ declare namespace API {
     update_time?: string;
   };
 
+  type CategoryLedger = {
+    children?: CategoryLedger[];
+    create_time?: string;
+    delete_time?: DeletedAt;
+    /** 分类描述 */
+    description?: string;
+    /** 分类图标类型 1 图片/2 icon/3 文字 */
+    icon_type?: string;
+    id?: string;
+    /** 分类名称 */
+    name?: string;
+    /** 父元素ID */
+    parent_id?: string;
+    /** 分类缩略图 */
+    thumbnail?: string;
+    /** 类型  0 支出/ 1收入.... */
+    type?: string;
+    update_time?: string;
+    user?: User;
+    /** 分类创建者ID */
+    user_id?: string;
+  };
+
   type deleteArticle_openAPI_deleteParams = {
     /** 参数 */
     id: string;
@@ -112,6 +160,26 @@ declare namespace API {
   type deleteFile_openAPI_deleteIdParams = {
     /** 参数 */
     id: string;
+  };
+
+  type deleteLedger_openAPI_deleteParams = {
+    /** 账本ID */
+    id: number;
+  };
+
+  type deleteLedgerBill_openAPI_deleteParams = {
+    /** 账单ID */
+    id: number;
+  };
+
+  type deleteLedgerCategory_openAPI_deleteParams = {
+    /** 账本分类ID */
+    id: number;
+  };
+
+  type deleteLedgerTag_openAPI_deleteParams = {
+    /** 账本标签ID */
+    id: number;
   };
 
   type deleteTag_openAPI_deleteParams = {
@@ -169,6 +237,11 @@ declare namespace API {
     page_size: number;
   };
 
+  type getLedgerCategoryListParams = {
+    /** 账本分类ID */
+    id: number;
+  };
+
   type getPublicBaseDetailParams = {
     /** 参数 */
     id: string;
@@ -192,6 +265,42 @@ declare namespace API {
   type getThemePublicParams = {
     /** 关键词 */
     keyword?: string;
+  };
+
+  type Ledger = {
+    /** 分类 */
+    categories?: CategoryLedger[];
+    create_time?: string;
+    creator?: User;
+    /** 账本创建者ID */
+    creator_id?: string;
+    delete_time?: DeletedAt;
+    /** 账本描述 */
+    description?: string;
+    id?: string;
+    /** 账本成员数量 */
+    member_count?: number;
+    /** 账本名称 */
+    name?: string;
+    /** 标签 */
+    tags?: TagLedger[];
+    /** 缩略图 */
+    thumbnail?: string;
+    /** 账本类型 */
+    type?: string;
+    update_time?: string;
+    /** 账本成员ID */
+    user?: User[];
+  };
+
+  type LedgerCategory = {
+    category_ledger_id?: string;
+    ledger_id?: string;
+  };
+
+  type LedgerTag = {
+    ledger_id?: string;
+    tag_id?: string;
   };
 
   type LoginRequest = {
@@ -241,6 +350,20 @@ declare namespace API {
     slug?: string;
     /** 缩略图 */
     thumbnail?: string;
+    update_time?: string;
+  };
+
+  type TagLedger = {
+    create_time?: string;
+    creator?: User;
+    /** 标签创建者ID */
+    creator_id?: string;
+    delete_time?: DeletedAt;
+    /** 标签描述 */
+    description?: string;
+    id?: string;
+    /** 标签名称 */
+    name?: string;
     update_time?: string;
   };
 

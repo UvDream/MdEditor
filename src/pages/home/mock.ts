@@ -1,4 +1,4 @@
-export const articleContent=`
+export const articleContent = `
 Vditor 是一款**所见即所得**编辑器，支持 *Markdown*。
 
 * 不熟悉 Markdown 可使用工具栏或快捷键进行排版
@@ -176,4 +176,4 @@ public class HelloWorld {
 [链接标识]: https://b3log.org
 \`\`\`
 
-    `
+    `;
