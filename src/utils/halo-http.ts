@@ -1,9 +1,7 @@
 import {Message} from "@arco-design/web-react";
 import axios from "axios";
-import {useDispatch} from "react-redux";
-import {SetArticleDetail} from "@/store/article";
 import {postArticleCreate, putArticleUpdate} from "@/api/article";
-import {changeState} from "@/store/save-state";
+import {getHaloCategory, getHaloTags} from "@/api/halo";
 
 export type treeItem = {
     title: string;
@@ -11,55 +9,24 @@ export type treeItem = {
     key: string;
     children?: treeItem[];
 };
-const url = "https://" + localStorage.getItem("halo-url") + "/api/admin";
-let token = localStorage.getItem("halo-token");
-//获取halo token
-export const GetToken = async (
-    url: string,
-    username: string,
-    password: string
-) => {
-    const res = await axios.post(url + "/login", {
-        username: username,
-        password: password,
-    });
-    const result = res.data;
-    if (result.status === 200) {
-        localStorage.setItem("halo-token", result.data.access_token);
-        token = result.data.access_token;
-        return result.data.access_token;
-    }
-    return "";
-};
+
 
 //获取halo 标签
 export const GetTags = async () => {
-    try {
-        const {data} = await axios.get(url + "/tags", {
-            // @ts-ignore
-            headers: {"Admin-Authorization": token},
-        });
-        if (data.status === 200) {
-            return data.data;
-        }
-    } catch (e) {
-        console.log(e, "11");
-        localStorage.removeItem("halo-token");
-    }
+    const url = "https://" + localStorage.getItem("halo-url");
+    const token = localStorage.getItem("halo-token") || "";
+    const res = await getHaloTags({url, token})
+    console.log(res, "tags")
+    return res.data
 };
 
 //获取halo 分类
 export const GetCategories = async () => {
-    try {
-        const {data} = await axios.get(url + "/categories", {
-            // @ts-ignore
-            headers: {"Admin-Authorization": token},
-        });
-        if (data.status === 200) {
-            return getTreData(data.data);
-        }
-    } catch (e) {
-        localStorage.removeItem("halo-token");
+    const url = "https://" + localStorage.getItem("halo-url");
+    const token = localStorage.getItem("halo-token") || "";
+    const result = await getHaloCategory({url, token}) as unknown as API.Response
+    if (result.code === 200) {
+        return getTreData(result.data);
     }
 };
 type HaloArticle = {
@@ -73,11 +40,11 @@ type HaloArticle = {
     md_content: string;
     halo_id: string;
 };
-// const dispatch = useDispatch();
 
 //提交文章
 export const PostArticle = async (article: HaloArticle) => {
-    console.log(article, "1111");
+    const url = "https://" + localStorage.getItem("halo-url");
+    const token = localStorage.getItem("halo-token") || "";
     if (article.id) {
         const {data} = await axios.put(
             url + "/posts/" + article.id,

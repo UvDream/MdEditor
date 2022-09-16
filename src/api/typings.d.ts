@@ -56,6 +56,29 @@ declare namespace API {
     word_count?: number;
   };
 
+  type ArticleHaloResponse = {
+    categoryIds?: number[];
+    /** html */
+    content?: string;
+    /** MARKDOWN RICHTEXT */
+    editorType?: string;
+    /** html */
+    formatContent?: string;
+    id?: string;
+    /** markdown */
+    originalContent?: string;
+    /** 别名 */
+    slug?: string;
+    /** PUBLISHED DRAFT INTIMATE RECYCLE */
+    status?: string;
+    tagIds?: number[];
+    title?: string;
+    token?: string;
+    /** 是否置顶 */
+    topped?: boolean;
+    url?: string;
+  };
+
   type Bill = {
     /** 账单金额 */
     amount?: number;
@@ -80,21 +103,21 @@ declare namespace API {
   };
 
   type Captcha = {
-      "bg-color"?: RGBA;
-      /** 验证码高度 */
-      height?: number;
-      /** 验证码语言 zh/en */
-      language?: string;
-      /** 验证码长度 */
-      length?: number;
-      /** 噪点数量 */
-      "noise-count"?: number;
-      /** 显示线条选项  2/4/8 */
-      "show-line-options"?: number;
-      /** 验证码类型 default/audio/math/string/math/chinese */
-      type?: string;
-      /** 验证码宽度 */
-      width?: number;
+    'bg-color'?: RGBA;
+    /** 验证码高度 */
+    height?: number;
+    /** 验证码语言 zh/en */
+    language?: string;
+    /** 验证码长度 */
+    length?: number;
+    /** 噪点数量 */
+    'noise-count'?: number;
+    /** 显示线条选项  2/4/8 */
+    'show-line-options'?: number;
+    /** 验证码类型 default/audio/math/string/math/chinese */
+    type?: string;
+    /** 验证码宽度 */
+    width?: number;
   };
 
   type Category = {
@@ -235,6 +258,29 @@ declare namespace API {
     key_word?: string;
     page: number;
     page_size: number;
+  };
+
+  type getHaloCategoryParams = {
+    /** token */
+    token: string;
+    /** url */
+    url: string;
+  };
+
+  type getHaloTagsParams = {
+    /** token */
+    token: string;
+    /** url */
+    url: string;
+  };
+
+  type getHaloTokenParams = {
+    /** 用户名 */
+    username: string;
+    /** 密码 */
+    password: string;
+    /** url */
+    url: string;
   };
 
   type getLedgerCategoryListParams = {
