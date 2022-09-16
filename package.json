@@ -1,7 +1,7 @@
 {
     "name": "md-editor",
     "private": true,
-    "version": "0.4.8",
+    "version": "0.4.9",
     "bin": {
         "mdc": "bin/cli.js"
     },
