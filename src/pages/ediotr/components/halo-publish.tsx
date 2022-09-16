@@ -65,10 +65,10 @@ export default function HaloPublish(props: Props) {
                 val.editorType = "MARKDOWN";
                 const result = await postHaloSave(val) as unknown as API.Response;
                 if (result.code === 200) {
-                    dispatch(SetArticleDetail({halo_id: result.data.id}));
+                    dispatch(SetArticleDetail({halo_id: result.data.id.toString()}));
                     const data: API.Article = {...article};
                     data.halo_id = result.data.id.toString()
-                    const res = await saveArticle(data);
+                    const res = await saveArticle(data) as unknown as API.Response;
                     res && props.onOk();
                 }
             }}
