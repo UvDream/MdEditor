@@ -15,8 +15,12 @@ export type treeItem = {
 export const GetTags = async () => {
     const url = "https://" + localStorage.getItem("halo-url");
     const token = localStorage.getItem("halo-token") || "";
-    const res = await getHaloTags({url, token})
-    console.log(res, "tags")
+    const res = await getHaloTags({url, token}) as unknown as API.Response
+    if (res.code == 200) {
+        return res.data
+    } else if (res.code === 50005) {
+        localStorage.removeItem("halo-token");
+    }
     return res.data
 };
 
@@ -27,7 +31,10 @@ export const GetCategories = async () => {
     const result = await getHaloCategory({url, token}) as unknown as API.Response
     if (result.code === 200) {
         return getTreData(result.data);
+    } else if (result.code === 50005) {
+        localStorage.removeItem("halo-token");
     }
+    return []
 };
 type HaloArticle = {
     id?: string;
