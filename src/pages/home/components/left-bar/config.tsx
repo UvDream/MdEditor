@@ -1,4 +1,4 @@
-import {Modal, Tabs} from "@arco-design/web-react";
+import {Button, Modal, Tabs} from "@arco-design/web-react";
 import {
     IconApps,
     IconImage,
@@ -20,7 +20,7 @@ export default function SetConfig(props: Props) {
             title="设置"
             style={{width: 900}}
             visible={props.visible}
-            onOk={() => props.onOk(false)}
+            footer={null}
             onCancel={() => props.onCancel(false)}
             autoFocus={false}
             focusLock={true}
