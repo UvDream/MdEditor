@@ -11,7 +11,6 @@ import * as system from './system';
 import * as user from './user';
 import * as tag from './tag';
 import * as theme from './theme';
-
 export default {
     article,
     category,

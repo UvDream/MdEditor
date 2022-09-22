@@ -64,7 +64,7 @@ declare namespace API {
     editorType?: string;
     /** html */
     formatContent?: string;
-    id?: string;
+    id?: number;
     /** markdown */
     originalContent?: string;
     /** 别名 */
@@ -445,6 +445,27 @@ declare namespace API {
     /** 关联到角色表 */
     roles?: SysRole[];
     update_time?: string;
+    user_config?: UserConfig;
+    user_config_id?: string;
     user_name?: string;
+  };
+
+  type UserConfig = {
+    create_time?: string;
+    delete_time?: DeletedAt;
+    id?: string;
+    /** 存储位置 */
+    oss_type?: string;
+    /** 七牛云 */
+    qi_niu_access_key?: string;
+    qi_niu_bucket?: string;
+    qi_niu_domain?: string;
+    qi_niu_secret_key?: string;
+    /** 又拍云 */
+    up_yun_bucket?: string;
+    up_yun_domain?: string;
+    up_yun_pass?: string;
+    up_yun_user?: string;
+    update_time?: string;
   };
 }
