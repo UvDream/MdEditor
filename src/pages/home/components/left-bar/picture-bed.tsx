@@ -1,4 +1,4 @@
-import {Button, Form, Input, Message, Select} from "@arco-design/web-react";
+import {Button, Form, Input, Message, Select, Switch} from "@arco-design/web-react";
 import {useEffect, useState} from "react";
 import {getUserUserConfig, postUserUserConfig, putUserUserConfig} from "@/api/system";
 
@@ -8,10 +8,12 @@ export default function PictureBed() {
     const [form] = Form.useForm();
     const [oss_type, setOssType] = useState("")
     const [id, setID] = useState("")
+    const [config, setConfig] = useState<any>()
     useEffect(() => {
         getUserUserConfig().then((res: any) => {
             if (res.success) {
                 res.data.id && setID(res.data.id)
+                setConfig(res.data)
                 form.setFieldsValue(res.data)
                 setOssType(res.data.oss_type)
             }
@@ -31,7 +33,9 @@ export default function PictureBed() {
         } else {
             //    编辑
             val.id = id
-            const res = await putUserUserConfig(val) as unknown as API.Response
+            //合并参数
+            const data = Object.assign(config, val)
+            const res = await putUserUserConfig(data) as unknown as API.Response
             if (res.success) {
                 Message.success("修改成功")
             }
@@ -51,6 +55,9 @@ export default function PictureBed() {
             <FormItem label="Domain" field="qi_niu_domain" rules={[{required: true, message: "Domain必填"}]}>
                 <Input/>
             </FormItem>
+            <FormItem label="域名是否是Https" field="is_https">
+                <Switch/>
+            </FormItem>
         </>
     }
     const YouPaiComponent = () => {
@@ -66,6 +73,9 @@ export default function PictureBed() {
             </FormItem>
             <FormItem label="PassWord" field="up_yun_pass" rules={[{required: true, message: "PassWord必填"}]}>
                 <Input.Password/>
+            </FormItem>
+            <FormItem label="域名是否是Https" field="is_https">
+                <Switch/>
             </FormItem>
         </>
     }

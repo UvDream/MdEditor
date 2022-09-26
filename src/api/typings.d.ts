@@ -220,6 +220,7 @@ declare namespace API {
     create_time?: string;
     delete_time?: DeletedAt;
     id?: string;
+    is_https?: boolean;
     key?: string;
     name?: string;
     position?: string;
@@ -454,12 +455,15 @@ declare namespace API {
     create_time?: string;
     delete_time?: DeletedAt;
     id?: string;
+    /** 是否是https */
+    is_https?: boolean;
     /** 存储位置 */
     oss_type?: string;
     /** 七牛云 */
     qi_niu_access_key?: string;
     qi_niu_bucket?: string;
     qi_niu_domain?: string;
+    qi_niu_position?: string;
     qi_niu_secret_key?: string;
     /** 又拍云 */
     up_yun_bucket?: string;
