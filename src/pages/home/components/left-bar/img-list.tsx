@@ -70,14 +70,16 @@ export default function ImgList(props: Props) {
     const uploadSuccess = (fileList: UploadItem[], file: any) => {
         if (file.response && file.response.success) {
             getImgList().then();
+            const {data} = file.response
             if (file.response.data.position === "local") {
                 CopyToClipboard(
                     "![" +
-                    file.response.data.name +
-                    "](" +
-                    config.baseURL +
-                    file.response.data.url +
-                    ")"
+                    data.is_https ? "https://" : "http://" +
+                        file.response.data.name +
+                        "](" +
+                        config.baseURL +
+                        file.response.data.url +
+                        ")"
                 ).then();
                 Message.success("上传成功,已复制为Markdown链接");
             }
@@ -164,7 +166,7 @@ export default function ImgList(props: Props) {
                                                 fill="#333"
                                                 strokeWidth={3}
                                                 onClick={() => {
-                                                    const text = `![](${item.position === "local" ? Config.baseURL : ""}${item.url})`;
+                                                    const text = `![](${item.is_https ? "https://" : "http://"}${item.position === "local" ? Config.baseURL : ""}${item.url})`;
                                                     CopyToClipboard(text).then(() => {
                                                         Message.success("复制成功,去编辑器粘贴吧!");
                                                     });
