@@ -44,37 +44,37 @@ export default function PictureBed() {
     const QiNiuComponent = () => {
         return <>
             <FormItem label="AccessKey" field="qi_niu_access_key" rules={[{required: true, message: "AccessKey必填"}]}>
-                <Input/>
+                <Input.Password/>
             </FormItem>
             <FormItem label="SecretKey" field="qi_niu_secret_key" rules={[{required: true, message: "SecretKey必填"}]}>
+                <Input.Password/>
+            </FormItem>
+            <FormItem label="空间名称" field="qi_niu_bucket" rules={[{required: true, message: "Bucket必填"}]}>
                 <Input/>
             </FormItem>
-            <FormItem label="Bucket" field="qi_niu_bucket" rules={[{required: true, message: "Bucket必填"}]}>
+            <FormItem label="绑定域名" field="qi_niu_domain" rules={[{required: true, message: "Domain必填"}]}>
                 <Input/>
             </FormItem>
-            <FormItem label="Domain" field="qi_niu_domain" rules={[{required: true, message: "Domain必填"}]}>
-                <Input/>
-            </FormItem>
-            <FormItem label="域名是否是Https" field="is_https">
+            <FormItem label="域名是否是Https" field="is_https" initialValue={false}>
                 <Switch/>
             </FormItem>
         </>
     }
     const YouPaiComponent = () => {
         return <>
-            <FormItem label="Bucket" field="up_yun_bucket" rules={[{required: true, message: "Bucket必填"}]}>
+            <FormItem label="空间名称" field="up_yun_bucket" rules={[{required: true, message: "Bucket必填"}]}>
                 <Input/>
             </FormItem>
-            <FormItem label="Domain" field="up_yun_domain" rules={[{required: true, message: "Domain必填"}]}>
+            <FormItem label="绑定的域名" field="up_yun_domain" rules={[{required: true, message: "Domain必填"}]}>
+                <Input placeholder="类似pic.uvdream.cn"/>
+            </FormItem>
+            <FormItem label="操作员名称" field="up_yun_user" rules={[{required: true, message: "Username必填"}]}>
                 <Input/>
             </FormItem>
-            <FormItem label="Username" field="up_yun_user" rules={[{required: true, message: "Username必填"}]}>
-                <Input/>
-            </FormItem>
-            <FormItem label="PassWord" field="up_yun_pass" rules={[{required: true, message: "PassWord必填"}]}>
+            <FormItem label="操作员授权码" field="up_yun_pass" rules={[{required: true, message: "PassWord必填"}]}>
                 <Input.Password/>
             </FormItem>
-            <FormItem label="域名是否是Https" field="is_https">
+            <FormItem label="域名是否是Https" field="is_https" initialValue={false}>
                 <Switch/>
             </FormItem>
         </>
