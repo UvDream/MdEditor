@@ -70,17 +70,17 @@ export default function Editor(props: Props) {
   });
 
   return (
-    <div className={"editor"}>
-      {/*<button onClick={() => {*/}
-      {/*    // insertText("#")*/}
-      {/*    insert(editor, '#', 1)*/}
-      {/*}}>*/}
-      {/*    添加*/}
-      {/*</button>*/}
-      <CodeMirror
-        placeholder={"请输入文章内容"}
-        width="100%"
-        height={"calc(100vh - 30px)"}
+    <div className={"editor print-hide"}>
+        {/*<button onClick={() => {*/}
+        {/*    // insertText("#")*/}
+        {/*    insert(editor, '#', 1)*/}
+        {/*}}>*/}
+        {/*    添加*/}
+        {/*</button>*/}
+        <CodeMirror
+            placeholder={"请输入文章内容"}
+            width="100%"
+            height={"calc(100vh - 30px)"}
         readOnly={props.readOnly}
         autoFocus={true}
         ref={editor}

@@ -86,7 +86,7 @@ export default function EditorPage() {
                     {config.editorArea ? (
                         <Col
                             span={24 / getCount()}
-                            className={"code-editor"}
+                            className={"code-editor print-hide"}
                             style={{display: "flex"}}
                         >
                             <Editor
@@ -111,7 +111,7 @@ export default function EditorPage() {
                         <></>
                     )}
                     {config.themeArea ? (
-                        <Col span={24 / getCount()} className={"style-editor"}>
+                        <Col span={24 / getCount()} className={"style-editor print-hide"}>
                             <ThemeEditor/>
                         </Col>
                     ) : (

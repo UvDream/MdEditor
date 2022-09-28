@@ -5,6 +5,10 @@ import {emitter, EventType} from "@/utils";
 
 export default function TopMenus() {
     const menusItemClick = (key: TopMenusType) => {
+        if (key.id === "1-3") {
+            window.print();
+            return
+        }
         console.log("---------菜单点击----------", key);
         emitter.emit(EventType.KeyEvents, key);
         emitter.all.delete(EventType.KeyEvents);
