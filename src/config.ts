@@ -1,5 +1,5 @@
 //api接口地址
-let baseUrl = "http://127.0.0.1:8989";
+export let baseUrl = "http://127.0.0.1:8989";
 //编辑器部署地址
 let frontEndUrl = "https://uvdream.cn/editor";
 if (process.env.NODE_ENV === "development") {

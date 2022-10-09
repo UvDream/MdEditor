@@ -220,25 +220,30 @@ declare namespace API {
     create_time?: string;
     delete_time?: DeletedAt;
     id?: string;
-    is_https?: boolean;
-    key?: string;
-    name?: string;
-    position?: string;
-    size?: number;
-    type?: string;
-    update_time?: string;
-    url?: string;
+      is_https?: boolean;
+      key?: string;
+      name?: string;
+      position?: string;
+      size?: number;
+      type?: string;
+      update_time?: string;
+      url?: string;
   };
 
-  type getArticleDetailParams = {
-    /** 参数 */
-    id: string;
-  };
+    type getArticle_openAPI_exportParams = {
+        /** 参数 */
+        id: string;
+    };
 
-  type getArticleHistoryParams = {
-    /** 参数 */
-    id: string;
-  };
+    type getArticleDetailParams = {
+        /** 参数 */
+        id: string;
+    };
+
+    type getArticleHistoryParams = {
+        /** 参数 */
+        id: string;
+    };
 
   type getArticleListParams = {
     category_id?: number;

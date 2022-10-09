@@ -54,3 +54,12 @@
 - [ ] 更多的组件支持
 - [ ] 手机端支持
 - [ ] 快捷键完善(目前只支持Mac快捷键,部分存在bug)
+
+# 如有疑惑或者需求提出,请在 [issues](https://github.com/UvDream/MdEditor/issues) 中提出
+
+# 联系我
+
+| 微信                                                 | QQ                                  |
+|----------------------------------------------------|-------------------------------------|
+| <img src="./docs/others/wechat.png" width="300"  > | <img src="./docs/others/qq.png" width="300"   > |
+

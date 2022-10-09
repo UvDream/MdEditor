@@ -44,6 +44,21 @@ export async function getArticleDetail(
     });
 }
 
+/** 文章导出md GET /article/export */
+export async function getArticle__openAPI__export(
+    // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
+    params: API.getArticle_openAPI_exportParams,
+    options?: { [key: string]: any },
+) {
+    return request<API.Response>('/article/export', {
+        method: 'GET',
+        params: {
+            ...params,
+        },
+        ...(options || {}),
+    });
+}
+
 /** 查询文章历史记录 GET /article/history */
 export async function getArticleHistory(
     // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
