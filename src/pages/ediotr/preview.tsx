@@ -107,7 +107,7 @@ export default function Preview(props: Props) {
     return (
         <div className={"md-preview"}>
             {props.tool && (
-                <div className={"tool"}>
+                <div className={"tool print-hide"}>
                     {IconList.map((item: IconType) => {
                         if (
                             item.id === 1 ||

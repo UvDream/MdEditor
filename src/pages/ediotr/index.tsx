@@ -19,7 +19,6 @@ import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "@/store";
 import {SetArticleDetail} from "@/store/article";
 import ThemeEditor from "@/pages/ediotr/theme-editor";
-import juice from "juice";
 
 const Row = Grid.Row;
 const Col = Grid.Col;
@@ -37,7 +36,10 @@ export default function EditorPage() {
     );
     //获取配置
     const [config, setConfig] = useState(getConfig());
-
+    useEffect(() => {
+        console.log("主题")
+        setEditorStyle(theme || "")
+    }, [theme])
     useEffect(() => {
         setEditorStyle(defaultStyle);
     }, []);
@@ -84,7 +86,7 @@ export default function EditorPage() {
                     {config.editorArea ? (
                         <Col
                             span={24 / getCount()}
-                            className={"code-editor"}
+                            className={"code-editor print-hide"}
                             style={{display: "flex"}}
                         >
                             <Editor
@@ -109,7 +111,7 @@ export default function EditorPage() {
                         <></>
                     )}
                     {config.themeArea ? (
-                        <Col span={24 / getCount()} className={"style-editor"}>
+                        <Col span={24 / getCount()} className={"style-editor print-hide"}>
                             <ThemeEditor/>
                         </Col>
                     ) : (

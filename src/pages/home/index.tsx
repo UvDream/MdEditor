@@ -50,7 +50,7 @@ export default function HomePage(props: any) {
             //pc端布局
             return (
                 <Layout className={"pc-layout"}>
-                    <Header>
+                    <Header className="print-hide">
                         <TopHeader/>
                     </Header>
                     <Layout className={"pc-layout-content"}>
@@ -64,7 +64,7 @@ export default function HomePage(props: any) {
                                 width: "100%",
                                 border: "1px solid var(--color-border)",
                             }}
-                            trigger={[<div key="2" className={"pc-layout-content-resize"}/>]}
+                            trigger={[<div key="2" className={"pc-layout-content-resize print-hide"}/>]}
                             panes={[
                                 <LeftBar/>,
                                 <Content className={"pc-layout-content"}>

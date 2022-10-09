@@ -7,9 +7,9 @@ import {
     Modal,
     Radio,
 } from "@arco-design/web-react";
-import {GetToken} from "@/utils";
 import {useEffect, useState} from "react";
 import HaloPublish from "@/pages/ediotr/components/halo-publish";
+import {getHaloToken} from "@/api/halo";
 
 type Props = {
     visible: boolean;
@@ -32,17 +32,19 @@ export default function HaloPage(props: Props) {
         }
     }, []);
     const getToken = async () => {
-        try {
-            const res = await form.validate();
-            const token = await GetToken(
-                "https://" + res.url + "/api/admin",
-                res.username,
-                res.password
-            );
-            localStorage.setItem("halo-url", res.url);
-            form.setFieldValue("token", token);
-            setToken(token);
-        } catch (e) {
+        const res = await form.validate();
+        const result = await getHaloToken({
+            url: "https://" + res.url,
+            username: res.username,
+            password: res.password
+        }) as unknown as API.Response;
+        localStorage.setItem("halo-url", res.url);
+        if (result.code === 200) {
+            form.setFieldValue("token", result.data.access_token);
+            localStorage.setItem("halo-token", result.data.access_token);
+            setTimeout(() => {
+                setToken(result.data.access_token);
+            }, 2000)
         }
     };
     return (
@@ -76,9 +78,23 @@ export default function HaloPage(props: Props) {
                         <Form.Item shouldUpdate noStyle>
                             {(values) => {
                                 return values.type === "手动填写" ? (
-                                    <Form.Item label="Token">
-                                        <Input/>
-                                    </Form.Item>
+                                    <>
+                                        <Form.Item label="博客Token" field="token">
+                                            <Input/>
+                                        </Form.Item>
+                                        <Form.Item wrapperCol={{offset: 5}}>
+                                            <Button type="primary" onClick={async () => {
+                                                const res = await form.validate();
+                                                if (res.token !== "") {
+                                                    setToken(res.token);
+                                                    localStorage.setItem("halo-token", res.token);
+                                                    props.onOk()
+                                                }
+                                            }}>
+                                                确定
+                                            </Button>
+                                        </Form.Item>
+                                    </>
                                 ) : (
                                     <>
                                         <Form.Item

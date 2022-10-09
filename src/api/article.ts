@@ -1,16 +1,13 @@
 // @ts-ignore
 /* eslint-disable */
-import {request} from "@/utils/http";
+import {request} from '@/utils/http';
 
 /** 创建文章 POST /article/create */
-export async function postArticleCreate(
-    body: API.Article,
-    options?: { [key: string]: any }
-) {
-    return request<API.Response>("/article/create", {
-        method: "POST",
+export async function postArticleCreate(body: API.Article, options?: { [key: string]: any }) {
+    return request<API.Response>('/article/create', {
+        method: 'POST',
         headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
         },
         data: body,
         ...(options || {}),
@@ -21,10 +18,10 @@ export async function postArticleCreate(
 export async function deleteArticle__openAPI__delete(
     // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
     params: API.deleteArticle_openAPI_deleteParams,
-    options?: { [key: string]: any }
+    options?: { [key: string]: any },
 ) {
-    return request<API.Response>("/article/delete", {
-        method: "DELETE",
+    return request<API.Response>('/article/delete', {
+        method: 'DELETE',
         params: {
             ...params,
         },
@@ -36,10 +33,25 @@ export async function deleteArticle__openAPI__delete(
 export async function getArticleDetail(
     // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
     params: API.getArticleDetailParams,
-    options?: { [key: string]: any }
+    options?: { [key: string]: any },
 ) {
-    return request<API.Response>("/article/detail", {
-        method: "GET",
+    return request<API.Response>('/article/detail', {
+        method: 'GET',
+        params: {
+            ...params,
+        },
+        ...(options || {}),
+    });
+}
+
+/** 文章导出md GET /article/export */
+export async function getArticle__openAPI__export(
+    // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
+    params: API.getArticle_openAPI_exportParams,
+    options?: { [key: string]: any },
+) {
+    return request<API.Response>('/article/export', {
+        method: 'GET',
         params: {
             ...params,
         },
@@ -51,10 +63,10 @@ export async function getArticleDetail(
 export async function getArticleHistory(
     // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
     params: API.getArticleHistoryParams,
-    options?: { [key: string]: any }
+    options?: { [key: string]: any },
 ) {
-    return request<API.Response>("/article/history", {
-        method: "GET",
+    return request<API.Response>('/article/history', {
+        method: 'GET',
         params: {
             ...params,
         },
@@ -66,10 +78,10 @@ export async function getArticleHistory(
 export async function getArticleList(
     // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
     params: API.getArticleListParams,
-    options?: { [key: string]: any }
+    options?: { [key: string]: any },
 ) {
-    return request<API.Response>("/article/list", {
-        method: "GET",
+    return request<API.Response>('/article/list', {
+        method: 'GET',
         params: {
             ...params,
         },
@@ -78,14 +90,11 @@ export async function getArticleList(
 }
 
 /** 修改文章 PUT /article/update */
-export async function putArticleUpdate(
-    body: API.Article,
-    options?: { [key: string]: any }
-) {
-    return request<API.Response>("/article/update", {
-        method: "PUT",
+export async function putArticleUpdate(body: API.Article, options?: { [key: string]: any }) {
+    return request<API.Response>('/article/update', {
+        method: 'PUT',
         headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
         },
         data: body,
         ...(options || {}),
@@ -96,10 +105,10 @@ export async function putArticleUpdate(
 export async function getPublicBaseDetail(
     // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
     params: API.getPublicBaseDetailParams,
-    options?: { [key: string]: any }
+    options?: { [key: string]: any },
 ) {
-    return request<API.Response>("/public/base/detail", {
-        method: "GET",
+    return request<API.Response>('/public/base/detail', {
+        method: 'GET',
         params: {
             ...params,
         },
@@ -111,10 +120,10 @@ export async function getPublicBaseDetail(
 export async function getPublicBaseMd(
     // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
     params: API.getPublicBaseMdParams,
-    options?: { [key: string]: any }
+    options?: { [key: string]: any },
 ) {
-    return request<API.Response>("/public/base/md", {
-        method: "GET",
+    return request<API.Response>('/public/base/md', {
+        method: 'GET',
         params: {
             ...params,
         },

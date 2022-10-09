@@ -18,6 +18,7 @@ import {useDispatch, useSelector, useStore} from "react-redux";
 import {RootState} from "@/store";
 import {pinyin} from "pinyin-pro";
 import {SetArticleDetail} from "@/store/article";
+import {postHaloSave} from "@/api/halo";
 
 const Option = Select.Option;
 type Props = {
@@ -37,6 +38,7 @@ export default function HaloPublish(props: Props) {
 
     useEffect(() => {
         GetTags().then((res) => {
+            // @ts-ignore
             setTags(res);
         });
         GetCategories().then((res: treeItem[] | undefined) => {
@@ -52,20 +54,23 @@ export default function HaloPublish(props: Props) {
     return (
         <Form
             form={form}
-            onSubmit={(val) => {
+            onSubmit={async (val) => {
                 val.content = html_content;
                 val.originalContent = html_content;
                 if (article.halo_id) {
                     val.id = Number(article.halo_id);
                 }
-                PostArticle(val).then(async (res) => {
-                    dispatch(SetArticleDetail({halo_id: res}));
+                val.url = "https://" + localStorage.getItem("halo-url");
+                val.token = localStorage.getItem("halo-token");
+                val.editorType = "MARKDOWN";
+                const result = await postHaloSave(val) as unknown as API.Response;
+                if (result.code === 200) {
+                    dispatch(SetArticleDetail({halo_id: result.data.id.toString()}));
                     const data: API.Article = {...article};
-                    data.halo_id = res.toString()
-                    const result = await saveArticle(data);
-                    result && props.onOk();
-
-                });
+                    data.halo_id = result.data.id.toString()
+                    const res = await saveArticle(data) as unknown as API.Response;
+                    res && props.onOk();
+                }
             }}
         >
             <Form.Item

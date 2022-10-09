@@ -56,6 +56,29 @@ declare namespace API {
     word_count?: number;
   };
 
+  type ArticleHaloResponse = {
+    categoryIds?: number[];
+    /** html */
+    content?: string;
+    /** MARKDOWN RICHTEXT */
+    editorType?: string;
+    /** html */
+    formatContent?: string;
+    id?: number;
+    /** markdown */
+    originalContent?: string;
+    /** 别名 */
+    slug?: string;
+    /** PUBLISHED DRAFT INTIMATE RECYCLE */
+    status?: string;
+    tagIds?: number[];
+    title?: string;
+    token?: string;
+    /** 是否置顶 */
+    topped?: boolean;
+    url?: string;
+  };
+
   type Bill = {
     /** 账单金额 */
     amount?: number;
@@ -80,21 +103,21 @@ declare namespace API {
   };
 
   type Captcha = {
-      "bg-color"?: RGBA;
-      /** 验证码高度 */
-      height?: number;
-      /** 验证码语言 zh/en */
-      language?: string;
-      /** 验证码长度 */
-      length?: number;
-      /** 噪点数量 */
-      "noise-count"?: number;
-      /** 显示线条选项  2/4/8 */
-      "show-line-options"?: number;
-      /** 验证码类型 default/audio/math/string/math/chinese */
-      type?: string;
-      /** 验证码宽度 */
-      width?: number;
+    'bg-color'?: RGBA;
+    /** 验证码高度 */
+    height?: number;
+    /** 验证码语言 zh/en */
+    language?: string;
+    /** 验证码长度 */
+    length?: number;
+    /** 噪点数量 */
+    'noise-count'?: number;
+    /** 显示线条选项  2/4/8 */
+    'show-line-options'?: number;
+    /** 验证码类型 default/audio/math/string/math/chinese */
+    type?: string;
+    /** 验证码宽度 */
+    width?: number;
   };
 
   type Category = {
@@ -197,24 +220,30 @@ declare namespace API {
     create_time?: string;
     delete_time?: DeletedAt;
     id?: string;
-    key?: string;
-    name?: string;
-    position?: string;
-    size?: number;
-    type?: string;
-    update_time?: string;
-    url?: string;
+      is_https?: boolean;
+      key?: string;
+      name?: string;
+      position?: string;
+      size?: number;
+      type?: string;
+      update_time?: string;
+      url?: string;
   };
 
-  type getArticleDetailParams = {
-    /** 参数 */
-    id: string;
-  };
+    type getArticle_openAPI_exportParams = {
+        /** 参数 */
+        id: string;
+    };
 
-  type getArticleHistoryParams = {
-    /** 参数 */
-    id: string;
-  };
+    type getArticleDetailParams = {
+        /** 参数 */
+        id: string;
+    };
+
+    type getArticleHistoryParams = {
+        /** 参数 */
+        id: string;
+    };
 
   type getArticleListParams = {
     category_id?: number;
@@ -235,6 +264,29 @@ declare namespace API {
     key_word?: string;
     page: number;
     page_size: number;
+  };
+
+  type getHaloCategoryParams = {
+    /** token */
+    token: string;
+    /** url */
+    url: string;
+  };
+
+  type getHaloTagsParams = {
+    /** token */
+    token: string;
+    /** url */
+    url: string;
+  };
+
+  type getHaloTokenParams = {
+    /** 用户名 */
+    username: string;
+    /** 密码 */
+    password: string;
+    /** url */
+    url: string;
   };
 
   type getLedgerCategoryListParams = {
@@ -399,6 +451,30 @@ declare namespace API {
     /** 关联到角色表 */
     roles?: SysRole[];
     update_time?: string;
+    user_config?: UserConfig;
+    user_config_id?: string;
     user_name?: string;
+  };
+
+  type UserConfig = {
+    create_time?: string;
+    delete_time?: DeletedAt;
+    id?: string;
+    /** 是否是https */
+    is_https?: boolean;
+    /** 存储位置 */
+    oss_type?: string;
+    /** 七牛云 */
+    qi_niu_access_key?: string;
+    qi_niu_bucket?: string;
+    qi_niu_domain?: string;
+    qi_niu_position?: string;
+    qi_niu_secret_key?: string;
+    /** 又拍云 */
+    up_yun_bucket?: string;
+    up_yun_domain?: string;
+    up_yun_pass?: string;
+    up_yun_user?: string;
+    update_time?: string;
   };
 }

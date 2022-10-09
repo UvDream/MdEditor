@@ -1,7 +1,7 @@
 export const WeXinIcon = () => {
     return (
-        // @ts-ignore
         <svg
+            // @ts-ignore
             t="1659060944087"
             className="icon"
             viewBox="0 0 1024 1024"

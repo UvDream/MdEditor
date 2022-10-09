@@ -1,16 +1,13 @@
 // @ts-ignore
 /* eslint-disable */
-import {request} from "@/utils/http";
+import {request} from '@/utils/http';
 
 /** 主题创建 主题创建 POST /theme/create */
-export async function postThemeCreate(
-    body: API.Theme,
-    options?: { [key: string]: any }
-) {
-    return request<API.Response>("/theme/create", {
-        method: "POST",
+export async function postThemeCreate(body: API.Theme, options?: { [key: string]: any }) {
+    return request<API.Response>('/theme/create', {
+        method: 'POST',
         headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
         },
         data: body,
         ...(options || {}),
@@ -21,10 +18,10 @@ export async function postThemeCreate(
 export async function deleteTheme__openAPI__delete(
     // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
     params: API.deleteTheme_openAPI_deleteParams,
-    options?: { [key: string]: any }
+    options?: { [key: string]: any },
 ) {
-    return request<API.Response>("/theme/delete", {
-        method: "DELETE",
+    return request<API.Response>('/theme/delete', {
+        method: 'DELETE',
         params: {
             ...params,
         },
@@ -36,10 +33,10 @@ export async function deleteTheme__openAPI__delete(
 export async function getThemeDetail(
     // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
     params: API.getThemeDetailParams,
-    options?: { [key: string]: any }
+    options?: { [key: string]: any },
 ) {
-    return request<API.Response>("/theme/detail", {
-        method: "GET",
+    return request<API.Response>('/theme/detail', {
+        method: 'GET',
         params: {
             ...params,
         },
@@ -51,10 +48,10 @@ export async function getThemeDetail(
 export async function getThemeList(
     // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
     params: API.getThemeListParams,
-    options?: { [key: string]: any }
+    options?: { [key: string]: any },
 ) {
-    return request<API.Response>("/theme/list", {
-        method: "GET",
+    return request<API.Response>('/theme/list', {
+        method: 'GET',
         params: {
             ...params,
         },
@@ -66,10 +63,10 @@ export async function getThemeList(
 export async function getThemePublic(
     // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
     params: API.getThemePublicParams,
-    options?: { [key: string]: any }
+    options?: { [key: string]: any },
 ) {
-    return request<API.Response>("/theme/public", {
-        method: "GET",
+    return request<API.Response>('/theme/public', {
+        method: 'GET',
         params: {
             ...params,
         },
@@ -78,14 +75,11 @@ export async function getThemePublic(
 }
 
 /** 主题更新 主题更新 PUT /theme/update */
-export async function putThemeUpdate(
-    body: API.Theme,
-    options?: { [key: string]: any }
-) {
-    return request<API.Response>("/theme/update", {
-        method: "PUT",
+export async function putThemeUpdate(body: API.Theme, options?: { [key: string]: any }) {
+    return request<API.Response>('/theme/update', {
+        method: 'PUT',
         headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
         },
         data: body,
         ...(options || {}),
