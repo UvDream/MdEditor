@@ -96,6 +96,7 @@ export default function PictureBed() {
                     <Select style={{width: 200}} placeholder="请选择图床类型" onChange={selectChange}>
                         <Option key="qiniu" value="qiniu">七牛云</Option>
                         <Option key="youpai" value="youpai">又拍云</Option>
+                        <Option key="ski" value="ski">Img Ski</Option>
                     </Select>
                 </FormItem>
                 {CheckComponent()}
