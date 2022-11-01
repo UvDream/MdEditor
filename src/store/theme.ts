@@ -1,7 +1,7 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {defaultStyle} from "@/utils";
+import {defaultStyle, DarkDefaultStyle} from "@/utils";
 
-const initialState: API.Theme = {theme: defaultStyle};
+const initialState: API.Theme = {theme: defaultStyle, dark_theme: DarkDefaultStyle};
 export const ThemeDetail = createSlice({
     name: "theme",
     initialState,
@@ -9,6 +9,10 @@ export const ThemeDetail = createSlice({
         //设置主题代码
         SetTheme: (state, action) => {
             state.theme = action.payload;
+            return state;
+        },
+        SetDarkTheme: (state, action) => {
+            state.dark_theme = action.payload;
             return state;
         },
         //新建主题
@@ -26,5 +30,5 @@ export const ThemeDetail = createSlice({
         },
     },
 });
-export const {SetTheme, CreateTheme, UpdateTheme} = ThemeDetail.actions;
+export const {SetTheme, CreateTheme, UpdateTheme, SetDarkTheme} = ThemeDetail.actions;
 export default ThemeDetail.reducer;
