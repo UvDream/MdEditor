@@ -101,21 +101,6 @@ export async function putArticleUpdate(body: API.Article, options?: { [key: stri
     });
 }
 
-/** 查询文章详情 GET /public/base/detail */
-export async function getPublicBaseDetail(
-    // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
-    params: API.getPublicBaseDetailParams,
-    options?: { [key: string]: any },
-) {
-    return request<API.Response>('/public/base/detail', {
-        method: 'GET',
-        params: {
-            ...params,
-        },
-        ...(options || {}),
-    });
-}
-
 /** 查询文章markdown内容 GET /public/base/md */
 export async function getPublicBaseMd(
     // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)

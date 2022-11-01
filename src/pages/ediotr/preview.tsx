@@ -25,7 +25,7 @@ export default function Preview(props: Props) {
     const preview = useRef(null);
     const dispatch = useDispatch();
     const [searchParams] = useSearchParams();
-    const {theme} = useSelector((state: RootState) => state.themeDetail);
+    const {theme, dark_theme} = useSelector((state: RootState) => state.themeDetail);
     const [DeviceType, setDeviceType] = useState("icon-pc");
     const articleDetail = useSelector((state: RootState) => state.articleDetail);
     const [visible, setVisible] = useState(false);
@@ -43,6 +43,7 @@ export default function Preview(props: Props) {
         let res = juice.inlineContent(preview.current.innerHTML, theme, {
             inlinePseudoElements: true,
             preserveImportant: true,
+            extraCss: {}
         });
         dispatch(SetArticleDetail({html_content: res}));
     }, [props.content]);
@@ -52,11 +53,15 @@ export default function Preview(props: Props) {
                 Message.info("暂未支持!敬请期待!");
                 break;
             case 2:
+                console.log(dark_theme, "暗色主题")
                 //@ts-ignore
                 let res = juice.inlineContent(preview.current.innerHTML, theme, {
                     inlinePseudoElements: true,
                     preserveImportant: true,
+                    // extraCss:dark_theme
                 });
+                let extraCss = `<style>${dark_theme}</style>`
+                res = res + extraCss
                 await CopyToClipboard(res);
                 Message.success("复制成功!去微信公众号编辑器粘贴吧!");
                 break;

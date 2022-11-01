@@ -141,3 +141,16 @@ export const defaultStyle = `
     background: #fafafa;
 }
 `;
+
+export const DarkDefaultStyle = `
+/*可以编写一些暗黑主题兼容性代码*/
+/*系统暗黑主题切换*/
+@media (prefers-color-scheme: light) {}
+
+@media (prefers-color-scheme: dark) {}
+
+/*一些网站主题切换*/
+html[data-mode="light"] {}
+
+html[data-mode="dark"] {}
+`

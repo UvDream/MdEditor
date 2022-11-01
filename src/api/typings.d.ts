@@ -220,30 +220,30 @@ declare namespace API {
     create_time?: string;
     delete_time?: DeletedAt;
     id?: string;
-      is_https?: boolean;
-      key?: string;
-      name?: string;
-      position?: string;
-      size?: number;
-      type?: string;
-      update_time?: string;
-      url?: string;
+    is_https?: boolean;
+    key?: string;
+    name?: string;
+    position?: string;
+    size?: number;
+    type?: string;
+    update_time?: string;
+    url?: string;
   };
 
-    type getArticle_openAPI_exportParams = {
-        /** 参数 */
-        id: string;
-    };
+  type getArticle_openAPI_exportParams = {
+    /** 参数 */
+    id: string;
+  };
 
-    type getArticleDetailParams = {
-        /** 参数 */
-        id: string;
-    };
+  type getArticleDetailParams = {
+    /** 参数 */
+    id: string;
+  };
 
-    type getArticleHistoryParams = {
-        /** 参数 */
-        id: string;
-    };
+  type getArticleHistoryParams = {
+    /** 参数 */
+    id: string;
+  };
 
   type getArticleListParams = {
     category_id?: number;
@@ -292,11 +292,6 @@ declare namespace API {
   type getLedgerCategoryListParams = {
     /** 账本分类ID */
     id: number;
-  };
-
-  type getPublicBaseDetailParams = {
-    /** 参数 */
-    id: string;
   };
 
   type getPublicBaseMdParams = {
@@ -367,11 +362,24 @@ declare namespace API {
     total?: number;
   };
 
+  type postFileUploadParams = {
+    /** 携带的平台token参数 */
+    token: string;
+  };
+
   type Response = {
     code: number;
     data: any;
     msg: string;
     success: boolean;
+  };
+
+  type RetrievePasswordRequest = {
+    email?: string;
+    nick_name?: string;
+    password?: string;
+    phone?: string;
+    user_name?: string;
   };
 
   type RGBA = {
@@ -421,6 +429,8 @@ declare namespace API {
 
   type Theme = {
     create_time?: string;
+    /** 额外主题 */
+    dark_theme?: string;
     delete_time?: DeletedAt;
     /** 描述 */
     description?: string;
@@ -470,6 +480,7 @@ declare namespace API {
     qi_niu_domain?: string;
     qi_niu_position?: string;
     qi_niu_secret_key?: string;
+    token?: string;
     /** 又拍云 */
     up_yun_bucket?: string;
     up_yun_domain?: string;

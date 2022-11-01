@@ -23,7 +23,10 @@ export default function PictureBed() {
         setOssType(val)
     }
     const onSubmitFunc = async (val: any) => {
-        console.log(val)
+        //ski token存储在本地
+        if (val.oss_type === "ski") {
+            localStorage.setItem("ski_token", val.ski_token)
+        }
         if (id == "") {
             //    新增
             const res = await postUserUserConfig(val) as unknown as API.Response
@@ -79,12 +82,22 @@ export default function PictureBed() {
             </FormItem>
         </>
     }
+    const SkiComponent = () => {
+        return <>
+            <FormItem label="Token" field="ski_token" rules={[{required: true, message: "Token必填"}]}>
+                <Input placeholder="请登陆https://img.ski后台设置token"/>
+            </FormItem>
+        </>
+    }
     const CheckComponent = () => {
         if (oss_type === "qiniu") {
             return <QiNiuComponent/>
         }
         if (oss_type === "youpai") {
             return <YouPaiComponent/>
+        }
+        if (oss_type === "ski") {
+            return <SkiComponent/>
         }
         return <></>
     }
