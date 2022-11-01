@@ -6,24 +6,24 @@
  * @Description:路由管理
  * @Email: UvDream@163.com
  */
-import {Routes, Route} from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import HomePage from "./home";
 import LoginPage from "./login";
 import EditorPage from "@/pages/ediotr";
 import PreviewPage from "@/pages/preview";
-import {useEffect} from "react";
-import {process, tauri, app} from "@tauri-apps/api";
+import { useEffect } from "react";
+import { process, tauri, app } from "@tauri-apps/api";
 
 export default function IndexPage() {
-    return (
-        <Routes>
-            <Route path="/" element={<HomePage/>}>
-                <Route path="/" element={<EditorPage/>}/>
-                <Route path="/editor" element={<EditorPage/>}/>
-            </Route>
-            {/*手机端预览页面*/}
-            <Route path="/preview" element={<PreviewPage/>}/>
-            <Route path="/login" element={<LoginPage/>}/>
-        </Routes>
-    );
+  return (
+    <Routes>
+      <Route path="/" element={<HomePage />}>
+        <Route path="/" element={<EditorPage />} />
+        <Route path="/editor" element={<EditorPage />} />
+      </Route>
+      {/*手机端预览页面*/}
+      <Route path="/preview" element={<PreviewPage />} />
+      <Route path="/login" element={<LoginPage />} />
+    </Routes>
+  );
 }

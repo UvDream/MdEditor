@@ -9,13 +9,13 @@ import { keymapEvent, MenusInsert } from "@/pages/home/components/key-events";
 import { useDebounceFn } from "ahooks";
 
 type Props = {
-    value?: string;
-    language?: string;
-    insert?: boolean;
-    onChange?: (value: string) => void;
-    mdEditor?: boolean;
-    readOnly?: boolean;
-    scroll?: boolean;
+  value?: string;
+  language?: string;
+  insert?: boolean;
+  onChange?: (value: string) => void;
+  mdEditor?: boolean;
+  readOnly?: boolean;
+  scroll?: boolean;
 };
 export default function Editor(props: Props) {
   const editor = useRef(null);
@@ -50,7 +50,7 @@ export default function Editor(props: Props) {
       // console.log("滚动", evn);
       // setScrollTop(evn.target.scrollTop);
       // @ts-ignore
-        props.scroll && emitter.emit(EventType.Scroll, evn.target.scrollTop);
+      props.scroll && emitter.emit(EventType.Scroll, evn.target.scrollTop);
     },
   });
 
@@ -71,16 +71,16 @@ export default function Editor(props: Props) {
 
   return (
     <div className={"editor print-hide"}>
-        {/*<button onClick={() => {*/}
-        {/*    // insertText("#")*/}
-        {/*    insert(editor, '#', 1)*/}
-        {/*}}>*/}
-        {/*    添加*/}
-        {/*</button>*/}
-        <CodeMirror
-            placeholder={"请输入文章内容"}
-            width="100%"
-            height={"calc(100vh - 30px)"}
+      {/*<button onClick={() => {*/}
+      {/*    // insertText("#")*/}
+      {/*    insert(editor, '#', 1)*/}
+      {/*}}>*/}
+      {/*    添加*/}
+      {/*</button>*/}
+      <CodeMirror
+        placeholder={"请输入文章内容"}
+        width="100%"
+        height={"calc(100vh - 30px)"}
         readOnly={props.readOnly}
         autoFocus={true}
         ref={editor}

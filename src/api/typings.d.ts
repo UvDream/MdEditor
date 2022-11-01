@@ -103,7 +103,7 @@ declare namespace API {
   };
 
   type Captcha = {
-    'bg-color'?: RGBA;
+    "bg-color"?: RGBA;
     /** 验证码高度 */
     height?: number;
     /** 验证码语言 zh/en */
@@ -111,9 +111,9 @@ declare namespace API {
     /** 验证码长度 */
     length?: number;
     /** 噪点数量 */
-    'noise-count'?: number;
+    "noise-count"?: number;
     /** 显示线条选项  2/4/8 */
-    'show-line-options'?: number;
+    "show-line-options"?: number;
     /** 验证码类型 default/audio/math/string/math/chinese */
     type?: string;
     /** 验证码宽度 */

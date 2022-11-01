@@ -153,4 +153,4 @@ export const DarkDefaultStyle = `
 html[data-mode="light"] {}
 
 html[data-mode="dark"] {}
-`
+`;

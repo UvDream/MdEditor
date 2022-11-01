@@ -7,9 +7,9 @@
  * @Email: UvDream@163.com
  */
 export enum DeviceTypeEnum {
-    PC,
-    MOBILE,
-    Pad,
+  PC,
+  MOBILE,
+  Pad,
 }
 
 /**
@@ -17,74 +17,74 @@ export enum DeviceTypeEnum {
  * @returns {DeviceTypeEnum}
  */
 export const DeviceType = () => {
-    let ua = navigator.userAgent.toLowerCase();
-    let isAndroid = ua.indexOf("android") > -1;
-    let isIphone = ua.indexOf("iphone") > -1;
-    let isIpad = ua.indexOf("ipad") > -1;
-    if (isAndroid || isIphone) {
-        return DeviceTypeEnum.MOBILE;
-    }
-    if (isIpad) {
-        return DeviceTypeEnum.Pad;
-    }
-    return DeviceTypeEnum.PC;
+  let ua = navigator.userAgent.toLowerCase();
+  let isAndroid = ua.indexOf("android") > -1;
+  let isIphone = ua.indexOf("iphone") > -1;
+  let isIpad = ua.indexOf("ipad") > -1;
+  if (isAndroid || isIphone) {
+    return DeviceTypeEnum.MOBILE;
+  }
+  if (isIpad) {
+    return DeviceTypeEnum.Pad;
+  }
+  return DeviceTypeEnum.PC;
 };
 
 /**
  * 判断是mac/window
  */
 export const GetSystem = () => {
-    let ua = navigator.userAgent.toLowerCase();
-    let isMac = ua.indexOf("macintosh") > -1;
-    let isWindow = ua.indexOf("windows") > -1;
-    if (isMac) {
-        return "mac";
-    }
-    if (isWindow) {
-        return "window";
-    }
+  let ua = navigator.userAgent.toLowerCase();
+  let isMac = ua.indexOf("macintosh") > -1;
+  let isWindow = ua.indexOf("windows") > -1;
+  if (isMac) {
+    return "mac";
+  }
+  if (isWindow) {
+    return "window";
+  }
 };
 /**
  * CalcWordCount 计算字数
  * @param data
  */
 export const CalcWordCount = (data: string) => {
-    const pattern =
-        /[a-zA-Z0-9_\u0392-\u03c9\u0410-\u04F9]+|[\u4E00-\u9FFF\u3400-\u4dbf\uf900-\ufaff\u3040-\u309f\uac00-\ud7af]+/g;
-    const m = data.match(pattern);
-    let count = 0;
-    if (m === null) return count;
-    for (let i = 0; i < m.length; i++) {
-        if (m[i].charCodeAt(0) >= 0x4e00) {
-            count += m[i].length;
-        } else {
-            count += 1;
-        }
+  const pattern =
+    /[a-zA-Z0-9_\u0392-\u03c9\u0410-\u04F9]+|[\u4E00-\u9FFF\u3400-\u4dbf\uf900-\ufaff\u3040-\u309f\uac00-\ud7af]+/g;
+  const m = data.match(pattern);
+  let count = 0;
+  if (m === null) return count;
+  for (let i = 0; i < m.length; i++) {
+    if (m[i].charCodeAt(0) >= 0x4e00) {
+      count += m[i].length;
+    } else {
+      count += 1;
     }
-    return count;
+  }
+  return count;
 };
 
 /**
  * CopyToClipboard 复制到剪贴板
  */
 export const CopyToClipboard = (text: string) => {
-    return new Promise((resolve, reject) => {
-        const input = document.createElement("input");
-        input.value = text;
-        document.body.appendChild(input);
-        input.select();
-        document.addEventListener("copy", function copyCall(e) {
-            e.preventDefault();
-            e.clipboardData?.setData("text/html", text);
-            e.clipboardData?.setData("text/plain", text);
-            document.removeEventListener("copy", copyCall);
-        });
-        const result = document.execCommand("copy");
-        if (result) {
-            resolve(true);
-        } else {
-            reject(false);
-        }
-        document.body.removeChild(input);
+  return new Promise((resolve, reject) => {
+    const input = document.createElement("input");
+    input.value = text;
+    document.body.appendChild(input);
+    input.select();
+    document.addEventListener("copy", function copyCall(e) {
+      e.preventDefault();
+      e.clipboardData?.setData("text/html", text);
+      e.clipboardData?.setData("text/plain", text);
+      document.removeEventListener("copy", copyCall);
     });
+    const result = document.execCommand("copy");
+    if (result) {
+      resolve(true);
+    } else {
+      reject(false);
+    }
+    document.body.removeChild(input);
+  });
 };

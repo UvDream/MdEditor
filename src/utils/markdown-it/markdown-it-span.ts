@@ -17,8 +17,8 @@ function makeRule(md: any, options: any) {
   return function addHeadingAnchors(state: any) {
     for (let i = 0; i < state.tokens.length - 1; i++) {
       if (
-          state.tokens[i].type !== "heading_open" ||
-          state.tokens[i + 1].type !== "inline"
+        state.tokens[i].type !== "heading_open" ||
+        state.tokens[i + 1].type !== "inline"
       ) {
         continue;
       }

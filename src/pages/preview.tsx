@@ -1,40 +1,40 @@
-import {useEffect, useState} from "react";
-import {useSearchParams} from "react-router-dom";
-import {getPublicBaseMd} from "@/api/article";
-import {defaultStyle, markdownParser, setEditorStyle} from "@/utils";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import { getPublicBaseMd } from "@/api/article";
+import { defaultStyle, markdownParser, setEditorStyle } from "@/utils";
 import "@/style/editor/preview_phone.less";
-import {Refresh} from "@icon-park/react";
-import {Affix} from "@arco-design/web-react";
+import { Refresh } from "@icon-park/react";
+import { Affix } from "@arco-design/web-react";
 
 export default function PreviewPage() {
-    const [content, setContent] = useState("");
-    const [searchParams] = useSearchParams();
+  const [content, setContent] = useState("");
+  const [searchParams] = useSearchParams();
 
-    useEffect(() => {
-        getContent().then();
-    }, []);
-    const getContent = async () => {
-        const res = (await getPublicBaseMd({
-            id: searchParams.get("id") || "",
-        })) as unknown as API.Response;
-        if (res.success) {
-            setContent(markdownParser.render(res.data.md_content));
-        }
-        setEditorStyle(defaultStyle);
-    };
-    return (
-        <div className="phone-preview">
-            <div className="refresh" onClick={getContent}>
-                <Refresh theme="outline" size="24" fill="#333" strokeWidth={3}/>
-            </div>
-            <div className="md-editor">
-                <div
-                    style={{paddingBottom: "100px"}}
-                    dangerouslySetInnerHTML={{
-                        __html: content,
-                    }}
-                />
-            </div>
-        </div>
-    );
+  useEffect(() => {
+    getContent().then();
+  }, []);
+  const getContent = async () => {
+    const res = (await getPublicBaseMd({
+      id: searchParams.get("id") || "",
+    })) as unknown as API.Response;
+    if (res.success) {
+      setContent(markdownParser.render(res.data.md_content));
+    }
+    setEditorStyle(defaultStyle);
+  };
+  return (
+    <div className="phone-preview">
+      <div className="refresh" onClick={getContent}>
+        <Refresh theme="outline" size="24" fill="#333" strokeWidth={3} />
+      </div>
+      <div className="md-editor">
+        <div
+          style={{ paddingBottom: "100px" }}
+          dangerouslySetInnerHTML={{
+            __html: content,
+          }}
+        />
+      </div>
+    </div>
+  );
 }

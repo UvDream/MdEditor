@@ -125,12 +125,12 @@ export default function LeftBar() {
         <div className={"left-bar-tool-top"}>
           <div className={"left-bar-tool-block"}>
             <ViewList
-                theme={selected === 0 ? "two-tone" : "outline"}
-                size="20"
-                fill={selected === 0 ? "#333" : ["#333", "#2F88FF"]}
-                strokeWidth={3}
-                onClick={() => {
-                  setSelected(0);
+              theme={selected === 0 ? "two-tone" : "outline"}
+              size="20"
+              fill={selected === 0 ? "#333" : ["#333", "#2F88FF"]}
+              strokeWidth={3}
+              onClick={() => {
+                setSelected(0);
               }}
             />
           </div>

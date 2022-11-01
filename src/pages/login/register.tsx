@@ -19,17 +19,17 @@ export default function Register(props: Props) {
     },
   };
   const onSubmit = async (value: FormData) => {
-      console.log("submit", value);
-      const res = (await postPublicBaseRegister(
-          //@ts-ignore
-          value
-      )) as unknown as ResponseType;
-      if (res.code === 200) {
-          Message.success("注册成功!");
-          props.onSwitch();
-      } else {
-          Message.error(res.msg);
-      }
+    console.log("submit", value);
+    const res = (await postPublicBaseRegister(
+      //@ts-ignore
+      value
+    )) as unknown as ResponseType;
+    if (res.code === 200) {
+      Message.success("注册成功!");
+      props.onSwitch();
+    } else {
+      Message.error(res.msg);
+    }
   };
   const onSubmitFailed = (error: { [key: string]: FieldError }) => {
     console.log("submit failed", error);

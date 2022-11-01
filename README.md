@@ -14,6 +14,7 @@
 ## 多平台发布需要安装插件
 
 [谷歌插件传送门](https://chrome.google.com/webstore/detail/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E5%90%8C%E6%AD%A5%E5%8A%A9%E6%89%8B/hchobocdmclopcbnibdnoafilagadion)
+
 > 没办法访问谷歌商店的
 
 1. 下载下面压缩包并且解压
@@ -28,7 +29,7 @@
 
 # 教程
 
-[halo同步教程](./docs/halo.md)
+[halo 同步教程](./docs/halo.md)
 
 [微信公众号同步教程](./docs/weixin.md)
 
@@ -53,13 +54,12 @@
 - [ ] 更多的 markdown 语法支持
 - [ ] 更多的组件支持
 - [ ] 手机端支持
-- [ ] 快捷键完善(目前只支持Mac快捷键,部分存在bug)
+- [ ] 快捷键完善(目前只支持 Mac 快捷键,部分存在 bug)
 
 # 如有疑惑或者需求提出,请在 [issues](https://github.com/UvDream/MdEditor/issues) 中提出
 
 # 联系我
 
-| 微信                                                 | QQ                                  |
-|----------------------------------------------------|-------------------------------------|
+| 微信                                               | QQ                                              |
+| -------------------------------------------------- | ----------------------------------------------- |
 | <img src="./docs/others/wechat.png" width="300"  > | <img src="./docs/others/qq.png" width="300"   > |
-

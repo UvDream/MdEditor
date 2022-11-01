@@ -1,10 +1,10 @@
-# 点击Halo同步标签
+# 点击 Halo 同步标签
 
 ![halo](./halo_1.jpg)
 
-# 第一次需要填写halo博客一些配置
+# 第一次需要填写 halo 博客一些配置
 
-> token可以自动获取也可以手动填写
+> token 可以自动获取也可以手动填写
 
 ![halo](./halo_2.jpg)
 
