@@ -29,6 +29,7 @@ export default function UploadFile(props: Props) {
   }, [props.value]);
   const uploadFunc = async (opts: RequestOptions) => {
     const { onProgress, onError, onSuccess, file } = opts;
+    //@ts-ignore
     const res = (await postFileUpload({ file })) as unknown as ResponseType;
     if (res.code === 200) {
       if (res.data.position === "local") {

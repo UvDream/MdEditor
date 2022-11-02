@@ -19,8 +19,8 @@ export default function TopMenus() {
     }
     //导出markdown
     if (key.id === "1-2" && id !== "") {
-      //@ts-ignore
       const res = (await getArticle__openAPI__export({
+        //@ts-ignore
         id,
       })) as unknown as API.Response;
       if (res.success) {

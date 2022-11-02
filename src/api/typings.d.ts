@@ -364,7 +364,7 @@ declare namespace API {
 
   type postFileUploadParams = {
     /** 携带的平台token参数 */
-    token: string;
+    token?: string;
   };
 
   type Response = {

@@ -9,25 +9,34 @@
 import "./index.less";
 import Login from "@/pages/login/login";
 import Register from "@/pages/login/register";
-import { useState } from "react";
+import {useState} from "react";
+import RetrievePassword from "@/pages/login/retrieve-password";
 
 export default function LoginPage() {
-  const [status, setStatus] = useState(true);
-  return (
-    <div className={"login-page"}>
-      {status ? (
-        <Login
-          onSwitch={() => {
-            setStatus(false);
-          }}
-        />
-      ) : (
-        <Register
-          onSwitch={() => {
-            setStatus(true);
-          }}
-        />
-      )}
-    </div>
-  );
+    const [status, setStatus] = useState<Number>(0);
+    return (
+        <div className={"login-page"}>
+            {status == 0 && (
+                <Login
+                    onSwitch={(num) => {
+                        setStatus(num);
+                    }}
+                />
+            )}
+            {status == 1 && (
+                <Register
+                    onSwitch={() => {
+                        setStatus(0);
+                    }}
+                />
+            )}
+            {
+                status === 2 && (
+                    <RetrievePassword onSwitch={() => {
+                        setStatus(0);
+                    }}/>
+                )
+            }
+        </div>
+    );
 }
