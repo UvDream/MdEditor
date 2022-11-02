@@ -18,11 +18,10 @@ export default function RetrievePassword(props: Props) {
         <div className="retrieve">
             <div className={"title"}>找回密码</div>
             <Form {...formItemLayout} onSubmit={async (val) => {
-                console.log(val);
                 const res = await postPublicBaseRetrievePassword(val) as unknown as API.Response
-                console.log(res);
                 if (res.success) {
                     Message.success("密码重置成功，请登录");
+                    props.onSwitch();
                 } else {
                     Message.error(res.msg);
                 }
